@@ -966,14 +966,14 @@ const MATERIAS = [
   },
   {
     id:"piayr-2", nombre:"Programación, IA y Robótica I", corto:"PIAyR I", nivel:"2.º ESO", color:"#e08a00",
-    intro:"Una parte por trimestre: aprendemos a pensar como una máquina y creamos nuestro primer videojuego, construimos y programamos un robot saltador, y enseñamos a una máquina a reconocer el mundo. Cerramos el curso con nuestro propio programa de televisión tecnológico.",
+    intro:"La robótica es el hilo del curso: empezamos pensando como una máquina y programando en Scratch, construimos un robot saltador con LEGO SPIKE, montamos una ciudad de reparto con robots Maqueen y terminamos controlándolos con gestos gracias a la inteligencia artificial. Cerramos con el Tech Show y la feria de robótica.",
     presentacion:{
       cita:"Programar no es mandar: es dar instrucciones claras.",
       texto:"Los ordenadores, los robots y la inteligencia artificial no son magia: hacen exactamente lo que alguien les ha enseñado a hacer. En esta materia pasamos de usar la tecnología a crearla. Aprendemos haciendo, probando, equivocándonos y mejorando, siempre en equipo y pensando en a quién ayuda lo que construimos.",
       bloques:["Programación","Robótica","Inteligencia artificial","Retos tecnológicos en equipo"]
     },
     unidades:[
-      {id:"p2-prog", etiqueta:"Situación de aprendizaje 1 · 1.er trimestre", titulo:"Piensa como una máquina", subtitulo:"De los algoritmos en papel a nuestro primer videojuego",
+      {id:"p2-prog", etiqueta:"Situación de aprendizaje 1 · septiembre–octubre", titulo:"Piensa como una máquina", subtitulo:"De los algoritmos en papel a nuestro primer videojuego",
        cita:["Todo el mundo debería aprender a programar, porque te enseña a pensar.","Steve Jobs"],
        bloque:"Bloque: Programación",
        desc:"Una máquina no sabe lo que quieres decir: solo hace lo que le dices. Empezamos sin ordenador, escribiendo instrucciones para que una máquina resuelva problemas reales, aprendemos a representarlas con diagramas de flujo y las convertimos en programas de Scratch hasta crear un videojuego propio que otros puedan probar y mejorar.",
@@ -1041,7 +1041,7 @@ const MATERIAS = [
        items:[
         {tipo:"interactiva", t:"Repaso: algoritmos y Scratch", s:"8 preguntas con informe de repaso.", quiz:"p2prog"}
        ]},
-      {id:"p2-robot", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Carrera de saltadores", subtitulo:"Un robot que corre sin ruedas",
+      {id:"p2-robot", etiqueta:"Situación de aprendizaje 2 · noviembre–enero", titulo:"Carrera de saltadores", subtitulo:"Un robot que corre sin ruedas",
        cita:["Un robot no es más que una idea con motores.",""],
        bloque:"Bloque: Robótica",
        desc:"Vamos a construir con LEGO SPIKE un robot corredor sin ruedas que llegue a la meta lo antes posible. Empezamos viendo cómo se adapta la tecnología a cada persona, aprendemos qué es un robot y cómo se programa, y mejoramos nuestro saltador prueba a prueba hasta la gran carrera.",
@@ -1099,12 +1099,67 @@ const MATERIAS = [
         {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"},
         {tipo:"interactiva", t:"Repaso: robots y robótica", s:"8 preguntas con informe de repaso.", quiz:"p2robot"}
        ]},
-      {id:"p2-ia", etiqueta:"Situación de aprendizaje 3 · 3.er trimestre", titulo:"Enseña a una máquina", subtitulo:"Qué es la inteligencia artificial y cómo aprende",
+      {id:"p2-reparto", etiqueta:"Situación de aprendizaje 3 · febrero–abril", titulo:"Ciudad de reparto", subtitulo:"Robots que llevan los pedidos por el barrio",
+       cita:["Un buen robot de reparto no es el más rápido, sino el que siempre llega.",""],
+       bloque:"Bloques: Robótica · Programación",
+       desc:"Construimos entre toda la clase la maqueta de un barrio con calles, cruces y paradas. Cada robot Maqueen aprende a seguir las calles, a contar los cruces para llegar a la dirección correcta, a frenar si hay un obstáculo y a entregar el pedido con su pala. Al final, una centralita envía los pedidos por radio y hacemos una demostración de reparto ante otra clase.",
+       criterios:["2.3","3.1","3.2","3.3","3.4","3.5","4.1","4.3","4.4"],
+       producto:"Maqueta del barrio con robots Maqueen que reciben pedidos por radio y los entregan, presentada ante otra clase.",
+       anexos:["p2cV","p2cR"],
+       teoria:`
+        <h3>La micro:bit</h3>
+        <p>Es una pequeña placa programable: el «cerebro» de nuestro robot. Tiene dos botones (A y B), una pantalla de 25 luces, sensores de luz, temperatura, movimiento (acelerómetro) y sonido, un altavoz y una <b>radio</b> para enviar mensajes a otras micro:bit. Se programa con bloques en <b>MakeCode</b>, muy parecido a Scratch.</p>
+        <h3>El robot Maqueen Plus V2</h3>
+        <p>Es el «cuerpo» del robot: la micro:bit se enchufa encima y le da órdenes.</p>
+        <div class="defs">
+          <div><b>Motores y ruedas</b><p>Dos motores, uno por rueda. Si giran a la misma velocidad, va recto; si uno va más rápido, gira.</p></div>
+          <div><b>Sensores de línea</b><p>Cinco sensores debajo (L2, L1, M, R1, R2) que distinguen negro y blanco: negro = 1, blanco = 0.</p></div>
+          <div><b>Ultrasonidos</b><p>Mide la distancia a lo que tiene delante, como un murciélago.</p></div>
+          <div><b>Luces y zumbador</b><p>Dos faros, cuatro luces de colores y un zumbador para avisar.</p></div>
+          <div><b>Mecanismos</b><p>Pala, empujador, pinza o montacargas que se mueven con un pequeño motor llamado <b>servo</b>, que gira a un ángulo exacto.</p></div>
+        </div>
+        <h3>Programar el Maqueen</h3>
+        <ol class="steps4">
+          <li>Abre MakeCode y crea un proyecto nuevo.</li>
+          <li>Añade la <b>extensión del Maqueen Plus V2</b> (el profesor te dará el enlace): aparecerán sus bloques.</li>
+          <li>Programa y prueba lo que puedas en el simulador.</li>
+          <li>Pasa el programa a la micro:bit, colócala en el robot y enciéndelo.</li>
+        </ol>
+        <h3>Seguir una línea con tres sensores</h3>
+        <p>El robot mira la calle con sus tres sensores centrales y decide:</p>
+        <div class="table-wrap"><table class="tbl"><thead><tr><th>L1</th><th>M</th><th>R1</th><th>¿Qué pasa?</th><th>Qué hace</th></tr></thead><tbody>
+          <tr><td>0</td><td>1</td><td>0</td><td>Va centrado</td><td>Recto</td></tr>
+          <tr><td>1</td><td>0 o 1</td><td>0</td><td>La línea se va a la izquierda</td><td>Gira a la izquierda</td></tr>
+          <tr><td>0</td><td>0 o 1</td><td>1</td><td>La línea se va a la derecha</td><td>Gira a la derecha</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>¡Un cruce!</td><td>Cuenta el cruce</td></tr>
+        </tbody></table></div>
+        <h3>Llegar a la dirección correcta</h3>
+        <p>Si las paradas están numeradas por cruces, el robot puede usar una <b>variable</b> que cuente los cruces que pasa. Cuando el contador llega al número de la parada, se detiene y entrega. Como en Scratch, la variable empieza en 0 y suma 1 en cada cruce.</p>
+        <h3>Pedidos por radio</h3>
+        <p>Las micro:bit pueden enviarse números y palabras por radio si están en el mismo <b>grupo</b>. Una micro:bit hace de <b>centralita</b>: con sus botones elige un número de parada y lo envía. El robot lo recibe, lo guarda en una variable y sale a repartir.</p>
+        <h3>Seguridad ante todo</h3>
+        <p>Un robot de reparto comparte el espacio con personas y otros robots. Siempre debe comprobar con el ultrasonido si hay algo delante y frenar a tiempo, encender las luces y avisar con el zumbador.</p>`,
+       tareas:[
+        {n:1, t:"Conoce tu robot", html:"<p>Localiza en tu Maqueen los motores, los cinco sensores de línea, el ultrasonido, las luces, el zumbador y dónde va la micro:bit. Haz tu primer programa: al pulsar A se encienden los faros y suena una nota; al pulsar B se apagan.</p>", evalua:"p2cR"},
+        {n:2, t:"Primeros movimientos", html:"<p>Programa el robot para que avance, se pare, retroceda y gire. Después, reto: que dibuje un <b>cuadrado</b> en el suelo. ¿Cuánto tiempo tienen que girar los motores para hacer 90 grados? Pruébalo y ajústalo; usa un bucle para no repetir bloques.</p>", evalua:"p2cR"},
+        {n:3, t:"¿Qué ve el robot?", html:"<p>Muestra en la pantalla de la micro:bit lo que lee el sensor central y pasa el robot por encima de la línea. Completa la tabla: ¿qué valor da en negro?, ¿y en blanco? Calibra los sensores si no distinguen bien.</p>", evalua:"p2cR"},
+        {n:4, t:"Sigue la calle", html:"<p>Dibuja el diagrama de flujo con los casos de la tabla de la teoría y programa el seguidor de línea. Mide cuánto tarda en dar una vuelta al circuito de prueba y mejora la velocidad sin que se salga.</p>", entrega:"Diagrama y programa", evalua:"p2cR"},
+        {n:5, t:"Diseñamos el barrio", html:"<p>Entre toda la clase diseñamos la maqueta: calles de cinta negra sobre fondo blanco, curvas suaves, cruces y paradas numeradas (casa, farmacia, colegio, tienda…). Cada equipo diseña y decora un edificio o una parada.</p>", evalua:"p2cR"},
+        {n:6, t:"Llega a la dirección", html:"<p>Usa una variable para contar los cruces. El robot sale de la base y se para justo en la parada que le digas. Prueba todas las paradas y apunta los aciertos.</p>", evalua:"p2cR"},
+        {n:7, t:"Seguridad vial", html:"<p>Añade el ultrasonido: si hay algo a menos de 10 cm, el robot frena, enciende las luces de color rojo y pita. Cuando el camino queda libre, sigue su ruta.</p>", evalua:"p2cR"},
+        {n:8, t:"Entrega el pedido", html:"<p>Monta la pala o el empujador y programa el servo para que deje el paquete en la parada y vuelva a su posición. ¿Qué ángulo necesitas para soltarlo sin que se caiga?</p>", evalua:"p2cR"},
+        {n:9, t:"La centralita", html:"<p>Programa una segunda micro:bit como centralita: con los botones eliges la parada y la envías por radio. El robot recibe el número, sale a repartir y, al volver a la base, avisa a la centralita de que el pedido está entregado.</p>", evalua:"p2cR"},
+        {n:10, t:"Día de reparto", html:"<p>Demostración ante otra clase: los visitantes eligen pedidos en la centralita y los robots los entregan. Cada equipo explica cómo funciona su robot. Después, completad el diario del proyecto con fotos, programas y mejoras.</p>", entrega:"Diario del proyecto por Teams", evalua:"p2cV"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: robots de reparto", s:"8 preguntas con informe de repaso.", quiz:"p2reparto"}
+       ]},
+      {id:"p2-ia", etiqueta:"Situación de aprendizaje 4 · mayo–junio", titulo:"Enseña a una máquina", subtitulo:"Qué es la IA, cómo aprende… y un torneo de robots controlados con gestos",
        cita:["La tecnología ayuda, pero pensar sigue siendo obligatorio.",""],
        bloque:"Bloque: Inteligencia artificial",
-       desc:"La inteligencia artificial está en el móvil, en las series que te recomiendan y en el traductor. Descubrimos qué es y qué no es, en qué se diferencia de nuestra inteligencia y cómo aprende a partir de datos. Entrenamos nuestro propio modelo, buscamos sus fallos y pensamos qué usos son justos y cuáles no.",
-       criterios:["1.1","1.2","1.3","1.4","4.2"],
-       producto:"Modelo de reconocimiento entrenado con Teachable Machine, con sus pruebas, sus mejoras y un informe sobre sus sesgos.",
+       desc:"La inteligencia artificial está en el móvil, en las series que te recomiendan y en el traductor. Descubrimos qué es y qué no es, en qué se diferencia de nuestra inteligencia y cómo aprende a partir de datos. Entrenamos nuestros propios modelos, buscamos sus fallos y terminamos con un torneo en el que los robots Maqueen obedecen a los gestos de nuestra mano.",
+       criterios:["1.1","1.2","1.3","1.4","3.5","4.1","4.2"],
+       producto:"Robot Maqueen controlado con gestos gracias a un modelo de IA entrenado por el equipo, que compite en el torneo de la clase.",
        anexos:["p2iV","p2iR"],
        teoria:`
         <h3>¿Qué es la inteligencia artificial?</h3>
@@ -1134,6 +1189,8 @@ const MATERIAS = [
         </ul>
         <h3>Sesgos: cuando la IA es injusta</h3>
         <p>Un <b>sesgo</b> es un error sistemático que hace que la IA funcione mejor para unos que para otros. Casi siempre viene de los datos: si un sistema de reconocimiento facial se entrena casi solo con caras de un tipo, fallará más con las demás. La IA no es neutral: repite lo que hay en sus datos.</p>
+        <h3>La IA en tu muñeca: micro:bit CreateAI</h3>
+        <p>La micro:bit tiene un <b>acelerómetro</b> que mide cómo se mueve. Con la web <b>micro:bit CreateAI</b> grabamos varios ejemplos de cada gesto (por ejemplo, inclinar hacia delante, girar la muñeca o sacudir), entrenamos un modelo y lo pasamos a MakeCode. A partir de ahí, la micro:bit reconoce el gesto y puede enviar una orden por radio a un robot. Igual que con las imágenes: cuantos más ejemplos y más variados, mejor aprende.</p>
         <h3>Usarla con responsabilidad</h3>
         <ul>
           <li>La IA puede equivocarse y decirlo con total seguridad: comprueba siempre lo importante.</li>
@@ -1146,15 +1203,17 @@ const MATERIAS = [
         {n:2, t:"Desgranando el vídeo", html:"<p>Mira el vídeo resumen sobre inteligencia artificial y haz una <b>infografía</b> en la herramienta que prefieras con las ideas principales: qué es, tipos, ejemplos y riesgos.</p>", enlaces:[["Vídeo resumen sobre IA","https://youtu.be/_tA5cinv0U8"]], entrega:"Infografía por Teams", evalua:"p2iR"},
         {n:3, t:"¿Persona o máquina?", html:"<p>En equipo, decidid quién hace mejor cada tarea y justificadlo: jugar al ajedrez, conducir ante un imprevisto, reconocer una cara en una foto antigua, escribir una historia con sentimientos, calcular una operación de doce cifras, aprender normas sociales nuevas. Debate final: ¿hay tareas que deberían seguir siendo solo humanas?</p>", evalua:"p2iR"},
         {n:4, t:"Un árbol que adivina", html:"<p>Diseña un <b>árbol de decisión</b> en papel que adivine un animal entre ocho posibles con preguntas de sí o no. Pruébalo con un compañero. ¿Cuántas preguntas necesitas como máximo? ¿Qué pasa si piensa en un animal que no estaba en tu lista?</p>", evalua:"p2iR"},
-        {n:5, t:"Práctica guiada de IA", html:"<p>Sigue la actividad guiada de inteligencia artificial en Vittascience: entrena un modelo y observa cómo cambia su respuesta cuando añades o quitas ejemplos.</p>", enlaces:[["Vittascience","https://vittascience.com"]], evalua:"p2iR"},
-        {n:6, t:"Entrena tu modelo", html:"<p>Con Teachable Machine, crea un modelo de imagen que distinga tres clases (por ejemplo, tres objetos del estuche o tres gestos). Usa <b>al menos 50 ejemplos por clase</b>.</p><ol><li>Pruébalo 10 veces con cada clase y apunta los aciertos.</li><li>Cambia la luz, el fondo o la distancia: ¿sigue acertando?</li><li>Mejora los datos y vuelve a medir.</li></ol>", enlaces:[["Teachable Machine","https://teachablemachine.withgoogle.com"]], entrega:"Tabla de pruebas y capturas", evalua:"p2iR"},
-        {n:7, t:"Cazadores de sesgos", html:"<p>Entrena a propósito un modelo con datos <b>desequilibrados</b>: muchos ejemplos de una clase y muy pocos de otra, o todos con el mismo fondo. Comprueba cómo falla. Después redacta una explicación breve sobre por qué es importante evitar los sesgos en la IA y qué consecuencias tienen en la vida real.</p>", entrega:"Explicación por Teams", evalua:"p2iR"},
-        {n:8, t:"Decálogo de la IA responsable", html:"<p>Entre toda la clase, redactamos diez normas para usar la IA en el colegio y en casa de forma segura, justa y honesta. Cada equipo propone dos y las defiende ante la clase.</p>", evalua:"p2iR"}
+        {n:5, t:"Entrena tu modelo", html:"<p>Con Teachable Machine, crea un modelo de imagen que distinga tres clases (por ejemplo, tres objetos del estuche o tres gestos). Usa <b>al menos 50 ejemplos por clase</b>.</p><ol><li>Pruébalo 10 veces con cada clase y apunta los aciertos.</li><li>Cambia la luz, el fondo o la distancia: ¿sigue acertando?</li><li>Mejora los datos y vuelve a medir.</li></ol>", enlaces:[["Teachable Machine","https://teachablemachine.withgoogle.com"]], entrega:"Tabla de pruebas y capturas", evalua:"p2iR"},
+        {n:6, t:"Cazadores de sesgos", html:"<p>Entrena a propósito un modelo con datos <b>desequilibrados</b>: muchos ejemplos de una clase y muy pocos de otra, o todos con el mismo fondo. Comprueba cómo falla. Después redacta una explicación breve sobre por qué es importante evitar los sesgos en la IA y qué consecuencias tienen en la vida real.</p>", entrega:"Explicación por Teams", evalua:"p2iR"},
+        {n:7, t:"Gestos que se entienden", html:"<p>Con micro:bit CreateAI, entrena un modelo que reconozca cuatro gestos con la micro:bit en la muñeca: adelante, atrás, izquierda y derecha, más un gesto de «quieto». Graba ejemplos de varias personas del equipo, pruébalo y mejora los gestos que se confunden.</p>", enlaces:[["micro:bit CreateAI","https://createai.microbit.org"]], evalua:"p2iR"},
+        {n:8, t:"El robot obedece", html:"<p>Pasa el modelo a MakeCode: cada gesto envía una orden por radio al Maqueen, que avanza, retrocede o gira. Por seguridad, con el gesto «quieto» o si no recibe órdenes, el robot se para.</p>", evalua:"p2iR"},
+        {n:9, t:"Torneo de robots con gestos", html:"<p>¡Torneo! Pruebas de habilidad (slalom entre conos, llevar una pelota a la portería, aparcar en una plaza) controlando el robot solo con gestos. Después, reflexión: ¿qué ha fallado más, el robot o el modelo?, ¿por qué?</p>", evalua:"p2iV"},
+        {n:10, t:"Decálogo de la IA responsable", html:"<p>Entre toda la clase, redactamos diez normas para usar la IA en el colegio y en casa de forma segura, justa y honesta. Cada equipo propone dos y las defiende ante la clase.</p>", evalua:"p2iR"}
        ],
        items:[
         {tipo:"interactiva", t:"Repaso: inteligencia artificial", s:"8 preguntas con informe de repaso.", quiz:"p2ia"}
        ]},
-      {id:"p2-techshow", etiqueta:"Cierre de curso", titulo:"Tech Show", subtitulo:"La tecnología se nos ha ido de las manos",
+      {id:"p2-techshow", etiqueta:"Cierre de curso · junio", titulo:"Tech Show", subtitulo:"La tecnología se nos ha ido de las manos",
        cita:["Un buen prompt no sustituye a una buena cabeza.",""],
        bloque:"Bloques: Programación · Robótica · Inteligencia artificial",
        desc:"Cerramos el curso con un programa de televisión hecho por la clase. Cada equipo prepara una sección de dos o tres minutos que explique algo de programación, robótica o IA de forma clara, crítica y divertida. Hay humor, pero la tecnología tiene que estar bien explicada.",
@@ -1221,14 +1280,14 @@ const MATERIAS = [
   },
   {
     id:"piayr-3", nombre:"Programación, IA y Robótica II", corto:"PIAyR II", nivel:"3.º ESO", color:"#c2410c",
-    intro:"Subimos un nivel: diseñamos sistemas automáticos que toman buenas decisiones y los programamos en una placa micro:bit, construimos un rover para superar misiones en Marte y creamos un prototipo con inteligencia artificial que ayude a personas reales.",
+    intro:"La robótica es el hilo del curso: diseñamos sistemas automáticos que toman buenas decisiones, construimos un rover para superar misiones en Marte, creamos un almacén automatizado con una flota de robots y terminamos con un prototipo con inteligencia artificial que ayude a personas reales. Cerramos con la feria de robótica.",
     presentacion:{
       cita:"La mejor forma de predecir el futuro es inventarlo.",
       texto:"En segundo aprendisteis a dar instrucciones. Este curso trabajamos con más autonomía: diseñaremos sistemas completos, elegiremos los sensores y las herramientas más adecuados, evaluaremos si funcionan y nos preguntaremos siempre para quién son y qué impacto tienen.",
       bloques:["Programación","Robótica","Inteligencia artificial","Retos tecnológicos en equipo"]
     },
     unidades:[
-      {id:"p3-prog", etiqueta:"Situación de aprendizaje 1 · 1.er trimestre", titulo:"Centro de control", subtitulo:"Sistemas que toman buenas decisiones",
+      {id:"p3-prog", etiqueta:"Situación de aprendizaje 1 · septiembre–octubre", titulo:"Centro de control", subtitulo:"Sistemas que toman buenas decisiones",
        cita:["Programar no es mandar: es dar instrucciones claras.",""],
        bloque:"Bloque: Programación",
        desc:"Somos una empresa de ingeniería contratada para automatizar el colegio: ahorrar energía, mejorar la seguridad y hacer el edificio más eficiente. Diseñamos reglas lógicas que combinan varias condiciones, las programamos en el simulador de micro:bit, damos el salto del bloque al código escrito y construimos un prototipo real del aula inteligente.",
@@ -1279,7 +1338,7 @@ const MATERIAS = [
        items:[
         {tipo:"interactiva", t:"Repaso: lógica y programación", s:"8 preguntas con informe de repaso.", quiz:"p3prog"}
        ]},
-      {id:"p3-robot", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Misión a Marte", subtitulo:"Un rover que se las arregla solo",
+      {id:"p3-robot", etiqueta:"Situación de aprendizaje 2 · noviembre–enero", titulo:"Misión a Marte", subtitulo:"Un rover que se las arregla solo",
        cita:["Los rovers no descansan. Los ingenieros que los programan, tampoco.",""],
        bloque:"Bloque: Robótica",
        desc:"Una orden enviada a Marte tarda entre 4 y 24 minutos en llegar. Por eso los rovers tienen que tomar decisiones por su cuenta. Diseñamos, construimos y programamos nuestro rover para superar misiones cada vez más difíciles: moverse con precisión, esquivar obstáculos, seguir una ruta, recoger muestras y obedecer desde la Tierra en tiempo real.",
@@ -1326,7 +1385,53 @@ const MATERIAS = [
         {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"},
         {tipo:"interactiva", t:"Repaso: rovers y robots autónomos", s:"8 preguntas con informe de repaso.", quiz:"p3robot"}
        ]},
-      {id:"p3-ia", etiqueta:"Situación de aprendizaje 3 · 3.er trimestre", titulo:"IA con propósito", subtitulo:"Tecnología que ayuda a personas reales",
+      {id:"p3-almacen", etiqueta:"Situación de aprendizaje 3 · febrero–abril", titulo:"Almacén automatizado", subtitulo:"Una flota de robots que trabaja en equipo",
+       cita:["En un almacén moderno, los robots llevan las estanterías a las personas.",""],
+       bloque:"Bloques: Robótica · Programación",
+       desc:"Somos una empresa de logística. Diseñamos un almacén a escala y programamos una flota de robots Maqueen que recogen cajas con el montacargas o la pinza, siguen los pasillos, se comunican por radio con el centro de control y se reparten el trabajo sin chocar. Medimos cuántos pedidos sacamos por minuto, lo mejoramos y presentamos nuestra empresa.",
+       criterios:["2.1","2.3","3.1","3.2","3.3","3.4","3.5","3.6","4.1","4.3","4.4","4.5"],
+       producto:"Almacén a escala con varios robots coordinados por radio, informe de eficacia y presentación de la empresa.",
+       anexos:["p3aV","p3aR"],
+       teoria:`
+        <h3>Robots en la logística</h3>
+        <p>En los grandes almacenes de comercio electrónico, miles de robots mueven estanterías y cajas. Hay dos tipos principales:</p>
+        <div class="defs">
+          <div><b>AGV</b><p>Vehículo de guiado automático: sigue rutas fijas marcadas en el suelo con líneas, imanes o códigos.</p></div>
+          <div><b>AMR</b><p>Robot móvil autónomo: construye un mapa y decide su ruta, esquivando obstáculos.</p></div>
+        </div>
+        <p>Nuestros Maqueen funcionarán como AGV: siguen pasillos marcados y obedecen al centro de control.</p>
+        <h3>Seguir pasillos con cinco sensores</h3>
+        <p>Con los sensores centrales (L1, M, R1) el robot va por la línea; con los exteriores (L2, R2) detecta cruces y se recupera si se desvía. Algunos sensores dan además un valor <b>analógico</b> (cuánta luz reflejan, no solo negro o blanco), que permite corregir de forma más suave: cuanto más se aleja de la línea, más corrige. Es el <b>control proporcional</b>.</p>
+        <h3>Servos: el montacargas y la pinza</h3>
+        <p>Un <b>servo</b> es un motor que gira hasta un ángulo exacto (normalmente de 0 a 180 grados) y se queda ahí. Con un servo el montacargas sube y baja, y la pinza se abre y se cierra. Hay que encontrar los ángulos adecuados y moverlos despacio para que la caja no se caiga.</p>
+        <h3>Comunicación: un protocolo</h3>
+        <p>Si varios robots escuchan la misma radio, todos reciben todos los mensajes. Necesitamos un <b>protocolo</b>: unas normas sobre cómo se escriben los mensajes. Por ejemplo, <code>R2:EST3</code> significa «robot 2, ve a la estantería 3». Cada robot solo obedece los mensajes con su número y responde <code>R2:OK</code> al terminar.</p>
+        <h3>Tráfico sin choques</h3>
+        <ul>
+          <li><b>Zonas reservadas:</b> antes de entrar en un cruce, el robot pide permiso; si está ocupado, espera.</li>
+          <li><b>Prioridades:</b> por ejemplo, el robot cargado pasa antes que el vacío.</li>
+          <li><b>Último recurso:</b> el ultrasonido frena siempre si hay algo delante.</li>
+        </ul>
+        <h3>Medir la eficacia</h3>
+        <p>Una empresa mide su almacén con datos: <b>pedidos por minuto</b>, <b>porcentaje de pedidos correctos</b>, tiempo medio por pedido y número de incidencias. Mejorar es cambiar algo (ruta, velocidad, reparto de tareas) y volver a medir.</p>
+        <h3>Sostenibilidad e inclusión</h3>
+        <p>Un almacén eficiente gasta menos energía: rutas más cortas, robots que no esperan con los motores encendidos, baterías recargables. Además, debe ser seguro y accesible para las personas que trabajan en él: pasillos amplios, avisos con luz y sonido, y robots que siempre se detienen ante una persona.</p>`,
+       tareas:[
+        {n:1, t:"Un almacén de verdad", html:"<p>Investiga cómo funciona un almacén robotizado real: qué hacen los robots, qué hacen las personas, qué tipo de robot es (AGV o AMR) y cómo evitan chocar. Valora una ventaja y un riesgo para el empleo y la seguridad.</p>", evalua:"p3aR"},
+        {n:2, t:"Puesta a punto", html:"<p>Primeros programas con el Maqueen: movimientos, giro de 90 grados calibrado, lectura de los cinco sensores en la pantalla y calibración. Documenta los valores que obtienes.</p>", evalua:"p3aR"},
+        {n:3, t:"Seguidor de precisión", html:"<p>Programa un seguidor de línea con cinco sensores que detecte los cruces y recupere la línea si se sale. Busca la velocidad máxima a la que completa el circuito diez veces sin fallar.</p>", entrega:"Tabla velocidad / éxito", evalua:"p3aR"},
+        {n:4, t:"El brazo del almacén", html:"<p>Montad el montacargas o la pinza y encontrad los ángulos para recoger una caja, transportarla y dejarla en otra estantería sin que se caiga. Contad los grados de libertad del mecanismo.</p>", evalua:"p3aR"},
+        {n:5, t:"Diseña el almacén", html:"<p>Haced el plano a escala del almacén: estanterías, pasillos, cruces, zona de carga y zona de expedición. Justificad el diseño con criterios de eficiencia (rutas cortas), seguridad y accesibilidad. Después, construidlo.</p>", entrega:"Plano a escala", evalua:"p3aR"},
+        {n:6, t:"El protocolo", html:"<p>Definid el protocolo de mensajes por radio entre el centro de control y los robots: formato, órdenes posibles y respuestas. Programad el centro de control en una micro:bit y probad que cada robot obedece solo sus mensajes.</p>", entrega:"Tabla del protocolo", evalua:"p3aR"},
+        {n:7, t:"Tráfico sin choques", html:"<p>Con dos o más robots a la vez, implementad un sistema para que no choquen en los cruces: zonas reservadas, turnos o prioridades. El ultrasonido siempre como último recurso.</p>", evalua:"p3aR"},
+        {n:8, t:"Prueba de estrés", html:"<p>Lanzad diez pedidos en cinco minutos y medid pedidos por minuto, aciertos, tiempo medio e incidencias. Cambiad una cosa (ruta, velocidad, reparto de tareas), repetid y comparad.</p>", entrega:"Informe de eficacia", evalua:"p3aR"},
+        {n:9, t:"Modo manual de emergencia", html:"<p>Programad un mando con una micro:bit que controle un robot en tiempo real inclinándola (adelante, atrás, giros) y que pare el robot si se pierde la señal. Sirve para sacar un robot atascado.</p>", evalua:"p3aR"},
+        {n:10, t:"Presentamos la empresa", html:"<p>Presentad vuestra empresa de logística: demostración en directo, datos de eficacia, mejoras, medidas de sostenibilidad y seguridad, y un vídeo promocional breve (solo aparece quien tenga autorización).</p>", entrega:"Presentación y vídeo por Teams", evalua:"p3aV"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: almacén automatizado", s:"8 preguntas con informe de repaso.", quiz:"p3almacen"}
+       ]},
+      {id:"p3-ia", etiqueta:"Situación de aprendizaje 4 · mayo–junio", titulo:"IA con propósito", subtitulo:"Tecnología que ayuda a personas reales",
        cita:["La pregunta no es qué puede hacer la IA, sino qué debería hacer.",""],
        bloque:"Bloque: Inteligencia artificial",
        desc:"Usamos la visión artificial para crear tecnología de apoyo: un sistema que permita jugar sin teclado ni ratón, un comunicador que reconozca signos básicos o un asistente que avise de sonidos importantes. Entrenamos el modelo, medimos sus aciertos y errores, lo probamos con personas diversas y analizamos sus límites éticos. También exploramos la realidad virtual y aumentada.",
@@ -1342,7 +1447,7 @@ const MATERIAS = [
         </div>
         <h3>Formas de aprender</h3>
         <ul>
-          <li><b>Supervisado:</b> los ejemplos llevan etiqueta («gesto: pulgar arriba»). Es lo que hace Teachable Machine.</li>
+          <li><b>Supervisado:</b> los ejemplos llevan etiqueta («gesto: pulgar arriba»). Es lo que hacen Teachable Machine con imágenes y micro:bit CreateAI con movimientos.</li>
           <li><b>No supervisado:</b> el sistema agrupa datos parecidos sin etiquetas (clientes con gustos similares).</li>
           <li><b>Por refuerzo:</b> aprende probando y recibiendo premios o castigos (robots que aprenden a andar, IA que juega).</li>
         </ul>
@@ -1374,9 +1479,9 @@ const MATERIAS = [
        tareas:[
         {n:1, t:"Sistema experto contra aprendizaje automático", html:"<p>Escribe un pequeño <b>sistema experto</b> de diez reglas que diagnostique por qué no funciona un ordenador o un robot. Después responde: ¿qué ventajas tendría un sistema que aprendiera de miles de averías reales?, ¿y qué inconvenientes?</p>", evalua:"p3iR"},
         {n:2, t:"Entrenar y medir", html:"<p>Entrena en Teachable Machine un modelo de tres clases. Haz 20 pruebas nuevas y construye su <b>matriz de confusión</b>. Calcula la precisión. ¿Qué clases se confunden y por qué?</p>", enlaces:[["Teachable Machine","https://teachablemachine.withgoogle.com"]], evalua:"p3iR"},
-        {n:3, t:"Elegid el reto", html:"<p>Cada equipo elige un proyecto de tecnología de apoyo:</p><ul><li><b>GestureSwitch:</b> controlar un juego o una app con cuatro gestos, sin teclado ni ratón.</li><li><b>Sign2Text:</b> un comunicador que reconozca seis signos básicos y los muestre como texto.</li><li><b>Avisador de sonidos:</b> detectar sonidos importantes (timbre, alarma, alguien que llama) y avisar con luz.</li><li><b>Propuesta propia</b>, aprobada por el profesor.</li></ul><p>Escribid para quién es, qué problema resuelve y qué debe hacer exactamente.</p>", entrega:"Ficha del reto", evalua:"p3iR"},
+        {n:3, t:"Elegid el reto", html:"<p>Cada equipo elige un proyecto de tecnología de apoyo:</p><ul><li><b>Robot accesible:</b> un Maqueen que se maneja con gestos adaptados a una persona que no puede usar un mando (con micro:bit CreateAI).</li><li><b>GestureSwitch:</b> controlar un juego o una app con cuatro gestos, sin teclado ni ratón.</li><li><b>Sign2Text:</b> un comunicador que reconozca seis signos básicos y los muestre como texto.</li><li><b>Avisador de sonidos:</b> detectar sonidos importantes (timbre, alarma, alguien que llama) y avisar con luz.</li><li><b>Propuesta propia</b>, aprobada por el profesor.</li></ul><p>Escribid para quién es, qué problema resuelve y qué debe hacer exactamente.</p>", entrega:"Ficha del reto", evalua:"p3iR"},
         {n:4, t:"Dataset y entrenamiento", html:"<p>Diseñad un conjunto de datos <b>equilibrado</b> y controlad la iluminación, el fondo y la distancia. Entrenad el modelo, guardad la versión 1 y medid su precisión con pruebas nuevas.</p>", evalua:"p3iR"},
-        {n:5, t:"Conectar el modelo", html:"<p>Haced que el modelo controle algo: un juego o una animación en Scratch con la extensión de Teachable Machine (Stretch3), o una página que muestre el texto o el aviso. Comprobad que responde rápido y sin errores graves.</p>", enlaces:[["Stretch3 (Scratch con Teachable Machine)","https://stretch3.github.io"]], evalua:"p3iR"},
+        {n:5, t:"Conectar el modelo", html:"<p>Haced que el modelo controle algo: un robot Maqueen por radio (modelo de gestos de CreateAI pasado a MakeCode), un juego o una animación en Scratch con la extensión de Teachable Machine (Stretch3), o una página que muestre el texto o el aviso. Comprobad que responde rápido y sin errores graves.</p>", enlaces:[["micro:bit CreateAI","https://createai.microbit.org"],["Stretch3 (Scratch con Teachable Machine)","https://stretch3.github.io"]], evalua:"p3iR"},
         {n:6, t:"Prueba con personas diversas", html:"<p>Probad el prototipo con personas distintas del equipo: otras edades, tamaños de mano, tonos de voz o posturas. Anotad dónde falla, mejorad los datos y medid la versión 2. ¿Ha mejorado la precisión para todos?</p>", evalua:"p3iR"},
         {n:7, t:"Ficha ética", html:"<p>Responded por escrito: ¿qué datos recoge el sistema y quién podría verlos?, ¿qué pasa si se equivoca?, ¿para quién funciona peor?, ¿podría sustituir a una persona o a un profesional?, ¿qué límites tiene y cómo los explicaríais a quien lo use?</p>", entrega:"Ficha ética por Teams", evalua:"p3iR"},
         {n:8, t:"Virtualiza tu prototipo", html:"<p>Cread un modelo 3D del dispositivo o del espacio donde se usaría (en Tinkercad o en otra herramienta) y mostradlo en <b>realidad aumentada</b> con el iPad, situado en el lugar real.</p>", enlaces:[["Tinkercad","https://www.tinkercad.com"]], evalua:"p3iR"},
@@ -1796,6 +1901,42 @@ const MATERIAS = [
    ANEXOS DE EVALUACIÓN (rúbricas, listas de control, escalas)
    ============================================================ */
 const ANEXOS = {
+  p2cV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Primeros programas y sensores</th><td>1–3</td><td>Rúbrica (Anexo 2): fila A</td><td>3.2 · 3.5</td><td>15 %</td></tr>
+    <tr><th>Seguidor de línea</th><td>4</td><td>Rúbrica (Anexo 2): fila B</td><td>2.3 · 3.4</td><td>15 %</td></tr>
+    <tr><th>Maqueta del barrio</th><td>5</td><td>Rúbrica (Anexo 2): fila C</td><td>4.1</td><td>10 %</td></tr>
+    <tr><th>Llegar, frenar y entregar</th><td>6–8</td><td>Rúbrica (Anexo 2): fila D</td><td>3.1 · 3.3 · 4.4</td><td>25 %</td></tr>
+    <tr><th>Centralita por radio</th><td>9</td><td>Rúbrica (Anexo 2): fila E</td><td>3.5</td><td>10 %</td></tr>
+    <tr><th>Día de reparto y diario</th><td>10</td><td>Rúbrica (Anexo 2): fila F</td><td>4.1 · 4.3</td><td>20 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>3.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p2cR:{titulo:"Anexo 2. Rúbrica de la ciudad de reparto", para:"tareas 1 a 10", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Primeros programas<span class="crit">3.2 · 3.5</span></th><td>Transfieres los programas sin ayuda, el cuadrado sale bien con un bucle y explicas qué lee cada sensor.</td><td>Lo consigues con poca ayuda.</td><td>Necesitas mucha ayuda.</td><td>No lo consigues.</td></tr>
+    <tr><th>B. Seguidor de línea<span class="crit">2.3 · 3.4</span></th><td>Diagrama correcto y el robot completa el circuito sin salirse; mejoras la velocidad con pruebas.</td><td>Completa el circuito.</td><td>Se sale a menudo.</td><td>No sigue la línea.</td></tr>
+    <tr><th>C. Maqueta<span class="crit">4.1</span></th><td>Tu parte está cuidada, cumple los requisitos y colaboras con el resto de la clase.</td><td>Tu parte es correcta.</td><td>Poco cuidada o incompleta.</td><td>No participas.</td></tr>
+    <tr><th>D. Llegar, frenar y entregar<span class="crit">3.1 · 3.3 · 4.4</span></th><td>Llega a todas las paradas, frena ante obstáculos y entrega sin tirar el paquete.</td><td>Cumple dos de las tres cosas.</td><td>Cumple una.</td><td>Ninguna.</td></tr>
+    <tr><th>E. Centralita<span class="crit">3.5</span></th><td>Envía pedidos, el robot los recibe y avisa al volver.</td><td>Envía y recibe sin aviso de vuelta.</td><td>Funciona a ratos.</td><td>No funciona.</td></tr>
+    <tr><th>F. Demostración y diario<span class="crit">4.1 · 4.3</span></th><td>Demostración fluida, explicación clara y diario completo con mejoras justificadas.</td><td>Demostración y diario correctos.</td><td>Diario incompleto.</td><td>No se entrega.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p3aV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Investigación y puesta a punto</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>3.2 · 4.3</td><td>10 %</td></tr>
+    <tr><th>Seguidor y brazo</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>3.1 · 3.3 · 3.4</td><td>20 %</td></tr>
+    <tr><th>Diseño del almacén</th><td>5</td><td>Rúbrica (Anexo 2): fila C</td><td>2.1 · 4.5</td><td>10 %</td></tr>
+    <tr><th>Protocolo y tráfico</th><td>6–7</td><td>Rúbrica (Anexo 2): fila D</td><td>2.3 · 3.5 · 4.4</td><td>25 %</td></tr>
+    <tr><th>Prueba de estrés</th><td>8</td><td>Rúbrica (Anexo 2): fila E</td><td>3.4</td><td>10 %</td></tr>
+    <tr><th>Modo manual</th><td>9</td><td>Rúbrica (Anexo 2): fila F</td><td>3.6</td><td>5 %</td></tr>
+    <tr><th>Presentación de la empresa</th><td>10</td><td>Rúbrica (Anexo 2): fila G</td><td>4.1 · 4.3</td><td>15 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>3.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p3aR:{titulo:"Anexo 2. Rúbrica del almacén automatizado", para:"tareas 1 a 10", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Investigación y puesta a punto<span class="crit">3.2 · 4.3</span></th><td>Explicas el funcionamiento real con criterio y documentas la calibración con datos.</td><td>Correcto con pocos datos.</td><td>Incompleto.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Seguidor y brazo<span class="crit">3.1 · 3.3 · 3.4</span></th><td>Seguidor fiable a buena velocidad con cruces y recuperación; brazo que coge y deja sin fallos.</td><td>Ambos funcionan.</td><td>Uno de los dos falla.</td><td>No funcionan.</td></tr>
+    <tr><th>C. Diseño del almacén<span class="crit">2.1 · 4.5</span></th><td>Plano a escala justificado con eficiencia, seguridad y accesibilidad.</td><td>Plano correcto con poca justificación.</td><td>Plano incompleto.</td><td>Sin plano.</td></tr>
+    <tr><th>D. Protocolo y tráfico<span class="crit">2.3 · 3.5 · 4.4</span></th><td>Protocolo claro y documentado; varios robots trabajan a la vez sin choques.</td><td>Funciona con algún choque o error.</td><td>Solo funciona con un robot.</td><td>No funciona.</td></tr>
+    <tr><th>E. Prueba de estrés<span class="crit">3.4</span></th><td>Datos completos, mejora aplicada y comparación razonada.</td><td>Datos y alguna mejora.</td><td>Datos incompletos.</td><td>Sin datos.</td></tr>
+    <tr><th>F. Modo manual<span class="crit">3.6</span></th><td>Control fluido con parada de seguridad.</td><td>Control sin parada de seguridad.</td><td>Funciona a ratos.</td><td>No funciona.</td></tr>
+    <tr><th>G. Presentación<span class="crit">4.1 · 4.3</span></th><td>Demostración, datos, sostenibilidad y vídeo convincentes; todo el equipo participa.</td><td>Presentación correcta.</td><td>Presentación incompleta.</td><td>No se presenta.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   p2pV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
     <tr><th>Algoritmos y diagramas en papel</th><td>2–3</td><td>Rúbrica (Anexo 2): fila A</td><td>2.1 · 2.3</td><td>15 %</td></tr>
     <tr><th>Retos de Scratch</th><td>4–6</td><td>Rúbrica (Anexo 2): fila B</td><td>2.3 · 2.4</td><td>20 %</td></tr>
@@ -1828,20 +1969,22 @@ const ANEXOS = {
     <tr><th>D. Pruebas y mejoras<span class="crit">3.3 · 3.4 · 4.4</span></th><td>Cambias una variable cada vez, repites las pruebas, mejoras el robot y el sensor funciona.</td><td>Pruebas y mejoras correctas.</td><td>Pocas pruebas o sin método.</td><td>Sin pruebas.</td></tr>
     <tr><th>E. Diario de ingeniería<span class="crit">4.1 · 4.3</span></th><td>Completo, con fotos, programa, tabla, cambios justificados y reflexión sobre su utilidad. Se ve el trabajo de todo el equipo.</td><td>Completo con algún apartado flojo.</td><td>Incompleto.</td><td>No se entrega.</td></tr>
     </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
-  p2iV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
-    <tr><th>La IA en mi vida e infografía</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1 · 1.2</td><td>20 %</td></tr>
-    <tr><th>Persona o máquina y árbol de decisión</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>1.1 · 1.3</td><td>15 %</td></tr>
-    <tr><th>Modelos entrenados</th><td>5–6</td><td>Rúbrica (Anexo 2): fila C</td><td>1.4</td><td>30 %</td></tr>
-    <tr><th>Cazadores de sesgos</th><td>7</td><td>Rúbrica (Anexo 2): fila D</td><td>1.3 · 4.2</td><td>20 %</td></tr>
-    <tr><th>Decálogo</th><td>8</td><td>Rúbrica (Anexo 2): fila E</td><td>1.3</td><td>10 %</td></tr>
+  p2iV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>La IA en mi vida e infografía</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1 · 1.2</td><td>15 %</td></tr>
+    <tr><th>Persona o máquina y árbol de decisión</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>1.1 · 1.3</td><td>10 %</td></tr>
+    <tr><th>Modelos entrenados</th><td>5 y 7</td><td>Rúbrica (Anexo 2): fila C</td><td>1.4</td><td>25 %</td></tr>
+    <tr><th>Cazadores de sesgos</th><td>6</td><td>Rúbrica (Anexo 2): fila D</td><td>1.3 · 4.2</td><td>15 %</td></tr>
+    <tr><th>Robot con gestos y torneo</th><td>8–9</td><td>Rúbrica (Anexo 2): fila E</td><td>3.5 · 4.1</td><td>20 %</td></tr>
+    <tr><th>Decálogo</th><td>10</td><td>Rúbrica (Anexo 2): fila F</td><td>1.3</td><td>10 %</td></tr>
     <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>1.1</td><td>5 %</td></tr>
     </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
-  p2iR:{titulo:"Anexo 2. Rúbrica de inteligencia artificial", para:"tareas 1 a 8", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+  p2iR:{titulo:"Anexo 2. Rúbrica de inteligencia artificial", para:"tareas 1 a 10", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
     <tr><th>A. La IA a mi alrededor<span class="crit">1.1 · 1.2</span></th><td>Ejemplos reales bien explicados e infografía clara, ordenada y correcta.</td><td>Ejemplos e infografía correctos.</td><td>Pocos ejemplos o infografía confusa.</td><td>No se entrega.</td></tr>
     <tr><th>B. Comparar y clasificar<span class="crit">1.1 · 1.3</span></th><td>Justificas cada decisión y tu árbol clasifica bien con pocas preguntas.</td><td>Justificaciones y árbol correctos.</td><td>Sin justificar o árbol con errores.</td><td>No participas.</td></tr>
-    <tr><th>C. Entrenar un modelo<span class="crit">1.4</span></th><td>Modelo con datos suficientes, pruebas anotadas y mejoras que suben los aciertos.</td><td>Modelo y pruebas correctos.</td><td>Pocas pruebas o sin mejoras.</td><td>Sin modelo.</td></tr>
+    <tr><th>C. Entrenar modelos<span class="crit">1.4</span></th><td>Modelos de imagen y de gestos con datos suficientes y variados, pruebas anotadas y mejoras que suben los aciertos.</td><td>Modelo y pruebas correctos.</td><td>Pocas pruebas o sin mejoras.</td><td>Sin modelo.</td></tr>
     <tr><th>D. Sesgos<span class="crit">1.3 · 4.2</span></th><td>Provocas y explicas el sesgo y lo relacionas con casos reales y sus consecuencias.</td><td>Explicas el sesgo correctamente.</td><td>Explicación confusa.</td><td>No se entrega.</td></tr>
-    <tr><th>E. IA responsable<span class="crit">1.3</span></th><td>Propones normas concretas y las defiendes con argumentos.</td><td>Propuestas correctas.</td><td>Propuestas vagas.</td><td>No participas.</td></tr>
+    <tr><th>E. Robot con gestos<span class="crit">3.5 · 4.1</span></th><td>El robot obedece los gestos de forma fiable, se para por seguridad y el equipo se organiza bien en el torneo.</td><td>Funciona con algún fallo.</td><td>Funciona a ratos.</td><td>No funciona.</td></tr>
+    <tr><th>F. IA responsable<span class="crit">1.3</span></th><td>Propones normas concretas y las defiendes con argumentos.</td><td>Propuestas correctas.</td><td>Propuestas vagas.</td><td>No participas.</td></tr>
     </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   p2tR:{titulo:"Rúbrica del Tech Show", para:"toda la secuencia", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
     <tr><th>A. Contenido tecnológico<span class="crit">4.3</span></th><td>Al menos dos conceptos explicados con precisión y de forma clara.</td><td>Conceptos correctos pero superficiales.</td><td>Algún error o poco contenido.</td><td>Solo teatro, sin tecnología.</td></tr>
@@ -2161,6 +2304,26 @@ ANEXOS.t3inf = {titulo:"Anexo 2. Rúbrica de la infografía", para:"tarea 1", ht
    FICHAS INTERACTIVAS
    ============================================================ */
 const QUIZZES = {
+  p2reparto:{titulo:"Repaso: robots de reparto", preguntas:[
+    {q:"En el robot de reparto, ¿qué hace la micro:bit?", o:["Es el cerebro que ejecuta el programa","Mueve las ruedas","Mide la distancia"], a:0, f:"El Maqueen es el cuerpo; la micro:bit le da las órdenes."},
+    {q:"Un sensor de línea sobre la cinta negra devuelve…", o:["0","1","100"], a:1, f:"Negro = 1, blanco = 0."},
+    {q:"Los sensores L1 = 1, M = 0, R1 = 0. ¿Qué debe hacer el robot?", o:["Girar a la izquierda","Girar a la derecha","Seguir recto"], a:0, f:"La línea se ha ido hacia la izquierda: el robot la sigue."},
+    {q:"Los tres sensores centrales leen 1 a la vez. ¿Qué ha encontrado?", o:["Un obstáculo","Un cruce","El final de la pila"], a:1, f:"Todo negro debajo significa que cruza otra calle."},
+    {q:"Para llegar a la tercera parada contando cruces, ¿qué usas?", o:["Una variable contador","El zumbador","La brújula"], a:0, f:"Empieza en 0 y suma 1 en cada cruce hasta llegar a 3."},
+    {q:"¿Qué sensor usas para frenar si hay un peatón delante?", o:["Sensor de línea","Ultrasonidos","Sensor de temperatura"], a:1, f:"El ultrasonido mide la distancia a lo que hay delante."},
+    {q:"¿Qué es un servo?", o:["Un motor que gira hasta un ángulo exacto","Un tipo de batería","Un sensor de luz"], a:0, f:"Por eso sirve para mover la pala a la posición justa."},
+    {q:"¿Qué necesitan dos micro:bit para comunicarse por radio?", o:["Estar conectadas por cable","Estar en el mismo grupo de radio","Tener la misma pantalla"], a:1, f:"Solo se oyen las micro:bit del mismo grupo."}
+  ]},
+  p3almacen:{titulo:"Repaso: almacén automatizado", preguntas:[
+    {q:"Un robot que sigue rutas fijas marcadas en el suelo es un…", o:["AGV","AMR","Dron"], a:0, f:"Vehículo de guiado automático. El AMR decide su propia ruta."},
+    {q:"¿Para qué sirven los sensores exteriores L2 y R2?", o:["Para medir la temperatura","Para detectar cruces y recuperar la línea","Para la radio"], a:1, f:"Los centrales siguen la línea; los exteriores ven lo que pasa a los lados."},
+    {q:"En el control proporcional, el robot corrige…", o:["Siempre lo mismo","Más cuanto más se aleja de la línea","Solo al final"], a:1, f:"La corrección es proporcional al error: movimiento más suave."},
+    {q:"El mensaje R3:EST2 llega a todos los robots. ¿Quién lo obedece?", o:["Todos","Solo el robot 3","Ninguno"], a:1, f:"Por eso hace falta un protocolo con identificador."},
+    {q:"¿Qué evita que dos robots choquen en un cruce?", o:["Ir más rápido","Reservar el cruce antes de entrar","Apagar la radio"], a:1, f:"Es lo que hacen los sistemas de tráfico reales; el ultrasonido es el último recurso."},
+    {q:"El almacén saca 12 pedidos en 4 minutos. ¿Cuántos pedidos por minuto?", o:["3","48","16"], a:0, f:"12 / 4 = 3 pedidos por minuto."},
+    {q:"Si un robot controlado a mano pierde la señal, debe…", o:["Seguir con la última orden","Detenerse","Volver a la base a toda velocidad"], a:1, f:"Es la parada de seguridad."},
+    {q:"¿Qué medida hace el almacén más sostenible?", o:["Rutas más cortas y motores parados mientras esperan","Más robots siempre encendidos","Pasillos más largos"], a:0, f:"Menos recorrido y menos esperas con consumo = menos energía."}
+  ]},
   p2prog:{titulo:"Repaso: algoritmos y Scratch", preguntas:[
     {q:"¿Qué tres características debe tener un algoritmo?", o:["Rápido, corto y bonito","Ordenado, preciso y finito","Largo, detallado y en inglés"], a:1, f:"Si falta una de las tres, la máquina no puede seguirlo bien."},
     {q:"En un diagrama de flujo, ¿qué forma tiene una decisión?", o:["Rectángulo","Óvalo","Rombo"], a:2, f:"El rombo tiene dos salidas: sí y no."},
