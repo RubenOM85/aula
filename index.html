@@ -400,7 +400,7 @@ const MATERIAS = [
        cita:["Todo lo complejo puede dividirse en partes simples","René Descartes"],
        bloque:"Bloque 1. Dispositivos digitales, sistemas operativos y de comunicación",
        desc:"Investigamos los componentes de un ordenador, diseñamos nuestro PC ideal y desmontamos y volvemos a montar un ordenador real del aula de tecnología.",
-       criterios:["1.1","1.3","1.4","1.5","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.3","3.5","3.6"],
+       criterios:["1.1","1.3","1.4","1.5","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.3","3.5","3.6","4.5","5.4"],
        saberes:[
         "La representación digital de la información. Unidades de medida.",
         "Diseño de un ordenador personal. Elementos, componentes físicos y sus características.",
@@ -409,13 +409,43 @@ const MATERIAS = [
         "Interacción de los componentes del equipo informático en su funcionamiento. Prestaciones y rendimiento.",
         "Dispositivos móviles. Características básicas."],
        producto:"Vídeo del desmontaje y montaje del ordenador, entregado por OneDrive.",
+       teoria:`
+        <p>Un ordenador es un sistema que recibe datos, los procesa, los guarda y devuelve resultados. Para entenderlo hay que distinguir dos partes:</p>
+        <div class="defs">
+          <div><b>Hardware</b><p>La parte física: placa base, procesador, memoria, almacenamiento, fuente de alimentación, periféricos…</p></div>
+          <div><b>Software</b><p>Los programas: el sistema operativo y las aplicaciones.</p></div>
+        </div>
+        <h3>Sistemas operativos</h3>
+        <p>El <b>sistema operativo</b> es el programa principal: gestiona el hardware, los archivos y los programas, y nos permite usarlos.</p>
+        <div class="defs">
+          <div><b>De escritorio</b><p>Windows, macOS y Linux.</p></div>
+          <div><b>Móviles</b><p>Android e iOS / iPadOS.</p></div>
+          <div><b>De servidor</b><p>Gestionan ordenadores que dan servicio a muchos usuarios a la vez (webs, correo). La mayoría usan Linux.</p></div>
+        </div>
+        <p>El software puede ser <b>propietario</b> (de una empresa, no se puede ver ni modificar su código) o <b>libre</b> (se puede usar, estudiar, modificar y compartir, como Linux o LibreOffice). Una <b>distribución</b> es una versión de Linux preparada con un conjunto de programas, como Ubuntu.</p>
+        <h3>Resolver problemas técnicos</h3>
+        <ol class="steps4">
+          <li><b>Identifica</b> el síntoma: ¿qué pasa exactamente y cuándo?</li>
+          <li><b>Comprueba lo sencillo:</b> cables, conexiones, encendido, batería.</li>
+          <li><b>Reinicia</b> el equipo o el programa.</li>
+          <li><b>Busca</b> el mensaje de error o el síntoma en Internet.</li>
+          <li><b>Prueba una solución cada vez</b> y anota qué has hecho.</li>
+          <li>Si no lo consigues, <b>pide ayuda</b> explicando todo lo que has probado.</li>
+        </ol>
+        <h3>Tecnología sostenible</h3>
+        <ul>
+          <li><b>Obsolescencia programada:</b> diseñar productos para que dejen de funcionar o queden anticuados antes de tiempo y haya que comprar otros.</li>
+          <li><b>Basura electrónica:</b> los aparatos contienen metales valiosos y sustancias contaminantes; deben llevarse a un punto limpio.</li>
+          <li><b>Consumo responsable:</b> comprar lo que necesitas, alargar la vida de los aparatos (repararlos, ampliar memoria, cambiar la batería) y valorar los reacondicionados.</li>
+          <li><b>Soberanía tecnológica:</b> poder decidir qué tecnología usamos sin depender de unas pocas empresas. El software libre ayuda a conseguirlo.</li>
+        </ul>`,
        tareas:[
         {n:1, t:"Vídeo motivacional", html:"<p>Empezamos viendo un vídeo sobre la situación de aprendizaje que vamos a trabajar este primer trimestre.</p>", enlaces:[["Ver el vídeo en TikTok","https://www.tiktok.com/@roro.bueno/video/7412640015076936993?lang=es"]]},
         {n:2, t:"Componentes de un ordenador", html:"<p>Echa un ojo al siguiente artículo y recopila toda la información necesaria para hacer una <b>infografía</b> que resuma lo explicado.</p>", enlaces:[["Guía de componentes del ordenador (PcComponentes)","https://www.pccomponentes.com/guia-componentes-ordenador"]], evalua:"anexo1", entrega:"PDF por Teams"},
-        {n:3, t:"¡De compras! Diseña tu ordenador personal", html:"<p>Una vez hecha la investigación sobre los componentes, diseña tu ordenador personal según tus intereses.</p><ol><li>Explica brevemente qué necesidad tienes y qué uso le vas a dar.</li><li>Simula la compra en la web de PcComponentes añadiendo al carrito todo lo necesario para montarlo.</li></ol><p>Esta tarea la valora un compañero o compañera con una lista de control.</p>", enlaces:[["PcComponentes","https://www.pccomponentes.com"]], evalua:"anexo2", entrega:"Coevaluación"},
+        {n:3, t:"¡De compras! Diseña tu ordenador personal", html:"<p>Una vez hecha la investigación sobre los componentes, diseña tu ordenador personal según tus intereses.</p><ol><li>Explica brevemente qué necesidad tienes y qué uso le vas a dar.</li><li>Simula la compra en la web de PcComponentes añadiendo al carrito todo lo necesario para montarlo.</li><li>Comprueba con un simulador de montaje de PC (el que indique el profesor) que todos los componentes son compatibles entre sí.</li><li>Elige el sistema operativo y justifica tu elección.</li><li>Explica qué has hecho para que sea un equipo sostenible: que dure, que se pueda ampliar y reparar, consumo…</li></ol><p>Esta tarea la valora un compañero o compañera con una lista de control.</p>", enlaces:[["PcComponentes","https://www.pccomponentes.com"]], evalua:"anexo2", entrega:"Coevaluación"},
         {n:4, t:"Tu ordenador del aula", html:"<p>Ya hemos visto suficiente, ahora toca mancharse las manos. Tu profesor te asignará un grupo y un ordenador del aula de tecnología. Comprobaremos juntos que funciona correctamente. Cuidadlo: será vuestro tesoro.</p>"},
         {n:5, t:"¡Manos a la obra! Despiece y montaje", html:"<p>Antes de quitar tornillos y extraer componentes, organizaos. Cada persona tiene un papel:</p><ul><li><b>Fotos y vídeo:</b> graba cada componente y cada paso.</li><li><b>Montaje:</b> herramienta en mano, desmonta el ordenador.</li><li><b>Notas:</b> apunta cada paso, cada nombre y cada idea. Será clave para editar el vídeo final.</li></ul><p>Cuando esté desmontado, limpiad todo y volved a montarlo.</p>"},
-        {n:6, t:"¿Se enciende?", html:"<p>Lo más importante: comprobad que funciona como al principio, sin ningún error. ¡Acordaos de grabar ese momento! Si aparece un error, investigad de qué se trata y buscad la solución.</p>"},
+        {n:6, t:"¿Se enciende?", html:"<p>Lo más importante: comprobad que funciona como al principio, sin ningún error. ¡Acordaos de grabar ese momento! Si aparece un error, aplicad los pasos para resolver problemas técnicos de la teoría y anotad qué habéis probado.</p>"},
         {n:7, t:"Entrega del vídeo", html:"<p>Edita y maqueta el vídeo, súbelo a tu cuenta de OneDrive y compártelo con el profesor para que pueda valorarlo.</p>", evalua:"anexo3", entrega:"Enlace de OneDrive"},
         {n:8, t:"Pon a punto tu dispositivo", html:"<p>Ahora que sabes cómo funciona un ordenador por dentro, cuida el dispositivo que más usas: tu iPad o tu móvil. Revisa cada punto, arregla lo que haga falta y haz una captura del antes y el después (tapa cualquier dato personal):</p><ol><li><b>Actualizaciones:</b> ¿el sistema y las apps están al día? Actualiza lo pendiente.</li><li><b>Almacenamiento:</b> ¿cuánto espacio queda y qué ocupa más? Libera espacio borrando lo que no uses.</li><li><b>Copia de seguridad:</b> ¿tus fotos y archivos están en la nube (iCloud, OneDrive…)? ¿Cuándo fue la última copia?</li><li><b>Permisos de las apps:</b> ¿qué apps usan tu ubicación, cámara y micrófono? Quita los permisos que no tengan sentido.</li><li><b>Bloqueo:</b> ¿tienes código de desbloqueo seguro y bloqueo automático?</li><li><b>Tiempo de uso:</b> mira cuántas horas usaste el dispositivo la última semana y en qué apps. ¿Te sorprende? ¿Qué cambiarías?</li></ol>", entrega:"Informe con capturas por Teams", evalua:"anexo4"}
        ],
@@ -426,7 +456,7 @@ const MATERIAS = [
       {id:"dig4-sa1-2", etiqueta:"Situación de aprendizaje 1.2", titulo:"Redes informáticas", subtitulo:"¿Hay alguien offline?",
        bloque:"Bloque 1. Dispositivos digitales, sistemas operativos y de comunicación",
        desc:"Qué es una red informática, qué tipos existen y cómo funcionan las redes cableadas e inalámbricas. Proyecto final: el esquema de la red del colegio.",
-       criterios:["1.1","1.2","1.3","1.4","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.3","3.6"],
+       criterios:["1.1","1.2","1.3","1.5","1.4","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.3","3.6"],
        producto:"Gráfico con la arquitectura de la red de nuestro centro educativo.",
        teoria:`
         <p>Hoy en día la comunicación entre dispositivos electrónicos es muy común, tanto para el ocio como para el trabajo de muchas empresas. Compartimos datos a través de conexiones 4G, 5G, wifi, NFC, Ethernet o bluetooth. Los móviles se conectan con otros móviles y con los proveedores de Internet a través de las redes de datos. Los ordenadores, portátiles, impresoras y otros dispositivos se conectan entre sí en redes locales para trabajar juntos, e incluso con ordenadores remotos en cualquier lugar de Internet.</p>
@@ -441,6 +471,22 @@ const MATERIAS = [
         <h3>¿Cómo diseñamos una red funcional?</h3>
         <p>Una red informática funcional tiene que permitir dos cosas:</p>
         <ul><li>Que varios dispositivos salgan a Internet usando la misma línea de acceso, que normalmente es única.</li><li>Que los ordenadores compartan los recursos internos de la red: la impresora, el escáner o un almacenamiento en red que todos pueden usar.</li></ul>
+        <h3>Topologías: cómo se conectan los equipos</h3>
+        <div class="defs">
+          <div><b>Estrella</b><p>Todos los equipos se conectan a un dispositivo central (router o switch). Es la de casa y la del colegio: si falla un equipo, los demás siguen funcionando.</p></div>
+          <div><b>Bus</b><p>Todos comparten un mismo cable. Sencilla, pero si el cable falla, cae toda la red.</p></div>
+          <div><b>Anillo</b><p>Cada equipo se conecta al siguiente formando un círculo.</p></div>
+          <div><b>Malla</b><p>Los equipos se conectan entre sí por varios caminos. Muy fiable: es la idea de Internet y de los sistemas wifi «mesh».</p></div>
+        </div>
+        <h3>Configurar bien la red de casa</h3>
+        <ul>
+          <li><b>Cambia la contraseña del router</b> que viene de fábrica, tanto la del wifi como la de acceso a su configuración.</li>
+          <li><b>Usa cifrado WPA2 o, mejor, WPA3.</b> Nunca dejes la red abierta.</li>
+          <li><b>Pon un nombre de red (SSID)</b> que no dé pistas de quién eres ni de dónde vives.</li>
+          <li><b>Crea una red de invitados</b> para las visitas y los aparatos inteligentes.</li>
+          <li><b>Mantén el router actualizado</b> y apágalo o reinícialo si va lento.</li>
+          <li>Cada dispositivo recibe una <b>dirección IP</b> que lo identifica dentro de la red, normalmente asignada automáticamente por el router.</li>
+        </ul>
         <h3>Glosario de dispositivos de red</h3>
         <div class="defs">
           <div><b>Router</b><p>Conecta tu red con otras redes, como Internet, y decide por dónde enviar los datos.</p></div>
@@ -454,7 +500,7 @@ const MATERIAS = [
           <div><b>Adaptador de red</b><p>La tarjeta que conecta cada equipo a la red, con cable o sin él.</p></div>
         </div>`,
        tareas:[
-        {n:1, t:"La red de tu casa", html:"<p>Diseña un gráfico que represente la arquitectura de una red que conecte entre sí todos los dispositivos de tu hogar.</p>"},
+        {n:1, t:"La red de tu casa", html:"<p>Diseña un gráfico que represente la arquitectura de una red que conecte entre sí todos los dispositivos de tu hogar. Indica qué topología tiene y qué medidas de seguridad aplicarías al router.</p>"},
         {n:2, t:"Opciones para crear una pequeña red", html:`<p>Completa la tabla con las opciones que existen para crear una pequeña red de datos. Las casillas con «?» son las que tienes que rellenar.</p>
           <div class="table-wrap"><table class="tbl">
             <thead><tr><th></th><th>Descripción</th><th>Ventajas</th><th>Inconvenientes</th></tr></thead>
@@ -510,7 +556,7 @@ const MATERIAS = [
       {id:"dig4-seguridad", etiqueta:"Situación de aprendizaje 3", titulo:"Seguridad en la red", subtitulo:"De alumnos a profesores: enseñamos a 6.º de Primaria",
        bloque:"Bloque 3. Seguridad y bienestar digital",
        desc:"Aprendemos los cinco principios de «Sé genial en Internet», los ponemos a prueba en Interland y preparamos y damos una sesión de seguridad digital al alumnado de 6.º de Primaria.",
-       criterios:["2.5","3.1","3.2","3.3","3.4","3.6","4.1","4.4","5.3"],
+       criterios:["2.5","3.1","3.2","3.3","3.4","3.5","3.6","4.1","4.4","5.3"],
        producto:"Sesión de seguridad digital impartida al alumnado de 6.º de Primaria, con su presentación.",
        anexos:["sa3a1","sa3a2"],
        teoria:`
@@ -564,6 +610,27 @@ const MATERIAS = [
             <p>Ante cualquier situación que te incomode, te dé miedo o no sepas resolver, habla con un adulto de confianza: tu familia, tu tutor o un profesor. Pedir ayuda es de valientes.</p>
             <p>También puedes llamar al <b>017</b>, la línea gratuita y confidencial de ayuda en ciberseguridad del INCIBE.</p>
           </article>
+        </div>
+        <h3>Identidad y reputación digital</h3>
+        <div class="defs">
+          <div><b>Identidad digital</b><p>Todo lo que hay sobre ti en Internet: perfiles, fotos, comentarios, lo que publican otros de ti.</p></div>
+          <div><b>Reputación digital</b><p>La opinión que los demás se forman de ti a partir de tu identidad digital. Cuesta mucho construirla y muy poco perderla.</p></div>
+          <div><b>Privacidad en redes</b><p>Cuenta privada, revisar quién puede etiquetarte o escribirte, no compartir la ubicación en directo y aceptar solo a quien conoces.</p></div>
+        </div>
+        <p class="ask">Prueba: busca tu nombre y apellidos en un buscador. ¿Te gusta lo que aparece?</p>
+        <h3>Proteger los dispositivos</h3>
+        <ul>
+          <li>Actualizar el sistema y las apps, que corrigen fallos de seguridad.</li>
+          <li>Descargar apps solo de las tiendas oficiales y revisar sus permisos.</li>
+          <li>Bloqueo de pantalla y copias de seguridad periódicas.</li>
+          <li>Cuidado con las redes wifi públicas: no entres en tu banco ni metas contraseñas en ellas.</li>
+        </ul>
+        <h3>Salud digital: cuerpo y mente</h3>
+        <div class="defs">
+          <div><b>Postura</b><p>Pantalla a la altura de los ojos, espalda apoyada y pies en el suelo. Con el móvil, levanta la pantalla en vez de bajar la cabeza.</p></div>
+          <div><b>Vista</b><p>Regla 20-20-20: cada 20 minutos, mira algo a unos 6 metros durante 20 segundos.</p></div>
+          <div><b>Sueño</b><p>La luz de las pantallas y las notificaciones retrasan el sueño. Deja el móvil fuera de la habitación por la noche.</p></div>
+          <div><b>Mente</b><p>La comparación constante con otros, el miedo a perderse algo (FOMO) o la necesidad de «likes» afectan al ánimo. Desconectar también es cuidarse.</p></div>
         </div>`,
        tareas:[
         {n:1, t:"Aprendemos la teoría", html:"<p>Lee la teoría de los cinco principios y haz un resumen con los conceptos clave de cada uno: huella digital, phishing, contraseña fuerte, verificación en dos pasos, ciberacoso… Después, comprueba lo que sabes con la ficha interactiva de repaso.</p>", evalua:"sa3a1", entrega:"Resumen por Teams"},
@@ -609,6 +676,15 @@ const MATERIAS = [
           <div><b>Efectos</b><p>Pasos, puertas, lluvia… Se pueden grabar aparte y añadir al editar.</p></div>
           <div><b>Silencio</b><p>Bien usado, crea tensión o da importancia a un momento.</p></div>
         </div>
+        <h3>Derechos de autor y licencias</h3>
+        <p>Todo lo que encuentras en Internet (música, fotos, vídeos, textos) tiene autor y, por defecto, está protegido: no se puede usar sin permiso aunque sea gratis verlo. Las licencias <b>Creative Commons</b> permiten usarlo con condiciones:</p>
+        <div class="defs">
+          <div><b>BY · Reconocimiento</b><p>Debes citar al autor. Todas las licencias CC lo piden.</p></div>
+          <div><b>SA · Compartir igual</b><p>Tu obra debe compartirse con la misma licencia.</p></div>
+          <div><b>NC · No comercial</b><p>No puedes usarlo para ganar dinero.</p></div>
+          <div><b>ND · Sin obras derivadas</b><p>No puedes modificarlo: solo usarlo tal cual.</p></div>
+        </div>
+        <p>También hay obras de <b>dominio público</b> (se pueden usar libremente) y bibliotecas de música y efectos libres de derechos. En los créditos del corto indica siempre de dónde sale cada recurso y con qué licencia.</p>
         <h3>Editar: el montaje</h3>
         <ul>
           <li><b>Ordenar y cortar:</b> elige las mejores tomas y quita lo que sobra. Un buen montaje es ágil.</li>
@@ -695,6 +771,25 @@ const MATERIAS = [
           <li><b>Busca otras fuentes.</b> ¿Lo cuentan otros medios fiables? ¿Lo han desmentido los verificadores?</li>
           <li><b>Rastrea el original.</b> Busca de dónde sale la imagen, el vídeo o la cita. Muchas veces es real pero de otro lugar u otra época.</li>
         </ol>
+        <h3>Buscar bien: operadores de búsqueda</h3>
+        <div class="defs">
+          <div><b>"comillas"</b><p>Busca la frase exacta: <i>"cambio climático Valencia"</i>.</p></div>
+          <div><b>- (menos)</b><p>Excluye una palabra: <i>jaguar -coche</i>.</p></div>
+          <div><b>site:</b><p>Busca solo en una web o dominio: <i>bulos site:maldita.es</i> o <i>site:gob.es</i>.</p></div>
+          <div><b>filetype:</b><p>Busca un tipo de archivo: <i>energía renovable filetype:pdf</i>.</p></div>
+          <div><b>OR</b><p>Una palabra u otra: <i>bici OR patinete</i>.</p></div>
+        </div>
+        <h3>Seis criterios para evaluar una fuente</h3>
+        <ol class="steps4">
+          <li><b>Autoría:</b> ¿quién lo publica y es experto o una institución reconocida?</li>
+          <li><b>Actualidad:</b> ¿de cuándo es? ¿sigue siendo válido?</li>
+          <li><b>Objetividad:</b> ¿informa o intenta convencerte o venderte algo?</li>
+          <li><b>Precisión:</b> ¿da datos concretos y cita de dónde salen?</li>
+          <li><b>Cobertura:</b> ¿trata el tema completo o solo una parte?</li>
+          <li><b>Diseño:</b> ¿está cuidado o lleno de anuncios, errores y titulares exagerados?</li>
+        </ol>
+        <h3>Algoritmos y burbujas</h3>
+        <p>Las redes y los buscadores te muestran lo que creen que te gustará según lo que ya has visto. Así acabas dentro de una <b>burbuja de filtro</b>, donde solo ves opiniones parecidas a las tuyas. Los algoritmos y la IA también pueden tener <b>sesgos</b>: si aprenden de datos desequilibrados, repiten esos desequilibrios.</p>
         <h3>Herramientas</h3>
         <ul>
           <li><b>Búsqueda inversa de imágenes</b> con Google Lens o TinEye: subes una imagen y te dice dónde ha aparecido antes.</li>
@@ -718,7 +813,7 @@ const MATERIAS = [
         </ul>`,
        tareas:[
         {n:1, t:"Aprendemos a verificar", html:"<p>Trabajamos la teoría en clase. Después, comprueba lo que sabes con la ficha interactiva «¿Bulo o verdad?».</p>", evalua:"sa6a1"},
-        {n:2, t:"Laboratorio de verificación", html:`<p>Aquí tienes un dosier con mensajes, imágenes, vídeos y noticias que han circulado de verdad. Algunos son reales y otros falsos o generados con IA. Para cada pieza, completa un informe:</p><ol><li>¿Qué dice o qué muestra?</li><li>¿Quién lo publica y cuándo?</li><li>¿Qué has hecho para comprobarlo? (búsqueda inversa, otros medios, verificadores…)</li><li>Conclusión: real, falso o manipulado.</li><li>La prueba: el enlace o la captura que lo demuestra.</li></ol><p>Lo que más cuenta no es acertar, sino que tu proceso sea sólido y esté demostrado. La plantilla del informe está en el canal de Teams de la materia.</p><h4>El dosier</h4><p>Cuidado: no todo es falso.</p>${dosierHTML()}`, entrega:"Informe de verificación por Teams", evalua:"sa6a2", enlaces:[["Google Lens","https://lens.google/"],["TinEye","https://tineye.com/"],["Maldita.es","https://maldita.es/"],["Newtral","https://www.newtral.es/"],["EFE Verifica","https://verifica.efe.com/"]]},
+        {n:2, t:"Laboratorio de verificación", html:`<p>Aquí tienes un dosier con mensajes, imágenes, vídeos y noticias que han circulado de verdad. Algunos son reales y otros falsos o generados con IA. Para cada pieza, completa un informe:</p><ol><li>¿Qué dice o qué muestra?</li><li>¿Quién lo publica y cuándo?</li><li>¿Qué has hecho para comprobarlo? (búsqueda inversa, otros medios, verificadores…)</li><li>Conclusión: real, falso o manipulado.</li><li>La prueba: el enlace o la captura que lo demuestra.</li></ol><p>Usa los operadores de búsqueda y los seis criterios para evaluar cada fuente. Lo que más cuenta no es acertar, sino que tu proceso sea sólido y esté demostrado. La plantilla del informe está en el canal de Teams de la materia.</p><h4>El dosier</h4><p>Cuidado: no todo es falso.</p>${dosierHTML()}`, entrega:"Informe de verificación por Teams", evalua:"sa6a2", enlaces:[["Google Lens","https://lens.google/"],["TinEye","https://tineye.com/"],["Maldita.es","https://maldita.es/"],["Newtral","https://www.newtral.es/"],["EFE Verifica","https://verifica.efe.com/"]]},
         {n:3, t:"La IA bajo la lupa", html:"<p>Con <b>Gemini</b>, haz una pregunta sobre un tema que conozcas bien o que puedas comprobar. Repítela varias veces y formulada de distintas maneras (si el profesor lo permite, compárala también con otra IA).</p><ul><li>Compara las respuestas: ¿coinciden? ¿Alguna se contradice?</li><li>Comprueba los datos con fuentes fiables. ¿Has encontrado errores o datos inventados?</li><li>Pide las fuentes y revisa si existen de verdad.</li><li>Busca sesgos: ¿hay estereotipos o puntos de vista que faltan?</li></ul><p>Recoge tus conclusiones en un documento con capturas.</p>", entrega:"Análisis con capturas por Teams", evalua:"sa6a2"},
         {n:4, t:"Debate: dilemas digitales", html:"<p>Debatimos sobre un dilema digital real. Algunas propuestas:</p><ul><li>¿Se debería poder usar la IA para hacer los deberes?</li><li>¿Debería subir la edad mínima para tener redes sociales?</li><li>¿Móviles en el aula: sí o no?</li><li>¿Deberían las redes sociales borrar los bulos o eso es censura?</li></ul><p>Prepara tus argumentos con datos verificados y cita de dónde salen. En el debate se valora tanto la fuerza de tus argumentos como el respeto a quien opina distinto.</p>", evalua:"sa6a2"},
         {n:5, t:"Tu kit antibulos", html:"<p>Crea una infografía con tu propio método para no caer en bulos: los pasos para verificar, las señales de alarma, las herramientas y los verificadores. Debe ser útil para cualquier persona de tu familia.</p>", entrega:"Infografía en PDF por Teams", evalua:"sa6a2"}
@@ -756,6 +851,8 @@ const MATERIAS = [
           <div><b>Cl@ve</b><p>Sistema para identificarte ante la Administración con el móvil, sin certificado.</p></div>
           <div><b>Certificado digital y DNIe</b><p>Tu identidad electrónica, que equivale a tu firma.</p></div>
           <div><b>Carpeta Ciudadana</b><p>Web donde consultar en un solo sitio tus datos y trámites con la Administración.</p></div>
+          <div><b>Registro electrónico</b><p>Permite presentar solicitudes y documentos a la Administración por Internet, con justificante de fecha y hora.</p></div>
+          <div><b>Certificados oficiales</b><p>Documentos que se descargan al momento, como el de empadronamiento o el de vida laboral.</p></div>
         </div>
         <p class="ask">Recuerda: la Administración y los bancos nunca te piden contraseñas ni códigos por SMS, correo o teléfono.</p>`,
        tareas:[
@@ -783,6 +880,15 @@ const MATERIAS = [
           <div><b>CSS</b><span>El aspecto</span><p>Cómo se ve: colores, tamaños, tipos de letra, posiciones.</p></div>
           <div><b>JavaScript</b><span>El comportamiento</span><p>Qué hace: calcular, guardar, reaccionar cuando pulsas un botón.</p></div>
         </div>
+        <h3>Pensar antes de programar: el algoritmo</h3>
+        <p>Un <b>algoritmo</b> es una secuencia ordenada de pasos para resolver un problema, como una receta. Antes de pedir el código a la IA, tienes que saber qué tiene que hacer tu app paso a paso. Todo algoritmo combina tres estructuras:</p>
+        <div class="defs">
+          <div><b>Secuencial</b><p>Pasos uno detrás de otro: pedir un dato, calcular, mostrar el resultado.</p></div>
+          <div><b>Condicional</b><p>Si pasa algo, haz una cosa; si no, otra: «si la casilla está vacía, avisa».</p></div>
+          <div><b>Repetitiva (bucle)</b><p>Repite unos pasos mientras se cumpla una condición o un número de veces: «para cada pregunta del repaso…».</p></div>
+        </div>
+        <p>El algoritmo se dibuja con un <b>diagrama de flujo</b>: óvalos para el inicio y el fin, rectángulos para las acciones, romboides para la entrada y la salida de datos, y rombos para las decisiones, todo unido con flechas.</p>
+        <p>El algoritmo se escribe después en un <b>lenguaje de programación</b> (JavaScript, Python…) dentro de un <b>entorno de desarrollo</b> (IDE), que es el programa donde se escribe, se prueba y se corrige el código.</p>
         <h3>Cómo pedirle una app a la IA</h3>
         <p>La IA hace lo que le pides, no lo que quieres. Un buen encargo incluye:</p>
         <ul>
@@ -811,10 +917,11 @@ const MATERIAS = [
        tareas:[
         {n:1, t:"Aprendemos cómo funciona", html:"<p>Trabajamos en clase qué es una app web, cómo se le pide a una IA y el ciclo de trabajo. Comprueba lo que sabes con la ficha interactiva.</p>", evalua:"sa8a1"},
         {n:2, t:"Detecta un problema y escribe los requisitos", html:"<p>Piensa en algo de tu día a día que una pequeña herramienta podría facilitar. Algunas ideas: un organizador de estudio, una calculadora de gastos, un repaso de vocabulario, un temporizador para estudiar, un conversor de unidades, un marcador para un deporte…</p><p>Escribe la <b>ficha de requisitos</b>:</p><ul><li>¿Qué problema resuelve y para quién?</li><li>Funciones mínimas (entre 3 y 5).</li><li>Cómo se tiene que ver.</li><li>Qué NO va a hacer.</li></ul>", entrega:"Ficha de requisitos por Teams", evalua:"sa8a2"},
-        {n:3, t:"Primer prototipo", html:"<p>Con <b>Gemini</b>, escribe tu encargo a partir de la ficha de requisitos. Prueba la app en la vista previa de Gemini (Canvas), si tu cuenta la tiene, o pega el código en un editor web como CodePen, y comprueba que funciona. Guarda el encargo (el prompt) que has usado: forma parte de la entrega.</p>", enlaces:[["CodePen","https://codepen.io/"]], evalua:"sa8a2"},
-        {n:4, t:"Prueba y mejora", html:"<p>Haz un plan de pruebas con al menos cinco casos, incluidos casos raros. Anota en tu <b>diario de versiones</b> cada fallo que encuentres, cómo se lo explicaste a la IA y qué cambió. Llega como mínimo a la versión 3, añadiendo funciones de una en una.</p>", entrega:"Diario de versiones por Teams", evalua:"sa8a2"},
-        {n:5, t:"Entiende tu código", html:"<p>Demuestra que entiendes lo que has creado:</p><ol><li>Señala en el código dónde está la estructura (HTML), el aspecto (CSS) y el comportamiento (JavaScript).</li><li>Explica con tus palabras qué hacen cinco partes del código.</li><li>Haz <b>tú, sin IA</b>, al menos un cambio a mano: un color, un texto, un nuevo botón o un cálculo, y explica qué has tocado.</li></ol>", entrega:"Explicación con capturas por Teams", evalua:"sa8a2"},
-        {n:6, t:"Presenta tu herramienta", html:"<p>Presenta tu herramienta a la clase con una demostración en directo. Acompáñala de una breve documentación: qué hace, cómo se usa, qué partes hizo la IA, qué hiciste tú y qué mejorarías.</p>", entrega:"Enlace a la herramienta y documentación por Teams", evalua:"sa8a2"}
+        {n:3, t:"Diseña el algoritmo", html:"<p>Dibuja el <b>diagrama de flujo</b> de la función principal de tu herramienta. Debe tener al menos una condición y, si tiene sentido, un bucle. Usa las formas correctas y comprueba que el recorrido llega siempre al final.</p>", entrega:"Diagrama de flujo por Teams", evalua:"sa8a2"},
+        {n:4, t:"Primer prototipo", html:"<p>Con <b>Gemini</b>, escribe tu encargo a partir de la ficha de requisitos y del diagrama de flujo. Prueba la app en la vista previa de Gemini (Canvas), si tu cuenta la tiene, o pega el código en un editor web como CodePen, y comprueba que funciona. Guarda el encargo (el prompt) que has usado: forma parte de la entrega.</p>", enlaces:[["CodePen","https://codepen.io/"]], evalua:"sa8a2"},
+        {n:5, t:"Prueba y mejora", html:"<p>Haz un plan de pruebas con al menos cinco casos, incluidos casos raros. Anota en tu <b>diario de versiones</b> cada fallo que encuentres, cómo se lo explicaste a la IA y qué cambió. Llega como mínimo a la versión 3, añadiendo funciones de una en una.</p>", entrega:"Diario de versiones por Teams", evalua:"sa8a2"},
+        {n:6, t:"Entiende tu código", html:"<p>Demuestra que entiendes lo que has creado:</p><ol><li>Señala en el código dónde está la estructura (HTML), el aspecto (CSS) y el comportamiento (JavaScript).</li><li>Explica con tus palabras qué hacen cinco partes del código.</li><li>Haz <b>tú, sin IA</b>, al menos un cambio a mano: un color, un texto, un nuevo botón o un cálculo, y explica qué has tocado.</li></ol>", entrega:"Explicación con capturas por Teams", evalua:"sa8a2"},
+        {n:7, t:"Presenta tu herramienta", html:"<p>Presenta tu herramienta a la clase con una demostración en directo. Acompáñala de una breve documentación: qué hace, cómo se usa, qué partes hizo la IA, qué hiciste tú y qué mejorarías.</p>", entrega:"Enlace a la herramienta y documentación por Teams", evalua:"sa8a2"}
        ],
        items:[
         {tipo:"interactiva", t:"Repaso: apps web e IA", s:"8 preguntas sobre HTML, CSS, JavaScript y cómo trabajar con IA.", quiz:"iaapp"}
@@ -1183,6 +1290,63 @@ const MATERIAS = [
        items:[
         {tipo:"interactiva", t:"Repaso: cargas, esfuerzos y estructuras", s:"8 preguntas con informe de repaso.", quiz:"estructuras"}
        ]}
+      ,{id:"tec3-entorno", complementario:true, etiqueta:"Tema complementario", titulo:"Mi entorno digital", subtitulo:"Hardware, software, ofimática e Internet",
+       bloque:"Bloque: Digitalización del entorno personal de aprendizaje",
+       desc:"Los conocimientos digitales básicos que usamos en todos los proyectos: cómo es un ordenador por dentro y por fuera, qué hace el sistema operativo, cómo sacar partido a la ofimática, cómo funciona Internet y cómo organizar nuestro entorno de trabajo. Se trabaja cuando un proyecto lo necesita.",
+       criterios:["1.1","4.1"],
+       teoria:`
+        <h3>¿Qué es la digitalización?</h3>
+        <p>Digitalizar es convertir información (textos, imágenes, sonidos, trámites, procesos) en datos que un ordenador puede guardar, procesar y transmitir. Está en casa (domótica, televisión a la carta), en el colegio (iPads, Teams) y en la calle (pago con el móvil, semáforos inteligentes).</p>
+        <h3>Hardware y software</h3>
+        <div class="defs">
+          <div><b>Hardware</b><p>La parte física del equipo: lo que se puede tocar.</p></div>
+          <div><b>Software</b><p>Los programas e instrucciones que hacen funcionar el hardware.</p></div>
+        </div>
+        <h3>Periféricos</h3>
+        <div class="defs">
+          <div><b>Entrada</b><p>Introducen datos: teclado, ratón, micrófono, escáner, webcam.</p></div>
+          <div><b>Salida</b><p>Muestran o sacan datos: monitor, impresora, altavoces, auriculares.</p></div>
+          <div><b>Entrada y salida</b><p>Hacen las dos cosas: pantalla táctil, memoria USB, router.</p></div>
+        </div>
+        <h3>Puertos y almacenamiento</h3>
+        <ul>
+          <li><b>USB y USB-C:</b> el conector universal para datos y carga. <b>HDMI:</b> imagen y sonido digital hacia monitores y proyectores. <b>Ethernet (RJ45):</b> red por cable. <b>Jack de 3,5 mm:</b> audio.</li>
+          <li><b>Almacenamiento:</b> interno (disco duro o SSD), externo (memorias USB, discos externos) y en la nube (OneDrive, iCloud). La información se mide en bits y bytes: 1 byte = 8 bits; después KB, MB, GB y TB.</li>
+        </ul>
+        <h3>El sistema operativo</h3>
+        <p>Gestiona el hardware, los archivos y los programas, y es la interfaz con la que trabajamos. Los más usados son Windows, macOS y Linux en ordenadores, y Android e iOS / iPadOS en móviles y tabletas.</p>
+        <h3>Ofimática</h3>
+        <div class="defs">
+          <div><b>Procesador de textos</b><p>Word, Pages: documentos, memorias técnicas, informes. Usa estilos de título, índice y numeración de páginas.</p></div>
+          <div><b>Presentaciones</b><p>Keynote, PowerPoint, Canva: poco texto, imágenes grandes y una idea por diapositiva.</p></div>
+          <div><b>Hojas de cálculo</b><p>Excel, Numbers: tablas, cálculos y gráficos. Las fórmulas empiezan por «=», como <i>=SUMA(B2:B10)</i> o <i>=B2*C2</i>.</p></div>
+        </div>
+        <h3>¿Cómo funciona Internet?</h3>
+        <ul>
+          <li><b>Internet</b> es la red de redes: millones de redes conectadas que se entienden gracias a unas normas comunes, los <b>protocolos</b>. Los principales son <b>TCP/IP</b>: IP pone la dirección a cada paquete de datos y TCP se asegura de que llegan todos y en orden.</li>
+          <li>Cada equipo conectado tiene una <b>dirección IP</b>. Como las IP son difíciles de recordar, el <b>DNS</b> traduce nombres como <i>lainmaculada.es</i> a su dirección IP.</li>
+          <li>Una <b>URL</b> es la dirección completa de una página. El <b>navegador</b> (Safari, Chrome, Edge) muestra las páginas; el <b>buscador</b> (Google, Bing) las encuentra.</li>
+          <li>Cada vez más objetos están conectados: relojes, altavoces, coches, electrodomésticos. Es el <b>internet de las cosas</b>.</li>
+        </ul>
+        <h3>Uso responsable</h3>
+        <ul>
+          <li><b>Protege tu identidad y tu privacidad:</b> contraseñas fuertes y distintas, verificación en dos pasos, cuidado con lo que publicas.</li>
+          <li><b>Protege tus dispositivos:</b> actualizaciones, apps de tiendas oficiales, bloqueo de pantalla y copias de seguridad.</li>
+        </ul>
+        <h3>Mi entorno personal de aprendizaje</h3>
+        <p>Es el conjunto de herramientas, fuentes y personas con las que aprendes: Teams para comunicarte con la clase, OneDrive para guardar y compartir, el iPad con sus apps para crear, buscadores y webs fiables para informarte. Organizarlo bien ahorra tiempo y disgustos.</p>`,
+       tareas:[
+        {n:1, t:"¿Hardware o software?", html:"<p>Clasifica estos elementos en hardware o software: Paint, teclado, videojuego, Firefox, impresora, ratón, webcam y navegador. Después, busca a qué puertos se conectan un ratón, un teclado, unos auriculares, un monitor y una impresora, y qué significan las siglas HDMI.</p>"},
+        {n:2, t:"Clasifica los periféricos", html:"<p>Haz una tabla con tres columnas (entrada, salida y entrada/salida) y coloca: teclado, monitor, impresora multifunción, micrófono, altavoces, pantalla táctil, escáner, memoria USB, webcam y auriculares con micrófono.</p>"},
+        {n:3, t:"Otros sistemas operativos", html:"<p>Investiga un sistema operativo distinto de Windows, macOS, Android e iOS (por ejemplo, ChromeOS, Ubuntu o HarmonyOS): quién lo desarrolla, para qué dispositivos es, si es libre o propietario y una ventaja y un inconveniente.</p>"},
+        {n:4, t:"La hoja de cálculo al servicio del proyecto", html:"<p>Haz en Excel o Numbers el <b>presupuesto de materiales</b> del proyecto que estéis haciendo: columnas de material, cantidad, precio unitario y total. Usa fórmulas para calcular cada total y el total general, y añade un gráfico que muestre en qué se va más dinero.</p>", entrega:"Hoja de cálculo por Teams"},
+        {n:5, t:"El viaje de una página web", html:"<p>Explica con un esquema qué pasa desde que escribes <i>lainmaculada.es</i> en el navegador hasta que ves la página: el DNS, la dirección IP, los paquetes TCP/IP, el router y el servidor. Indica también tres objetos de tu vida diaria que estén conectados a Internet.</p>"},
+        {n:6, t:"Ordena tu entorno digital", html:"<p>Organiza tu OneDrive con una carpeta por materia y, dentro, una por proyecto. Pon a tus archivos nombres claros (por ejemplo, <i>2026-11_memoria-tecnica_v2</i>) y comprueba que tus trabajos importantes tienen copia en la nube. Haz un mapa de tu entorno personal de aprendizaje: dónde te informas, con qué creas, cómo te comunicas y dónde guardas.</p>", entrega:"Captura de tu OneDrive y mapa por Teams"}
+       ],
+       evaluacionNota:"Las tareas de este tema se valoran dentro del proyecto en el que se trabajen.",
+       items:[
+        {tipo:"interactiva", t:"Repaso: mi entorno digital", s:"8 preguntas con informe de repaso.", quiz:"entorno"}
+       ]}
     ],
     norma:"currículo de Tecnología y Digitalización",
     competencias:[
@@ -1246,19 +1410,14 @@ const ANEXOS = {
       <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
       <tbody>
         <tr><th>Repaso</th><td>1</td><td>Resultado de la ficha interactiva</td><td>2.4</td><td>10 %</td></tr>
-        <tr><th>Ficha de requisitos</th><td>2</td><td>Rúbrica (Anexo 2): fila A</td><td>5.2</td><td>15 %</td></tr>
-        <tr><th>Herramienta funcional</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>2.4 · 5.2</td><td>20 %</td></tr>
-        <tr><th>Pruebas y diario de versiones</th><td>4</td><td>Rúbrica (Anexo 2): fila C</td><td>5.1 · 5.4</td><td>25 %</td></tr>
-        <tr><th>Comprensión del código</th><td>5</td><td>Rúbrica (Anexo 2): fila D</td><td>2.4</td><td>20 %</td></tr>
-        <tr><th>Presentación y documentación</th><td>6</td><td>Rúbrica (Anexo 2): fila E</td><td>4.1</td><td>10 %</td></tr>
-      </tbody>
+        <tr><th>Ficha de requisitos y diagrama de flujo</th><td>2–3</td><td>Rúbrica (Anexo 2): fila A</td><td>5.2 · 2.4</td><td>15 %</td></tr><tr><th>Herramienta funcional</th><td>4–5</td><td>Rúbrica (Anexo 2): fila B</td><td>2.4 · 5.2</td><td>20 %</td></tr><tr><th>Pruebas y diario de versiones</th><td>5</td><td>Rúbrica (Anexo 2): fila C</td><td>5.1 · 5.4</td><td>25 %</td></tr><tr><th>Comprensión del código</th><td>6</td><td>Rúbrica (Anexo 2): fila D</td><td>2.4</td><td>20 %</td></tr><tr><th>Presentación y documentación</th><td>7</td><td>Rúbrica (Anexo 2): fila E</td><td>4.1</td><td>10 %</td></tr></tbody>
       <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
     </table></div>`},
-  sa8a2:{titulo:"Anexo 2. Rúbrica del proyecto", para:"tareas 2 a 6", html:`
+  sa8a2:{titulo:"Anexo 2. Rúbrica del proyecto", para:"tareas 2 a 7", html:`
     <div class="table-wrap"><table class="tbl rub">
       <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
       <tbody>
-        <tr><th>A. Requisitos<span class="crit">5.2</span></th><td>Problema real y bien definido; funciones concretas y realistas; deja claro qué no hará.</td><td>Problema y funciones claros, con algún punto vago.</td><td>Requisitos generales o poco realistas.</td><td>Sin requisitos claros.</td></tr>
+        <tr><th>A. Requisitos y algoritmo<span class="crit">5.2 · 2.4</span></th><td>Problema real y bien definido; funciones concretas; diagrama de flujo correcto, con condición y bucle si procede.</td><td>Requisitos claros y diagrama correcto con algún fallo de símbolos o de lógica.</td><td>Requisitos generales o diagrama incompleto.</td><td>Sin requisitos o sin diagrama.</td></tr>
         <tr><th>B. La herramienta<span class="crit">2.4 · 5.2</span></th><td>Funciona sin errores, cumple todos los requisitos, es fácil de usar y se ve bien en distintos dispositivos.</td><td>Funciona y cumple casi todos los requisitos.</td><td>Funciona a medias o con errores visibles.</td><td>No funciona.</td></tr>
         <tr><th>C. Pruebas y mejora<span class="crit">5.1 · 5.4</span></th><td>Plan de pruebas con casos raros, fallos descritos con precisión y al menos tres versiones bien documentadas.</td><td>Pruebas y diario completos con alguna versión poco explicada.</td><td>Pocas pruebas o diario incompleto.</td><td>No hay pruebas ni diario.</td></tr>
         <tr><th>D. Comprensión del código<span class="crit">2.4</span></th><td>Identificas HTML, CSS y JavaScript, explicas bien cinco partes y haces cambios a mano que funcionan.</td><td>Explicas las partes con algún error y haces un cambio a mano.</td><td>Explicación superficial o cambio que no funciona.</td><td>No demuestras entender el código.</td></tr>
@@ -1473,6 +1632,16 @@ ANEXOS.t3inf = {titulo:"Anexo 2. Rúbrica de la infografía", para:"tarea 1", ht
    FICHAS INTERACTIVAS
    ============================================================ */
 const QUIZZES = {
+  entorno:{titulo:"Repaso: mi entorno digital", preguntas:[
+    {q:"¿Cuál de estos es software?", o:["El teclado","El navegador","La impresora"], a:1, f:"El navegador es un programa; los otros son hardware."},
+    {q:"Una pantalla táctil es un periférico de…", o:["Entrada","Salida","Entrada y salida"], a:2, f:"Muestra información (salida) y recibe tus toques (entrada)."},
+    {q:"¿Qué puerto usarías para conectar el ordenador a un proyector con imagen y sonido digital?", o:["HDMI","Jack de 3,5 mm","Ethernet"], a:0, f:"HDMI transmite imagen y sonido digital."},
+    {q:"¿Cuántos bits tiene un byte?", o:["8","100","1024"], a:0, f:"1 byte = 8 bits."},
+    {q:"¿Qué hace el DNS?", o:["Protege de los virus","Traduce nombres de dominio a direcciones IP","Acelera la conexión"], a:1, f:"Gracias al DNS escribimos nombres en lugar de números."},
+    {q:"En una hoja de cálculo, ¿cuál es una fórmula correcta para sumar de B2 a B10?", o:["SUMA B2-B10","=SUMA(B2:B10)","B2+...+B10"], a:1, f:"Las fórmulas empiezan por «=» y los rangos se indican con dos puntos."},
+    {q:"¿Qué diferencia hay entre navegador y buscador?", o:["Ninguna","El navegador muestra las páginas; el buscador las encuentra","El buscador se instala en el ordenador"], a:1, f:"Safari es un navegador; Google es un buscador."},
+    {q:"¿Qué es el internet de las cosas?", o:["Una red social","Objetos cotidianos conectados a Internet","Una tienda online"], a:1, f:"Relojes, altavoces, coches o electrodomésticos conectados."}
+  ]},
   mecanismos:{titulo:"Repaso: mecanismos, transmisión y electricidad", preguntas:[
     {q:"Un engranaje de 12 dientes mueve a uno de 36. ¿Cuál es la relación de transmisión?", o:["3","1/3","12"], a:1, f:"i = Z motriz / Z conducido = 12/36 = 1/3. Es un reductor."},
     {q:"En el caso anterior, si el motor gira a 120 rpm, ¿a cuánto gira el eje conducido?", o:["40 rpm","360 rpm","120 rpm"], a:0, f:"n conducido = n motriz · i = 120 · 1/3 = 40 rpm."},
@@ -1696,7 +1865,7 @@ function renderSubject(m){
         <div class="units">
           ${m.unidades.map((u,i)=> u.id ? `
             <a class="unit unit-link" href="#${u.id}">
-              <div class="unit-head"><span class="unit-num">Tema ${i+1}</span><span class="eti">${esc(u.etiqueta||"")}</span></div>
+              <div class="unit-head"><span class="unit-num">${u.complementario?"Complementario":"Tema "+(i+1)}</span>${u.complementario?"":`<span class="eti">${esc(u.etiqueta||"")}</span>`}</div>
               <h2>${esc(u.titulo)}</h2>
               <p class="desc">${esc(u.desc)}</p>
               <div class="meta">
@@ -1762,6 +1931,7 @@ function renderUnit(m,u){
           ${u.saberes?`<section class="unit" id="saberes-${u.id}"><h2>Qué vamos a aprender</h2>${u.bloque?`<p class="desc">${esc(u.bloque)}</p>`:""}<ul class="plain">${u.saberes.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></section>`:""}
           ${u.tareas?`<section class="unit" id="tareas-${u.id}"><h2>Tareas</h2><ol class="tasks">${u.tareas.map(tareaHtml).join("")}</ol></section>`:""}
           ${u.items&&u.items.length?`<section class="unit" id="recursos-${u.id}"><h2>Recursos y repaso</h2>${itemsList(u.items)}</section>`:""}
+          ${u.evaluacionNota?`<section class="unit"><h2>Cómo se evalúa</h2><p class="desc">${esc(u.evaluacionNota)}</p></section>`:""}
           ${u.anexos?`<section class="unit" id="anexos-${u.id}"><h2>Cómo se evalúa</h2>
             ${u.anexos.map(k=>{const a=ANEXOS[k]; return `
               <div class="anexo" id="${k}-${u.id}">
