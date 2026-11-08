@@ -240,6 +240,8 @@ aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:16px}
 .eff input{font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
 .eff output{grid-column:1 / -1;font-size:.95rem}
 
+.formula{font-family:var(--display);font-size:1.15rem;font-weight:700;text-align:center;background:var(--bg);border-radius:8px;padding:8px;margin:0;max-width:68ch}
+
 /* Ficha interactiva */
 .overlay{position:fixed;inset:0;background:rgba(10,15,25,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;z-index:10}
 .overlay.open{display:flex}
@@ -357,6 +359,14 @@ const ANGULOS = [
   {n:"Plano contrapicado", t:"contrapicado", d:"La cámara está por debajo y mira hacia arriba.", u:"El personaje parece grande, poderoso o amenazante."},
   {n:"Plano cenital", t:"cenital", d:"La cámara está justo encima, en vertical.", u:"Vista de pájaro: originalidad, orden, mostrar un espacio desde arriba."}
 ];
+function calcTransmision(){
+  return `<div class="eff">
+    <label for="tr-z1">Dientes del engranaje motriz (Z₁)</label><input id="tr-z1" type="number" min="1" step="1" inputmode="numeric">
+    <label for="tr-z2">Dientes del engranaje conducido (Z₂)</label><input id="tr-z2" type="number" min="1" step="1" inputmode="numeric">
+    <label for="tr-n1">Velocidad del motor (rpm)</label><input id="tr-n1" type="number" min="0" step="1" inputmode="numeric">
+    <output id="tr-out">Introduce los datos.</output>
+  </div>`;
+}
 function planosHTML(){
   return `<div class="planos">${PLANOS.map((p,i)=>`
     <figure class="plano"><div class="shot">${planoSVG(p.vb)}<span class="abbr">${p.s}</span></div>
@@ -953,7 +963,62 @@ const MATERIAS = [
        items:[
         {tipo:"interactiva", t:"Repaso: proceso tecnológico y emprendimiento", s:"8 preguntas con informe de repaso.", quiz:"abp"}
        ]},
-      {id:"tec3-sa2", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Proyecto del segundo trimestre", desc:"Próximamente.", items:[]},
+      {id:"tec3-movilidad", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Energía en movimiento", subtitulo:"Proyecto Zinkers: movilidad sostenible",
+       cita:["La energía más limpia es la que no se consume",""],
+       bloque:"Bloques: Proceso de resolución de problemas · Tecnología sostenible · Pensamiento computacional",
+       desc:"¿Cómo nos movemos y cuánto contamina? Estudiamos la movilidad de nuestro colegio, aprendemos cómo los mecanismos transforman la fuerza y la velocidad, y diseñamos con LEGO SPIKE un vehículo de reparto que gaste la menor energía posible. Con todo ello escribimos el manifiesto de sostenibilidad de la clase para los Premios Zinkers.",
+       criterios:["1.1","1.2","2.1","2.2","3.1","3.2","4.1"],
+       producto:"Vehículo de reparto sostenible con LEGO SPIKE y manifiesto de sostenibilidad de la clase para los Premios Zinkers.",
+       anexos:["t3zV","t3zR"],
+       teoria:`
+        <h3>Energía y movilidad</h3>
+        <p>El transporte es uno de los sectores que más energía consume y más gases de efecto invernadero emite. Cada vez que elegimos cómo movernos, también elegimos cuánta energía gastamos y cuánto contaminamos.</p>
+        <div class="defs">
+          <div><b>Energía</b><p>La capacidad de un sistema para producir trabajo: mover, calentar, iluminar… No se crea ni se destruye: se transforma.</p></div>
+          <div><b>Renovable / no renovable</b><p>Las renovables (sol, viento, agua) no se agotan; las no renovables (petróleo, gas, carbón) sí, y al quemarse emiten CO₂.</p></div>
+          <div><b>Eficiencia energética</b><p>Hacer lo mismo gastando menos energía. Un motor eficiente convierte más energía en movimiento y desperdicia menos en calor.</p></div>
+          <div><b>Movilidad sostenible</b><p>Moverse contaminando lo mínimo: a pie, en bici, en transporte público, compartiendo coche o con vehículos eléctricos.</p></div>
+        </div>
+        <h3>¿Qué es un mecanismo?</h3>
+        <p>Un <b>mecanismo</b> es un conjunto de piezas que transmite o transforma una fuerza o un movimiento desde un <b>elemento motriz</b> (el que provoca el movimiento, como un motor) hasta un <b>elemento conducido</b> (el que lo recibe, como una rueda).</p>
+        <h3>La palanca</h3>
+        <p>Una barra rígida que gira sobre un punto de apoyo. Permite mover una carga (resistencia, R) haciendo una fuerza (F) menor si la colocamos lejos del apoyo:</p>
+        <p class="formula">F · d = R · r</p>
+        <p>donde <i>d</i> es la distancia de la fuerza al apoyo y <i>r</i> la de la resistencia al apoyo. Según dónde esté el apoyo hay palancas de primer grado (balancín, tijeras), de segundo (carretilla, cascanueces) y de tercer grado (pinzas, caña de pescar).</p>
+        <h3>Transmitir el giro: poleas y engranajes</h3>
+        <ul>
+          <li><b>Poleas con correa:</b> dos ruedas unidas por una correa giran en el mismo sentido.</li>
+          <li><b>Engranajes:</b> ruedas dentadas que encajan entre sí. No patinan y giran en sentidos contrarios.</li>
+        </ul>
+        <p>La <b>relación de transmisión</b> (i) indica cuántas veces más rápido o más lento gira el eje conducido:</p>
+        <p class="formula">i = Z<sub>motriz</sub> / Z<sub>conducido</sub> = n<sub>conducido</sub> / n<sub>motriz</sub></p>
+        <p>donde Z es el número de dientes y n la velocidad de giro (vueltas por minuto, rpm). Con poleas se usan los diámetros en lugar de los dientes.</p>
+        <div class="defs">
+          <div><b>Reductor (i &lt; 1)</b><p>Engranaje pequeño mueve a uno grande: el eje conducido gira más despacio pero con <b>más fuerza</b>. Ideal para subir cuestas o cargar peso.</p></div>
+          <div><b>Multiplicador (i &gt; 1)</b><p>Engranaje grande mueve a uno pequeño: gira más rápido pero con <b>menos fuerza</b>. Ideal en llano y sin carga.</p></div>
+          <div><b>Tren de engranajes</b><p>Varios pares encadenados. La relación total es el producto de las relaciones de cada par.</p></div>
+        </div>
+        <p class="ask">La regla de oro de los mecanismos: <b>lo que ganas en fuerza lo pierdes en velocidad</b>, y al revés. Elegir bien la transmisión es elegir la más eficiente para cada tarea.</p>
+        <h3>Transformar el movimiento</h3>
+        <ul>
+          <li><b>Piñón y cremallera:</b> giro en movimiento recto (dirección de un coche).</li>
+          <li><b>Biela-manivela:</b> giro en vaivén, y al revés (motor de un coche, máquina de coser).</li>
+          <li><b>Leva:</b> giro en subida y bajada (juguetes, motores).</li>
+          <li><b>Tornillo sin fin:</b> gran reducción de velocidad en poco espacio (clavijas de una guitarra).</li>
+        </ul>`,
+       tareas:[
+        {n:1, t:"¿Cómo nos movemos? Encuesta de movilidad", html:"<p>Trabajamos los materiales de Zinkers sobre energía y movilidad sostenible que indique el profesor. Después, diseñad una encuesta sobre cómo viene al colegio el alumnado de vuestra clase o de vuestro curso: medio de transporte, distancia y tiempo.</p><p>Analizad los resultados con gráficos: ¿qué porcentaje viene a pie, en bici, en bus o en coche? ¿Qué cambios serían realistas para contaminar menos? Estos datos serán la base del manifiesto.</p>", enlaces:[["Programa Zinkers (Fundación Repsol)","https://zinkers.fundacionrepsol.com/"]], entrega:"Encuesta y análisis con gráficos por Teams", evalua:"t3zR"},
+        {n:2, t:"Mecanismos: la teoría", html:"<p>Trabajamos en clase energía, palancas, poleas, engranajes y relación de transmisión. Comprueba lo que sabes con la ficha interactiva de mecanismos y practica con la calculadora de transmisión:</p>${calcTransmision()}", evalua:"t3zV"},
+        {n:3, t:"Laboratorio de palancas", html:"<p>Con una regla como barra, un lápiz como apoyo y monedas como pesos, comprueba la ley de la palanca:</p><ol><li>Coloca 2 monedas a 5 cm del apoyo. ¿Cuántas necesitas a 10 cm para equilibrar? ¿Y a 2,5 cm?</li><li>Calcula antes con F · d = R · r y comprueba después.</li><li>Fotografía cada caso y anota si se cumple la ley y por qué puede haber pequeñas diferencias.</li></ol>", evalua:"t3zR"},
+        {n:4, t:"Laboratorio de engranajes con SPIKE", html:"<p>Con vuestro kit de SPIKE, conectad un motor a un engranaje motriz y haced que mueva un engranaje conducido. Marcad el eje conducido con una pieza de color para poder contar sus vueltas.</p><ol><li>Contad los dientes de cada engranaje y calculad la relación de transmisión.</li><li>Programad el motor para que dé exactamente <b>3 vueltas</b> (1080°).</li><li>Contad las vueltas del eje conducido y comparad con lo calculado.</li><li>Repetid con un montaje <b>reductor</b>, uno <b>multiplicador</b> y un <b>tren de dos pares</b>.</li><li>Recoged los datos en una tabla: Z motriz, Z conducido, i calculada, vueltas esperadas, vueltas medidas y diferencia.</li></ol>", entrega:"Tabla de datos y fotos de los montajes en el diario", evalua:"t3zR"},
+        {n:5, t:"Reto: vehículo de reparto sostenible", html:"<p>Una empresa de reparto necesita un vehículo eléctrico que lleve paquetes por la ciudad gastando la menor energía posible. Con un kit de SPIKE por equipo:</p><ol><li><b>Diseñad</b> el vehículo con bocetos e indicad qué transmisión vais a usar y por qué.</li><li><b>Construid</b> el vehículo: debe llevar una carga (el paquete) y poder cambiar de transmisión.</li><li><b>Probad</b> en dos recorridos: un tramo llano de 2 m y una rampa. Medid el tiempo de cada uno con dos transmisiones distintas y siempre a la misma potencia del motor.</li><li><b>Elegid</b> la mejor transmisión para cada tramo y explicad por qué con la regla de oro: fuerza o velocidad.</li><li><b>Mejorad</b> el diseño: menos peso, menos rozamiento, mejor agarre.</li></ol>", entrega:"Vehículo, datos de las pruebas y vídeo de la prueba final", evalua:"t3zR"},
+        {n:6, t:"Programación del vehículo", html:"<p>Programad el vehículo para que haga el recorrido de reparto solo:</p><ul><li><b>Nivel básico:</b> avanzar una distancia exacta (calculad los grados de motor a partir del diámetro de la rueda) y detenerse.</li><li><b>Nivel medio:</b> detenerse al detectar un obstáculo con el sensor de distancia.</li><li><b>Nivel avanzado:</b> detectar el punto de entrega con el sensor de color y volver a la base.</li></ul><p>Cuanto menos tiempo esté el motor encendido para hacer la entrega, más eficiente es vuestro vehículo.</p>", evalua:"t3zR"},
+        {n:7, t:"Memoria del proyecto", html:"<p>Documentad el proyecto: el problema, los cálculos de transmisión, los bocetos, las pruebas con sus datos, las mejoras y las conclusiones. ¿Qué habéis aprendido sobre eficiencia que se pueda aplicar a la movilidad real?</p>", entrega:"Memoria en PDF por Teams", evalua:"t3zR"},
+        {n:8, t:"Manifiesto de sostenibilidad", html:"<p>Entre toda la clase, escribimos y diseñamos el <b>manifiesto de sostenibilidad</b> que presentaremos a los Premios Zinkers. Debe recoger:</p><ul><li><b>Lo que hemos aprendido</b> sobre energía, movilidad y eficiencia.</li><li><b>Los datos</b> de nuestra encuesta de movilidad.</li><li><b>Nuestros compromisos</b> concretos y realistas como clase.</li><li><b>Las acciones</b> que proponemos al colegio y al barrio.</li></ul><p>Las fotos del vehículo y de las pruebas servirán como evidencias. Si se hace un vídeo, solo pueden salir compañeros con la autorización de su familia.</p>", entrega:"Manifiesto en PDF o imagen", evalua:"t3zR"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: mecanismos y transmisión", s:"8 preguntas con informe de repaso.", quiz:"mecanismos"}
+       ]},
       {id:"tec3-estructuras", etiqueta:"Situación de aprendizaje 3 · 3.er trimestre", titulo:"Estructuras 3E", subtitulo:"Estable, Eficiente y Elegante",
        bloque:"Bloques: Proceso de resolución de problemas · Comunicación y difusión de ideas · Tecnología sostenible",
        desc:"¿Puede una estructura ser estable, eficiente y elegante a la vez? Investigamos su evolución histórica, experimentamos con cargas y esfuerzos, diseñamos en 3D y construimos un puente de papel para el concurso de carga máxima del colegio.",
@@ -1056,6 +1121,33 @@ const MATERIAS = [
    ANEXOS DE EVALUACIÓN (rúbricas, listas de control, escalas)
    ============================================================ */
 const ANEXOS = {
+  t3zV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Encuesta de movilidad</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1</td><td>10 %</td></tr>
+        <tr><th>Repaso de mecanismos</th><td>2</td><td>Resultado de la ficha interactiva</td><td>3.2</td><td>5 %</td></tr>
+        <tr><th>Laboratorios de palancas y engranajes</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>1.2 · 3.2</td><td>20 %</td></tr>
+        <tr><th>Vehículo de reparto sostenible</th><td>5</td><td>Rúbrica (Anexo 2): filas C y D</td><td>2.1 · 2.2 · 3.1 · 3.2</td><td>30 %</td></tr>
+        <tr><th>Programación</th><td>6</td><td>Nivel conseguido: básico 5, medio 7,5, avanzado 10</td><td>3.1</td><td>10 %</td></tr>
+        <tr><th>Memoria del proyecto</th><td>7</td><td>Rúbrica (Anexo 2): fila E</td><td>4.1</td><td>10 %</td></tr>
+        <tr><th>Manifiesto de sostenibilidad</th><td>8</td><td>Rúbrica (Anexo 2): fila F</td><td>1.1 · 4.1</td><td>15 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  t3zR:{titulo:"Anexo 2. Rúbrica del proyecto", para:"tareas 1 a 8", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Encuesta y análisis<span class="crit">1.1</span></th><td>Encuesta bien diseñada, datos analizados con gráficos claros y conclusiones con propuestas realistas.</td><td>Encuesta y gráficos correctos con conclusiones generales.</td><td>Pocos datos o gráficos poco claros.</td><td>Sin encuesta o sin análisis.</td></tr>
+        <tr><th>B. Laboratorios<span class="crit">1.2 · 3.2</span></th><td>Cálculos correctos, tabla completa con valores medidos y esperados, y explicación de las diferencias.</td><td>Cálculos y tabla correctos con alguna explicación incompleta.</td><td>Errores en los cálculos o tabla incompleta.</td><td>Sin datos o sin cálculos.</td></tr>
+        <tr><th>C. Diseño y construcción del vehículo<span class="crit">2.1 · 3.1</span></th><td>Bocetos justificados, montaje sólido y cuidado, transmisión intercambiable y mejoras a partir de las pruebas.</td><td>Diseño y montaje correctos con pocas mejoras.</td><td>Montaje poco sólido o sin justificar.</td><td>El vehículo no funciona.</td></tr>
+        <tr><th>D. Pruebas y elección de la transmisión<span class="crit">3.2 · 2.2</span></th><td>Pruebas planificadas y repetidas, datos fiables y elección de la transmisión explicada con la relación fuerza-velocidad.</td><td>Pruebas correctas y elección razonada.</td><td>Pocas pruebas o elección sin justificar.</td><td>Sin pruebas.</td></tr>
+        <tr><th>E. Memoria<span class="crit">4.1</span></th><td>Completa, ordenada, con vocabulario técnico, cálculos, datos y conclusiones sobre eficiencia.</td><td>Completa con algún apartado poco desarrollado.</td><td>Incompleta o desordenada.</td><td>No se entrega.</td></tr>
+        <tr><th>F. Manifiesto<span class="crit">1.1 · 4.1</span></th><td>Aportas aprendizajes, datos y compromisos concretos; tu parte está bien redactada y diseñada.</td><td>Aportas con contenido correcto.</td><td>Aportación escasa o poco cuidada.</td><td>No participas.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   t3m1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody><tr><th>Infografía del proceso tecnológico</th><td>1</td><td>Rúbrica de la infografía (Anexo 2)</td><td>4.1</td><td>10 %</td></tr><tr><th>Investigación e idea</th><td>3–4</td><td>Rúbrica del proyecto (Anexo 3): filas A y B</td><td>1.1 · 1.2 · 2.1</td><td>15 %</td></tr><tr><th>Modelo de negocio y viabilidad</th><td>5</td><td>Rúbrica del proyecto: fila C</td><td>2.1 · 2.2</td><td>10 %</td></tr><tr><th>Prototipo y pruebas con usuarios</th><td>6–8</td><td>Rúbrica del proyecto: fila D</td><td>2.1 · 3.1</td><td>20 %</td></tr><tr><th>Memoria técnica</th><td>9</td><td>Rúbrica del proyecto: fila E</td><td>2.2 · 4.1</td><td>15 %</td></tr><tr><th>Marca y plan de marketing</th><td>10–11</td><td>Rúbrica del proyecto: fila F</td><td>1.1 · 2.1 · 4.1</td><td>10 %</td></tr><tr><th>Pitch final</th><td>12</td><td>Rúbrica del proyecto: fila G</td><td>4.1</td><td>15 %</td></tr><tr><th>Trabajo en equipo</th><td>Todas</td><td>Observación en clase y coevaluación: fila H</td><td>2.2</td><td>5 %</td></tr></tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
   t3m2:{titulo:"Anexo 3. Rúbrica del proyecto", para:"tareas 3 a 12", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>A. Investigación del problema<span class="crit">1.1</span></th><td>Entrevistas a usuarios reales bien preparadas; mapa de empatía completo; el problema está muy bien definido.</td><td>Entrevistas y mapa de empatía completos, con algún punto superficial.</td><td>Pocas entrevistas o mapa incompleto.</td><td>Sin investigación con usuarios.</td></tr><tr><th>B. Análisis y elección de la idea<span class="crit">1.2 · 2.1</span></th><td>Analizáis soluciones existentes y elegís la idea con una matriz de decisión justificada; la idea es original.</td><td>Analizáis lo que existe y justificáis la elección.</td><td>Análisis o justificación muy pobres.</td><td>No hay análisis ni justificación.</td></tr><tr><th>C. Modelo de negocio<span class="crit">2.1 · 2.2</span></th><td>Lean Canvas completo y coherente; costes, precio e impacto social y ambiental bien calculados y razonados.</td><td>Lean Canvas completo y viabilidad estudiada con algún error.</td><td>Lean Canvas incompleto o viabilidad poco estudiada.</td><td>Sin modelo de negocio.</td></tr><tr><th>D. Prototipo y pruebas<span class="crit">2.1 · 3.1</span></th><td>Prototipo de baja y de alta fidelidad bien construidos; probados con usuarios y mejorados a partir de su opinión.</td><td>Prototipos correctos y probados, con pocas mejoras.</td><td>Prototipo poco cuidado o sin pruebas con usuarios.</td><td>No hay prototipo.</td></tr><tr><th>E. Memoria técnica<span class="crit">2.2 · 4.1</span></th><td>Completa, ordenada y con vocabulario técnico; bocetos con medidas, planificación clara y fuentes citadas.</td><td>Completa con algún apartado poco desarrollado.</td><td>Incompleta o desordenada.</td><td>No se entrega o no sirve como documentación.</td></tr><tr><th>F. Marca y marketing<span class="crit">1.1 · 2.1 · 4.1</span></th><td>Identidad coherente y justificada (colores, tipografía, logo, eslogan); plan de marketing completo; publicaciones atractivas y coherentes.</td><td>Marca coherente y plan completo con algún fallo.</td><td>Marca poco cuidada o plan incompleto.</td><td>Sin marca ni plan.</td></tr><tr><th>G. Pitch<span class="crit">4.1</span></th><td>Claro, convincente y en tiempo; demostración del prototipo; respondéis con seguridad al jurado.</td><td>Claro y ordenado, con algún fallo de tiempo o seguridad.</td><td>Desordenado, leído o fuera de tiempo.</td><td>No se presenta.</td></tr><tr><th>H. Trabajo en equipo<span class="crit">2.2</span></th><td>Cumples tu parte a tiempo, aportas ideas y ayudas a resolver desacuerdos.</td><td>Cumples tu parte y colaboras.</td><td>Cumples solo parte de lo acordado.</td><td>No cumples tu parte.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   t3eV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody><tr><th>Póster de la evolución histórica</th><td>4</td><td>Rúbrica del póster (Anexo 2)</td><td>1.1 · 4.1</td><td>15 %</td></tr><tr><th>Reto de la torre de espaguetis</th><td>8</td><td>Rúbrica de la torre (Anexo 3)</td><td>2.1 · 3.1</td><td>10 %</td></tr><tr><th>Practicopedia de los esfuerzos</th><td>12</td><td>Rúbrica de la practicopedia (Anexo 4)</td><td>4.1</td><td>15 %</td></tr><tr><th>Puente 3E</th><td>14</td><td>Rúbrica del puente (Anexo 5)</td><td>2.1 · 2.2 · 3.1</td><td>35 %</td></tr><tr><th>Diario de aprendizaje</th><td>Todas</td><td>Rúbrica del diario (Anexo 6)</td><td>1.2 · 4.1</td><td>25 %</td></tr></tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
@@ -1296,6 +1388,16 @@ ANEXOS.t3inf = {titulo:"Anexo 2. Rúbrica de la infografía", para:"tarea 1", ht
    FICHAS INTERACTIVAS
    ============================================================ */
 const QUIZZES = {
+  mecanismos:{titulo:"Repaso: mecanismos y transmisión", preguntas:[
+    {q:"Un engranaje de 12 dientes mueve a uno de 36. ¿Cuál es la relación de transmisión?", o:["3","1/3","12"], a:1, f:"i = Z motriz / Z conducido = 12/36 = 1/3. Es un reductor."},
+    {q:"En el caso anterior, si el motor gira a 120 rpm, ¿a cuánto gira el eje conducido?", o:["40 rpm","360 rpm","120 rpm"], a:0, f:"n conducido = n motriz · i = 120 · 1/3 = 40 rpm."},
+    {q:"Tu vehículo no sube la rampa. ¿Qué transmisión deberías usar?", o:["Un multiplicador","Un reductor","Da igual"], a:1, f:"El reductor gira más despacio pero con más fuerza."},
+    {q:"¿En qué sentido giran dos engranajes que encajan entre sí?", o:["En el mismo","En sentidos contrarios","Depende de los dientes"], a:1, f:"Los engranajes en contacto giran en sentidos opuestos; las poleas con correa, en el mismo."},
+    {q:"Para levantar 20 kg a 10 cm del apoyo de una palanca, haces fuerza a 40 cm. ¿Cuánta fuerza necesitas?", o:["80 kg","5 kg","20 kg"], a:1, f:"F · d = R · r → F · 40 = 20 · 10 → F = 5 kg."},
+    {q:"Un tren tiene dos pares con i = 1/2 y i = 1/3. ¿Cuál es la relación total?", o:["1/6","5/6","1/5"], a:0, f:"La relación total es el producto: 1/2 · 1/3 = 1/6."},
+    {q:"¿Qué mecanismo transforma el giro en movimiento recto, como en la dirección de un coche?", o:["Biela-manivela","Piñón y cremallera","Leva"], a:1, f:"El piñón gira y desplaza la cremallera en línea recta."},
+    {q:"¿Qué significa que un vehículo sea más eficiente energéticamente?", o:["Que es más rápido","Que hace el mismo trabajo gastando menos energía","Que pesa más"], a:1, f:"Eficiencia: el mismo resultado con menos energía."}
+  ]},
   estructuras:{titulo:"Repaso: cargas, esfuerzos y estructuras", preguntas:[
     {q:"El cable de un ascensor sostiene la cabina. ¿Qué esfuerzo sufre?", o:["Compresión","Tracción","Torsión"], a:1, f:"Las cargas tiran del cable en sentidos contrarios: tiende a alargarse."},
     {q:"Un pilar soporta el peso del edificio. ¿Qué esfuerzo sufre?", o:["Compresión","Flexión","Cortante"], a:0, f:"Las cargas empujan el pilar hacia dentro: tiende a acortarse y ensancharse."},
@@ -1564,7 +1666,7 @@ function renderUnit(m,u){
         <span class="lvl">${esc(u.etiqueta||("Tema "+(idx+1)))}</span>
         <h1>${esc(u.titulo)}</h1>
         ${u.subtitulo?`<p class="sub">${esc(u.subtitulo)}</p>`:""}
-        ${u.cita?`<blockquote class="quote">${esc(u.cita[0])}<cite>${esc(u.cita[1])}</cite></blockquote>`:""}
+        ${u.cita?`<blockquote class="quote">${esc(u.cita[0])}${u.cita[1]?`<cite>${esc(u.cita[1])}</cite>`:""}</blockquote>`:""}
         <p>${esc(u.desc)}</p>
       </div>
       <div class="layout">
@@ -1772,6 +1874,13 @@ document.addEventListener("submit", e=>{
 });
 document.addEventListener("input", e=>{
   if(e.target.id==="alumno") e.target.setCustomValidity("");
+  if(["tr-z1","tr-z2","tr-n1"].includes(e.target.id)){
+    const z1=parseFloat($("#tr-z1").value), z2=parseFloat($("#tr-z2").value), n1=parseFloat($("#tr-n1").value), o=$("#tr-out");
+    if(!(z1>0)||!(z2>0)){ o.textContent="Introduce los dientes de los dos engranajes."; return; }
+    const i=z1/z2, tipo=i<1?"reductor: más fuerza, menos velocidad":i>1?"multiplicador: más velocidad, menos fuerza":"ni reduce ni multiplica";
+    const f=x=>x.toLocaleString("es-ES",{maximumFractionDigits:2});
+    o.innerHTML=`Relación de transmisión i = ${f(z1)}/${f(z2)} = <b>${f(i)}</b> → ${tipo}.`+(n1>0?` El eje conducido gira a <b>${f(n1*i)} rpm</b>.`:"");
+  }
   if(e.target.id==="eff-peso"||e.target.id==="eff-carga"){
     const p=parseFloat($("#eff-peso").value), c=parseFloat($("#eff-carga").value), o=$("#eff-out");
     if(!(p>0)||!(c>0)){ o.textContent="Introduce los dos datos."; return; }
