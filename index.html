@@ -235,6 +235,11 @@ aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:16px}
 .check.bad{border-color:var(--bad)}.check.bad>b{color:var(--bad)}
 .check dl{padding:0}
 
+.eff{display:grid;grid-template-columns:auto 140px;gap:8px 12px;align-items:center;max-width:420px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.eff label{font-weight:700;font-size:.92rem}
+.eff input{font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
+.eff output{grid-column:1 / -1;font-size:.95rem}
+
 /* Ficha interactiva */
 .overlay{position:fixed;inset:0;background:rgba(10,15,25,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;z-index:10}
 .overlay.open{display:flex}
@@ -868,19 +873,182 @@ const MATERIAS = [
   },
   {
     id:"tecnologia-3", nombre:"Tecnología y Digitalización", corto:"Tecnología y Dig.", nivel:"3.º ESO", color:"#1f5fd6",
-    intro:"Proyecto de emprendimiento por ABP. Seis equipos llevan una idea hasta un prototipo presentado con iPad, Keynote y Canva.",
+    intro:"Un proyecto por trimestre: creamos una empresa, construimos y ponemos a prueba estructuras, y aprendemos a resolver problemas tecnológicos con el método de proyectos.",
+    presentacion:{
+      cita:"La tecnología, como el arte, es un ejercicio altísimo de la imaginación humana.",
+      texto:"La tecnología es el conjunto de conocimientos y técnicas que nos permiten resolver problemas y aprovechar en la práctica lo que sabemos de ciencia. En esta materia aprendemos haciendo: cada trimestre afrontamos un reto real y lo resolvemos con el proceso tecnológico, trabajando en equipo, con creatividad y pensando en la sostenibilidad.",
+      bloques:["Proceso de resolución de problemas","Comunicación y difusión de ideas","Pensamiento computacional, programación y robótica","Digitalización del entorno personal de aprendizaje","Tecnología sostenible"]
+    },
     unidades:[
-      {titulo:"De la idea al prototipo", desc:"Fase actual del proyecto: cada equipo construye y presenta el prototipo de su producto o servicio.",
+      {id:"tec3-empresa", etiqueta:"Situación de aprendizaje 1 · 1.er trimestre", titulo:"Crea tu propia empresa", subtitulo:"De la idea al prototipo",
+       cita:["Si tú no trabajas por tus sueños, alguien te contratará para que trabajes por los suyos","Steve Jobs"],
+       bloque:"Bloques: Proceso de resolución de problemas · Comunicación y difusión de ideas · Tecnología sostenible",
+       desc:"Detectamos un problema real de nuestro entorno, lo convertimos en una oportunidad y creamos una empresa que lo resuelva: investigamos, diseñamos un prototipo, lo probamos con usuarios, creamos la marca y lo presentamos ante un jurado.",
+       criterios:["1.1","1.2","2.1","2.2","3.1","4.1"],
+       producto:"Prototipo probado con usuarios, memoria técnica, identidad de marca y pitch final ante un jurado.",
+       anexos:["t3m1","t3inf","t3m2"],
+       teoria:`
+        <h3>El proceso tecnológico</h3>
+        <p>Es el método que siguen ingenieros y diseñadores para pasar de un problema a una solución que funciona. Lo usaremos en todos los proyectos del curso:</p>
+        <ol class="steps4">
+          <li><b>Identificar el problema</b> o la necesidad: ¿qué falla?, ¿a quién afecta?</li>
+          <li><b>Buscar información:</b> qué existe ya, qué opinan los usuarios, qué se puede mejorar.</li>
+          <li><b>Diseñar:</b> generar ideas, elegir la mejor y dibujarla con bocetos y croquis.</li>
+          <li><b>Planificar:</b> materiales, herramientas, tareas, responsables y plazos.</li>
+          <li><b>Construir</b> el prototipo con seguridad.</li>
+          <li><b>Evaluar:</b> probarlo, detectar fallos y mejorarlo. Muchas veces hay que volver a pasos anteriores.</li>
+          <li><b>Comunicar:</b> presentar la solución y documentarla en una memoria técnica.</li>
+        </ol>
+        <h3>Emprender: convertir problemas en oportunidades</h3>
+        <p>Detrás de cada empresa hay una necesidad que no estaba bien resuelta. Emprender no siempre significa ganar dinero: una empresa puede ser <b>con ánimo de lucro</b> o <b>social</b>, si su objetivo principal es mejorar la vida de las personas o el medio ambiente.</p>
+        <p>Una idea es <b>viable</b> cuando se sostiene desde tres puntos de vista:</p>
+        <div class="defs">
+          <div><b>Económico</b><p>Los ingresos cubren los costes. ¿Cuánto cuesta hacerlo? ¿A qué precio se vendería?</p></div>
+          <div><b>Social</b><p>Resuelve un problema real a personas reales y no perjudica a nadie.</p></div>
+          <div><b>Medioambiental</b><p>Usa los recursos con responsabilidad y contribuye a algún Objetivo de Desarrollo Sostenible (ODS).</p></div>
+        </div>
+        <h3>Herramientas del emprendedor</h3>
+        <div class="defs">
+          <div><b>Entrevista a usuarios</b><p>Preguntar a quienes tienen el problema antes de inventar la solución. Escuchar más que hablar.</p></div>
+          <div><b>Mapa de empatía</b><p>Qué piensa, siente, ve, oye, dice y hace el usuario; qué le frustra y qué desea.</p></div>
+          <div><b>¿Cómo podríamos…?</b><p>Convertir el problema en un reto: «¿Cómo podríamos ayudar a… a…?».</p></div>
+          <div><b>Lean Canvas</b><p>El modelo de negocio en una página: problema, clientes, propuesta de valor, solución, canales, ingresos, costes, métricas y ventaja.</p></div>
+        </div>
+        <h3>El prototipo</h3>
+        <p>Un <b>prototipo</b> es una versión de prueba de la solución. Sirve para aprender rápido y barato antes de invertir en el producto final.</p>
+        <ul>
+          <li><b>Baja fidelidad:</b> papel, cartón, plastilina o bocetos. Se hace en minutos y se puede tirar sin pena.</li>
+          <li><b>Alta fidelidad:</b> una maqueta cuidada o una versión digital (pantallas en Keynote o Canva) que se parece mucho al producto real.</li>
+          <li><b>Probar con usuarios:</b> lo importante no es que guste a tu equipo, sino que funcione para quien lo va a usar.</li>
+        </ul>
+        <h3>La marca</h3>
+        <p>La marca no es solo un logotipo: es la imagen y la confianza que tu empresa genera. Se construye con:</p>
+        <ul>
+          <li><b>Misión</b> (qué hacemos y para quién), <b>visión</b> (en qué queremos convertirnos) y <b>valores</b> (cómo trabajamos).</li>
+          <li><b>Nombre y eslogan:</b> breves, fáciles de recordar y que transmitan lo que os diferencia.</li>
+          <li><b>Identidad visual:</b> logotipo, colores (cada color transmite sensaciones), tipografía e icono, siempre coherentes entre sí.</li>
+        </ul>
+        <h3>El marketing</h3>
+        <p>El marketing estudia qué necesitan las personas para ofrecérselo de la mejor manera. Puede ser <b>tradicional</b> (carteles, folletos, degustaciones) o <b>digital</b> (redes sociales, web, correo, buscadores). Un plan de marketing responde a cuatro preguntas:</p>
+        <ol class="steps4">
+          <li><b>¿A quién?</b> El público objetivo: edad, intereses, dónde está y qué redes usa.</li>
+          <li><b>¿Contra quién?</b> La competencia: qué hacen bien, qué hacen mal y en qué podéis ser mejores.</li>
+          <li><b>¿Con qué?</b> Vuestros recursos: tiempo, responsables, frecuencia de publicación.</li>
+          <li><b>¿Cómo y dónde?</b> Los canales y el tipo de contenido. En redes, la gente busca cercanía, respuestas, contenido útil o divertido y beneficios; nadie sigue a una marca que solo anuncia.</li>
+        </ol>`,
+       tareas:[
+        {n:1, t:"El proceso tecnológico", html:"<p>Trabajamos en clase las fases del proceso tecnológico y haz una <b>infografía</b> que lo resuma, con un ejemplo de un objeto cotidiano.</p>", entrega:"Infografía en PDF por Teams", evalua:"t3inf"},
+        {n:2, t:"Lluvia de ideas: ¿qué problemas vemos?", html:"<p>Entre toda la clase, recogemos en Mentimeter problemas o necesidades de nuestro entorno: el colegio, el barrio, Paiporta, la gente joven, las personas mayores, el medio ambiente… Después se forman los equipos de trabajo.</p>", enlaces:[["Mentimeter","https://www.mentimeter.com"]]},
+        {n:3, t:"Empatizar: escuchamos a los usuarios", html:"<p>Cada equipo elige tres problemas de la lluvia de ideas. Para cada uno, entrevistad al menos a cinco personas que lo sufran. Preguntad por su experiencia, no por vuestra solución: «¿Cuándo te pasa?», «¿Qué haces ahora?», «¿Qué es lo que más te molesta?».</p><p>Con las respuestas, completad un <b>mapa de empatía</b> de vuestro usuario.</p>", entrega:"Entrevistas y mapa de empatía en la memoria", evalua:"t3m2"},
+        {n:4, t:"Definir e idear", html:"<ol><li>Escribid el reto como pregunta: «¿Cómo podríamos…?».</li><li>Cada miembro aporta ideas en silencio durante cinco minutos; después las compartís sin criticarlas.</li><li>Investigad qué soluciones existen ya y qué podéis mejorar.</li><li>Elegid la idea final con una <b>matriz de decisión</b>: puntuad de 1 a 5 cada idea según su impacto, viabilidad, originalidad y coste.</li></ol>", evalua:"t3m2"},
+        {n:5, t:"Modelo de negocio y viabilidad", html:"<p>Completad el <b>Lean Canvas</b> de vuestra empresa y estudiad su viabilidad:</p><ul><li><b>Económica:</b> calculad cuánto cuesta producir una unidad, a qué precio la venderíais y cuántas tendríais que vender para cubrir los gastos.</li><li><b>Social:</b> a quién ayuda y cómo.</li><li><b>Medioambiental:</b> materiales, residuos, consumo de energía y con qué ODS se relaciona.</li></ul>", evalua:"t3m2"},
+        {n:6, t:"Prototipo de baja fidelidad", html:"<p>Construid una primera versión rápida con materiales sencillos (papel, cartón, plastilina) o con bocetos de las pantallas si es una app o un servicio. Fotografiadlo: irá a la memoria.</p>", evalua:"t3m2"},
+        {n:7, t:"Probamos con usuarios", html:"<p>Enseñad el prototipo a usuarios reales y dejad que lo usen sin explicar demasiado. Recoged su opinión con la <b>malla de feedback</b>: qué les gusta, qué cambiarían, qué preguntas les surgen y qué ideas nuevas aportan. Con eso, decidid qué mejorar.</p>", evalua:"t3m2"},
+        {n:8, t:"Prototipo final", html:"<p>Construid el prototipo de alta fidelidad aplicando las mejoras: una maqueta cuidada o una versión digital en Keynote o Canva que se parezca al producto real. Respetad las normas de seguridad del taller.</p>", entrega:"Fotos o vídeo del prototipo en la memoria", evalua:"t3m2"},
+        {n:9, t:"Memoria técnica", html:"<p>Documentad todo el proyecto en la memoria técnica: el problema, la investigación, las ideas, el diseño con bocetos y medidas, la planificación (materiales, tareas, responsables y plazos), el prototipo, las pruebas y las mejoras.</p>", enlaces:[["Plantilla de la memoria técnica (OneDrive del colegio)","https://lainmaculada-my.sharepoint.com/:w:/g/personal/ruben_lainmaculada_es/ETbTvmkVJ6hMvpquomQdUQcB--84eA0lF5zzvKFRYyvqEQ?e=3ngL7g"]], entrega:"Memoria técnica por Teams", evalua:"t3m2"},
+        {n:10, t:"Identidad de marca", html:"<ol><li>Escribid la misión, la visión y los valores de la empresa.</li><li>Elegid el nombre (podéis inspiraros con un generador de nombres, filtrando los resultados) y un eslogan.</li><li>Escoged los colores explicando por qué, la tipografía y un icono.</li><li>Diseñad el logotipo en Canva y comprobad que es coherente con todo lo anterior.</li></ol>", enlaces:[["Generador de nombres","https://businessnamegenerator.com"],["Psicología del color (Canva)","https://www.canva.com/es_mx/aprende/psicologia-del-color/"],["Combinar tipografías (Fontjoy)","https://fontjoy.com"],["Iconos (Flaticon)","https://www.flaticon.es"]], evalua:"t3m2"},
+        {n:11, t:"Plan de marketing y campaña", html:"<p>Elaborad el plan de marketing en cuatro pasos: público objetivo, competencia (los tres competidores principales), recursos y estrategia de canales.</p><p>Después, diseñad en Canva el <b>perfil de la empresa</b> en la red social elegida y un calendario con seis publicaciones coherentes con el plan. Es una maqueta: no se publica en redes reales. Si el profesor lo autoriza, las mejores se podrán difundir desde los canales oficiales del colegio.</p>", entrega:"Plan de marketing y maqueta del perfil por Teams", evalua:"t3m2"},
+        {n:12, t:"Pitch final", html:"<p>Presentad vuestra empresa ante un jurado en un máximo de tres minutos, como en un concurso de emprendimiento:</p><ol><li><b>Gancho:</b> una pregunta, un dato o una historia.</li><li><b>Problema</b> y a quién afecta.</li><li><b>Solución</b> y demostración del prototipo.</li><li><b>Qué os diferencia</b> de la competencia.</li><li><b>Viabilidad:</b> costes, precio e impacto.</li><li><b>Equipo y cierre.</b></li></ol>", entrega:"Presentación en Keynote o Canva por Teams", evalua:"t3m2"}
+       ],
        items:[
-        {tipo:"contenido", t:"Qué es un prototipo y para qué sirve", s:"Prototipo de baja y alta fidelidad, cuándo usar cada uno."},
-        {tipo:"actividad", t:"Diario de equipo", s:"Cada sesión, una entrada: qué hemos hecho, qué falta, quién se encarga."},
-        {tipo:"ficha", t:"Plantilla de presentación del prototipo", s:"Para preparar la exposición en Keynote."},
-        {tipo:"interactiva", t:"Repaso: fases del proyecto", s:"8 preguntas con corrección automática.", quiz:"abp"}
+        {tipo:"interactiva", t:"Repaso: proceso tecnológico y emprendimiento", s:"8 preguntas con informe de repaso.", quiz:"abp"}
+       ]},
+      {id:"tec3-sa2", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Proyecto del segundo trimestre", desc:"Próximamente.", items:[]},
+      {id:"tec3-estructuras", etiqueta:"Situación de aprendizaje 3 · 3.er trimestre", titulo:"Estructuras 3E", subtitulo:"Estable, Eficiente y Elegante",
+       bloque:"Bloques: Proceso de resolución de problemas · Comunicación y difusión de ideas · Tecnología sostenible",
+       desc:"¿Puede una estructura ser estable, eficiente y elegante a la vez? Investigamos su evolución histórica, experimentamos con cargas y esfuerzos, diseñamos en 3D y construimos un puente de papel para el concurso de carga máxima del colegio.",
+       criterios:["1.1","1.2","2.1","2.2","3.1","4.1"],
+       producto:"Maqueta de un puente que cumpla las 3E, sobre un tablero de cartón de 50 × 15 cm, para el concurso de carga máxima del colegio.",
+       anexos:["t3eV","t3e0","t3e1","t3e2","t3e3","t3e4"],
+       teoria:`
+        <p>En arquitectura e ingeniería hay tres palabras que guían cualquier diseño: <b>Estable</b> (cumple su función sin deformarse ni caerse), <b>Eficiente</b> (usa el material necesario y suficiente) y <b>Elegante</b> (además de funcionar, es bello). En este proyecto descubriremos si una estructura puede cumplir las tres a la vez.</p>
+        <p class="ask">Durante todo el proyecto usarás <b>GoodNotes como diario de aprendizaje</b>: ahí irás guardando información, respuestas, fotos y vídeos de cada tarea. Al final se entrega al profesor.</p>
+        <h3>¿Qué es una estructura?</h3>
+        <p>Es el conjunto de elementos de un objeto o construcción que soporta las cargas y mantiene su forma. Para cumplir su función, una estructura debe ser:</p>
+        <div class="defs">
+          <div><b>Resistente</b><p>Soporta las cargas sin romperse.</p></div>
+          <div><b>Rígida</b><p>No se deforma de manera apreciable al recibir las cargas.</p></div>
+          <div><b>Estable</b><p>No vuelca ni se desplaza: se mantiene en equilibrio.</p></div>
+        </div>
+        <h3>Cargas</h3>
+        <p>Las <b>cargas</b> son las fuerzas que actúan sobre una estructura. Pueden ser <b>fijas</b> (su propio peso) o <b>variables</b> (personas, vehículos, viento, nieve), y <b>puntuales</b> (en un punto) o <b>repartidas</b> (a lo largo de una superficie, de forma uniforme o no).</p>
+        <h3>Esfuerzos</h3>
+        <p>Cuando las cargas actúan sobre un elemento, este sufre un <b>esfuerzo</b> y tiende a deformarse:</p>
+        <div class="defs">
+          <div><b>Tracción</b><p>Las cargas tiran del elemento en la misma dirección y sentidos contrarios: tiende a alargarse y adelgazar. Ej.: el cable de un ascensor.</p></div>
+          <div><b>Compresión</b><p>Las cargas empujan en la misma dirección y sentidos opuestos: tiende a acortarse y ensancharse. Ej.: un pilar.</p></div>
+          <div><b>Flexión</b><p>Las cargas tienden a doblarlo: una parte se comprime y la otra se estira. Ej.: una viga o una estantería.</p></div>
+          <div><b>Torsión</b><p>Las cargas tienden a retorcerlo. Ej.: una llave al girar en la cerradura.</p></div>
+          <div><b>Cortante o cizalladura</b><p>Dos cargas paralelas, muy próximas y en sentidos contrarios tienden a cortarlo. Ej.: unas tijeras sobre el papel.</p></div>
+        </div>
+        <h3>Elementos estructurales</h3>
+        <div class="defs">
+          <div><b>Cimentación</b><p>Reparte el peso de la estructura sobre el terreno.</p></div>
+          <div><b>Pilar o columna</b><p>Elemento vertical que soporta las cargas a compresión.</p></div>
+          <div><b>Viga</b><p>Elemento horizontal apoyado en pilares; trabaja a flexión.</p></div>
+          <div><b>Forjado</b><p>Superficie horizontal (suelos y techos) que reparte las cargas a las vigas.</p></div>
+          <div><b>Arco</b><p>Elemento curvo que convierte las cargas en compresión hacia los apoyos.</p></div>
+          <div><b>Tirante o tensor</b><p>Cable o barra que trabaja a tracción, como en los puentes colgantes.</p></div>
+        </div>
+        <h3>Tipos de estructuras artificiales</h3>
+        <ul>
+          <li><b>Masivas:</b> mucho material y pocos huecos (pirámides, presas).</li>
+          <li><b>Adinteladas:</b> pilares y vigas horizontales (templos griegos).</li>
+          <li><b>Abovedadas:</b> arcos, bóvedas y cúpulas (acueductos, catedrales).</li>
+          <li><b>Entramadas:</b> pilares, vigas y forjados unidos (edificios actuales).</li>
+          <li><b>Trianguladas:</b> barras formando triángulos (torres eléctricas, grúas, muchos puentes).</li>
+          <li><b>Colgadas:</b> el tablero cuelga de cables (puentes colgantes).</li>
+          <li><b>Laminares, neumáticas y geodésicas:</b> láminas curvas, estructuras hinchables y cúpulas formadas por triángulos.</li>
+        </ul>
+        <h3>El secreto del triángulo</h3>
+        <p>Un cuadrado de barras unidas por las esquinas se deforma con facilidad; un triángulo, no: es la única figura indeformable. Por eso se <b>triangulan</b> las estructuras. Además, la <b>forma</b> del material importa tanto como el material: un folio plano se dobla enseguida, pero enrollado en tubo soporta mucho más. Eso es un <b>perfil</b>.</p>`,
+       tareas:[
+        {n:1, t:"Evolución histórica · Observamos", html:"<p>Mira el vídeo y responde en tu diario: ¿qué aspectos han provocado la evolución de las estructuras?</p>", enlaces:[["Vídeo: la evolución de las estructuras","https://www.youtube.com/watch?v=lmro2FvfZLQ"]], evalua:"t3e4"},
+        {n:2, t:"Evolución histórica · Decidimos", html:"<p>A lo largo de la historia se han construido estructuras para cubrir necesidades: transporte (puentes, túneles), vivienda, protección frente a desastres (presas, diques), almacenamiento, salud, educación, ocio, trabajo o religión. Elige qué tipo de estructura vas a investigar.</p>"},
+        {n:3, t:"Evolución histórica · Investigamos", html:"<p>Busca la historia y la importancia de la estructura elegida y al menos <b>cuatro ejemplos de épocas distintas</b>. De cada uno: ubicación, fecha, materiales, características del diseño y datos curiosos. Usa la ficha de recogida de datos, anota las fuentes y respeta los derechos de autor de las imágenes.</p>", enlaces:[["Ficha de recogida de datos (CEDEC)","https://cedec.intef.es/rubrica/ficha-de-recogida-de-datos/"],["Guía de licencias y derechos de autor","https://descargas.intef.es/cedec/proyectoedia/guias/contenidos/guiadelicencias/derechos_de_autor.html"]], evalua:"t3e4"},
+        {n:4, t:"Evolución histórica · Creamos el póster", html:"<p>Crea un póster digital con: título («Evolución histórica de…»), importancia e historia resumida, imágenes de cada época con su ubicación y fecha, y una reflexión sobre qué ha provocado la evolución:</p><ul><li><b>Materiales:</b> cómo han cambiado y con qué ventajas e inconvenientes.</li><li><b>Técnicas constructivas:</b> qué avances técnicos y de ingeniería las han hecho posibles.</li><li><b>Estilos:</b> qué factores sociales, culturales y económicos han influido.</li><li><b>Medio ambiente:</b> qué impacto tienen y qué podemos aprender de la construcción tradicional.</li></ul>", entrega:"Póster en PDF por Teams", evalua:"t3e0"},
+        {n:5, t:"Las 3E · Observamos", html:"<p>Observa estos casos en los que las estructuras dejaron de cumplir su función. ¿Qué crees que falló en cada uno?</p>", enlaces:[["Colapso del puente de Tacoma Narrows","https://www.youtube.com/watch?v=DNrg-lWvuhg"],["Demoliciones espectaculares","https://www.youtube.com/watch?v=j-zczJXSxnw"],["Colapso del puente de Baltimore","https://www.youtube.com/watch?v=5yqUMpLtAJM"],["Derrumbe del puente de Picanya","https://www.youtube.com/watch?v=ay2miI0W33E"]], evalua:"t3e4"},
+        {n:6, t:"Las 3E · Investigamos", html:"<p>Responde en tu diario: ¿qué es una estructura? ¿Qué significa que sea estable? ¿Y eficiente? ¿Y estética? Apóyate en la teoría, el vídeo y los apuntes.</p>", enlaces:[["Vídeo: definición de estructura","https://www.youtube.com/watch?v=KYFLQj5nLjQ"],["Apuntes de estructuras (Pelandintecno)","https://www3.gobiernodecanarias.org/medusa/ecoblog/ilopmon/files/2017/10/pelandintecno-2eso-t3-estructuras.pdf"]], evalua:"t3e4"},
+        {n:7, t:"Las 3E · Experimentamos con Build a Bridge", html:"<p>En la app <b>Build a Bridge</b> del iPad, refuerza estructuras que se desestabilizan al añadir cargas. Cada barra cuesta dinero, como en la vida real. Responde: ¿cuánto has tardado? ¿Qué forma geométrica se repite? ¿Cómo has hecho la estructura más resistente?</p>", evalua:"t3e4"},
+        {n:8, t:"Reto: la torre de espaguetis", html:"<p>En equipo, construid con espaguetis, plastilina e hilo la torre más alta, estable, eficiente y elegante posible, y que soporte carga. Fotografiadla y subid la foto y la rúbrica a vuestro diario.</p>", evalua:"t3e1"},
+        {n:9, t:"Esfuerzos · Identificamos", html:"<p>Copia en tu diario la imagen de los esfuerzos que muestra el profesor y escribe el nombre de cada uno. Después haz la ficha interactiva de esfuerzos.</p>", evalua:"t3e4"},
+        {n:10, t:"Esfuerzos · Los aplicamos", html:"<p>Aplica uno a uno los cinco esfuerzos sobre una nube de golosina. Fotografía cada deformación y completa la ficha de análisis: ¿qué le pasa a su longitud y a su grosor?</p>", evalua:"t3e4"},
+        {n:11, t:"Cargas · Practicamos con un folio", html:"<p>Dobla un folio con tres pliegues longitudinales y dobla 5 cm de cada extremo en ángulo recto para hacer una «mesa». Aplica las cargas de una en una, fotografía y anota la deformación:</p><ul><li>Una goma en el centro (carga puntual centrada).</li><li>La goma cerca de un lateral (carga puntual excéntrica).</li><li>Un lápiz a lo largo (carga repartida uniforme).</li><li>Plastilina con forma irregular (carga repartida no uniforme).</li></ul>", evalua:"t3e4"},
+        {n:12, t:"Practicopedia de los esfuerzos", html:"<p>Cread un vídeo de entre 1 y 1,5 minutos que explique los cinco esfuerzos solo con <b>voz en off y dibujos</b>:</p><ol><li><b>Guion:</b> qué es un esfuerzo, los cinco tipos (cargas, deformación y un ejemplo real de cada uno) y una conclusión. Empezad con una pregunta que enganche.</li><li><b>Dibujos:</b> títulos con lettering, flechas y dibujos que se vean bien en cámara.</li><li><b>Ensayo:</b> sincronizad la voz con los dibujos.</li><li><b>Grabación:</b> una persona graba, otra lee y otra va mostrando los dibujos.</li><li><b>Edición:</b> con título y créditos.</li></ol><p class=\"ask\">La voz tiene que ser vuestra y el vídeo se graba en clase: no vale generar voz ni vídeo con IA.</p>", enlaces:[["Ejemplo de practicopedia","https://www.youtube.com/watch?v=6_iAsR-ZfGw"]], entrega:"Vídeo por Teams", evalua:"t3e2"},
+        {n:13, t:"Diseñamos en 3D con Tinkercad", html:"<p>Diseña en Tinkercad una estructura que combine distintos elementos estructurales: pilares, vigas, arcos, tirantes, triangulaciones… Entra con tu cuenta del colegio o con el código de clase. Haz una captura y guárdala en tu diario.</p>", enlaces:[["Tinkercad","https://www.tinkercad.com/login"],["Tutorial de Tinkercad","https://www.youtube.com/watch?v=tcvujxk1Iqg"],["Tipos de estructuras (Pelandintecno)","http://pelandintecno.blogspot.com/2018/01/clasificando-diferentes-tipos-de.html"]], entrega:"Captura en el diario", evalua:"t3e4"},
+        {n:14, t:"Tarea final: el puente 3E", html:`<p>¡Es el momento de ser ingenieros! Diseñad y construid un puente que cumpla las 3E para el <b>concurso de carga máxima</b> del colegio.</p>
+          <h4>Materiales (solo estos)</h4>
+          <ul><li>Tablero de cartón de 50 × 15 cm.</li><li>Folios, preferiblemente usados (empezad a guardarlos ya).</li><li>Pegamento de barra y silicona caliente con su pistola.</li><li>Hilo de lana, solo para tensores.</li></ul>
+          <h4>Pasos</h4>
+          <ol><li><b>Diseño:</b> bocetos del puente con medidas y el tipo de estructura elegido. ¿Dónde habrá tracción y dónde compresión?</li><li><b>Planificación:</b> tareas, responsables y plazos.</li><li><b>Perfiles:</b> enrollad los folios en tubos finos y apretados, en diagonal sobre un lápiz o una varilla, y pegad el borde con barra.</li><li><b>Construcción:</b> montad las vigas laterales triangulando, unidlas con tubos transversales y pegad la estructura al tablero con silicona. Dejad secar.</li><li><b>Pesaje:</b> pesad el puente antes de la prueba.</li><li><b>Prueba de carga:</b> se añade peso poco a poco hasta que colapse. Documentad todo con fotos y vídeo para el diario.</li></ol>
+          <h4>Calcula la eficiencia de tu puente</h4>
+          <p>Eficiencia = peso del puente ÷ carga máxima soportada. Cuanto más pequeño el número, mejor: el puente soportó mucho en comparación con lo que pesa.</p>
+          <div class="eff">
+            <label for="eff-peso">Peso del puente (g)</label><input id="eff-peso" type="number" min="0" step="1" inputmode="decimal">
+            <label for="eff-carga">Carga máxima soportada (g)</label><input id="eff-carga" type="number" min="0" step="1" inputmode="decimal">
+            <output id="eff-out" for="eff-peso eff-carga">Introduce los dos datos.</output>
+          </div>
+          <p class="ask"><b>Seguridad:</b> cuidado con la silicona caliente; usad la pistola sobre su soporte. En la prueba de carga, solo sube peso quien indique el profesor. Las maquetas se expondrán en el centro y el concurso se grabará; solo se publicará en las redes del colegio con la autorización de las familias.</p>`, entrega:"Puente, fotos y vídeo en el diario", evalua:"t3e3"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: cargas, esfuerzos y estructuras", s:"8 preguntas con informe de repaso.", quiz:"estructuras"}
        ]}
     ],
-    criterios:null,
-    pesos:[["Prototipo",40],["Presentación",25],["Diario de equipo",20],["Coevaluación",15]],
-    pesosEjemplo:true
+    norma:"currículo de Tecnología y Digitalización",
+    competencias:[
+      {n:1, t:"Investigar y analizar", d:"Buscar información fiable, analizar productos y usar simuladores para definir problemas tecnológicos.", c:[
+        ["1.1","Definir problemas o necesidades, buscando y contrastando información de distintas fuentes de forma crítica y segura."],
+        ["1.2","Comprender y examinar productos tecnológicos de uso habitual analizando objetos y sistemas, con el método científico y herramientas de simulación."]]},
+      {n:2, t:"Diseñar y planificar", d:"Afrontar problemas con autonomía y creatividad, trabajando de forma ordenada y en equipo.", c:[
+        ["2.1","Idear y diseñar soluciones originales con actitud emprendedora, perseverante y creativa."],
+        ["2.2","Seleccionar, planificar y organizar materiales, herramientas y tareas para construir una solución, solo o en equipo."]]},
+      {n:3, t:"Construir", d:"Fabricar soluciones tecnológicas sostenibles aplicando técnicas y conocimientos.", c:[
+        ["3.1","Fabricar objetos o modelos con materiales, herramientas y máquinas adecuadas, aplicando estructuras, mecanismos y electricidad y respetando la seguridad."],
+        ["3.2","Estimar cómo se transforman las velocidades y las fuerzas en mecanismos simples."]]},
+      {n:4, t:"Comunicar", d:"Describir y compartir ideas y soluciones con el vocabulario, la simbología y las herramientas adecuadas.", c:[
+        ["4.1","Elaborar de forma guiada la documentación técnica y gráfica básica, con la simbología y el vocabulario técnico adecuados, presencialmente o en remoto."]]}
+    ],
+    criterios:null, pesos:null
   }
 ];
 
@@ -888,6 +1056,14 @@ const MATERIAS = [
    ANEXOS DE EVALUACIÓN (rúbricas, listas de control, escalas)
    ============================================================ */
 const ANEXOS = {
+  t3m1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody><tr><th>Infografía del proceso tecnológico</th><td>1</td><td>Rúbrica de la infografía (Anexo 2)</td><td>4.1</td><td>10 %</td></tr><tr><th>Investigación e idea</th><td>3–4</td><td>Rúbrica del proyecto (Anexo 3): filas A y B</td><td>1.1 · 1.2 · 2.1</td><td>15 %</td></tr><tr><th>Modelo de negocio y viabilidad</th><td>5</td><td>Rúbrica del proyecto: fila C</td><td>2.1 · 2.2</td><td>10 %</td></tr><tr><th>Prototipo y pruebas con usuarios</th><td>6–8</td><td>Rúbrica del proyecto: fila D</td><td>2.1 · 3.1</td><td>20 %</td></tr><tr><th>Memoria técnica</th><td>9</td><td>Rúbrica del proyecto: fila E</td><td>2.2 · 4.1</td><td>15 %</td></tr><tr><th>Marca y plan de marketing</th><td>10–11</td><td>Rúbrica del proyecto: fila F</td><td>1.1 · 2.1 · 4.1</td><td>10 %</td></tr><tr><th>Pitch final</th><td>12</td><td>Rúbrica del proyecto: fila G</td><td>4.1</td><td>15 %</td></tr><tr><th>Trabajo en equipo</th><td>Todas</td><td>Observación en clase y coevaluación: fila H</td><td>2.2</td><td>5 %</td></tr></tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  t3m2:{titulo:"Anexo 3. Rúbrica del proyecto", para:"tareas 3 a 12", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>A. Investigación del problema<span class="crit">1.1</span></th><td>Entrevistas a usuarios reales bien preparadas; mapa de empatía completo; el problema está muy bien definido.</td><td>Entrevistas y mapa de empatía completos, con algún punto superficial.</td><td>Pocas entrevistas o mapa incompleto.</td><td>Sin investigación con usuarios.</td></tr><tr><th>B. Análisis y elección de la idea<span class="crit">1.2 · 2.1</span></th><td>Analizáis soluciones existentes y elegís la idea con una matriz de decisión justificada; la idea es original.</td><td>Analizáis lo que existe y justificáis la elección.</td><td>Análisis o justificación muy pobres.</td><td>No hay análisis ni justificación.</td></tr><tr><th>C. Modelo de negocio<span class="crit">2.1 · 2.2</span></th><td>Lean Canvas completo y coherente; costes, precio e impacto social y ambiental bien calculados y razonados.</td><td>Lean Canvas completo y viabilidad estudiada con algún error.</td><td>Lean Canvas incompleto o viabilidad poco estudiada.</td><td>Sin modelo de negocio.</td></tr><tr><th>D. Prototipo y pruebas<span class="crit">2.1 · 3.1</span></th><td>Prototipo de baja y de alta fidelidad bien construidos; probados con usuarios y mejorados a partir de su opinión.</td><td>Prototipos correctos y probados, con pocas mejoras.</td><td>Prototipo poco cuidado o sin pruebas con usuarios.</td><td>No hay prototipo.</td></tr><tr><th>E. Memoria técnica<span class="crit">2.2 · 4.1</span></th><td>Completa, ordenada y con vocabulario técnico; bocetos con medidas, planificación clara y fuentes citadas.</td><td>Completa con algún apartado poco desarrollado.</td><td>Incompleta o desordenada.</td><td>No se entrega o no sirve como documentación.</td></tr><tr><th>F. Marca y marketing<span class="crit">1.1 · 2.1 · 4.1</span></th><td>Identidad coherente y justificada (colores, tipografía, logo, eslogan); plan de marketing completo; publicaciones atractivas y coherentes.</td><td>Marca coherente y plan completo con algún fallo.</td><td>Marca poco cuidada o plan incompleto.</td><td>Sin marca ni plan.</td></tr><tr><th>G. Pitch<span class="crit">4.1</span></th><td>Claro, convincente y en tiempo; demostración del prototipo; respondéis con seguridad al jurado.</td><td>Claro y ordenado, con algún fallo de tiempo o seguridad.</td><td>Desordenado, leído o fuera de tiempo.</td><td>No se presenta.</td></tr><tr><th>H. Trabajo en equipo<span class="crit">2.2</span></th><td>Cumples tu parte a tiempo, aportas ideas y ayudas a resolver desacuerdos.</td><td>Cumples tu parte y colaboras.</td><td>Cumples solo parte de lo acordado.</td><td>No cumples tu parte.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  t3eV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody><tr><th>Póster de la evolución histórica</th><td>4</td><td>Rúbrica del póster (Anexo 2)</td><td>1.1 · 4.1</td><td>15 %</td></tr><tr><th>Reto de la torre de espaguetis</th><td>8</td><td>Rúbrica de la torre (Anexo 3)</td><td>2.1 · 3.1</td><td>10 %</td></tr><tr><th>Practicopedia de los esfuerzos</th><td>12</td><td>Rúbrica de la practicopedia (Anexo 4)</td><td>4.1</td><td>15 %</td></tr><tr><th>Puente 3E</th><td>14</td><td>Rúbrica del puente (Anexo 5)</td><td>2.1 · 2.2 · 3.1</td><td>35 %</td></tr><tr><th>Diario de aprendizaje</th><td>Todas</td><td>Rúbrica del diario (Anexo 6)</td><td>1.2 · 4.1</td><td>25 %</td></tr></tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  t3e0:{titulo:"Anexo 2. Rúbrica del póster", para:"tarea 4", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>Contenido<span class="crit">1.1</span></th><td>Todos los apartados están completos, detallados y bien organizados.</td><td>Todos los apartados están presentes y claros.</td><td>Algunos apartados están incompletos o poco claros.</td><td>Faltan varios apartados o la información es insuficiente.</td></tr><tr><th>Diseño visual<span class="crit">4.1</span></th><td>Atractivo, claro y bien organizado; facilita la comprensión.</td><td>Claro y organizado, aunque podría ser más atractivo.</td><td>Poco atractivo y sin unidad visual.</td><td>Confuso, desordenado y difícil de seguir.</td></tr><tr><th>Creatividad y originalidad<span class="crit">4.1</span></th><td>Muy creativo y original; destaca visualmente.</td><td>Creatividad y originalidad adecuadas.</td><td>Algún elemento creativo, pero en general poco original.</td><td>Sin creatividad ni originalidad.</td></tr><tr><th>Coherencia y rigor<span class="crit">1.1</span></th><td>Muy bien organizado, con información precisa y fuentes citadas.</td><td>Bien organizado y con cierta coherencia.</td><td>Poca coherencia o información imprecisa.</td><td>Sin coherencia o con información incorrecta.</td></tr><tr><th>Reflexión y análisis<span class="crit">1.1</span></th><td>Responde a todas las preguntas guía con un análisis profundo y detallado.</td><td>Responde a todas las preguntas guía con cierta profundidad.</td><td>Responde solo a parte de las preguntas o de forma superficial.</td><td>Reflexión superficial o inexistente.</td></tr><tr><th>Presentación oral (opcional)<span class="crit">4.1</span></th><td>Clara y persuasiva; demuestra que domina el tema.</td><td>Clara y muestra que comprende el tema.</td><td>Limitada o poco clara.</td><td>No realizada o muy deficiente.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  t3e1:{titulo:"Anexo 3. Rúbrica de la torre de espaguetis", para:"tarea 8", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>Altura<span class="crit">3.1</span></th><td>La más alta y se mantiene estable.</td><td>Buena altura y cierta estabilidad.</td><td>Altura moderada, pero poco estable.</td><td>Baja y poco estable.</td></tr><tr><th>Estabilidad<span class="crit">3.1</span></th><td>Sólida y estable, sin problemas.</td><td>Estable, con algún problema menor.</td><td>Tiene problemas de estabilidad y se tambalea.</td><td>Inestable: se derrumba con facilidad.</td></tr><tr><th>Eficiencia<span class="crit">2.1</span></th><td>Usa el mínimo material para ser alta y estable.</td><td>Usa una cantidad adecuada de material.</td><td>Usa material de más; se podría optimizar.</td><td>Usa material en exceso sin pensar en la eficiencia.</td></tr><tr><th>Estética<span class="crit">2.1</span></th><td>Diseño creativo y llamativo, muy elegante.</td><td>Diseño cuidado y atractivo.</td><td>Diseño básico, poco estético.</td><td>Sin diseño; poco atractiva.</td></tr><tr><th>Carga máxima<span class="crit">3.1</span></th><td>Soporta mucha carga sin mostrar debilidad.</td><td>Soporta una carga moderada sin problemas.</td><td>Soporta poca carga sin caerse.</td><td>No soporta ninguna carga.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  t3e2:{titulo:"Anexo 4. Rúbrica de la practicopedia", para:"tarea 12", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>Narración<span class="crit">4.1</span></th><td>Pronuncia con estupenda claridad, fluidez y buena entonación.</td><td>Pronuncia con claridad y fluidez, pero sin entonación.</td><td>Pronuncia con claridad, pero con bloqueos y pausas.</td><td>No pronuncia con claridad ni fluidez.</td></tr><tr><th>Elementos gráficos<span class="crit">4.1</span></th><td>Muchos dibujos, imágenes y símbolos de buena calidad y bien elegidos.</td><td>Bastantes dibujos y símbolos adecuados.</td><td>Pocos dibujos o poco adecuados o de baja calidad.</td><td>Dibujos mal elegidos o de muy baja calidad.</td></tr><tr><th>Dominio del contenido<span class="crit">4.1</span></th><td>Explica los cinco esfuerzos con claridad, ejemplos reales y sin errores.</td><td>Domina el tema, con alguna imprecisión.</td><td>Domina solo algunos esfuerzos.</td><td>No demuestra conocer el tema.</td></tr><tr><th>Seguimiento de las pautas<span class="crit">4.1</span></th><td>Sigue todas las pautas del guion y del formato.</td><td>Le falta alguna pauta menor.</td><td>Le falta una cuarta parte de las pautas.</td><td>No sigue la mayoría de las pautas.</td></tr><tr><th>Calidad técnica<span class="crit">4.1</span></th><td>Bien editado, con título y créditos; imagen y sonido de buena calidad; dura entre 1 y 1,5 minutos.</td><td>Editado con título y créditos; calidad aceptable.</td><td>Falta el título o los créditos, o la calidad dificulta seguirlo.</td><td>Sin editar o no se entiende.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  t3e3:{titulo:"Anexo 5. Rúbrica del puente 3E", para:"tarea 14", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>Diseño y planificación<span class="crit">2.1 · 2.2</span></th><td>Bocetos con medidas, estructura justificada (dónde hay tracción y compresión) y planificación de tareas, responsables y plazos.</td><td>Bocetos y planificación completos con algún hueco.</td><td>Bocetos sin medidas o planificación incompleta.</td><td>Sin diseño ni planificación.</td></tr><tr><th>Construcción<span class="crit">3.1</span></th><td>Perfiles bien hechos, uniones limpias y triangulación correcta; respeta los materiales y las normas de seguridad.</td><td>Construcción correcta con algún defecto de acabado.</td><td>Construcción descuidada o que no respeta algún material o norma.</td><td>Construcción muy deficiente.</td></tr><tr><th>Eficiencia<span class="crit">3.1</span></th><td>Entre las eficiencias más bajas (mejores) de la clase.</td><td>Eficiencia buena.</td><td>Eficiencia mejorable.</td><td>El puente apenas soporta su propio peso.</td></tr><tr><th>Estética<span class="crit">2.1</span></th><td>Diseño elegante, original y muy bien acabado.</td><td>Diseño cuidado y atractivo.</td><td>Diseño básico.</td><td>Sin cuidado estético.</td></tr><tr><th>Documentación<span class="crit">4.1</span></th><td>Todo el proceso documentado en el diario con fotos, vídeo, datos de la prueba y conclusiones.</td><td>Proceso documentado con algún hueco.</td><td>Documentación incompleta.</td><td>Sin documentación.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  t3e4:{titulo:"Anexo 6. Rúbrica del diario de aprendizaje", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody><tr><th>Contenido<span class="crit">1.2</span></th><td>Completo y relevante; muestra una comprensión profunda, con detalles y ejemplos.</td><td>Adecuado; cubre lo principal, aunque algún detalle podría ser más claro.</td><td>Básico; faltan aspectos importantes.</td><td>Escaso o confuso; no aborda lo esencial.</td></tr><tr><th>Redacción<span class="crit">4.1</span></th><td>Clara, concisa y con vocabulario técnico adecuado; sin errores.</td><td>Comprensible, con algunas frases mejorables.</td><td>Confusa a veces o con errores gramaticales.</td><td>Difícil de entender o con muchos errores.</td></tr><tr><th>Evidencias<span class="crit">4.1</span></th><td>Fotos, vídeos y datos bien elegidos que respaldan lo que cuenta; fuentes citadas.</td><td>Evidencias pertinentes, algunas poco detalladas.</td><td>Pocas evidencias o fuentes sin citar.</td><td>Evidencias insuficientes o sin relación.</td></tr><tr><th>Reflexión<span class="crit">1.2</span></th><td>Reflexión profunda y crítica sobre lo aprendido, lo que funcionó y lo que mejorar.</td><td>Reflexión adecuada con algunos puntos de mejora.</td><td>Reflexión superficial.</td><td>Sin reflexión.</td></tr><tr><th>Organización y presentación<span class="crit">4.1</span></th><td>Muy bien organizado por tareas, ordenado y visualmente cuidado.</td><td>Organizado, con algún desorden.</td><td>Poco organizado.</td><td>Desordenado y difícil de seguir.</td></tr></tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   sa8a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
     <div class="table-wrap"><table class="tbl ev">
       <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
@@ -1114,10 +1290,22 @@ const ANEXOS = {
     </table></div>`}
 };
 
+ANEXOS.t3inf = {titulo:"Anexo 2. Rúbrica de la infografía", para:"tarea 1", html:ANEXOS.anexo1.html.replace(/Teams/g,"Teams")};
+
 /* ============================================================
    FICHAS INTERACTIVAS
    ============================================================ */
 const QUIZZES = {
+  estructuras:{titulo:"Repaso: cargas, esfuerzos y estructuras", preguntas:[
+    {q:"El cable de un ascensor sostiene la cabina. ¿Qué esfuerzo sufre?", o:["Compresión","Tracción","Torsión"], a:1, f:"Las cargas tiran del cable en sentidos contrarios: tiende a alargarse."},
+    {q:"Un pilar soporta el peso del edificio. ¿Qué esfuerzo sufre?", o:["Compresión","Flexión","Cortante"], a:0, f:"Las cargas empujan el pilar hacia dentro: tiende a acortarse y ensancharse."},
+    {q:"Una estantería se curva con el peso de los libros. ¿Qué esfuerzo es?", o:["Torsión","Flexión","Tracción"], a:1, f:"En la flexión, una parte se comprime y la otra se estira."},
+    {q:"¿Qué esfuerzo sufre una llave al girarla en la cerradura?", o:["Torsión","Cortante","Compresión"], a:0, f:"Las cargas tienden a retorcer la llave."},
+    {q:"¿Por qué se usan triángulos en las estructuras?", o:["Porque son más bonitos","Porque son la única figura indeformable","Porque gastan más material"], a:1, f:"Un triángulo de barras no se deforma; un cuadrado sí."},
+    {q:"¿Qué significa que una estructura sea rígida?", o:["Que no se rompe","Que no vuelca","Que no se deforma de manera apreciable"], a:2, f:"Resistente: no se rompe. Estable: no vuelca. Rígida: no se deforma."},
+    {q:"Un puente pesa 200 g y soporta 10 000 g. Otro pesa 100 g y soporta 4000 g. ¿Cuál es más eficiente?", o:["El primero (0,02)","El segundo (0,025)","Son iguales"], a:0, f:"Eficiencia = peso ÷ carga máxima. Cuanto menor, mejor: 200/10 000 = 0,02 frente a 100/4000 = 0,025."},
+    {q:"Las torres eléctricas y las grúas son estructuras…", o:["Masivas","Trianguladas","Neumáticas"], a:1, f:"Están formadas por barras unidas en triángulos."}
+  ]},
   iaapp:{titulo:"Repaso: apps web e IA", preguntas:[
     {q:"¿Qué lenguaje define la estructura de una página: títulos, textos y botones?", o:["CSS","HTML","JavaScript"], a:1, f:"HTML es la estructura; CSS, el aspecto; JavaScript, el comportamiento."},
     {q:"Quieres que el botón sea verde y más grande. ¿Qué parte del código cambias?", o:["El CSS","El HTML","El JavaScript"], a:0, f:"Colores y tamaños se definen en el CSS."},
@@ -1582,7 +1770,15 @@ document.addEventListener("submit", e=>{
       : `<div class="check bad"><b>No se puede verificar</b><p style="margin:0">${esc(r.msg)}</p></div>`;
   }
 });
-document.addEventListener("input", e=>{ if(e.target.id==="alumno") e.target.setCustomValidity(""); });
+document.addEventListener("input", e=>{
+  if(e.target.id==="alumno") e.target.setCustomValidity("");
+  if(e.target.id==="eff-peso"||e.target.id==="eff-carga"){
+    const p=parseFloat($("#eff-peso").value), c=parseFloat($("#eff-carga").value), o=$("#eff-out");
+    if(!(p>0)||!(c>0)){ o.textContent="Introduce los dos datos."; return; }
+    const ef=p/c, veces=c/p;
+    o.innerHTML=`Eficiencia: <b>${ef.toLocaleString("es-ES",{maximumFractionDigits:4})}</b> · tu puente soportó <b>${veces.toLocaleString("es-ES",{maximumFractionDigits:1})} veces</b> su propio peso.`;
+  }
+});
 window.addEventListener("hashchange", route);
 route();
 </script>
