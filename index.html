@@ -1523,7 +1523,7 @@ const MATERIAS = [
   },
   {
     id:"lab-audiovisual-1", nombre:"Laboratorio de Creación Audiovisual", corto:"Lab. Audiovisual", nivel:"1.º ESO", color:"#7c4dcc",
-    intro:"Aprendemos a mirar, escuchar y contar historias con imágenes y sonidos. Un proyecto por trimestre: una postal sonora que mezcla foto y sonido, una animación en stop motion y un cortometraje rodado por la clase que estrenamos en el colegio.",
+    intro:"Aprendemos a mirar, escuchar y contar historias con imágenes y sonidos. Un proyecto por trimestre: el lenguaje de la cámara y nuestro primer corto, un cuento animado para los peques de Infantil y un anuncio publicitario grabado con croma.",
     presentacion:{
       cita:"El cine es un espejo pintado.",
       texto:"Vivimos rodeados de imágenes, vídeos y sonidos: en el móvil, en las redes, en la publicidad, en el cine. En esta materia aprendemos cómo están hechos para entenderlos mejor y, sobre todo, para crear los nuestros. No hace falta saber dibujar ni ser artista: hace falta mirar con atención, tener ideas y trabajar en equipo.",
@@ -1588,114 +1588,113 @@ const MATERIAS = [
        items:[
         {tipo:"interactiva", t:"Repaso: planos y sonido", s:"8 preguntas con informe de repaso.", quiz:"labpostal"}
        ]},
-      {id:"lab-stop", etiqueta:"Proyecto 2 · 2.º trimestre", titulo:"Dar vida a las cosas", subtitulo:"Animación en stop motion",
+      {id:"lab-cuento", etiqueta:"Proyecto 2 · 2.º trimestre", titulo:"Cuentos que cobran vida", subtitulo:"Animamos un cuento para los peques de Infantil",
        cita:["La animación no es el arte de los dibujos que se mueven, sino de los movimientos que se dibujan.","Norman McLaren"],
-       bloque:"Bloques: Fundamentos del lenguaje audiovisual · Producción audiovisual",
-       desc:"¿Cómo puede moverse algo que está quieto? Descubrimos el truco que engaña a nuestro ojo, construimos juguetes ópticos y animamos objetos cotidianos foto a foto. El reto: contar una historia en stop motion en la que los personajes son monedas.",
-       criterios:["1.2","2.1","2.2","2.3","2.4","3.1","3.2"],
-       producto:"Cortometraje de animación en stop motion con monedas como personajes, con su banda sonora.",
-       anexos:["labSV","labSR"],
+       bloque:"Bloques: Fundamentos del lenguaje audiovisual · Producción audiovisual · Difusión",
+       desc:"Cada equipo crea un cuento animado pensado para un curso de Educación Infantil del colegio. Dibujamos los personajes y los escenarios, les damos movimiento con Keynote, grabamos las voces, componemos la música con GarageBand y montamos el vídeo con iMovie. Al final, vamos a su clase a estrenarlo.",
+       criterios:["1.2","1.3","2.1","2.2","2.4","3.1","3.2","4.1","4.3"],
+       producto:"Cuento animado de 2 a 4 minutos para un curso de Infantil, estrenado en su aula.",
+       anexos:["labKV","labKR"],
        teoria:`
         <h3>¿Por qué vemos movimiento?</h3>
-        <p>Cuando vemos muchas imágenes fijas muy seguidas, ligeramente distintas, nuestro cerebro las une y cree que hay movimiento. Es lo que se llama <b>persistencia de la visión</b> o efecto phi. Toda la animación y el cine se basan en este «engaño».</p>
-        <h3>Fotogramas por segundo</h3>
-        <p>Cada imagen es un <b>fotograma</b>. El cine proyecta 24 fotogramas por segundo (fps). En stop motion se suele trabajar a 12 fps: para un segundo de animación necesitas 12 fotos. Un corto de 30 segundos son… 360 fotos.</p>
-        <h3>Juguetes ópticos</h3>
-        <p>Antes del cine, en el siglo XIX, se inventaron juguetes que ya creaban movimiento: el <b>taumatropo</b> (un disco con un dibujo a cada lado que se superponen al girar), el <b>zoótropo</b> (un tambor con ranuras) y el <b>flipbook</b> (un librito que se pasa rápido con el dedo).</p>
+        <p>Cuando vemos imágenes fijas muy seguidas y ligeramente distintas, el cerebro las une y cree que hay movimiento. Es la <b>persistencia de la visión</b>. Cada imagen es un <b>fotograma</b>: el cine proyecta 24 por segundo. Antes del cine ya existían juguetes que usaban este truco, como el <b>taumatropo</b>, el <b>zoótropo</b> o el <b>flipbook</b>.</p>
         <h3>Técnicas de animación</h3>
         <div class="defs">
-          <div><b>Dibujo animado</b><p>Cada fotograma se dibuja a mano o en el ordenador.</p></div>
-          <div><b>Stop motion</b><p>Se fotografían objetos reales moviéndolos un poco entre foto y foto: plastilina, juguetes, recortes o… monedas.</p></div>
+          <div><b>Dibujo animado</b><p>Cada fotograma se dibuja.</p></div>
+          <div><b>Animación de recortes</b><p>Las partes del personaje (cabeza, brazos, piernas) son piezas separadas que se mueven. Es lo que haremos con Keynote.</p></div>
+          <div><b>Stop motion</b><p>Se fotografían objetos reales moviéndolos poco a poco.</p></div>
           <div><b>Animación 3D</b><p>Modelos creados y movidos por ordenador.</p></div>
         </div>
-        <h3>Trucos del stop motion</h3>
+        <h3>Pensar en el público</h3>
+        <p>Un cuento para niños de 3 a 5 años necesita:</p>
         <ul>
-          <li><b>Cámara fija:</b> el iPad o el móvil siempre en el mismo sitio, sujeto con un soporte.</li>
-          <li><b>Luz constante:</b> mejor luz artificial; la del sol cambia y produce parpadeos.</li>
-          <li><b>Movimientos pequeños:</b> cuanto más pequeño el cambio entre fotos, más suave la animación.</li>
-          <li><b>Papel cebolla:</b> la app muestra la foto anterior transparente para calcular el siguiente movimiento.</li>
-          <li><b>Ritmo:</b> para que algo vaya rápido, muévelo más entre foto y foto; para que vaya lento, menos.</li>
+          <li><b>Una historia sencilla:</b> pocos personajes, un problema claro y un final feliz o con enseñanza.</li>
+          <li><b>Frases cortas</b>, voces claras y despacio, y repeticiones que puedan anticipar.</li>
+          <li><b>Colores vivos</b>, personajes con formas sencillas y expresiones muy marcadas.</li>
+          <li><b>Nada que dé miedo de verdad</b> ni que deje fuera a nadie: personajes diversos y respetuosos.</li>
         </ul>
-        <h3>El sonido de la animación</h3>
-        <p>En animación todo el sonido se añade después. Los <b>efectos de sala</b> (en inglés, <i>foley</i>) se graban imitando los sonidos con objetos: una moneda que cae, pasos, un golpe. La música marca la emoción de cada escena.</p>
-        <h3>Contar una historia</h3>
-        <p>Toda historia, por corta que sea, tiene <b>planteamiento</b> (quién, dónde), <b>nudo</b> (un problema o conflicto) y <b>desenlace</b> (cómo se resuelve). Antes de animar, se dibuja un <b>storyboard</b>: viñetas con lo que pasa en cada momento.</p>`,
+        <h3>Del cuento al storyboard</h3>
+        <p>El cuento tiene <b>planteamiento</b>, <b>nudo</b> y <b>desenlace</b>. Después se divide en escenas y se dibuja un <b>storyboard</b>: una viñeta por cada momento, con lo que se ve, lo que se mueve y lo que se oye. Así sabremos cuántas diapositivas, dibujos y voces necesitamos.</p>
+        <h3>Animar con Keynote</h3>
+        <ul>
+          <li>Cada <b>diapositiva</b> es una escena o un momento de la escena.</li>
+          <li>Los personajes se dibujan con <b>fondo transparente</b> y por partes si queremos mover brazos o cabeza.</li>
+          <li><b>Animaciones de entrada y salida:</b> el personaje aparece o desaparece.</li>
+          <li><b>Mover a:</b> el personaje se desplaza por un camino que dibujamos.</li>
+          <li><b>Movimiento mágico</b> (transición): si el mismo objeto está en dos diapositivas seguidas en distinta posición o tamaño, Keynote crea el movimiento entre una y otra.</li>
+          <li>Ajusta la <b>duración</b> y el <b>retardo</b> de cada animación y pon la presentación en avance automático. Al final, se <b>exporta como película</b>.</li>
+        </ul>
+        <h3>Voces, música y montaje</h3>
+        <ul>
+          <li><b>Voces:</b> grábalas en un lugar silencioso, cerca del micrófono, con entonación de cuentacuentos. Cada personaje, una voz distinta.</li>
+          <li><b>Música:</b> en GarageBand, un tema para cada ambiente (alegre, misterio, final feliz) y efectos de sonido.</li>
+          <li><b>Montaje:</b> en iMovie se unen la animación, las voces, la música y los títulos de inicio y créditos.</li>
+        </ul>
+        <h3>Compartir</h3>
+        <p>Los vídeos se suben al canal del colegio como <b>ocultos</b>: solo los ve quien tiene el enlace. En los créditos aparecen los nombres que el colegio permita, y todo lo que no es nuestro tiene licencia libre y se cita.</p>`,
        tareas:[
-        {n:1, t:"Taumatropo y flipbook", html:"<p>Construye un taumatropo (por ejemplo, un pájaro y una jaula) y un flipbook de al menos 20 páginas con un movimiento sencillo. Explica por qué parece que se mueve.</p>", evalua:"labSR"},
-        {n:2, t:"Primeros fotogramas", html:"<p>Con la app de stop motion, anima un objeto que cruce la mesa en 3 segundos a 12 fps. ¿Cuántas fotos necesitas? Haz una versión rápida y otra lenta y compáralas.</p>", enlaces:[["Stop Motion Studio","https://www.cateater.com"]], evalua:"labSR"},
-        {n:3, t:"Monedas con personalidad", html:"<p>Diseñad los personajes de vuestra historia: cada moneda tendrá un carácter (valiente, despistada, presumida…). Probad cómo se mueve cada una para mostrar ese carácter: rodar, saltar, girar, temblar.</p>", evalua:"labSR"},
-        {n:4, t:"Guion y storyboard", html:"<p>Escribid la historia en cinco líneas (planteamiento, nudo y desenlace) y dibujad el storyboard con al menos 8 viñetas. Repartid los roles: animación, cámara y luz, decorado y sonido.</p>", entrega:"Storyboard por Teams", evalua:"labSR"},
-        {n:5, t:"Decorado y rodaje", html:"<p>Construid el decorado y fijad la cámara y la luz. Rodad la animación siguiendo el storyboard. Revisad cada escena antes de pasar a la siguiente.</p>", evalua:"labSR"},
-        {n:6, t:"Sonido y montaje", html:"<p>Grabad los efectos de sala con objetos reales, añadid música libre y unidlo todo en el editor de vídeo. Poned título y créditos.</p>", entrega:"Cortometraje por Teams", evalua:"labSV"},
-        {n:7, t:"Pase y valoración", html:"<p>Vemos los cortos en clase. Cada equipo explica una dificultad y cómo la resolvió, y valora el trabajo de otro equipo: algo que funciona muy bien y una propuesta de mejora.</p>", evalua:"labSR"}
+        {n:1, t:"Juguetes ópticos", html:"<p>Construye un taumatropo o un flipbook de al menos 20 páginas. Explica por qué parece que se mueve.</p>", evalua:"labKR"},
+        {n:2, t:"Conoce a tu público", html:"<p>A cada equipo se le asigna un curso de Infantil. Averiguad qué les gusta, qué están trabajando en clase (un proyecto, una estación, un valor) y qué cuentos les encantan. Con eso, elegid el tema del vuestro.</p>", evalua:"labKR"},
+        {n:3, t:"El cuento y el storyboard", html:"<p>Escribid el cuento con planteamiento, nudo y desenlace, en frases cortas. Dividid en escenas y dibujad el storyboard: qué se ve, qué se mueve y qué se oye en cada momento. Repartid los roles: dibujo, animación, voces, música y montaje.</p>", entrega:"Cuento y storyboard por Teams", evalua:"labKR"},
+        {n:4, t:"Personajes y escenarios", html:"<p>Dibujad los personajes (por partes si se van a mover) y los escenarios, en papel o en el iPad. Pasadlos a imágenes con fondo transparente.</p>", evalua:"labKR"},
+        {n:5, t:"Animamos con Keynote", html:"<p>Montad cada escena en Keynote y animad los personajes con animaciones de entrada, salida, «mover a» y movimiento mágico. Ajustad los tiempos para que dé tiempo a seguir la historia. Exportad como película.</p>", evalua:"labKR"},
+        {n:6, t:"Voces y música", html:"<p>Grabad las voces del narrador y de los personajes y componed en GarageBand la música de cada ambiente, más los efectos de sonido.</p>", evalua:"labKR"},
+        {n:7, t:"Montaje", html:"<p>Unid en iMovie la animación, las voces, la música y los efectos. Añadid título y créditos. Revisad que la voz se entiende por encima de la música.</p>", entrega:"Vídeo final por Teams", evalua:"labKV"},
+        {n:8, t:"Estreno en Infantil", html:"<p>Vamos a la clase de Infantil a estrenar el cuento. Preparad una presentación breve y una pregunta o actividad para hacer con los peques después. Al volver, valorad qué les gustó y qué cambiaríais.</p>", entrega:"Valoración del estreno", evalua:"labKR"}
        ],
        items:[
-        {tipo:"interactiva", t:"Repaso: animación", s:"8 preguntas con informe de repaso.", quiz:"labstop"}
+        {tipo:"interactiva", t:"Repaso: animación", s:"8 preguntas con informe de repaso.", quiz:"labcuento"}
        ]},
-      {id:"lab-corto", etiqueta:"Proyecto 3 · 3.er trimestre", titulo:"¡Rodamos!", subtitulo:"Nuestro cortometraje, de la idea al estreno",
-       cita:["Una película es tres veces escrita: en el guion, en el rodaje y en el montaje.",""],
-       bloque:"Bloque: Producción audiovisual",
-       desc:"Nos convertimos en un equipo de cine. Pasamos por todas las fases de una producción real: de la idea al guion, del storyboard al rodaje, del montaje al estreno. Cada persona asume un rol, y al final estrenamos los cortos en un pequeño festival del colegio.",
-       criterios:["1.4","2.4","3.1","3.2","3.3","4.1","4.2","4.3","4.4"],
-       producto:"Cortometraje de ficción de 2 a 4 minutos, su cartel y su tráiler, estrenados en el festival de cortos del colegio.",
-       anexos:["labCV","labCR"],
+      {id:"lab-croma", etiqueta:"Proyecto 3 · 3.er trimestre", titulo:"¡Anúncialo!", subtitulo:"Publicidad y efectos de croma",
+       cita:["La publicidad es el arte de convencer en pocos segundos.",""],
+       bloque:"Bloques: Fundamentos del lenguaje audiovisual · Difusión",
+       desc:"Descubrimos cómo nos convence la publicidad y la usamos para algo útil: un anuncio para la jornada de puertas abiertas del colegio o una campaña sobre una causa que nos importe. Grabamos con fondo verde y, gracias al croma, nos teletransportamos a cualquier lugar. Completamos la campaña con un cartel.",
+       criterios:["1.1","1.3","1.4","2.2","2.3","2.4","4.1","4.2","4.3","4.4"],
+       producto:"Anuncio de 30 a 60 segundos grabado con croma y cartel de la campaña.",
+       anexos:["labAV","labAR"],
        teoria:`
-        <h3>Las fases de una producción</h3>
+        <h3>¿Qué es la publicidad?</h3>
+        <p>Es la comunicación que busca que hagamos algo: comprar un producto, ir a un sitio o cambiar un hábito. Cuando no vende un producto sino una idea (reciclar, no hacer ciberacoso) se llama <b>campaña de concienciación</b> o publicidad social.</p>
+        <h3>Cómo nos convence un anuncio</h3>
+        <div class="defs">
+          <div><b>Emoción</b><p>Nos hace reír, emocionarnos o sentir que pertenecemos a algo.</p></div>
+          <div><b>Eslogan</b><p>Una frase corta y fácil de recordar.</p></div>
+          <div><b>Música</b><p>Pegadiza: hace que recordemos el anuncio.</p></div>
+          <div><b>Personajes</b><p>Gente con la que nos identificamos o a la que admiramos.</p></div>
+          <div><b>Llamada a la acción</b><p>Lo que quieren que hagamos: «ven», «prueba», «comparte».</p></div>
+        </div>
+        <p>Un público crítico detecta los trucos: exageraciones, estereotipos o promesas imposibles. La publicidad debe ser veraz y respetar a todas las personas.</p>
+        <h3>Estructura de un anuncio</h3>
         <ol class="steps4">
-          <li><b>Preproducción:</b> todo lo que se prepara antes de grabar. Idea, guion, storyboard, reparto de roles, localizaciones, vestuario y plan de rodaje.</li>
-          <li><b>Producción o rodaje:</b> grabar las imágenes y los sonidos.</li>
-          <li><b>Postproducción:</b> montaje, sonido, música, títulos y créditos.</li>
-          <li><b>Difusión:</b> cartel, tráiler y estreno.</li>
+          <li><b>Gancho:</b> en los primeros segundos hay que captar la atención.</li>
+          <li><b>Mensaje:</b> qué ofrecemos o qué idea defendemos.</li>
+          <li><b>Prueba o ejemplo:</b> lo mostramos, no solo lo decimos.</li>
+          <li><b>Cierre:</b> eslogan, llamada a la acción y logotipo.</li>
         </ol>
-        <h3>Del guion literario al guion técnico</h3>
-        <div class="defs">
-          <div><b>Idea y sinopsis</b><p>La historia contada en una o dos frases.</p></div>
-          <div><b>Escaleta</b><p>La lista ordenada de escenas, con lo que pasa en cada una.</p></div>
-          <div><b>Guion literario</b><p>Escenas con el lugar, el momento, las acciones y los diálogos.</p></div>
-          <div><b>Guion técnico</b><p>Añade cómo se graba: tipo de plano, movimiento de cámara y sonido.</p></div>
-          <div><b>Storyboard</b><p>El guion técnico dibujado en viñetas.</p></div>
-        </div>
-        <p>Una historia necesita <b>personajes</b> con un deseo, un <b>conflicto</b> que se lo pone difícil y una resolución. Una <b>escena</b> ocurre en un mismo lugar y tiempo; una <b>secuencia</b> es un grupo de escenas con unidad; un <b>plano</b> es lo que se graba sin cortar.</p>
-        <h3>Los planos</h3>
-        <div class="defs">
-          <div><b>Plano general</b><p>Muestra el lugar y a los personajes enteros: sitúa.</p></div>
-          <div><b>Plano medio</b><p>De la cintura hacia arriba: conversaciones.</p></div>
-          <div><b>Primer plano</b><p>La cara: emociones.</p></div>
-          <div><b>Plano detalle</b><p>Un objeto o una parte: llama la atención.</p></div>
-        </div>
-        <p>El <b>ángulo</b> también cuenta: en <b>picado</b> (desde arriba) el personaje parece pequeño o débil; en <b>contrapicado</b> (desde abajo), grande o poderoso.</p>
-        <h3>Los roles del equipo</h3>
+        <h3>El croma</h3>
+        <p>Se graba a una persona delante de un fondo de un solo color, normalmente <b>verde</b>. El programa de edición borra ese color y lo sustituye por otra imagen o vídeo. Así se hacen el tiempo de la televisión y muchos efectos de cine. En iMovie se pone el vídeo grabado encima del fondo y se elige el efecto <b>pantalla verde/azul</b>.</p>
         <ul>
-          <li><b>Dirección:</b> decide cómo se cuenta la historia y coordina.</li>
-          <li><b>Guion:</b> escribe y revisa la historia.</li>
-          <li><b>Cámara y fotografía:</b> encuadres, movimientos y luz.</li>
-          <li><b>Sonido:</b> que se entienda todo y sin ruidos.</li>
-          <li><b>Producción y arte:</b> localizaciones, vestuario, objetos y plan de rodaje.</li>
-          <li><b>Montaje:</b> une los planos y da ritmo.</li>
-          <li><b>Interpretación:</b> los actores y actrices.</li>
+          <li>El fondo tiene que estar <b>bien iluminado y sin arrugas ni sombras</b>.</li>
+          <li>Nadie puede llevar <b>ropa verde</b>: ¡desaparecería!</li>
+          <li>La persona, un poco separada del fondo para no proyectar sombra.</li>
+          <li>El fondo nuevo debe encajar en luz y perspectiva con la persona.</li>
         </ul>
-        <h3>El montaje</h3>
-        <p>Montar es elegir qué tomas valen, ordenarlas y decidir cuánto dura cada plano. El ritmo cambia la emoción: planos cortos dan tensión; planos largos, calma. En el editor de vídeo (iMovie, CapCut u OpenShot) se trabaja en una <b>línea de tiempo</b> con pistas de vídeo, voz, música y texto.</p>
-        <h3>Difundir con responsabilidad</h3>
-        <ul>
-          <li><b>Cartel y tráiler:</b> despiertan las ganas de ver la película sin contar el final.</li>
-          <li><b>Derechos de imagen:</b> solo aparece en cámara quien tiene autorización, y los cortos se comparten solo en los canales que el colegio permita.</li>
-          <li><b>Licencias:</b> música y recursos libres, citados en los créditos. Tu corto también puede llevar una licencia Creative Commons.</li>
-        </ul>
-        <h3>Nuestro patrimonio audiovisual</h3>
-        <p>La Comunitat Valenciana tiene una gran tradición: el director valenciano <b>Luis García Berlanga</b> es uno de los grandes del cine español, y en Valencia se celebran festivales de cine joven en los que participan centros educativos.</p>`,
+        <h3>El cartel</h3>
+        <p>Un buen cartel se entiende en tres segundos: una <b>imagen</b> potente, un <b>titular</b> corto, la información justa y el <b>logotipo</b>. Usa como mucho dos tipografías, colores que contrasten y deja espacio libre para que respire.</p>
+        <h3>Profesiones del audiovisual</h3>
+        <p>Detrás de un anuncio trabajan creativos, guionistas, directores, cámaras, editores, diseñadores gráficos, músicos y expertos en redes sociales. Muchas de estas profesiones se pueden estudiar en ciclos formativos y en la universidad.</p>`,
        tareas:[
-        {n:1, t:"Analizamos un corto", html:"<p>Vemos en clase un cortometraje. Analízalo: género, personajes, conflicto, tipos de plano que reconoces, papel de la música y qué emoción quiere transmitir.</p>", evalua:"labCR"},
-        {n:2, t:"La idea", html:"<p>Cada persona propone una idea en una frase. En equipo, elegid una con una técnica creativa (por ejemplo, votar y mezclar las dos favoritas). Escribid la sinopsis y la escaleta.</p>", evalua:"labCR"},
-        {n:3, t:"Guion y storyboard", html:"<p>Escribid el guion literario y, a partir de él, el guion técnico y el storyboard con el tipo de plano de cada toma.</p>", entrega:"Guion y storyboard por Teams", evalua:"labCR"},
-        {n:4, t:"Preproducción", html:"<p>Repartid los roles de forma que todos tengan responsabilidades. Preparad localizaciones dentro del colegio, vestuario, objetos y un plan de rodaje: qué se graba cada día y qué hace falta.</p>", entrega:"Plan de rodaje", evalua:"labCR"},
-        {n:5, t:"Rodaje", html:"<p>Grabad siguiendo el plan. Antes de cada toma: silencio, cámara estable y sonido comprobado. Grabad cada plano al menos dos veces. Solo actúan quienes tienen autorización de imagen; quien no la tenga asume otro rol.</p>", evalua:"labCR"},
-        {n:6, t:"Montaje", html:"<p>Montad el corto en el editor de vídeo: seleccionad las mejores tomas, ajustad el ritmo, mezclad voces, música y efectos y añadid títulos y créditos con las licencias.</p>", entrega:"Cortometraje por Teams", evalua:"labCV"},
-        {n:7, t:"Cartel y tráiler", html:"<p>Diseñad el cartel del corto (título, imagen, créditos principales y una frase gancho) y un tráiler de 20 a 30 segundos que no cuente el final.</p>", evalua:"labCR"},
-        {n:8, t:"Festival y valoración", html:"<p>Estreno en el festival de cortos del colegio. Después, cada persona rellena su valoración: qué ha aportado en su rol, qué aprendió, qué mejoraría y una opinión constructiva sobre otro corto.</p>", entrega:"Valoración individual por Teams", evalua:"labCR"}
+        {n:1, t:"Desmontamos anuncios", html:"<p>Analiza dos anuncios: uno comercial y una campaña de concienciación. ¿A quién se dirigen?, ¿qué emoción buscan?, ¿cuál es el eslogan?, ¿qué trucos usan?, ¿hay algún estereotipo?</p>", evalua:"labAR"},
+        {n:2, t:"Elegimos campaña", html:"<p>En equipo, elegid el encargo: un anuncio para la jornada de puertas abiertas del colegio o una campaña sobre una causa (convivencia, medio ambiente, uso responsable del móvil…). Definid el público, el mensaje y el eslogan.</p>", evalua:"labAR"},
+        {n:3, t:"Guion y storyboard", html:"<p>Escribid el guion del anuncio con su gancho, mensaje, prueba y cierre, y dibujad el storyboard indicando qué planos se graban con croma y qué fondo irá detrás.</p>", entrega:"Guion y storyboard por Teams", evalua:"labAR"},
+        {n:4, t:"Prueba de croma", html:"<p>Haced una prueba rápida: grabad a alguien delante del fondo verde y sustituid el fondo en iMovie. Detectad los problemas (sombras, bordes verdes, ropa) y apuntad cómo evitarlos.</p>", evalua:"labAR"},
+        {n:5, t:"Fondos y música", html:"<p>Preparad los fondos (fotos o vídeos propios o con licencia libre) y la música del anuncio en GarageBand.</p>", evalua:"labAR"},
+        {n:6, t:"Rodaje y montaje", html:"<p>Grabad las tomas con croma y el resto de planos, y montad el anuncio en iMovie: fondos, música, textos, eslogan y logotipo. Entre 30 y 60 segundos. Solo sale en cámara quien tiene autorización de imagen.</p>", entrega:"Anuncio por Teams", evalua:"labAV"},
+        {n:7, t:"El cartel", html:"<p>Diseñad en Canva o Keynote el cartel de la campaña, coherente con el anuncio: imagen, titular, información y logotipo.</p>", entrega:"Cartel por Teams", evalua:"labAR"},
+        {n:8, t:"Presentación y votación", html:"<p>Presentamos las campañas a la clase, que vota el anuncio más convincente. Si el colegio lo aprueba, los mejores se usarán en sus canales oficiales.</p>", evalua:"labAR"}
        ],
        items:[
-        {tipo:"interactiva", t:"Repaso: hacemos cine", s:"8 preguntas con informe de repaso.", quiz:"labcorto"}
+        {tipo:"interactiva", t:"Repaso: publicidad y croma", s:"8 preguntas con informe de repaso.", quiz:"labcroma"}
        ]}
     ],
     norma:"currículo de Laboratorio de Creación Audiovisual",
@@ -2096,6 +2095,36 @@ const MATERIAS = [
    ANEXOS DE EVALUACIÓN (rúbricas, listas de control, escalas)
    ============================================================ */
 const ANEXOS = {
+  labKV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Juguete óptico</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.2</td><td>5 %</td></tr>
+    <tr><th>Público, cuento y storyboard</th><td>2–3</td><td>Rúbrica (Anexo 2): fila B</td><td>1.3 · 2.1 · 3.1</td><td>20 %</td></tr>
+    <tr><th>Dibujos y animación</th><td>4–5</td><td>Rúbrica (Anexo 2): fila C</td><td>2.2 · 2.4</td><td>30 %</td></tr>
+    <tr><th>Voces, música y montaje</th><td>6–7</td><td>Rúbrica (Anexo 2): fila D</td><td>2.2 · 2.4</td><td>20 %</td></tr>
+    <tr><th>Trabajo en equipo y estreno</th><td>3–8</td><td>Rúbrica (Anexo 2): fila E</td><td>3.2 · 4.1 · 4.3</td><td>20 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>1.2</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  labKR:{titulo:"Anexo 2. Rúbrica del cuento animado", para:"tareas 1 a 8", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Juguete óptico<span class="crit">1.2</span></th><td>Funciona y explicas bien por qué.</td><td>Funciona con explicación breve.</td><td>Funciona a medias.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Cuento y storyboard<span class="crit">1.3 · 2.1 · 3.1</span></th><td>Historia adaptada a su público, con planteamiento, nudo y desenlace, personajes diversos y storyboard completo.</td><td>Correctos.</td><td>Historia poco adecuada o storyboard incompleto.</td><td>Sin preparación.</td></tr>
+    <tr><th>C. Dibujos y animación<span class="crit">2.2 · 2.4</span></th><td>Dibujos cuidados y movimientos variados (mover a, movimiento mágico) con buen ritmo.</td><td>Animación correcta.</td><td>Pocos movimientos o ritmo confuso.</td><td>Sin animación.</td></tr>
+    <tr><th>D. Sonido y montaje<span class="crit">2.2 · 2.4</span></th><td>Voces claras y expresivas, música propia para cada ambiente, efectos y créditos.</td><td>Sonido y montaje correctos.</td><td>La voz no se entiende bien o faltan créditos.</td><td>Sin sonido.</td></tr>
+    <tr><th>E. Equipo y estreno<span class="crit">3.2 · 4.1 · 4.3</span></th><td>Cumples tu rol, participas en el estreno con los peques y valoras con propuestas de mejora.</td><td>Cumples tu rol.</td><td>Participación irregular.</td><td>No participas.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  labAV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Análisis de anuncios</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1 · 1.3 · 1.4</td><td>15 %</td></tr>
+    <tr><th>Campaña, guion y storyboard</th><td>2–3</td><td>Rúbrica (Anexo 2): fila B</td><td>2.4 · 4.1</td><td>20 %</td></tr>
+    <tr><th>Croma y anuncio</th><td>4–6</td><td>Rúbrica (Anexo 2): fila C</td><td>2.2 · 2.3 · 4.2</td><td>35 %</td></tr>
+    <tr><th>Cartel</th><td>7</td><td>Rúbrica (Anexo 2): fila D</td><td>4.1</td><td>15 %</td></tr>
+    <tr><th>Presentación</th><td>8</td><td>Rúbrica (Anexo 2): fila E</td><td>4.3 · 4.4</td><td>10 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>4.4</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  labAR:{titulo:"Anexo 2. Rúbrica del anuncio", para:"tareas 1 a 8", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Análisis<span class="crit">1.1 · 1.3 · 1.4</span></th><td>Detectas público, emoción, eslogan, trucos y estereotipos con vocabulario correcto.</td><td>Análisis correcto.</td><td>Análisis superficial.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Campaña y guion<span class="crit">2.4 · 4.1</span></th><td>Mensaje claro para su público, eslogan potente y guion con gancho, mensaje, prueba y cierre.</td><td>Correctos.</td><td>Mensaje confuso.</td><td>Sin guion.</td></tr>
+    <tr><th>C. Croma y montaje<span class="crit">2.2 · 2.3 · 4.2</span></th><td>Croma limpio, fondos que encajan, buen ritmo y recursos con licencia citados.</td><td>Correcto con algún fallo de croma.</td><td>Croma con muchos fallos o sin créditos.</td><td>No se entrega.</td></tr>
+    <tr><th>D. Cartel<span class="crit">4.1</span></th><td>Se entiende en tres segundos y es coherente con el anuncio.</td><td>Correcto.</td><td>Recargado o poco claro.</td><td>No se entrega.</td></tr>
+    <tr><th>E. Presentación<span class="crit">4.3 · 4.4</span></th><td>Explicas la campaña con la terminología audiovisual y valoras las demás con respeto.</td><td>Presentación correcta.</td><td>Presentación pobre.</td><td>No se presenta.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   labPV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
     <tr><th>Infografía de los planos</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1 · 1.2</td><td>15 %</td></tr>
     <tr><th>Fotos de los planos</th><td>2</td><td>Rúbrica (Anexo 2): fila B</td><td>1.2 · 2.3</td><td>15 %</td></tr>
@@ -2110,38 +2139,6 @@ const ANEXOS = {
     <tr><th>C. Tráiler<span class="crit">2.1 · 2.3</span></th><td>Planos adecuados en cada hueco, títulos que crean intriga y ritmo cuidado.</td><td>Tráiler correcto.</td><td>Planos poco adecuados o títulos flojos.</td><td>No se entrega.</td></tr>
     <tr><th>D. Tu rol en el corto<span class="crit">2.4 · 3.1 · 3.2</span></th><td>Cumples tu función con responsabilidad, aportas ideas y ayudas al resto.</td><td>Cumples tu función.</td><td>Participación irregular.</td><td>No participas.</td></tr>
     <tr><th>E. Corto y valoración<span class="crit">3.2 · 4.2</span></th><td>Valoras con sinceridad tu trabajo y el del grupo, con propuestas de mejora, y respetas los derechos de autor e imagen.</td><td>Valoración correcta.</td><td>Valoración muy breve.</td><td>No se entrega.</td></tr>
-    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
-  labSV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
-    <tr><th>Juguetes ópticos y primeros fotogramas</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>1.2 · 2.2</td><td>15 %</td></tr>
-    <tr><th>Personajes, guion y storyboard</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>2.1 · 3.1</td><td>20 %</td></tr>
-    <tr><th>Animación</th><td>5</td><td>Rúbrica (Anexo 2): fila C</td><td>2.3 · 2.4</td><td>25 %</td></tr>
-    <tr><th>Sonido y montaje</th><td>6</td><td>Rúbrica (Anexo 2): fila D</td><td>2.3</td><td>15 %</td></tr>
-    <tr><th>Trabajo en equipo y valoración</th><td>3–7</td><td>Rúbrica (Anexo 2): fila E</td><td>3.2</td><td>20 %</td></tr>
-    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>1.2</td><td>5 %</td></tr>
-    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
-  labSR:{titulo:"Anexo 2. Rúbrica de la animación", para:"tareas 1 a 7", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
-    <tr><th>A. Experimentar<span class="crit">1.2 · 2.2</span></th><td>Juguetes ópticos que funcionan y explicas por qué; calculas bien los fotogramas.</td><td>Funcionan con explicación breve.</td><td>Funcionan a medias.</td><td>No se entregan.</td></tr>
-    <tr><th>B. Historia y storyboard<span class="crit">2.1 · 3.1</span></th><td>Historia con planteamiento, nudo y desenlace, personajes con carácter y storyboard completo; roles repartidos.</td><td>Historia y storyboard correctos.</td><td>Historia sin conflicto o storyboard incompleto.</td><td>Sin preparación.</td></tr>
-    <tr><th>C. Animación<span class="crit">2.3 · 2.4</span></th><td>Movimientos suaves, cámara y luz estables y los personajes transmiten emociones.</td><td>Animación correcta con algún salto.</td><td>Muchos saltos o parpadeos.</td><td>Sin animación.</td></tr>
-    <tr><th>D. Sonido y montaje<span class="crit">2.3</span></th><td>Efectos de sala propios, música adecuada, títulos y créditos.</td><td>Sonido y montaje correctos.</td><td>Sonido pobre o sin créditos.</td><td>Sin sonido.</td></tr>
-    <tr><th>E. Equipo y valoración<span class="crit">3.2</span></th><td>Cumples tu rol con responsabilidad y valoras con respeto y propuestas concretas.</td><td>Cumples tu rol.</td><td>Participación irregular.</td><td>No participas.</td></tr>
-    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
-  labCV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
-    <tr><th>Análisis de un corto</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.4 · 4.4</td><td>10 %</td></tr>
-    <tr><th>Idea, guion y storyboard</th><td>2–3</td><td>Rúbrica (Anexo 2): fila B</td><td>2.4 · 3.1</td><td>20 %</td></tr>
-    <tr><th>Preproducción y rodaje</th><td>4–5</td><td>Rúbrica (Anexo 2): fila C</td><td>3.1 · 3.2</td><td>20 %</td></tr>
-    <tr><th>Montaje</th><td>6</td><td>Rúbrica (Anexo 2): fila D</td><td>2.4 · 4.2</td><td>20 %</td></tr>
-    <tr><th>Cartel y tráiler</th><td>7</td><td>Rúbrica (Anexo 2): fila E</td><td>4.1</td><td>10 %</td></tr>
-    <tr><th>Festival y valoración</th><td>8</td><td>Rúbrica (Anexo 2): fila F</td><td>3.3 · 4.3</td><td>15 %</td></tr>
-    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>4.4</td><td>5 %</td></tr>
-    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
-  labCR:{titulo:"Anexo 2. Rúbrica del cortometraje", para:"tareas 1 a 8", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
-    <tr><th>A. Análisis<span class="crit">1.4 · 4.4</span></th><td>Análisis completo con el vocabulario audiovisual correcto.</td><td>Análisis correcto.</td><td>Análisis superficial.</td><td>No se entrega.</td></tr>
-    <tr><th>B. Guion y storyboard<span class="crit">2.4 · 3.1</span></th><td>Historia con conflicto, guion literario y técnico coherentes y storyboard con planos variados.</td><td>Correctos con algún apartado flojo.</td><td>Incompletos.</td><td>Sin guion.</td></tr>
-    <tr><th>C. Preproducción y rodaje<span class="crit">3.1 · 3.2</span></th><td>Plan de rodaje cumplido, roles bien repartidos y tomas cuidadas.</td><td>Rodaje correcto con algún imprevisto.</td><td>Rodaje desorganizado.</td><td>No se rueda.</td></tr>
-    <tr><th>D. Montaje<span class="crit">2.4 · 4.2</span></th><td>Buen ritmo, sonido claro, música adecuada, títulos y créditos con licencias.</td><td>Montaje correcto.</td><td>Ritmo o sonido deficientes.</td><td>Sin montaje.</td></tr>
-    <tr><th>E. Cartel y tráiler<span class="crit">4.1</span></th><td>Atractivos, coherentes con el corto y sin desvelar el final.</td><td>Correctos.</td><td>Poco cuidados.</td><td>No se entregan.</td></tr>
-    <tr><th>F. Festival y valoración<span class="crit">3.3 · 4.3</span></th><td>Participas en el estreno y valoras tu trabajo y el de otros de forma constructiva.</td><td>Valoración correcta.</td><td>Valoración pobre.</td><td>No participas.</td></tr>
     </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   p2cV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
     <tr><th>Primeros programas y sensores</th><td>1–3</td><td>Rúbrica (Anexo 2): fila A</td><td>3.2 · 3.5</td><td>15 %</td></tr>
@@ -2546,6 +2543,26 @@ ANEXOS.t3inf = {titulo:"Anexo 2. Rúbrica de la infografía", para:"tarea 1", ht
    FICHAS INTERACTIVAS
    ============================================================ */
 const QUIZZES = {
+  labcuento:{titulo:"Repaso: animación", preguntas:[
+    {q:"¿Por qué vemos movimiento en una animación?", o:["Porque las imágenes se mueven de verdad","Porque el cerebro une imágenes fijas muy seguidas","Por la música"], a:1, f:"Es la persistencia de la visión."},
+    {q:"¿Cuántos fotogramas por segundo proyecta el cine?", o:["12","24","60"], a:1, f:"24 fps es el estándar del cine."},
+    {q:"¿Qué juguete óptico es un disco con un dibujo a cada lado?", o:["Taumatropo","Zoótropo","Flipbook"], a:0, f:"Al girarlo, los dos dibujos parecen uno."},
+    {q:"Mover por separado la cabeza, los brazos y las piernas de un personaje es animación de…", o:["Recortes","Stop motion","3D"], a:0, f:"Por eso dibujamos los personajes por partes."},
+    {q:"En Keynote, el mismo objeto en dos diapositivas en distinta posición se anima solo con…", o:["Movimiento mágico","Disolver","Cubo"], a:0, f:"Keynote crea el movimiento entre una y otra."},
+    {q:"¿Qué cuento es más adecuado para niños de 4 años?", o:["Muchos personajes y un final abierto","Pocos personajes, frases cortas y un problema claro","Un cuento de miedo"], a:1, f:"Hay que pensar siempre en el público."},
+    {q:"La música tapa la voz del narrador. ¿Qué haces?", o:["Subo la música","Bajo el volumen de la música en esas partes","Quito la voz"], a:1, f:"La voz tiene que entenderse siempre."},
+    {q:"Un vídeo «oculto» en YouTube…", o:["Lo puede encontrar cualquiera en el buscador","Solo lo ve quien tiene el enlace","No lo puede ver nadie"], a:1, f:"Por eso lo usamos para compartirlo con las familias y el colegio."}
+  ]},
+  labcroma:{titulo:"Repaso: publicidad y croma", preguntas:[
+    {q:"Un anuncio que no vende un producto sino una idea es…", o:["Una campaña de concienciación","Un tráiler","Un documental"], a:0, f:"También se llama publicidad social."},
+    {q:"Una frase corta y fácil de recordar de un anuncio es el…", o:["Eslogan","Guion técnico","Gancho"], a:0, f:"Por ejemplo, el lema de una campaña."},
+    {q:"¿Qué debe pasar en los primeros segundos de un anuncio?", o:["Los créditos","Captar la atención con un gancho","El logotipo"], a:1, f:"Si no enganchas al principio, el público se va."},
+    {q:"«Ven a conocernos el sábado» es…", o:["Una llamada a la acción","Un estereotipo","Un plano detalle"], a:0, f:"Dice al público qué tiene que hacer."},
+    {q:"¿Qué hace el croma?", o:["Cambia el color de la ropa","Sustituye un fondo de un solo color por otra imagen","Mejora el sonido"], a:1, f:"El programa borra el verde y pone otro fondo."},
+    {q:"¿Por qué nadie debe llevar ropa verde delante del croma?", o:["Porque queda feo","Porque desaparecería junto con el fondo","Porque no se graba"], a:1, f:"El programa borra todo lo que sea de ese color."},
+    {q:"Para que el croma salga limpio, el fondo debe estar…", o:["Arrugado y en penumbra","Bien iluminado, liso y sin sombras","Pegado a la persona"], a:1, f:"Las sombras y arrugas crean bordes raros."},
+    {q:"Un buen cartel…", o:["Usa muchas tipografías y mucho texto","Se entiende en tres segundos","No lleva imagen"], a:1, f:"Imagen potente, titular corto y la información justa."}
+  ]},
   labpostal:{titulo:"Repaso: planos y sonido", preguntas:[
     {q:"¿Qué plano usarías para mostrar la emoción de un personaje?", o:["Plano general","Primer plano","Gran plano general"], a:1, f:"El primer plano muestra la cara."},
     {q:"Un plano que muestra al personaje desde la cintura hacia arriba es…", o:["Plano medio","Plano americano","Plano detalle"], a:0, f:"Ideal para conversaciones."},
@@ -2555,26 +2572,6 @@ const QUIZZES = {
     {q:"¿Qué no debe hacer nunca un tráiler?", o:["Mostrar personajes","Contar el final","Usar música"], a:1, f:"Debe crear intriga."},
     {q:"Imitar sonidos con objetos para añadirlos al vídeo se llama…", o:["Efectos de sala (foley)","Doblaje","Montaje"], a:0, f:"Por ejemplo, arrugar papel para imitar el fuego."},
     {q:"¿Podemos subir a YouTube nuestra adaptación de Del Revés 2?", o:["Sí, la hemos hecho nosotros","No: los personajes tienen derechos de autor; es un ejercicio de clase","Sí, si ponemos el título original"], a:1, f:"Las adaptaciones de obras protegidas se quedan en el ámbito del aula."}
-  ]},
-  labstop:{titulo:"Repaso: animación", preguntas:[
-    {q:"¿Por qué vemos movimiento en una animación?", o:["Porque las imágenes se mueven de verdad","Porque el cerebro une imágenes fijas muy seguidas","Por la música"], a:1, f:"Es la persistencia de la visión."},
-    {q:"¿Cuántos fotogramas por segundo proyecta el cine?", o:["12","24","60"], a:1, f:"24 fps es el estándar del cine."},
-    {q:"Animas a 12 fps. ¿Cuántas fotos necesitas para 5 segundos?", o:["17","60","120"], a:1, f:"12 × 5 = 60 fotos."},
-    {q:"¿Qué juguete óptico es un disco con un dibujo a cada lado?", o:["Taumatropo","Zoótropo","Flipbook"], a:0, f:"Al girarlo rápido, los dos dibujos parecen uno."},
-    {q:"Tu animación parpadea. ¿Qué ha pasado probablemente?", o:["La luz ha cambiado entre fotos","La música es mala","Hay demasiadas monedas"], a:0, f:"Usa luz artificial constante, no la del sol."},
-    {q:"Para que una moneda se mueva más rápido en pantalla…", o:["La mueves más entre foto y foto","La mueves menos","Haces más fotos iguales"], a:0, f:"Más distancia por fotograma = más velocidad."},
-    {q:"¿Qué es el papel cebolla en una app de stop motion?", o:["Un tipo de decorado","Ver la foto anterior transparente","Un filtro de color"], a:1, f:"Ayuda a calcular el siguiente movimiento."},
-    {q:"Imitar sonidos con objetos para añadirlos después se llama…", o:["Efectos de sala (foley)","Doblaje","Montaje"], a:0, f:"Por ejemplo, dejar caer una moneda de verdad junto al micrófono."}
-  ]},
-  labcorto:{titulo:"Repaso: hacemos cine", preguntas:[
-    {q:"Escribir el guion y preparar el rodaje forma parte de la…", o:["Preproducción","Producción","Postproducción"], a:0, f:"Todo lo que se prepara antes de grabar."},
-    {q:"¿Qué añade el guion técnico al guion literario?", o:["Los diálogos","Cómo se graba cada toma: planos, cámara y sonido","El cartel"], a:1, f:"Es el guion pensado para la cámara."},
-    {q:"Para mostrar la emoción de un personaje, ¿qué plano usarías?", o:["Plano general","Primer plano","Plano detalle de un zapato"], a:1, f:"El primer plano muestra la cara."},
-    {q:"Una cámara que graba desde abajo hace que el personaje parezca…", o:["Pequeño y débil","Grande y poderoso","Lejano"], a:1, f:"Es un contrapicado."},
-    {q:"¿Qué es el storyboard?", o:["El guion dibujado en viñetas","La lista de actores","El cartel de la película"], a:0, f:"Permite ver la película antes de rodarla."},
-    {q:"¿Quién une los planos y da ritmo a la película?", o:["Montaje","Producción","Sonido"], a:0, f:"Montar es elegir, ordenar y decidir cuánto dura cada plano."},
-    {q:"¿Qué debe evitar un buen tráiler?", o:["Mostrar a los personajes","Contar el final","Poner música"], a:1, f:"Tiene que despertar las ganas de verla."},
-    {q:"Un compañero no tiene autorización de imagen. ¿Qué hacéis?", o:["Sale igualmente","Asume otro rol que no sea delante de la cámara","Se le difumina después"], a:1, f:"Hay muchos roles importantes detrás de la cámara."}
   ]},
   p2reparto:{titulo:"Repaso: robots de reparto", preguntas:[
     {q:"En el robot de reparto, ¿qué hace la micro:bit?", o:["Es el cerebro que ejecuta el programa","Mueve las ruedas","Mide la distancia"], a:0, f:"El Maqueen es el cuerpo; la micro:bit le da las órdenes."},
