@@ -966,27 +966,453 @@ const MATERIAS = [
   },
   {
     id:"piayr-2", nombre:"Programación, IA y Robótica I", corto:"PIAyR I", nivel:"2.º ESO", color:"#e08a00",
-    intro:"Proyecto «Carrera de saltadores» con LEGO SPIKE: diseñamos, programamos y mejoramos un robot que salta.",
+    intro:"Una parte por trimestre: aprendemos a pensar como una máquina y creamos nuestro primer videojuego, construimos y programamos un robot saltador, y enseñamos a una máquina a reconocer el mundo. Cerramos el curso con nuestro propio programa de televisión tecnológico.",
+    presentacion:{
+      cita:"Programar no es mandar: es dar instrucciones claras.",
+      texto:"Los ordenadores, los robots y la inteligencia artificial no son magia: hacen exactamente lo que alguien les ha enseñado a hacer. En esta materia pasamos de usar la tecnología a crearla. Aprendemos haciendo, probando, equivocándonos y mejorando, siempre en equipo y pensando en a quién ayuda lo que construimos.",
+      bloques:["Programación","Robótica","Inteligencia artificial","Retos tecnológicos en equipo"]
+    },
     unidades:[
-      {titulo:"Carrera de saltadores", desc:"Empezamos en noviembre. Montaje, primeros programas y pruebas de salto.",
+      {id:"p2-prog", etiqueta:"Situación de aprendizaje 1 · 1.er trimestre", titulo:"Piensa como una máquina", subtitulo:"De los algoritmos en papel a nuestro primer videojuego",
+       cita:["Todo el mundo debería aprender a programar, porque te enseña a pensar.","Steve Jobs"],
+       bloque:"Bloque: Programación",
+       desc:"Una máquina no sabe lo que quieres decir: solo hace lo que le dices. Empezamos sin ordenador, escribiendo instrucciones para que una máquina resuelva problemas reales, aprendemos a representarlas con diagramas de flujo y las convertimos en programas de Scratch hasta crear un videojuego propio que otros puedan probar y mejorar.",
+       criterios:["2.1","2.2","2.3","2.4","2.5","4.1","4.4"],
+       producto:"Videojuego propio en Scratch, probado por otro equipo, corregido y publicado con sus créditos y su licencia.",
+       anexos:["p2pV","p2pR"],
+       teoria:`
+        <h3>El pensamiento computacional</h3>
+        <p>Es la forma de pensar que usamos para resolver un problema de manera que una máquina pueda ejecutar la solución. Tiene cuatro habilidades:</p>
+        <div class="defs">
+          <div><b>Descomposición</b><p>Dividir un problema grande en partes pequeñas y manejables.</p></div>
+          <div><b>Patrones</b><p>Detectar lo que se repite para resolverlo una sola vez y reutilizarlo.</p></div>
+          <div><b>Abstracción</b><p>Quedarse con lo importante e ignorar los detalles que no influyen.</p></div>
+          <div><b>Algoritmo</b><p>Escribir los pasos exactos que llevan a la solución.</p></div>
+        </div>
+        <h3>¿Qué es un algoritmo?</h3>
+        <p>Un <b>algoritmo</b> es una secuencia de instrucciones que resuelve un problema. Para que una máquina pueda seguirlo, tiene que ser:</p>
+        <ul>
+          <li><b>Ordenado:</b> cada paso va en su sitio. Si cambias el orden, cambia el resultado.</li>
+          <li><b>Preciso:</b> sin dudas ni ambigüedades. «Gira un poco» no sirve; «gira 90 grados a la derecha», sí.</li>
+          <li><b>Finito:</b> tiene que terminar.</li>
+        </ul>
+        <p>Un <b>programa</b> es un algoritmo escrito en un lenguaje que la máquina entiende. Cuando el programa no hace lo que esperábamos tiene un <b>error</b> (en inglés, <i>bug</i>). Buscarlo y corregirlo se llama <b>depurar</b>. Equivocarse forma parte de programar.</p>
+        <h3>Diagramas de flujo</h3>
+        <p>Sirven para dibujar un algoritmo antes de programarlo. Cada forma tiene un significado:</p>
+        <div class="defs">
+          <div><b>Óvalo</b><p>Inicio y fin.</p></div>
+          <div><b>Rectángulo</b><p>Una acción: «encender la luz», «moverse 10 pasos».</p></div>
+          <div><b>Rombo</b><p>Una decisión o pregunta con dos salidas, sí o no: «¿está oscuro?».</p></div>
+          <div><b>Paralelogramo</b><p>Entrada o salida de datos: «pedir el nombre», «mostrar la puntuación».</p></div>
+        </div>
+        <h3>Las tres estructuras de cualquier programa</h3>
+        <div class="defs">
+          <div><b>Secuencia</b><p>Instrucciones una detrás de otra, en orden.</p></div>
+          <div><b>Condición</b><p>SI ocurre algo, ENTONCES el programa hace una cosa; SI NO, hace otra. Así una máquina «decide» siguiendo reglas, sin necesidad de inteligencia artificial.</p></div>
+          <div><b>Bucle</b><p>Repetir instrucciones un número de veces, para siempre o hasta que se cumpla una condición.</p></div>
+        </div>
+        <h3>Variables y eventos</h3>
+        <ul>
+          <li>Una <b>variable</b> es una caja con nombre donde el programa guarda un dato que puede cambiar: la puntuación, las vidas, el tiempo.</li>
+          <li>Un <b>evento</b> es algo que pone en marcha un programa: pulsar la bandera verde, una tecla, hacer clic o recibir un mensaje.</li>
+          <li>Los <b>operadores</b> comparan o calculan: mayor que, menor que, igual, suma, resta, número al azar.</li>
+        </ul>
+        <h3>Scratch</h3>
+        <p>Es un lenguaje de <b>programación por bloques</b>: las instrucciones encajan como piezas y no hay errores de escritura. Lo forman el <b>escenario</b> (donde ocurre todo), los <b>objetos</b> (personajes) y los <b>programas</b> de cada objeto. Los bloques están ordenados por colores: Movimiento, Apariencia, Sonido, Eventos, Control, Sensores, Operadores y Variables.</p>
+        <h3>Probar el software</h3>
+        <p>Un programa no está terminado cuando funciona en tu ordenador, sino cuando funciona para quien lo usa. Para validarlo: pruébalo con otras personas, apunta qué hacen y qué falla, comprueba los casos raros (¿y si pulsa dos teclas a la vez?, ¿y si la puntuación llega a cero?) y corrige.</p>
+        <h3>Autoría y licencias</h3>
+        <ul>
+          <li>Todo programa, imagen o sonido tiene un autor y unos derechos. Usar lo de otros sin permiso o sin citarlo no está bien, aunque esté en internet.</li>
+          <li><b>Software propietario:</b> no puedes ver ni cambiar su código. <b>Software libre:</b> puedes usarlo, estudiarlo, modificarlo y compartirlo.</li>
+          <li>Las licencias <b>Creative Commons</b> indican qué permite el autor. Todo lo que se comparte en Scratch tiene la licencia CC BY-SA: se puede reutilizar (hacer una <i>remezcla</i>) citando al autor y compartiendo igual.</li>
+        </ul>`,
+       tareas:[
+        {n:1, t:"¿Qué sabes ya?", html:"<p>Contesta la evaluación inicial: qué es programar, un algoritmo, un robot, un sensor o la inteligencia artificial. No cuenta para la nota: sirve para saber desde dónde partimos. Guárdala, porque al final del curso la volverás a mirar.</p>"},
+        {n:2, t:"Una máquina hace exactamente lo que le dices", html:"<p>Escribe las instrucciones para que una «máquina humana» haga una tarea cotidiana (dibujar una figura, ir de la puerta a una mesa, preparar un bocadillo). Un compañero las sigue al pie de la letra, sin interpretar nada.</p><ol><li>¿Qué ha salido mal?</li><li>Reescribe el algoritmo para que sea <b>ordenado, preciso y finito</b>.</li><li>Vuelve a probarlo hasta que funcione.</li></ol>", entrega:"Algoritmo final en el cuaderno", evalua:"p2pR"},
+        {n:3, t:"Ahora la máquina puede decidir", html:"<p>Completa la ficha de condiciones: escribe reglas SI… ENTONCES… para una luz automática, un riego, una alarma de humo y una puerta automática. Después dibuja el <b>diagrama de flujo</b> de la puerta automática, con su rombo de decisión.</p>", entrega:"Ficha de condiciones", evalua:"p2pR"},
+        {n:4, t:"Nuestro primer programa en Scratch", html:"<p>Abre el editor de Scratch y supera los retos en orden. No pases al siguiente hasta comprobar que el anterior funciona:</p><ol><li><b>El gato obedece:</b> al pulsar la bandera verde dice «Hola», se mueve 50 pasos, gira 90 grados y dice el nombre de tu equipo.</li><li><b>¿Importa el orden?</b> Cambia el orden de dos bloques y explica qué cambia.</li><li><b>Control con teclas:</b> el personaje se mueve con las flechas.</li><li><b>Toma una decisión:</b> si toca el borde, dice «¡Cuidado!».</li></ol>", enlaces:[["Editor de Scratch","https://scratch.mit.edu/projects/editor/"]], evalua:"p2pR"},
+        {n:5, t:"Bucles: dibuja con el lápiz", html:"<p>Con la extensión <b>Lápiz</b>, haz que el personaje dibuje un cuadrado. Después hazlo con el bloque <b>repetir</b>: ¿cuántos bloques te has ahorrado? Dibuja un triángulo, un hexágono y una figura con 36 lados. Descubre la regla: ¿cuánto hay que girar en cada lado para un polígono de <i>n</i> lados?</p>", evalua:"p2pR"},
+        {n:6, t:"Variables: marcador y cronómetro", html:"<p>Crea un minijuego en el que el personaje atrape un objeto que aparece en un lugar al azar. Usa una variable <b>puntos</b> que suba cada vez que lo atrapas y otra <b>tiempo</b> que baje desde 30. Cuando el tiempo llegue a cero, el juego termina y muestra la puntuación.</p>", evalua:"p2pR"},
+        {n:7, t:"Diseña tu videojuego", html:"<p>Ahora el juego es vuestro. Antes de programar:</p><ol><li>Escribid la idea en tres frases: de qué trata, cómo se gana y cómo se pierde.</li><li>Descomponed el juego en partes: personajes, escenarios, controles, puntuación.</li><li>Dibujad el diagrama de flujo de la parte principal.</li></ol><p>Después programadlo. Debe tener eventos, al menos una condición, un bucle y una variable.</p>", entrega:"Ficha de diseño y enlace del proyecto por Teams", evalua:"p2pR"},
+        {n:8, t:"Cazadores de errores", html:"<p>Intercambiad los juegos con otro equipo. Jugad al juego de los demás y rellenad un <b>informe de pruebas</b>: qué funciona, qué falla, cómo provocar el error y una propuesta de mejora. Con el informe que recibáis, corregid vuestro juego y anotad qué habéis cambiado.</p>", entrega:"Informe de pruebas recibido y lista de cambios", evalua:"p2pR"},
+        {n:9, t:"Publica con tus créditos", html:"<p>Antes de compartir vuestro juego en el estudio de la clase, completad sus <b>instrucciones</b> y sus <b>notas y créditos</b>: quién lo ha hecho, qué imágenes o sonidos no son vuestros y de dónde salen. Explicad en dos frases qué significa que otra persona pueda hacer una remezcla de vuestro juego.</p>", entrega:"Proyecto publicado en el estudio de la clase", evalua:"p2pR"}
+       ],
        items:[
-        {tipo:"contenido", t:"Conocer el hub y los motores de SPIKE", s:"Puertos, motores, sensores y la app."},
-        {tipo:"actividad", t:"Primer salto", s:"Programa el motor para que el saltador avance y mide la distancia."},
-        {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"}
-       ]}
+        {tipo:"interactiva", t:"Repaso: algoritmos y Scratch", s:"8 preguntas con informe de repaso.", quiz:"p2prog"}
+       ]},
+      {id:"p2-robot", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Carrera de saltadores", subtitulo:"Un robot que corre sin ruedas",
+       cita:["Un robot no es más que una idea con motores.",""],
+       bloque:"Bloque: Robótica",
+       desc:"Vamos a construir con LEGO SPIKE un robot corredor sin ruedas que llegue a la meta lo antes posible. Empezamos viendo cómo se adapta la tecnología a cada persona, aprendemos qué es un robot y cómo se programa, y mejoramos nuestro saltador prueba a prueba hasta la gran carrera.",
+       criterios:["3.1","3.2","3.3","3.4","3.5","4.1","4.3","4.4"],
+       producto:"Robot saltador con LEGO SPIKE que compite en la carrera de la clase, con su diario de ingeniería.",
+       anexos:["p2rV","p2rR"],
+       teoria:`
+        <h3>¿Qué es un robot?</h3>
+        <p>Un <b>robot</b> es una máquina programable que percibe su entorno, toma decisiones y actúa. Se resume en tres verbos:</p>
+        <div class="defs">
+          <div><b>Percibir</b><p>Con los <b>sensores</b>: luz, color, distancia, fuerza, sonido, temperatura.</p></div>
+          <div><b>Decidir</b><p>Con el <b>controlador</b>, el «cerebro» que ejecuta el programa.</p></div>
+          <div><b>Actuar</b><p>Con los <b>actuadores</b>: motores, luces, altavoces, pantallas.</p></div>
+        </div>
+        <p>Todo ello va montado sobre una <b>estructura</b> y necesita una fuente de <b>energía</b>, normalmente una batería.</p>
+        <h3>Tipos de robots</h3>
+        <ul>
+          <li><b>Industriales:</b> brazos que sueldan, pintan o empaquetan en las fábricas.</li>
+          <li><b>Móviles:</b> se desplazan con ruedas, orugas, patas o hélices (robots aspiradora, drones, rovers).</li>
+          <li><b>De servicio:</b> ayudan a las personas: robots cirujanos, de reparto, de limpieza.</li>
+          <li><b>Humanoides y animaloides:</b> imitan la forma de personas o animales.</li>
+          <li><b>Colaborativos:</b> trabajan junto a personas de forma segura.</li>
+        </ul>
+        <h3>Grados de libertad</h3>
+        <p>Son los movimientos independientes que puede hacer un robot. Cada articulación que gira o se desplaza suma uno. Tu brazo, del hombro a la muñeca, tiene siete; un brazo industrial suele tener seis. Cuantos más grados de libertad, más movimientos puede hacer, pero más difícil es controlarlo.</p>
+        <h3>Moverse sin ruedas</h3>
+        <p>Los robots con patas transforman el giro del motor en un movimiento de ida y vuelta mediante mecanismos como la <b>biela-manivela</b> o la <b>leva</b>. Caminan mejor que las ruedas por terrenos irregulares, pero son más lentos y complejos. La forma y el tamaño de las patas, el peso y el reparto de la carga cambian mucho cómo avanza el robot.</p>
+        <h3>LEGO SPIKE</h3>
+        <div class="defs">
+          <div><b>Hub</b><p>El controlador: tiene batería, botones, matriz de luces, altavoz, sensor de giro y seis puertos (A–F) para motores y sensores.</p></div>
+          <div><b>Motores</b><p>Giran un número exacto de grados o rotaciones a la velocidad que indiques (en %). Además, saben en qué posición están.</p></div>
+          <div><b>Sensores</b><p>De color (también mide la luz), de distancia (ultrasonidos) y de fuerza (detecta si se pulsa).</p></div>
+          <div><b>App</b><p>Se programa con bloques de Scratch o con Python y se envía el programa al hub por Bluetooth o por cable.</p></div>
+        </div>
+        <h3>Programar un motor</h3>
+        <ul>
+          <li>Una <b>rotación</b> son 360 grados.</li>
+          <li>La <b>velocidad</b> va de −100 % a 100 %: el signo cambia el sentido de giro.</li>
+          <li>Puedes moverlo por <b>grados</b>, por <b>rotaciones</b>, por <b>segundos</b> o hasta que un sensor detecte algo.</li>
+        </ul>
+        <h3>Probar como un ingeniero</h3>
+        <p>Para saber qué mejora tu robot, <b>cambia una sola cosa cada vez</b> y deja todo lo demás igual. Repite cada prueba al menos tres veces, apunta los resultados en una tabla y calcula la media. Si cambias dos cosas a la vez, no sabrás cuál ha funcionado.</p>`,
+       tareas:[
+        {n:1, t:"Tecnología a la medida de cada persona", html:"<p>Mirad el vídeo sobre el ciclista paralímpico Martín Berchesi y responded en equipo: ¿qué os ha llamado la atención?, ¿en qué se diferencia su bicicleta de una convencional?, ¿qué problema resuelve cada adaptación? Estas ideas os servirán para diseñar vuestro robot.</p>", enlaces:[["Vídeo: Martín Berchesi","https://youtu.be/kgpVUwjIEek"]], entrega:"Ficha de la sesión 1", evalua:"p2rR"},
+        {n:2, t:"¿Qué es un robot?", html:"<p>Busca imágenes de cinco robots reales distintos y clasifícalos por tipo. Para cada uno indica qué sensores y actuadores crees que tiene y para qué sirve. Después cuenta los grados de libertad de tu propio brazo moviendo cada articulación.</p>", evalua:"p2rR"},
+        {n:3, t:"Conoce el SPIKE", html:"<p>Explora el kit: localiza el hub, los motores y los sensores. Conecta el hub a la app, enciende la matriz de luces con un dibujo propio y haz que suene un sonido al pulsar el botón izquierdo. Anota en el diario qué hace cada pieza.</p>", evalua:"p2rR"},
+        {n:4, t:"Primeros movimientos", html:"<p>Conecta un motor y prográmalo para que gire una rotación, luego 90 grados, luego 2 segundos. Prueba velocidades positivas y negativas. Pon una marca en el eje y comprueba que el motor hace exactamente lo que le pides.</p>", evalua:"p2rR"},
+        {n:5, t:"Montamos el saltador", html:"<p>Montad el robot saltador siguiendo la guía de la app SPIKE (lección «Carrera de saltadores»). Antes de programarlo, explicad con un dibujo cómo transforma el giro del motor en un salto o en un paso.</p>", evalua:"p2rR"},
+        {n:6, t:"Experimenta y mejora", html:"<p>Medid cuánto tarda vuestro saltador en recorrer un metro. Después elegid <b>una sola variable</b> para mejorar (la velocidad del motor, la forma o el tamaño de las patas, el peso o dónde está) y haced al menos tres pruebas con cada cambio. Apuntadlo todo en una tabla y quedaos con la mejor versión.</p>", entrega:"Tabla de pruebas en el diario", evalua:"p2rR"},
+        {n:7, t:"El robot ve la meta", html:"<p>Añadid un sensor para que el robot sea más autónomo: que arranque cuando se pulse el sensor de fuerza y que se pare solo cuando el sensor de color detecte la línea de meta. Dibujad antes el diagrama de flujo del programa.</p>", evalua:"p2rR"},
+        {n:8, t:"La gran carrera", html:"<p>¡Carrera de saltadores! Cada robot tiene dos intentos y cuenta el mejor tiempo. Las normas: el robot sale parado detrás de la línea, no se puede tocar durante la carrera y debe pararse solo en la meta.</p>", evalua:"p2rV"},
+        {n:9, t:"Diario de ingeniería", html:"<p>Completad el diario del proyecto: fotos del robot, programa final, tabla de pruebas, qué cambió y por qué, y qué haríais si tuvierais una semana más. Terminad con una reflexión: ¿dónde serían útiles los robots con patas en lugar de ruedas?, ¿a quién podrían ayudar?</p>", entrega:"Diario de ingeniería por Teams", evalua:"p2rR"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"},
+        {tipo:"interactiva", t:"Repaso: robots y robótica", s:"8 preguntas con informe de repaso.", quiz:"p2robot"}
+       ]},
+      {id:"p2-ia", etiqueta:"Situación de aprendizaje 3 · 3.er trimestre", titulo:"Enseña a una máquina", subtitulo:"Qué es la inteligencia artificial y cómo aprende",
+       cita:["La tecnología ayuda, pero pensar sigue siendo obligatorio.",""],
+       bloque:"Bloque: Inteligencia artificial",
+       desc:"La inteligencia artificial está en el móvil, en las series que te recomiendan y en el traductor. Descubrimos qué es y qué no es, en qué se diferencia de nuestra inteligencia y cómo aprende a partir de datos. Entrenamos nuestro propio modelo, buscamos sus fallos y pensamos qué usos son justos y cuáles no.",
+       criterios:["1.1","1.2","1.3","1.4","4.2"],
+       producto:"Modelo de reconocimiento entrenado con Teachable Machine, con sus pruebas, sus mejoras y un informe sobre sus sesgos.",
+       anexos:["p2iV","p2iR"],
+       teoria:`
+        <h3>¿Qué es la inteligencia artificial?</h3>
+        <p>La <b>inteligencia artificial (IA)</b> es la rama de la informática que permite a las máquinas hacer tareas que normalmente requieren inteligencia humana: reconocer imágenes, entender el lenguaje o tomar decisiones. No es un cerebro: es un programa que aprende de datos y mejora con ellos.</p>
+        <p>Ya la usas cada día: el traductor, las recomendaciones de series y música, el desbloqueo facial del móvil, el filtro de correo no deseado o los asistentes de voz.</p>
+        <h3>Tres tipos de IA</h3>
+        <div class="defs">
+          <div><b>IA débil o específica</b><p>Hace muy bien una sola tarea. Es la única que existe hoy: asistentes de voz, traductores, filtros de spam.</p></div>
+          <div><b>IA general</b><p>Podría aprender cualquier tarea como una persona. Todavía no existe.</p></div>
+          <div><b>Superinteligencia</b><p>Superaría a los humanos en todo. Es ciencia ficción y un tema de debate entre expertos.</p></div>
+        </div>
+        <h3>Aprender: personas y máquinas</h3>
+        <p>Los seres vivos aprenden con la experiencia: un bebé ve muchos perros hasta que reconoce uno nuevo. Las máquinas hacen algo parecido con el <b>aprendizaje automático</b>:</p>
+        <ol class="steps4">
+          <li><b>Datos:</b> muchos ejemplos, cada uno con su etiqueta («esto es un gato», «esto es un perro»).</li>
+          <li><b>Entrenamiento:</b> el programa busca qué tienen en común los ejemplos de cada clase.</li>
+          <li><b>Modelo:</b> lo que ha aprendido.</li>
+          <li><b>Predicción:</b> ante un ejemplo nuevo, el modelo dice a qué clase cree que pertenece y con qué seguridad.</li>
+        </ol>
+        <p>Pero la máquina no entiende lo que ve: solo encuentra patrones. Si los datos son pocos o están mal elegidos, aprenderá mal.</p>
+        <h3>Árboles de decisión y redes neuronales</h3>
+        <ul>
+          <li>Un <b>árbol de decisión</b> clasifica haciendo preguntas de sí o no, una tras otra: «¿tiene plumas?», «¿vuela?». Es fácil de entender y de dibujar.</li>
+          <li>Una <b>red neuronal</b> se inspira en las neuronas del cerebro: muchas unidades conectadas en capas que se ajustan con cada ejemplo. Son las que reconocen imágenes y voz.</li>
+          <li>El <b>big data</b> son cantidades enormes de datos. Cuantos más datos de calidad, mejor aprende una IA.</li>
+          <li>Los <b>sensores</b> (cámaras, micrófonos, acelerómetros) son los ojos y oídos con los que la IA recoge datos del mundo.</li>
+        </ul>
+        <h3>Sesgos: cuando la IA es injusta</h3>
+        <p>Un <b>sesgo</b> es un error sistemático que hace que la IA funcione mejor para unos que para otros. Casi siempre viene de los datos: si un sistema de reconocimiento facial se entrena casi solo con caras de un tipo, fallará más con las demás. La IA no es neutral: repite lo que hay en sus datos.</p>
+        <h3>Usarla con responsabilidad</h3>
+        <ul>
+          <li>La IA puede equivocarse y decirlo con total seguridad: comprueba siempre lo importante.</li>
+          <li>Protege tus datos y los de los demás: no subas fotos ni información personal de otras personas.</li>
+          <li>Hay decisiones que deben seguir tomándolas personas, sobre todo las que afectan a la vida de otros.</li>
+          <li>Si usas IA en un trabajo, dilo y explica para qué.</li>
+        </ul>`,
+       tareas:[
+        {n:1, t:"¿Dónde está la IA?", html:"<p>Haz una lista de todas las veces que crees que has usado inteligencia artificial esta semana. Para cada una, explica qué tarea hace la IA y qué datos crees que usa. Después, en clase, decidimos cuáles son IA de verdad y cuáles son programas normales.</p>", evalua:"p2iR"},
+        {n:2, t:"Desgranando el vídeo", html:"<p>Mira el vídeo resumen sobre inteligencia artificial y haz una <b>infografía</b> en la herramienta que prefieras con las ideas principales: qué es, tipos, ejemplos y riesgos.</p>", enlaces:[["Vídeo resumen sobre IA","https://youtu.be/_tA5cinv0U8"]], entrega:"Infografía por Teams", evalua:"p2iR"},
+        {n:3, t:"¿Persona o máquina?", html:"<p>En equipo, decidid quién hace mejor cada tarea y justificadlo: jugar al ajedrez, conducir ante un imprevisto, reconocer una cara en una foto antigua, escribir una historia con sentimientos, calcular una operación de doce cifras, aprender normas sociales nuevas. Debate final: ¿hay tareas que deberían seguir siendo solo humanas?</p>", evalua:"p2iR"},
+        {n:4, t:"Un árbol que adivina", html:"<p>Diseña un <b>árbol de decisión</b> en papel que adivine un animal entre ocho posibles con preguntas de sí o no. Pruébalo con un compañero. ¿Cuántas preguntas necesitas como máximo? ¿Qué pasa si piensa en un animal que no estaba en tu lista?</p>", evalua:"p2iR"},
+        {n:5, t:"Práctica guiada de IA", html:"<p>Sigue la actividad guiada de inteligencia artificial en Vittascience: entrena un modelo y observa cómo cambia su respuesta cuando añades o quitas ejemplos.</p>", enlaces:[["Vittascience","https://vittascience.com"]], evalua:"p2iR"},
+        {n:6, t:"Entrena tu modelo", html:"<p>Con Teachable Machine, crea un modelo de imagen que distinga tres clases (por ejemplo, tres objetos del estuche o tres gestos). Usa <b>al menos 50 ejemplos por clase</b>.</p><ol><li>Pruébalo 10 veces con cada clase y apunta los aciertos.</li><li>Cambia la luz, el fondo o la distancia: ¿sigue acertando?</li><li>Mejora los datos y vuelve a medir.</li></ol>", enlaces:[["Teachable Machine","https://teachablemachine.withgoogle.com"]], entrega:"Tabla de pruebas y capturas", evalua:"p2iR"},
+        {n:7, t:"Cazadores de sesgos", html:"<p>Entrena a propósito un modelo con datos <b>desequilibrados</b>: muchos ejemplos de una clase y muy pocos de otra, o todos con el mismo fondo. Comprueba cómo falla. Después redacta una explicación breve sobre por qué es importante evitar los sesgos en la IA y qué consecuencias tienen en la vida real.</p>", entrega:"Explicación por Teams", evalua:"p2iR"},
+        {n:8, t:"Decálogo de la IA responsable", html:"<p>Entre toda la clase, redactamos diez normas para usar la IA en el colegio y en casa de forma segura, justa y honesta. Cada equipo propone dos y las defiende ante la clase.</p>", evalua:"p2iR"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: inteligencia artificial", s:"8 preguntas con informe de repaso.", quiz:"p2ia"}
+       ]},
+      {id:"p2-techshow", etiqueta:"Cierre de curso", titulo:"Tech Show", subtitulo:"La tecnología se nos ha ido de las manos",
+       cita:["Un buen prompt no sustituye a una buena cabeza.",""],
+       bloque:"Bloques: Programación · Robótica · Inteligencia artificial",
+       desc:"Cerramos el curso con un programa de televisión hecho por la clase. Cada equipo prepara una sección de dos o tres minutos que explique algo de programación, robótica o IA de forma clara, crítica y divertida. Hay humor, pero la tecnología tiene que estar bien explicada.",
+       criterios:["1.3","2.5","4.1","4.2","4.3"],
+       producto:"Sección de 2-3 minutos del programa Tech Show, representada en directo o grabada.",
+       anexos:["p2tR"],
+       teoria:`
+        <h3>Las reglas del programa</h3>
+        <ul>
+          <li>Cada sección dura entre <b>2 y 3 minutos</b>.</li>
+          <li>Debe aparecer contenido real de programación, robótica o IA: no vale solo hacer teatro.</li>
+          <li>Tiene que haber humor o sorpresa, pero sin ridiculizar a nadie.</li>
+          <li>Todo el equipo participa de forma visible: presentar, escribir, actuar, revisar, diseñar o coordinar.</li>
+          <li>La IA se puede usar como ayuda, pero toda respuesta se revisa y se adapta.</li>
+          <li>Si se graba, el vídeo es para uso interno de la clase y solo aparece quien tenga autorización.</li>
+        </ul>
+        <h3>Ideas de secciones</h3>
+        <div class="defs">
+          <div><b>Robot literal</b><p>Un robot que obedece las órdenes al pie de la letra, con resultados desastrosos.</p></div>
+          <div><b>Tutorial en 90 segundos</b><p>Explica un concepto (bucle, sensor, sesgo) como un vídeo de un influencer.</p></div>
+          <div><b>La IA que se lo inventa</b><p>Una IA responde con total seguridad… y está completamente equivocada.</p></div>
+          <div><b>Teletienda</b><p>Presentamos el invento que nadie pidió, con sus sensores y su programa.</p></div>
+          <div><b>Entrevista</b><p>A un robot, a un algoritmo o a un sensor que cuenta su vida.</p></div>
+        </div>
+        <h3>Si os bloqueáis</h3>
+        <p>Usad esta estructura: <b>problema → error tecnológico → explicación → solución → frase final</b>.</p>`,
+       tareas:[
+        {n:1, t:"Lanzamiento", duracion:"1 sesión", html:"<p>Elegid la sección, repartid los roles y escribid la primera idea en la ficha inicial.</p>", evalua:"p2tR"},
+        {n:2, t:"Guion express", duracion:"1 sesión", html:"<p>Escribid el guion con su inicio, desarrollo y final. Marcad qué dice y hace cada miembro del equipo.</p>", evalua:"p2tR"},
+        {n:3, t:"Verificación tecnológica", duracion:"1 sesión", html:"<p>Revisad que los conceptos que explicáis son correctos. Escribid al menos dos conceptos tecnológicos que aparecen y cómo los explicáis. Si habéis usado IA, comprobad cada dato.</p>", evalua:"p2tR"},
+        {n:4, t:"Ensayo con público", duracion:"1 sesión", html:"<p>Representad la sección ante otro equipo, que rellena la ficha de feedback. Aplicad las mejoras.</p>", evalua:"p2tR"},
+        {n:5, t:"Grabación o puesta en escena", duracion:"1 sesión", html:"<p>Grabad la sección (máximo dos tomas) o preparad la puesta en escena en directo con el cartel de la sección.</p>", evalua:"p2tR"},
+        {n:6, t:"Edición y preparación", duracion:"1 sesión", html:"<p>Haced una edición sencilla con rótulos y comprobad la lista final antes del estreno.</p>", evalua:"p2tR"},
+        {n:7, t:"Estreno", duracion:"1 sesión", html:"<p>¡Se emite el Tech Show! Después, cada persona rellena su ticket de salida: qué ha aprendido este curso y qué explicaría mejor ahora.</p>", entrega:"Ticket de salida individual", evalua:"p2tR"}
+       ],
+       items:[]}
+    ],
+    norma:"currículo de Programación, Inteligencia Artificial y Robótica I",
+    competencias:[
+      {n:1, t:"Inteligencia artificial", d:"Entender cómo funciona la IA, dónde se usa y qué consecuencias tiene.", c:[
+        ["1.1","Identificar los fundamentos y el funcionamiento de las técnicas básicas de inteligencia artificial."],
+        ["1.2","Investigar situaciones de nuestro entorno en las que se aplica la IA."],
+        ["1.3","Valorar las consecuencias éticas y sociales de la IA."],
+        ["1.4","Usar funciones de IA en aplicaciones sencillas, de forma guiada."]]},
+      {n:2, t:"Programación", d:"Resolver problemas con el pensamiento computacional y crear programas.", c:[
+        ["2.1","Analizar problemas sencillos mediante la abstracción y el modelado."],
+        ["2.2","Analizar y probar aplicaciones ya existentes para comprobar si funcionan bien."],
+        ["2.3","Resolver problemas sencillos con algoritmos y datos, de forma guiada."],
+        ["2.4","Programar aplicaciones sencillas, de forma guiada."],
+        ["2.5","Conocer y respetar los derechos de autoría y las licencias."]]},
+      {n:3, t:"Robótica", d:"Montar, programar y mejorar robots.", c:[
+        ["3.1","Montar robots siguiendo una guía."],
+        ["3.2","Conectar el robot, enviarle el programa y ejecutarlo."],
+        ["3.3","Superar retos modificando un robot disponible."],
+        ["3.4","Analizar y comprobar el programa de control del robot."],
+        ["3.5","Programar instrucciones sencillas, de forma guiada."]]},
+      {n:4, t:"Retos en equipo", d:"Trabajar en equipo para resolver retos tecnológicos con espíritu crítico.", c:[
+        ["4.1","Trabajar en equipo asumiendo el rol asignado."],
+        ["4.2","Analizar con espíritu crítico el impacto social, ético y medioambiental de la tecnología."],
+        ["4.3","Describir y valorar si una tecnología es adecuada para un problema."],
+        ["4.4","Resolver problemas técnicos y replantear el proceso cuando haga falta."]]}
     ],
     criterios:null, pesos:null
   },
   {
     id:"piayr-3", nombre:"Programación, IA y Robótica II", corto:"PIAyR II", nivel:"3.º ESO", color:"#c2410c",
-    intro:"Proyecto «Misión a Marte»: construimos y programamos un rover con LEGO SPIKE para superar misiones.",
+    intro:"Subimos un nivel: diseñamos sistemas automáticos que toman buenas decisiones y los programamos en una placa micro:bit, construimos un rover para superar misiones en Marte y creamos un prototipo con inteligencia artificial que ayude a personas reales.",
+    presentacion:{
+      cita:"La mejor forma de predecir el futuro es inventarlo.",
+      texto:"En segundo aprendisteis a dar instrucciones. Este curso trabajamos con más autonomía: diseñaremos sistemas completos, elegiremos los sensores y las herramientas más adecuados, evaluaremos si funcionan y nos preguntaremos siempre para quién son y qué impacto tienen.",
+      bloques:["Programación","Robótica","Inteligencia artificial","Retos tecnológicos en equipo"]
+    },
     unidades:[
-      {titulo:"Misión a Marte", desc:"Empezamos en noviembre. Montaje del rover y programación de las primeras misiones.",
+      {id:"p3-prog", etiqueta:"Situación de aprendizaje 1 · 1.er trimestre", titulo:"Centro de control", subtitulo:"Sistemas que toman buenas decisiones",
+       cita:["Programar no es mandar: es dar instrucciones claras.",""],
+       bloque:"Bloque: Programación",
+       desc:"Somos una empresa de ingeniería contratada para automatizar el colegio: ahorrar energía, mejorar la seguridad y hacer el edificio más eficiente. Diseñamos reglas lógicas que combinan varias condiciones, las programamos en el simulador de micro:bit, damos el salto del bloque al código escrito y construimos un prototipo real del aula inteligente.",
+       criterios:["2.1","2.2","2.3","2.4","2.5","4.1","4.4","4.5"],
+       producto:"Prototipo de aula inteligente con micro:bit que combina sensores y condiciones, con su documentación y su versión mejorada.",
+       anexos:["p3pV","p3pR"],
+       teoria:`
+        <h3>Entrada, decisión y salida</h3>
+        <p>Cualquier sistema automático funciona igual: recoge datos con <b>sensores</b> (entrada), un <b>controlador</b> los compara con unas reglas (decisión) y activa unos <b>actuadores</b> (salida). Un termostato, una puerta automática o el riego de un jardín lo hacen sin necesidad de inteligencia artificial: solo siguen reglas programadas.</p>
+        <h3>Combinar condiciones: Y, O, NO</h3>
+        <p>Una sola regla casi nunca basta. Los <b>operadores lógicos</b> combinan varias condiciones:</p>
+        <div class="defs">
+          <div><b>Y (AND)</b><p>Se cumple solo si se cumplen <b>todas</b>. «Hay alguien Y está oscuro → encender luces».</p></div>
+          <div><b>O (OR)</b><p>Se cumple si se cumple <b>al menos una</b>. «Hay humo O la temperatura supera 60 ºC → alarma».</p></div>
+          <div><b>NO (NOT)</b><p>Invierte la condición. «Hay movimiento Y NO es horario escolar → alarma».</p></div>
+        </div>
+        <p>Una <b>tabla de verdad</b> recoge todos los casos posibles para comprobar que la regla hace lo que queremos. Con dos condiciones hay cuatro casos; con tres, ocho.</p>
+        <div class="table-wrap"><table class="tbl"><thead><tr><th>Hay alguien</th><th>Está oscuro</th><th>Y</th><th>O</th></tr></thead><tbody><tr><td>No</td><td>No</td><td>No</td><td>No</td></tr><tr><td>No</td><td>Sí</td><td>No</td><td>Sí</td></tr><tr><td>Sí</td><td>No</td><td>No</td><td>Sí</td></tr><tr><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td></tr></tbody></table></div>
+        <h3>Estructuras de control y datos</h3>
+        <ul>
+          <li><b>Condicionales:</b> si… entonces… si no…, y condiciones encadenadas.</li>
+          <li><b>Bucles:</b> repetir un número de veces, para siempre o mientras se cumpla una condición.</li>
+          <li><b>Variables</b> (datos que cambian), <b>constantes</b> (datos fijos, como el umbral de 27 ºC) y <b>operadores</b> de comparación (&gt;, &lt;, =) y aritméticos.</li>
+          <li><b>Funciones:</b> un bloque de instrucciones con nombre que se reutiliza. Detectar <b>patrones</b> que se repiten y convertirlos en funciones es <b>generalizar</b>.</li>
+        </ul>
+        <h3>La placa micro:bit</h3>
+        <p>Es una pequeña <b>tarjeta controladora</b> con sensores integrados (luz, temperatura, acelerómetro, brújula, micrófono), dos botones, una matriz de 25 luces, altavoz y radio para comunicarse con otras micro:bit. Se programa en <b>MakeCode</b>, que tiene un <b>simulador</b>: puedes probar el programa en pantalla antes de enviarlo a la placa.</p>
+        <h3>De los bloques al código</h3>
+        <p>Los bloques son una forma visual de escribir código. MakeCode permite ver el mismo programa en <b>Python</b> o <b>JavaScript</b>, que son <b>lenguajes de alto nivel</b>: se parecen al lenguaje humano y un programa los traduce al lenguaje de la máquina. Cada lenguaje tiene su <b>sintaxis</b> (cómo se escribe: paréntesis, dos puntos, sangrías) y su <b>semántica</b> (qué significa cada instrucción). Un error de sintaxis impide que el programa funcione; uno de semántica hace que funcione, pero mal.</p>
+        <h3>Evaluar y mantener el software</h3>
+        <p>Un programa se usa, falla y se mejora. Para mantenerlo: documenta qué hace cada parte, ponle nombres claros a las variables, guarda versiones y anota cada cambio. Un buen <b>informe de error</b> dice qué esperabas, qué pasó y cómo repetirlo.</p>
+        <h3>Diseñar para todos y para el planeta</h3>
+        <p>La <b>sostenibilidad</b> y la <b>inclusión</b> son requisitos de diseño, no extras: un sistema automático debe ahorrar energía, no gastarla, y debe funcionar para todas las personas (alguien en silla de ruedas, alguien que no oye la alarma, alguien que no lee bien).</p>
+        <h3>Licencias</h3>
+        <p>El <b>software libre</b> se puede usar, estudiar, modificar y compartir; el <b>propietario</b>, no. Las licencias Creative Commons y las de software libre (como MIT o GPL) indican qué puedes hacer con el trabajo de otros. Cita siempre el código o los recursos que reutilices.</p>`,
+       tareas:[
+        {n:1, t:"¿Cómo piensa una máquina?", html:"<p>Para cada sistema (puerta automática, termostato, farola, riego) identifica la <b>entrada</b> (sensor), la <b>decisión</b> (regla SI… ENTONCES…) y la <b>salida</b> (actuador). ¿Alguno necesita inteligencia artificial?</p>", evalua:"p3pR"},
+        {n:2, t:"Decisiones con Y, O y NO", html:"<p>Escribe reglas para encender las luces del aula, activar el aire acondicionado y abrir el aparcamiento combinando varias condiciones. Comprueba cada regla con su <b>tabla de verdad</b>. Al final, explica la diferencia entre automatización e inteligencia artificial.</p>", evalua:"p3pR"},
+        {n:3, t:"Centro de control: salvad el instituto", html:"<p>Resolved en equipo las misiones de la ficha: aula inteligente, alarma del colegio, laboratorio que se sobrecalienta, control de acceso y cazadores de bugs. En cada misión hay que <b>justificar</b> la solución: no basta con escribir Y, O o NO.</p>", entrega:"Ficha del centro de control", evalua:"p3pR"},
+        {n:4, t:"Del papel al simulador", html:"<p>Programa en MakeCode la regla del aula inteligente: el botón A simula que hay alguien y el sensor de luz mide si está oscuro. Si se cumplen las dos condiciones, la matriz se enciende. Prueba los cuatro casos de la tabla de verdad en el simulador.</p>", enlaces:[["MakeCode para micro:bit","https://makecode.microbit.org"]], evalua:"p3pR"},
+        {n:5, t:"Variables y funciones", html:"<p>Elige un reto:</p><ul><li><b>Control de aforo:</b> el botón A suma una persona, el B resta; si se supera el aforo, suena un aviso.</li><li><b>Laboratorio:</b> si la temperatura supera una constante y hay alguien, se muestra un icono de ventilador; si no hay nadie, se apaga todo para ahorrar.</li></ul><p>Crea al menos una <b>función</b> propia y usa una constante para el umbral.</p>", evalua:"p3pR"},
+        {n:6, t:"Del bloque al código", html:"<p>Abre tu programa en la vista de <b>Python</b>. Localiza el condicional, el bucle y la variable. Cambia un valor directamente en el código, provoca a propósito un error de sintaxis y otro de semántica, y explica la diferencia.</p>", evalua:"p3pR"},
+        {n:7, t:"Prototipo del aula inteligente", html:"<p>Montad un prototipo real con la micro:bit y los sensores disponibles que resuelva una necesidad del colegio: luces, ventilación, aforo, riego de plantas o aviso de ruido. Debe combinar al menos dos condiciones y tener en cuenta el ahorro de energía y la accesibilidad (por ejemplo, avisos con luz y con sonido).</p>", entrega:"Programa, fotos y vídeo breve por Teams", evalua:"p3pR"},
+        {n:8, t:"Versión 2.0", html:"<p>Intercambiad el prototipo con otro equipo. Probad el suyo y escribid un <b>informe de errores</b> (qué esperabais, qué pasó y cómo repetirlo) y una propuesta de mejora. Con el informe que recibáis, publicad la versión 2.0 y anotad los cambios.</p>", entrega:"Informe recibido y registro de cambios", evalua:"p3pR"},
+        {n:9, t:"Tu primera app", html:"<p>Crea con MIT App Inventor una app sencilla para el centro de control: una pantalla con el estado de cada sistema, botones para encender y apagar, y un aviso cuando algo va mal. Prueba la app en el iPad con la aplicación de App Inventor.</p>", enlaces:[["MIT App Inventor","https://appinventor.mit.edu"]], evalua:"p3pR"},
+        {n:10, t:"Documentación y licencia", html:"<p>Completad la documentación del proyecto: problema, reglas y tablas de verdad, diagrama de flujo, código comentado, pruebas, versión 2.0 y créditos de lo que hayáis reutilizado. Elegid una licencia para vuestro proyecto y justificadla.</p>", entrega:"Documentación por Teams", evalua:"p3pR"}
+       ],
        items:[
-        {tipo:"contenido", t:"Movimiento del rover: giros y distancias", s:"Rotaciones, grados y velocidad."},
-        {tipo:"actividad", t:"Misión 1: salir de la base", s:"Programa el rover para recorrer un circuito marcado."},
-        {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"}
+        {tipo:"interactiva", t:"Repaso: lógica y programación", s:"8 preguntas con informe de repaso.", quiz:"p3prog"}
+       ]},
+      {id:"p3-robot", etiqueta:"Situación de aprendizaje 2 · 2.º trimestre", titulo:"Misión a Marte", subtitulo:"Un rover que se las arregla solo",
+       cita:["Los rovers no descansan. Los ingenieros que los programan, tampoco.",""],
+       bloque:"Bloque: Robótica",
+       desc:"Una orden enviada a Marte tarda entre 4 y 24 minutos en llegar. Por eso los rovers tienen que tomar decisiones por su cuenta. Diseñamos, construimos y programamos nuestro rover para superar misiones cada vez más difíciles: moverse con precisión, esquivar obstáculos, seguir una ruta, recoger muestras y obedecer desde la Tierra en tiempo real.",
+       criterios:["3.1","3.2","3.3","3.4","3.5","3.6","4.1","4.3","4.4"],
+       producto:"Rover programado que supera las misiones, con el informe de misión que evalúa su eficacia.",
+       anexos:["p3rV","p3rR"],
+       teoria:`
+        <h3>Los rovers de Marte</h3>
+        <p>Un <b>rover</b> es un robot explorador. Curiosity y Perseverance recorren Marte analizando rocas, buscando agua y señales de vida pasada. Como las órdenes tardan minutos en llegar, tienen que ser <b>autónomos</b>: perciben el terreno con sus sensores y deciden solos cómo moverse sin chocar.</p>
+        <h3>Sensores y actuadores</h3>
+        <div class="defs">
+          <div><b>Distancia</b><p>Mide por ultrasonidos a qué distancia hay un obstáculo.</p></div>
+          <div><b>Color y luz</b><p>Detecta colores o cuánta luz refleja el suelo. Sirve para seguir líneas.</p></div>
+          <div><b>Fuerza</b><p>Detecta un choque o una pulsación.</p></div>
+          <div><b>Giroscopio</b><p>Mide giros e inclinación: el rover sabe hacia dónde mira.</p></div>
+          <div><b>Motores</b><p>Mueven las ruedas, una pinza o un brazo con precisión de grados.</p></div>
+        </div>
+        <p>Elegir bien los <b>módulos de entrada y salida</b> es parte del diseño: cada sensor de más añade peso, consumo y complejidad.</p>
+        <h3>Moverse con precisión</h3>
+        <p>En cada vuelta, una rueda avanza su <b>perímetro</b>: <b>P = π · d</b>. Si la rueda mide 5,6 cm de diámetro, avanza unos 17,6 cm por vuelta. Para recorrer 50 cm necesita 50 / 17,6 ≈ 2,84 vueltas, es decir, unos 1023 grados. En la realidad hay deslizamiento: por eso hay que <b>calibrar</b> midiendo y corrigiendo.</p>
+        <h3>Control en lazo abierto y en lazo cerrado</h3>
+        <ul>
+          <li><b>Lazo abierto:</b> el robot hace lo programado sin comprobar el resultado («avanza 3 segundos»). Si algo cambia, falla.</li>
+          <li><b>Lazo cerrado:</b> el robot mide con sus sensores y corrige sobre la marcha («avanza hasta que haya un obstáculo a 10 cm»). Es lo que hace un robot autónomo.</li>
+        </ul>
+        <h3>Seguir una línea</h3>
+        <p>El sensor de color mira el borde de la línea. Si ve negro, el rover gira hacia un lado; si ve blanco, hacia el otro. Así avanza en zigzag pegado al borde. Cuanto más suave sea la corrección, más fluido será el movimiento.</p>
+        <h3>Control remoto en tiempo real</h3>
+        <p>A veces una persona tiene que tomar el control: el rover recibe órdenes por <b>Bluetooth</b> o por <b>radio</b> desde un mando, otra placa o una app. El reto es que la respuesta sea inmediata y que el robot siga siendo seguro si se pierde la conexión.</p>
+        <h3>Evaluar la eficacia</h3>
+        <p>Un robot es eficaz cuando cumple la misión de forma <b>fiable</b> (funciona siempre, no solo una vez), <b>precisa</b> y <b>eficiente</b> (sin gastar más tiempo ni energía de la necesaria). Se mide repitiendo pruebas y anotando el porcentaje de éxito, el error y el tiempo.</p>`,
+       tareas:[
+        {n:1, t:"Bienvenidos a la agencia espacial", html:"<p>Investiga un rover real (Sojourner, Spirit, Curiosity, Perseverance o Zhurong): qué misión tenía, qué sensores e instrumentos llevaba y cómo se movía. Explica por qué un rover tiene que ser autónomo.</p>", evalua:"p3rR"},
+        {n:2, t:"Diseña tu rover", html:"<p>Antes de construir, escribid los <b>requisitos</b> de vuestro rover a partir de las misiones. Elegid qué sensores y actuadores necesitáis y justificad la elección. Dibujad un boceto con la posición de cada pieza.</p>", entrega:"Ficha de diseño", evalua:"p3rR"},
+        {n:3, t:"Construir y calibrar", html:"<p>Montad el rover y calibrad el movimiento: calculad cuántos grados debe girar el motor para avanzar 50 cm y para girar 90 grados, comprobadlo con la regla y corregid hasta que el error sea menor de 2 cm.</p>", evalua:"p3rR"},
+        {n:4, t:"Misión 1: salir de la base", html:"<p>El rover debe recorrer un circuito marcado en el suelo con giros, sin salirse, y volver a la base. Primero en lazo abierto. ¿Lo consigue cinco veces seguidas?</p>", evalua:"p3rR"},
+        {n:5, t:"Misión 2: campo de rocas", html:"<p>El rover avanza por un terreno con obstáculos y los esquiva usando el sensor de distancia. Dibujad el diagrama de flujo antes de programar.</p>", evalua:"p3rR"},
+        {n:6, t:"Misión 3: la ruta segura", html:"<p>Seguid la línea negra hasta la zona de muestras con el sensor de color. Ajustad la velocidad y la corrección para que sea rápido sin perder la línea.</p>", evalua:"p3rR"},
+        {n:7, t:"Misión 4: recoger la muestra", html:"<p>Añadid un actuador (una pinza, una pala o un brazo) para recoger una muestra y llevarla a la base. Contad los grados de libertad de vuestro mecanismo.</p>", evalua:"p3rR"},
+        {n:8, t:"Misión 5: control desde la Tierra", html:"<p>Programad un control remoto en tiempo real: el rover recibe órdenes desde otro dispositivo (la app, otro hub o una micro:bit por radio) y se para por seguridad si deja de recibirlas.</p>", evalua:"p3rR"},
+        {n:9, t:"Informe de misión", html:"<p>Evaluad la eficacia del rover en cada misión: porcentaje de éxito en diez intentos, error medio y tiempo. Explicad qué falló, qué mejorasteis y qué cambiaríais en el diseño. Terminad valorando qué ventajas e inconvenientes tienen los robots autónomos en la Tierra (agricultura, rescate, reparto).</p>", entrega:"Informe de misión por Teams", evalua:"p3rR"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"},
+        {tipo:"interactiva", t:"Repaso: rovers y robots autónomos", s:"8 preguntas con informe de repaso.", quiz:"p3robot"}
+       ]},
+      {id:"p3-ia", etiqueta:"Situación de aprendizaje 3 · 3.er trimestre", titulo:"IA con propósito", subtitulo:"Tecnología que ayuda a personas reales",
+       cita:["La pregunta no es qué puede hacer la IA, sino qué debería hacer.",""],
+       bloque:"Bloque: Inteligencia artificial",
+       desc:"Usamos la visión artificial para crear tecnología de apoyo: un sistema que permita jugar sin teclado ni ratón, un comunicador que reconozca signos básicos o un asistente que avise de sonidos importantes. Entrenamos el modelo, medimos sus aciertos y errores, lo probamos con personas diversas y analizamos sus límites éticos. También exploramos la realidad virtual y aumentada.",
+       criterios:["1.1","1.2","1.3","1.4","1.5","4.2","4.3","4.5"],
+       producto:"Prototipo de tecnología de apoyo con un modelo de IA entrenado por el equipo, con su evaluación de precisión y su ficha ética.",
+       anexos:["p3iV","p3iR"],
+       teoria:`
+        <h3>Técnicas de inteligencia artificial</h3>
+        <div class="defs">
+          <div><b>Sistemas expertos</b><p>Guardan el conocimiento de expertos en forma de reglas SI… ENTONCES… Son fáciles de explicar, pero no aprenden solos.</p></div>
+          <div><b>Aprendizaje automático</b><p>El sistema aprende las reglas a partir de ejemplos. Es la base de casi toda la IA actual.</p></div>
+          <div><b>Redes neuronales</b><p>Capas de unidades conectadas que ajustan sus conexiones con cada ejemplo. Con muchas capas se habla de <i>aprendizaje profundo</i>.</p></div>
+        </div>
+        <h3>Formas de aprender</h3>
+        <ul>
+          <li><b>Supervisado:</b> los ejemplos llevan etiqueta («gesto: pulgar arriba»). Es lo que hace Teachable Machine.</li>
+          <li><b>No supervisado:</b> el sistema agrupa datos parecidos sin etiquetas (clientes con gustos similares).</li>
+          <li><b>Por refuerzo:</b> aprende probando y recibiendo premios o castigos (robots que aprenden a andar, IA que juega).</li>
+        </ul>
+        <h3>Un buen conjunto de datos</h3>
+        <ul>
+          <li><b>Equilibrado:</b> el mismo número de ejemplos por clase.</li>
+          <li><b>Variado:</b> distintas personas, luces, fondos y distancias, si así se va a usar.</li>
+          <li><b>Separado:</b> no se prueba el modelo con los mismos datos con los que se entrenó.</li>
+          <li><b>Respetuoso:</b> solo con imágenes o voces de quien ha dado permiso.</li>
+        </ul>
+        <h3>Medir si funciona</h3>
+        <p>La <b>precisión</b> es el porcentaje de aciertos en pruebas nuevas. La <b>matriz de confusión</b> es una tabla que muestra qué clase se confunde con cuál: en las filas, lo que era de verdad; en las columnas, lo que dijo el modelo. Así se descubre, por ejemplo, que «puño» y «pulgar abajo» se confunden a menudo.</p>
+        <h3>Equidad, inclusión y sesgos</h3>
+        <p>Un modelo entrenado solo con las manos del equipo puede fallar con manos de otro tamaño, color de piel o movilidad. Diseñar con <b>inclusión</b> significa probar con personas diversas y corregir. Un modelo que funciona peor para un grupo tiene un <b>sesgo</b>, aunque nadie lo haya querido.</p>
+        <h3>Implicaciones éticas y sociales</h3>
+        <ul>
+          <li><b>Privacidad:</b> las cámaras y micrófonos recogen datos personales.</li>
+          <li><b>Responsabilidad:</b> si la IA se equivoca, ¿de quién es la culpa?</li>
+          <li><b>Empleo:</b> la IA cambia trabajos; unos desaparecen y aparecen otros.</li>
+          <li><b>Desinformación:</b> imágenes, voces y vídeos falsos (<i>deepfakes</i>).</li>
+          <li><b>Tecnología asistiva:</b> la que mejora la autonomía y la participación de personas con discapacidad. Un prototipo de clase no sustituye a profesionales ni a soluciones certificadas, pero sirve para entender sus posibilidades.</li>
+        </ul>
+        <h3>Virtualizar la realidad</h3>
+        <div class="defs">
+          <div><b>Realidad virtual</b><p>Te sumerge en un mundo totalmente digital, normalmente con gafas.</p></div>
+          <div><b>Realidad aumentada</b><p>Añade objetos digitales sobre el mundo real que ves con la cámara del iPad o del móvil.</p></div>
+          <div><b>Gemelo digital</b><p>Copia virtual de un objeto o un edificio real para simular y probar antes de construir.</p></div>
+        </div>`,
+       tareas:[
+        {n:1, t:"Sistema experto contra aprendizaje automático", html:"<p>Escribe un pequeño <b>sistema experto</b> de diez reglas que diagnostique por qué no funciona un ordenador o un robot. Después responde: ¿qué ventajas tendría un sistema que aprendiera de miles de averías reales?, ¿y qué inconvenientes?</p>", evalua:"p3iR"},
+        {n:2, t:"Entrenar y medir", html:"<p>Entrena en Teachable Machine un modelo de tres clases. Haz 20 pruebas nuevas y construye su <b>matriz de confusión</b>. Calcula la precisión. ¿Qué clases se confunden y por qué?</p>", enlaces:[["Teachable Machine","https://teachablemachine.withgoogle.com"]], evalua:"p3iR"},
+        {n:3, t:"Elegid el reto", html:"<p>Cada equipo elige un proyecto de tecnología de apoyo:</p><ul><li><b>GestureSwitch:</b> controlar un juego o una app con cuatro gestos, sin teclado ni ratón.</li><li><b>Sign2Text:</b> un comunicador que reconozca seis signos básicos y los muestre como texto.</li><li><b>Avisador de sonidos:</b> detectar sonidos importantes (timbre, alarma, alguien que llama) y avisar con luz.</li><li><b>Propuesta propia</b>, aprobada por el profesor.</li></ul><p>Escribid para quién es, qué problema resuelve y qué debe hacer exactamente.</p>", entrega:"Ficha del reto", evalua:"p3iR"},
+        {n:4, t:"Dataset y entrenamiento", html:"<p>Diseñad un conjunto de datos <b>equilibrado</b> y controlad la iluminación, el fondo y la distancia. Entrenad el modelo, guardad la versión 1 y medid su precisión con pruebas nuevas.</p>", evalua:"p3iR"},
+        {n:5, t:"Conectar el modelo", html:"<p>Haced que el modelo controle algo: un juego o una animación en Scratch con la extensión de Teachable Machine (Stretch3), o una página que muestre el texto o el aviso. Comprobad que responde rápido y sin errores graves.</p>", enlaces:[["Stretch3 (Scratch con Teachable Machine)","https://stretch3.github.io"]], evalua:"p3iR"},
+        {n:6, t:"Prueba con personas diversas", html:"<p>Probad el prototipo con personas distintas del equipo: otras edades, tamaños de mano, tonos de voz o posturas. Anotad dónde falla, mejorad los datos y medid la versión 2. ¿Ha mejorado la precisión para todos?</p>", evalua:"p3iR"},
+        {n:7, t:"Ficha ética", html:"<p>Responded por escrito: ¿qué datos recoge el sistema y quién podría verlos?, ¿qué pasa si se equivoca?, ¿para quién funciona peor?, ¿podría sustituir a una persona o a un profesional?, ¿qué límites tiene y cómo los explicaríais a quien lo use?</p>", entrega:"Ficha ética por Teams", evalua:"p3iR"},
+        {n:8, t:"Virtualiza tu prototipo", html:"<p>Cread un modelo 3D del dispositivo o del espacio donde se usaría (en Tinkercad o en otra herramienta) y mostradlo en <b>realidad aumentada</b> con el iPad, situado en el lugar real.</p>", enlaces:[["Tinkercad","https://www.tinkercad.com"]], evalua:"p3iR"},
+        {n:9, t:"Feria de proyectos", html:"<p>Presentad el prototipo funcionando ante la clase o ante visitantes: el problema, la demostración, la precisión de las versiones 1 y 2, los límites y la reflexión ética.</p>", entrega:"Presentación y vídeo de la demostración", evalua:"p3iR"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: IA, datos y ética", s:"8 preguntas con informe de repaso.", quiz:"p3ia"}
        ]}
+    ],
+    norma:"currículo de Programación, Inteligencia Artificial y Robótica II",
+    competencias:[
+      {n:1, t:"Inteligencia artificial", d:"Entender, usar y valorar la IA con criterios éticos e inclusivos.", c:[
+        ["1.1","Explicar los fundamentos y el funcionamiento de las técnicas de inteligencia artificial."],
+        ["1.2","Investigar con autonomía situaciones en las que se aplica la IA."],
+        ["1.3","Valorar las consecuencias éticas y sociales de la IA con criterios de equidad e inclusión."],
+        ["1.4","Usar funciones de IA en aplicaciones, con autonomía."],
+        ["1.5","Emplear técnicas sencillas de virtualización de la realidad."]]},
+      {n:2, t:"Programación", d:"Planificar y programar soluciones con autonomía.", c:[
+        ["2.1","Analizar problemas usando las estructuras de control más adecuadas."],
+        ["2.2","Evaluar y mantener las aplicaciones que desarrollas."],
+        ["2.3","Planificar de forma autónoma la solución de problemas."],
+        ["2.4","Programar aplicaciones sencillas para distintas plataformas, con autonomía."],
+        ["2.5","Aplicar y respetar los derechos de autoría y las licencias."]]},
+      {n:3, t:"Robótica", d:"Diseñar, montar y programar robots autónomos y controlados a distancia.", c:[
+        ["3.1","Montar robots más complejos con sensores, actuadores y operadores."],
+        ["3.2","Conectar el robot, transferir el programa y comprobar que se ejecuta bien."],
+        ["3.3","Elegir los módulos de entrada y salida adecuados para robots autónomos."],
+        ["3.4","Analizar y evaluar la eficacia de la interacción del robot con su entorno."],
+        ["3.5","Programar instrucciones para distintas plataformas, con autonomía."],
+        ["3.6","Controlar el robot en tiempo real y a distancia."]]},
+      {n:4, t:"Retos en equipo", d:"Planificar y resolver retos en equipo con criterios de sostenibilidad e inclusión.", c:[
+        ["4.1","Planificar tareas y organizar el equipo de trabajo."],
+        ["4.2","Valorar la IA, la programación y la robótica como tecnologías que transforman la sociedad."],
+        ["4.3","Diseñar soluciones eligiendo la opción más adecuada."],
+        ["4.4","Gestionar la incertidumbre y los imprevistos en entornos digitales."],
+        ["4.5","Aplicar la sostenibilidad y la inclusión como requisitos del diseño."]]}
     ],
     criterios:null, pesos:null
   },
@@ -1370,6 +1796,109 @@ const MATERIAS = [
    ANEXOS DE EVALUACIÓN (rúbricas, listas de control, escalas)
    ============================================================ */
 const ANEXOS = {
+  p2pV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Algoritmos y diagramas en papel</th><td>2–3</td><td>Rúbrica (Anexo 2): fila A</td><td>2.1 · 2.3</td><td>15 %</td></tr>
+    <tr><th>Retos de Scratch</th><td>4–6</td><td>Rúbrica (Anexo 2): fila B</td><td>2.3 · 2.4</td><td>20 %</td></tr>
+    <tr><th>Videojuego propio</th><td>7</td><td>Rúbrica (Anexo 2): filas C y D</td><td>2.1 · 2.4 · 4.1</td><td>35 %</td></tr>
+    <tr><th>Pruebas y corrección</th><td>8</td><td>Rúbrica (Anexo 2): fila E</td><td>2.2 · 4.4</td><td>15 %</td></tr>
+    <tr><th>Publicación y créditos</th><td>9</td><td>Rúbrica (Anexo 2): fila F</td><td>2.5</td><td>10 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>2.3</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p2pR:{titulo:"Anexo 2. Rúbrica de programación", para:"tareas 2 a 9", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Algoritmos y diagramas<span class="crit">2.1 · 2.3</span></th><td>Ordenados, precisos y finitos; diagramas con los símbolos correctos y las decisiones bien planteadas.</td><td>Correctos con alguna imprecisión.</td><td>Desordenados o con símbolos mal usados.</td><td>No se entienden o no se entregan.</td></tr>
+    <tr><th>B. Retos de Scratch<span class="crit">2.3 · 2.4</span></th><td>Todos superados, con bucles y variables bien usados y explicas cómo funcionan.</td><td>Casi todos superados.</td><td>Superas pocos o necesitas mucha ayuda.</td><td>No los intentas.</td></tr>
+    <tr><th>C. Diseño del videojuego<span class="crit">2.1</span></th><td>Idea clara, descompuesta en partes y con diagrama de flujo antes de programar.</td><td>Idea y diseño correctos pero incompletos.</td><td>Se programa sin diseño previo.</td><td>Sin diseño.</td></tr>
+    <tr><th>D. Programación del videojuego<span class="crit">2.4 · 4.1</span></th><td>Funciona, usa eventos, condiciones, bucles y variables, y el código está ordenado. Todo el equipo participa.</td><td>Funciona con los elementos básicos.</td><td>Funciona a medias o falta algún elemento.</td><td>No funciona.</td></tr>
+    <tr><th>E. Pruebas y corrección<span class="crit">2.2 · 4.4</span></th><td>Informe útil para el otro equipo y corriges tu juego registrando los cambios.</td><td>Informe correcto y algunas correcciones.</td><td>Informe pobre o sin correcciones.</td><td>No participas.</td></tr>
+    <tr><th>F. Créditos y licencia<span class="crit">2.5</span></th><td>Instrucciones, créditos de todos los recursos ajenos y explicación correcta de la licencia.</td><td>Créditos e instrucciones con algún olvido.</td><td>Créditos incompletos.</td><td>Sin créditos.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p2rV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Investigación sobre robots y adaptaciones</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>4.3</td><td>10 %</td></tr>
+    <tr><th>Primeros programas con SPIKE</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>3.2 · 3.5</td><td>15 %</td></tr>
+    <tr><th>Montaje del saltador</th><td>5</td><td>Rúbrica (Anexo 2): fila C</td><td>3.1</td><td>15 %</td></tr>
+    <tr><th>Pruebas y mejoras</th><td>6–7</td><td>Rúbrica (Anexo 2): fila D</td><td>3.3 · 3.4 · 4.4</td><td>25 %</td></tr>
+    <tr><th>La gran carrera</th><td>8</td><td>El robot cumple las normas y llega solo a la meta: 10. Llega con ayuda: 6. No llega: 3.</td><td>3.3</td><td>10 %</td></tr>
+    <tr><th>Diario de ingeniería</th><td>9</td><td>Rúbrica (Anexo 2): fila E</td><td>4.1 · 4.3</td><td>20 %</td></tr>
+    <tr><th>Fichas de repaso</th><td>—</td><td>Resultado de las fichas interactivas</td><td>3.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p2rR:{titulo:"Anexo 2. Rúbrica del robot saltador", para:"tareas 1 a 9", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Investigación<span class="crit">4.3</span></th><td>Explicas cada adaptación y cada robot con sus sensores, actuadores y utilidad.</td><td>Respuestas correctas pero generales.</td><td>Respuestas incompletas.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Primeros programas<span class="crit">3.2 · 3.5</span></th><td>Conectas el hub y programas motores por grados, rotaciones y tiempo sin ayuda.</td><td>Lo consigues con poca ayuda.</td><td>Necesitas mucha ayuda.</td><td>No lo consigues.</td></tr>
+    <tr><th>C. Montaje<span class="crit">3.1</span></th><td>Montaje completo, sólido y bien explicado con un dibujo del mecanismo.</td><td>Montaje correcto con explicación breve.</td><td>Montaje con fallos.</td><td>No se monta.</td></tr>
+    <tr><th>D. Pruebas y mejoras<span class="crit">3.3 · 3.4 · 4.4</span></th><td>Cambias una variable cada vez, repites las pruebas, mejoras el robot y el sensor funciona.</td><td>Pruebas y mejoras correctas.</td><td>Pocas pruebas o sin método.</td><td>Sin pruebas.</td></tr>
+    <tr><th>E. Diario de ingeniería<span class="crit">4.1 · 4.3</span></th><td>Completo, con fotos, programa, tabla, cambios justificados y reflexión sobre su utilidad. Se ve el trabajo de todo el equipo.</td><td>Completo con algún apartado flojo.</td><td>Incompleto.</td><td>No se entrega.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p2iV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>La IA en mi vida e infografía</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1 · 1.2</td><td>20 %</td></tr>
+    <tr><th>Persona o máquina y árbol de decisión</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>1.1 · 1.3</td><td>15 %</td></tr>
+    <tr><th>Modelos entrenados</th><td>5–6</td><td>Rúbrica (Anexo 2): fila C</td><td>1.4</td><td>30 %</td></tr>
+    <tr><th>Cazadores de sesgos</th><td>7</td><td>Rúbrica (Anexo 2): fila D</td><td>1.3 · 4.2</td><td>20 %</td></tr>
+    <tr><th>Decálogo</th><td>8</td><td>Rúbrica (Anexo 2): fila E</td><td>1.3</td><td>10 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>1.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p2iR:{titulo:"Anexo 2. Rúbrica de inteligencia artificial", para:"tareas 1 a 8", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. La IA a mi alrededor<span class="crit">1.1 · 1.2</span></th><td>Ejemplos reales bien explicados e infografía clara, ordenada y correcta.</td><td>Ejemplos e infografía correctos.</td><td>Pocos ejemplos o infografía confusa.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Comparar y clasificar<span class="crit">1.1 · 1.3</span></th><td>Justificas cada decisión y tu árbol clasifica bien con pocas preguntas.</td><td>Justificaciones y árbol correctos.</td><td>Sin justificar o árbol con errores.</td><td>No participas.</td></tr>
+    <tr><th>C. Entrenar un modelo<span class="crit">1.4</span></th><td>Modelo con datos suficientes, pruebas anotadas y mejoras que suben los aciertos.</td><td>Modelo y pruebas correctos.</td><td>Pocas pruebas o sin mejoras.</td><td>Sin modelo.</td></tr>
+    <tr><th>D. Sesgos<span class="crit">1.3 · 4.2</span></th><td>Provocas y explicas el sesgo y lo relacionas con casos reales y sus consecuencias.</td><td>Explicas el sesgo correctamente.</td><td>Explicación confusa.</td><td>No se entrega.</td></tr>
+    <tr><th>E. IA responsable<span class="crit">1.3</span></th><td>Propones normas concretas y las defiendes con argumentos.</td><td>Propuestas correctas.</td><td>Propuestas vagas.</td><td>No participas.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p2tR:{titulo:"Rúbrica del Tech Show", para:"toda la secuencia", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Contenido tecnológico<span class="crit">4.3</span></th><td>Al menos dos conceptos explicados con precisión y de forma clara.</td><td>Conceptos correctos pero superficiales.</td><td>Algún error o poco contenido.</td><td>Solo teatro, sin tecnología.</td></tr>
+    <tr><th>B. Mirada crítica<span class="crit">1.3 · 4.2</span></th><td>La sección hace pensar sobre el uso responsable de la tecnología.</td><td>Hay alguna reflexión.</td><td>La reflexión es muy pobre.</td><td>Sin reflexión.</td></tr>
+    <tr><th>C. Guion y comunicación<span class="crit">4.1</span></th><td>Guion claro, con humor respetuoso, buen ritmo y en tiempo.</td><td>Guion correcto.</td><td>Desordenado o fuera de tiempo.</td><td>Sin guion.</td></tr>
+    <tr><th>D. Trabajo en equipo<span class="crit">4.1</span></th><td>Cada persona cumple su rol y entrega lo de cada sesión.</td><td>Casi todos cumplen.</td><td>Reparto desigual.</td><td>No hay trabajo en equipo.</td></tr>
+    <tr><th>E. Autoría y uso de la IA<span class="crit">2.5</span></th><td>Se citan los recursos ajenos y se explica cómo se ha usado y revisado la IA.</td><td>Se citan casi todos.</td><td>Faltan créditos.</td><td>Se copia sin citar.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p3pV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Lógica y centro de control</th><td>1–3</td><td>Rúbrica (Anexo 2): fila A</td><td>2.1 · 2.3</td><td>20 %</td></tr>
+    <tr><th>Programas en MakeCode y Python</th><td>4–6</td><td>Rúbrica (Anexo 2): fila B</td><td>2.1 · 2.4</td><td>20 %</td></tr>
+    <tr><th>Prototipo del aula inteligente</th><td>7</td><td>Rúbrica (Anexo 2): fila C</td><td>2.3 · 2.4 · 4.1 · 4.5</td><td>25 %</td></tr>
+    <tr><th>Versión 2.0</th><td>8</td><td>Rúbrica (Anexo 2): fila D</td><td>2.2 · 4.4</td><td>10 %</td></tr>
+    <tr><th>App</th><td>9</td><td>Rúbrica (Anexo 2): fila E</td><td>2.4</td><td>10 %</td></tr>
+    <tr><th>Documentación y licencia</th><td>10</td><td>Rúbrica (Anexo 2): fila F</td><td>2.2 · 2.5</td><td>10 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>2.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p3pR:{titulo:"Anexo 2. Rúbrica del centro de control", para:"tareas 1 a 10", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Reglas lógicas<span class="crit">2.1 · 2.3</span></th><td>Reglas correctas con Y, O y NO, comprobadas con tablas de verdad y bien justificadas.</td><td>Reglas correctas con justificación breve.</td><td>Errores lógicos o sin justificar.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Programación<span class="crit">2.1 · 2.4</span></th><td>Usas las estructuras más adecuadas, funciones y constantes, y explicas el código en Python.</td><td>Programas correctos.</td><td>Funcionan a medias.</td><td>No funcionan.</td></tr>
+    <tr><th>C. Prototipo<span class="crit">2.3 · 2.4 · 4.1 · 4.5</span></th><td>Resuelve una necesidad real, combina condiciones, ahorra energía y es accesible. Equipo bien organizado.</td><td>Funciona y cumple casi todos los requisitos.</td><td>Funciona a medias.</td><td>No funciona.</td></tr>
+    <tr><th>D. Mantenimiento<span class="crit">2.2 · 4.4</span></th><td>Informe de errores útil y versión 2.0 con cambios registrados.</td><td>Informe y mejoras correctos.</td><td>Pocas mejoras.</td><td>Sin versión 2.0.</td></tr>
+    <tr><th>E. App<span class="crit">2.4</span></th><td>App funcional, clara y probada en el dispositivo.</td><td>App funcional sencilla.</td><td>App incompleta.</td><td>Sin app.</td></tr>
+    <tr><th>F. Documentación<span class="crit">2.2 · 2.5</span></th><td>Completa, con código comentado, créditos y licencia justificada.</td><td>Completa con algún olvido.</td><td>Incompleta.</td><td>No se entrega.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p3rV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Investigación y diseño</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>3.3 · 4.3</td><td>15 %</td></tr>
+    <tr><th>Construcción y calibración</th><td>3</td><td>Rúbrica (Anexo 2): fila B</td><td>3.1 · 3.2</td><td>15 %</td></tr>
+    <tr><th>Misiones autónomas</th><td>4–7</td><td>Rúbrica (Anexo 2): fila C</td><td>3.4 · 3.5 · 4.4</td><td>30 %</td></tr>
+    <tr><th>Control remoto</th><td>8</td><td>Rúbrica (Anexo 2): fila D</td><td>3.6</td><td>10 %</td></tr>
+    <tr><th>Informe de misión</th><td>9</td><td>Rúbrica (Anexo 2): fila E</td><td>3.4 · 4.1</td><td>25 %</td></tr>
+    <tr><th>Fichas de repaso</th><td>—</td><td>Resultado de las fichas interactivas</td><td>3.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p3rR:{titulo:"Anexo 2. Rúbrica de la misión a Marte", para:"tareas 1 a 9", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Diseño<span class="crit">3.3 · 4.3</span></th><td>Requisitos claros y cada sensor y actuador elegido con justificación.</td><td>Diseño correcto con poca justificación.</td><td>Diseño incompleto.</td><td>Sin diseño.</td></tr>
+    <tr><th>B. Construcción y calibración<span class="crit">3.1 · 3.2</span></th><td>Rover sólido, cálculos de perímetro y grados correctos y error menor de 2 cm.</td><td>Rover y cálculos correctos.</td><td>Errores grandes de calibración.</td><td>No funciona.</td></tr>
+    <tr><th>C. Misiones autónomas<span class="crit">3.4 · 3.5 · 4.4</span></th><td>Supera las cuatro misiones de forma fiable, con lazo cerrado y diagramas previos.</td><td>Supera tres.</td><td>Supera una o dos.</td><td>No supera ninguna.</td></tr>
+    <tr><th>D. Control remoto<span class="crit">3.6</span></th><td>Responde al instante y se detiene solo si pierde la conexión.</td><td>Funciona sin parada de seguridad.</td><td>Funciona a ratos.</td><td>No funciona.</td></tr>
+    <tr><th>E. Informe de misión<span class="crit">3.4 · 4.1</span></th><td>Datos de éxito, error y tiempo; análisis de fallos, mejoras y valoración de los robots autónomos.</td><td>Informe correcto.</td><td>Informe sin datos.</td><td>No se entrega.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  p3iV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el trimestre", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
+    <tr><th>Técnicas de IA y matriz de confusión</th><td>1–2</td><td>Rúbrica (Anexo 2): fila A</td><td>1.1 · 1.2</td><td>15 %</td></tr>
+    <tr><th>Reto, datos y modelo</th><td>3–5</td><td>Rúbrica (Anexo 2): fila B</td><td>1.4 · 4.3</td><td>30 %</td></tr>
+    <tr><th>Pruebas con personas diversas</th><td>6</td><td>Rúbrica (Anexo 2): fila C</td><td>1.3 · 4.5</td><td>15 %</td></tr>
+    <tr><th>Ficha ética</th><td>7</td><td>Rúbrica (Anexo 2): fila D</td><td>1.3 · 4.2</td><td>15 %</td></tr>
+    <tr><th>Realidad aumentada</th><td>8</td><td>Rúbrica (Anexo 2): fila E</td><td>1.5</td><td>10 %</td></tr>
+    <tr><th>Feria de proyectos</th><td>9</td><td>Rúbrica (Anexo 2): fila F</td><td>4.2</td><td>10 %</td></tr>
+    <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>1.1</td><td>5 %</td></tr>
+    </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
+  p3iR:{titulo:"Anexo 2. Rúbrica de IA con propósito", para:"tareas 1 a 9", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+    <tr><th>A. Técnicas y medida<span class="crit">1.1 · 1.2</span></th><td>Sistema experto coherente, matriz de confusión correcta y conclusiones razonadas.</td><td>Correcto con conclusiones breves.</td><td>Errores en la matriz o la precisión.</td><td>No se entrega.</td></tr>
+    <tr><th>B. Modelo y prototipo<span class="crit">1.4 · 4.3</span></th><td>Dataset equilibrado y controlado, modelo conectado que funciona y responde a la necesidad elegida.</td><td>Modelo y prototipo funcionan.</td><td>Funciona a medias.</td><td>No funciona.</td></tr>
+    <tr><th>C. Inclusión<span class="crit">1.3 · 4.5</span></th><td>Pruebas con personas diversas, fallos detectados y mejora medida en la versión 2.</td><td>Pruebas y alguna mejora.</td><td>Pocas pruebas.</td><td>Sin pruebas.</td></tr>
+    <tr><th>D. Ficha ética<span class="crit">1.3 · 4.2</span></th><td>Respuestas profundas sobre privacidad, errores, sesgos y límites.</td><td>Respuestas correctas.</td><td>Respuestas superficiales.</td><td>No se entrega.</td></tr>
+    <tr><th>E. Virtualización<span class="crit">1.5</span></th><td>Modelo 3D cuidado y bien situado en realidad aumentada.</td><td>Modelo correcto en RA.</td><td>Modelo incompleto.</td><td>No se entrega.</td></tr>
+    <tr><th>F. Presentación<span class="crit">4.2</span></th><td>Demostración clara con datos, límites y reflexión sobre el impacto de la IA.</td><td>Presentación correcta.</td><td>Presentación confusa.</td><td>No se presenta.</td></tr>
+    </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   t3zV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`
     <div class="table-wrap"><table class="tbl ev">
       <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
@@ -1632,6 +2161,66 @@ ANEXOS.t3inf = {titulo:"Anexo 2. Rúbrica de la infografía", para:"tarea 1", ht
    FICHAS INTERACTIVAS
    ============================================================ */
 const QUIZZES = {
+  p2prog:{titulo:"Repaso: algoritmos y Scratch", preguntas:[
+    {q:"¿Qué tres características debe tener un algoritmo?", o:["Rápido, corto y bonito","Ordenado, preciso y finito","Largo, detallado y en inglés"], a:1, f:"Si falta una de las tres, la máquina no puede seguirlo bien."},
+    {q:"En un diagrama de flujo, ¿qué forma tiene una decisión?", o:["Rectángulo","Óvalo","Rombo"], a:2, f:"El rombo tiene dos salidas: sí y no."},
+    {q:"Dividir un problema grande en partes pequeñas se llama…", o:["Descomposición","Abstracción","Depuración"], a:0, f:"Es la primera habilidad del pensamiento computacional."},
+    {q:"¿Qué bloque de Scratch evita repetir cuatro veces «mover 100 pasos, girar 90 grados»?", o:["Si… entonces","Repetir 4","Esperar 1 segundo"], a:1, f:"Un bucle repite instrucciones."},
+    {q:"Para dibujar un hexágono regular, ¿cuántos grados gira el lápiz en cada lado?", o:["90","60","45"], a:1, f:"360 / número de lados = 360 / 6 = 60 grados."},
+    {q:"¿Para qué sirve una variable en un videojuego?", o:["Para guardar datos que cambian, como los puntos","Para cambiar el fondo","Para dibujar"], a:0, f:"Puntuación, vidas o tiempo se guardan en variables."},
+    {q:"Buscar y corregir los errores de un programa se llama…", o:["Compilar","Depurar","Remezclar"], a:1, f:"En inglés se dice debugging, de bug: error."},
+    {q:"Usas un sonido que has descargado de internet en tu juego. ¿Qué debes hacer?", o:["Nada, si está en internet es gratis","Comprobar su licencia y citar al autor","Cambiarle el nombre"], a:1, f:"Todo recurso tiene autor y derechos: cita siempre lo que no es tuyo."}
+  ]},
+  p2robot:{titulo:"Repaso: robots y robótica", preguntas:[
+    {q:"¿Cuáles son los tres verbos que resumen qué hace un robot?", o:["Percibir, decidir y actuar","Encender, mover y apagar","Ver, oír y hablar"], a:0, f:"Sensores para percibir, controlador para decidir y actuadores para actuar."},
+    {q:"¿Cuál de estos es un actuador?", o:["Sensor de color","Motor","Sensor de distancia"], a:1, f:"Los actuadores producen una acción: motores, luces, altavoces."},
+    {q:"¿Qué son los grados de libertad de un robot?", o:["Las horas que funciona sin batería","Los movimientos independientes que puede hacer","Su velocidad máxima"], a:1, f:"Cada articulación que gira o se desplaza suma un grado de libertad."},
+    {q:"Si un motor gira 2 rotaciones, ¿cuántos grados ha girado?", o:["180","360","720"], a:2, f:"1 rotación = 360 grados; 2 rotaciones = 720 grados."},
+    {q:"¿Qué hace un motor de SPIKE con velocidad −50 %?", o:["Gira a la mitad de velocidad en sentido contrario","Se para","Gira al doble de velocidad"], a:0, f:"El signo indica el sentido de giro."},
+    {q:"Quieres saber si el tamaño de las patas mejora tu saltador. ¿Qué haces?", o:["Cambiar patas, velocidad y peso a la vez","Cambiar solo las patas y repetir las pruebas","Probar una sola vez"], a:1, f:"Una variable cada vez y varias repeticiones: así sabes qué ha funcionado."},
+    {q:"¿Qué sensor usarías para que el robot se pare al ver la línea de meta?", o:["Sensor de fuerza","Sensor de color","Altavoz"], a:1, f:"El sensor de color detecta la línea en el suelo."},
+    {q:"¿Qué ventaja tienen las patas frente a las ruedas?", o:["Son más rápidas en suelo liso","Se mueven mejor por terreno irregular","Gastan menos energía siempre"], a:1, f:"Las patas superan obstáculos, aunque son más lentas y complejas."}
+  ]},
+  p2ia:{titulo:"Repaso: inteligencia artificial", preguntas:[
+    {q:"¿Qué tipo de IA existe hoy en día?", o:["Solo la IA débil o específica","La IA general","La superinteligencia"], a:0, f:"Toda la IA actual hace tareas concretas."},
+    {q:"En el aprendizaje automático, ¿de qué aprende la máquina?", o:["De las reglas que escribe el programador una a una","De muchos ejemplos (datos)","De internet, sin ayuda"], a:1, f:"Encuentra patrones en ejemplos etiquetados."},
+    {q:"Lo que la máquina ha aprendido después del entrenamiento se llama…", o:["Modelo","Algoritmo de búsqueda","Sensor"], a:0, f:"El modelo hace predicciones ante ejemplos nuevos."},
+    {q:"¿Qué hace un árbol de decisión?", o:["Clasifica haciendo preguntas de sí o no","Dibuja árboles","Guarda fotos"], a:0, f:"Cada pregunta divide los casos hasta llegar a una respuesta."},
+    {q:"Tu modelo reconoce bien tu estuche pero falla con el de tu compañero. ¿Qué le pasa?", o:["Está roto","Le faltan ejemplos variados","Necesita más batería"], a:1, f:"Si los datos no son variados, el modelo no generaliza."},
+    {q:"¿Qué es un sesgo en IA?", o:["Un virus","Un error que hace que funcione peor para unos grupos que para otros","Un tipo de sensor"], a:1, f:"Suele venir de datos desequilibrados."},
+    {q:"Una IA te da un dato con mucha seguridad. ¿Qué haces?", o:["Me lo creo: las máquinas no se equivocan","Lo compruebo en fuentes fiables","Lo comparto enseguida"], a:1, f:"La IA puede inventarse cosas y decirlas con total seguridad."},
+    {q:"¿Cuál de estos NO usa inteligencia artificial?", o:["Un recomendador de series","Un interruptor de la luz","Un traductor automático"], a:1, f:"Un interruptor solo abre o cierra un circuito."}
+  ]},
+  p3prog:{titulo:"Repaso: lógica y programación", preguntas:[
+    {q:"La regla «hay alguien Y está oscuro» se cumple cuando…", o:["Se cumple al menos una condición","Se cumplen las dos condiciones","No se cumple ninguna"], a:1, f:"Y solo es verdadero si todas las condiciones lo son."},
+    {q:"La regla «hay humo O temperatura > 60 ºC» se cumple cuando…", o:["Se cumple al menos una condición","Se cumplen las dos","Nunca"], a:0, f:"O es verdadero si al menos una condición lo es."},
+    {q:"Una alarma debe sonar si hay movimiento fuera del horario escolar. ¿Qué regla es correcta?", o:["Movimiento Y horario escolar","Movimiento Y NO horario escolar","Movimiento O horario escolar"], a:1, f:"NO invierte la condición del horario."},
+    {q:"¿Cuántas filas tiene la tabla de verdad de una regla con tres condiciones?", o:["3","6","8"], a:2, f:"2 × 2 × 2 = 8 casos posibles."},
+    {q:"¿Qué es mejor para guardar el umbral de 27 ºC que no cambia?", o:["Una constante","Un bucle","Un evento"], a:0, f:"Si el valor es fijo, usa una constante con nombre claro."},
+    {q:"Python y JavaScript son lenguajes…", o:["De bajo nivel","De alto nivel","De bloques"], a:1, f:"Se parecen al lenguaje humano y se traducen al de la máquina."},
+    {q:"Tu programa funciona pero enciende la luz de día. ¿Qué tipo de error es?", o:["De sintaxis","De semántica (de lógica)","De conexión"], a:1, f:"El programa se ejecuta, pero no hace lo que queríamos."},
+    {q:"¿Qué ventaja tiene el simulador de MakeCode?", o:["Prueba el programa antes de enviarlo a la placa","Hace la placa más rápida","Sustituye a los sensores para siempre"], a:0, f:"Simular permite detectar errores sin montar nada."}
+  ]},
+  p3robot:{titulo:"Repaso: rovers y robots autónomos", preguntas:[
+    {q:"¿Por qué un rover en Marte necesita ser autónomo?", o:["Porque es más barato","Porque las órdenes tardan minutos en llegar","Porque no hay gravedad"], a:1, f:"Entre 4 y 24 minutos según la posición de los planetas."},
+    {q:"Una rueda de 5,6 cm de diámetro, ¿cuánto avanza en una vuelta?", o:["5,6 cm","Unos 17,6 cm","Unos 31 cm"], a:1, f:"P = π · d = 3,14 · 5,6 ≈ 17,6 cm."},
+    {q:"«Avanza hasta que haya un obstáculo a 10 cm» es un control en…", o:["Lazo abierto","Lazo cerrado","Modo manual"], a:1, f:"El robot mide y corrige con sus sensores."},
+    {q:"¿Qué sensor usarías para esquivar rocas?", o:["Distancia","Color","Fuerza"], a:0, f:"El sensor de distancia detecta obstáculos antes de chocar."},
+    {q:"Al seguir una línea, el sensor ve blanco. ¿Qué hace el rover?", o:["Se para","Gira hacia la línea","Acelera recto"], a:1, f:"Corrige hacia el borde de la línea y avanza en zigzag."},
+    {q:"¿Qué debe hacer un rover controlado a distancia si pierde la conexión?", o:["Seguir a toda velocidad","Detenerse por seguridad","Girar sin parar"], a:1, f:"Es una medida básica de seguridad en robótica."},
+    {q:"Un robot es fiable cuando…", o:["Funciona una vez","Cumple la misión casi siempre en pruebas repetidas","Es muy rápido"], a:1, f:"La eficacia se mide repitiendo pruebas y calculando el porcentaje de éxito."},
+    {q:"Añadir más sensores al rover…", o:["Siempre lo mejora","Añade peso, consumo y complejidad","No tiene ningún efecto"], a:1, f:"Hay que elegir solo los módulos que la misión necesita."}
+  ]},
+  p3ia:{titulo:"Repaso: IA, datos y ética", preguntas:[
+    {q:"Un sistema basado en reglas SI… ENTONCES… escritas por expertos es…", o:["Un sistema experto","Una red neuronal","Aprendizaje por refuerzo"], a:0, f:"Guarda conocimiento en reglas, pero no aprende solo."},
+    {q:"Teachable Machine entrena con ejemplos etiquetados. Es aprendizaje…", o:["Supervisado","No supervisado","Por refuerzo"], a:0, f:"Cada ejemplo lleva su etiqueta."},
+    {q:"¿Qué muestra una matriz de confusión?", o:["Qué clases se confunden entre sí","La velocidad del modelo","Cuántas fotos hay"], a:0, f:"Compara la clase real con la que dijo el modelo."},
+    {q:"El modelo acierta 18 de 20 pruebas. ¿Cuál es su precisión?", o:["18 %","90 %","20 %"], a:1, f:"18 / 20 = 0,9 = 90 %."},
+    {q:"¿Por qué no se debe probar un modelo con las mismas imágenes del entrenamiento?", o:["Porque daría un resultado demasiado optimista","Porque se borran","Porque es más lento"], a:0, f:"Hay que medir con datos nuevos, como en el uso real."},
+    {q:"Tu modelo funciona peor con manos más pequeñas. ¿Qué haces?", o:["Nada","Añadir ejemplos variados y volver a medir","Usar solo manos grandes"], a:1, f:"Probar con personas diversas y corregir los datos es diseñar con inclusión."},
+    {q:"Ver un mueble virtual en tu salón a través del iPad es…", o:["Realidad virtual","Realidad aumentada","Un gemelo digital"], a:1, f:"La RA añade objetos digitales al mundo real."},
+    {q:"Un prototipo de clase que reconoce signos básicos…", o:["Sustituye a un intérprete","Ayuda a entender las posibilidades de la IA, pero tiene límites","No sirve para nada"], a:1, f:"Hay que explicar siempre los límites de la tecnología."}
+  ]},
   entorno:{titulo:"Repaso: mi entorno digital", preguntas:[
     {q:"¿Cuál de estos es software?", o:["El teclado","El navegador","La impresora"], a:1, f:"El navegador es un programa; los otros son hardware."},
     {q:"Una pantalla táctil es un periférico de…", o:["Entrada","Salida","Entrada y salida"], a:2, f:"Muestra información (salida) y recibe tus toques (entrada)."},
