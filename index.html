@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula de Rubén</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabecera con pestañas de materia; cada materia = columna de unidades + columna lateral de criterios */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#15223b; --muted:#56637a; --line:#d9dfe8;
+  --accent:#1f5fd6; --accent-ink:#ffffff; --highlight:#ffd84d;
+  --ok:#1b8a4b; --bad:#c23b2c;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1522; --surface:#182133; --ink:#e8edf6; --muted:#9ba8be; --line:#2a3650;
+    --accent:#6d9cff; --accent-ink:#0b1220; --highlight:#ffd84d; --ok:#4cc985; --bad:#ff7a6b;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#182133; --ink:#e8edf6; --muted:#9ba8be; --line:#2a3650;
+  --accent:#6d9cff; --accent-ink:#0b1220; --highlight:#ffd84d; --ok:#4cc985; --bad:#ff7a6b;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--highlight);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+.top{display:flex;gap:16px;align-items:baseline;justify-content:space-between;flex-wrap:wrap;padding-top:22px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.6rem;text-decoration:none;color:var(--ink)}
+.brand span{background:linear-gradient(transparent 62%, var(--highlight) 62%)}
+.school{color:var(--muted);font-size:.92rem}
+nav{display:flex;gap:6px;overflow-x:auto;padding:16px 0 0}
+nav a{flex:none;text-decoration:none;color:var(--muted);font-weight:700;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:3px solid transparent}
+nav a:hover{color:var(--ink)}
+nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--sub,var(--accent))}
+
+main{padding:28px 0 60px}
+.home-intro{max-width:62ch;margin-bottom:24px}
+.home-intro h1{font-size:2.1rem;margin-bottom:8px}
+.home-intro p{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.subj-card{display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--sub);border-radius:12px;padding:18px;text-decoration:none;color:var(--ink)}
+.subj-card:hover{border-color:var(--sub)}
+.subj-card .lvl{font-size:.85rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.subj-card h2{font-size:1.3rem}
+.subj-card p{margin:0;color:var(--muted);font-size:.95rem}
+
+.subj-head{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;max-width:70ch}
+.subj-head .lvl{display:inline-block;align-self:flex-start;background:var(--sub);color:#fff;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:99px}
+.subj-head h1{font-size:2rem}
+.subj-head p{margin:0;color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.units{display:flex;flex-direction:column;gap:18px}
+.unit-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.unit-num{font-family:var(--display);font-weight:800;color:var(--sub);font-size:1.1rem}
+.unit h2{font-size:1.3rem}
+.unit .desc{margin:0;color:var(--muted);max-width:65ch}
+.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.item{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+@media (max-width:520px){.item{grid-template-columns:1fr}}
+.tag{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.tag::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;background:var(--c)}
+.item .t{font-weight:700}
+.item .s{color:var(--muted);font-size:.92rem}
+.btn{appearance:none;border:0;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:700;font-size:.92rem;padding:8px 14px;border-radius:8px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.pending{font-size:.85rem;color:var(--muted);font-style:italic;white-space:nowrap}
+
+aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:16px}
+@media (max-width:860px){aside{position:static}}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.box h3{font-size:1.1rem;margin-bottom:10px}
+.box ol,.box ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.box .note{color:var(--muted);font-size:.9rem;margin:0}
+.weights{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.w-row{display:grid;grid-template-columns:1fr 44px;gap:8px;font-size:.92rem;align-items:center}
+.w-bar{grid-column:1 / -1;height:7px;background:var(--line);border-radius:99px;overflow:hidden}
+.w-bar i{display:block;height:100%;background:var(--sub)}
+.w-row b{text-align:right;font-variant-numeric:tabular-nums}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag-plain{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-right:4px}
+.chip{font-size:.85rem;font-weight:700;font-variant-numeric:tabular-nums;padding:2px 9px;border-radius:99px;border:1.5px solid var(--sub);color:var(--ink);cursor:help}
+.ces{display:flex;flex-direction:column;gap:10px}
+.ce{border:1px solid var(--line);border-radius:10px;padding:0}
+.ce summary{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;cursor:pointer;list-style:none}
+.ce summary::-webkit-details-marker{display:none}
+.ce summary b{display:block}
+.ce-n{flex:none;font-family:var(--display);font-weight:800;color:#fff;background:var(--sub);border-radius:8px;padding:2px 8px;font-size:.9rem}
+.ce-d{display:block;color:var(--muted);font-size:.92rem}
+.crit-list{list-style:none;margin:0;padding:0 14px 12px;display:flex;flex-direction:column;gap:6px}
+.crit-list li{display:grid;grid-template-columns:42px 1fr;gap:8px;font-size:.95rem;padding-top:6px;border-top:1px dashed var(--line)}
+.code{font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums}
+.ce-short{list-style:none!important;padding-left:0!important}
+.ce-short b{color:var(--sub);margin-right:4px}
+
+/* Temas */
+.unit-link{text-decoration:none;color:var(--ink);border-left:6px solid var(--sub)}
+.unit-link:hover{border-color:var(--sub);box-shadow:0 2px 10px rgba(20,30,50,.08)}
+.eti{font-size:.85rem;color:var(--muted);font-weight:700}
+.meta{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.88rem;color:var(--muted);align-items:center}
+.meta .go{margin-left:auto;color:var(--accent);font-weight:700}
+.back{display:inline-block;margin-bottom:14px;text-decoration:none;font-weight:700}
+.sub{font-family:var(--display);font-size:1.2rem;color:var(--ink)!important}
+.quote{margin:4px 0;padding:4px 0 4px 14px;border-left:4px solid var(--sub);font-style:italic;color:var(--ink)}
+.quote cite{display:block;font-style:normal;color:var(--muted);font-size:.9rem;margin-top:2px}
+.blocks{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:.93rem}
+.prose h2,.units .unit>h2{font-size:1.35rem}
+.prose h3{font-size:1.1rem;margin-top:6px}
+.prose p,.prose ul{margin:0;max-width:68ch}
+.prose ul,.plain{padding-left:20px;display:flex;flex-direction:column;gap:4px;margin:0}
+.defs{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.defs>div{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px;background:var(--bg)}
+.defs b{font-family:var(--display);color:var(--sub);font-size:1.05rem}
+.defs span{font-size:.85rem;color:var(--muted)}
+.defs p{font-size:.95rem;margin:0}
+.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.task{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px;scroll-margin-top:12px}
+.task-n{width:36px;height:36px;border-radius:50%;background:var(--sub);color:#fff;font-family:var(--display);font-weight:800;display:flex;align-items:center;justify-content:center}
+.task-body{display:flex;flex-direction:column;gap:8px;min-width:0}
+.task-body h3{font-size:1.1rem}
+.task-body p,.task-body ol,.task-body ul{margin:0}
+.task-body ol,.task-body ul{padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.task-meta,.links{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.85rem;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--bg);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.pill-link{border-color:var(--sub)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.tbl{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+.tbl thead th{background:var(--bg);font-size:.82rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.tbl tbody th{font-weight:700;width:18%}
+.tbl td{min-width:150px}
+.tbl.pts td,.tbl.check td{min-width:0}
+.tbl td.q{color:var(--muted);text-align:center;font-weight:700;background:color-mix(in srgb,var(--highlight) 18%,transparent)}
+.tbl.rub{min-width:760px}
+.tbl.check td{width:56px}.tbl.check td:last-child{width:auto}
+.tbl.pts td:last-child,.tbl.pts tfoot th:last-child{text-align:right;font-variant-numeric:tabular-nums;width:70px}
+.tbl tfoot th{border-bottom:0}
+.anexo{display:flex;flex-direction:column;gap:10px;padding-top:14px;border-top:1px dashed var(--line);scroll-margin-top:12px}
+.anexo:first-of-type{border-top:0;padding-top:0}
+.anexo h3{font-size:1.1rem}
+.unit{scroll-margin-top:12px}
+.toc{list-style:none;margin:0;padding:0!important}
+.crit-mini{list-style:none;margin:0;padding:0!important;font-size:.9rem}
+.crit-mini li{display:grid;grid-template-columns:34px 1fr;gap:6px}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.task-body h4{font-family:var(--display);font-size:1rem;margin:6px 0 0}
+.fig{margin:0;display:flex;flex-direction:column;gap:6px}
+.fig figcaption{font-size:.88rem;color:var(--muted)}
+.zoom{padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in;display:block}
+.zoom img{display:block;width:100%;height:auto}
+.pins{list-style:none!important;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px!important}
+.pins li{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:.92rem}
+.pins b{font-variant-numeric:tabular-nums;width:14px;text-align:right}
+.wire{flex:none;width:34px;height:12px;border-radius:6px;background:var(--w);border:1px solid rgba(0,0,0,.25)}
+.wire.w-st{background:repeating-linear-gradient(90deg,#fff 0 6px,var(--w) 6px 10px)}
+.dialog.wide{max-width:1200px}
+.zoom-big{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+.zoom-big img{display:block;width:100%;min-width:900px;height:auto}
+
+.worlds{display:flex;flex-direction:column;gap:12px}
+.world{border:1px solid var(--line);border-left:6px solid var(--wc);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.world header{display:flex;gap:12px;align-items:center}
+.world header span{font-size:.88rem;color:var(--muted)}
+.world h3{margin:0}
+.wn{flex:none;width:34px;height:34px;border-radius:50%;background:var(--wc);color:#fff!important;font-family:var(--display);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1rem!important}
+.world ul{padding-left:20px;display:flex;flex-direction:column;gap:5px;margin:0}
+.world p{margin:0}
+.ask{background:var(--bg);border-radius:8px;padding:8px 12px;font-style:italic}
+
+.tbl .crit{display:block;font-size:.8rem;font-weight:700;color:var(--sub);margin-top:3px}
+.tbl.ev td:nth-child(2),.tbl.ev td:last-child,.tbl.ev tfoot th:last-child{text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums;min-width:0;width:64px}
+.tbl.ev td:nth-child(4){min-width:110px}
+
+.planos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.plano{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;background:var(--surface)}
+.shot{position:relative;aspect-ratio:16/9;background:#cfe6f7;border-bottom:1px solid var(--line)}
+.shot svg{display:block;width:100%;height:100%}
+.abbr{position:absolute;top:6px;left:6px;background:rgba(21,34,59,.85);color:#fff;font-size:.75rem;font-weight:700;padding:2px 7px;border-radius:6px}
+.plano figcaption{padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+.plano figcaption b{font-family:var(--display);font-size:1rem}
+.plano .uso{color:var(--muted);font-size:.88rem}
+
+.ficha{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.ficha-sec{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg)}
+.ficha-sec h4{font-family:var(--display);margin:0 0 6px;color:var(--sub)}
+.ficha-sec ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.93rem}
+
+.steps4{padding-left:22px;display:flex;flex-direction:column;gap:6px;margin:0;max-width:68ch}
+
+.dosier{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.pieza{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.pieza header{display:flex;align-items:center;gap:8px}
+.pn{width:26px;height:26px;border-radius:50%;background:var(--sub);color:#fff;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.canal{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.pieza h4{margin:0;font-family:var(--display);font-size:1rem}
+.pieza .msg{margin:0;font-size:.92rem;background:var(--bg);border-radius:8px;padding:8px 10px}
+
+.name-form{display:flex;flex-direction:column;gap:8px;max-width:420px}
+.name-form label{font-weight:700;font-size:.92rem}
+.name-form input{font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.name-form input:focus{outline:3px solid var(--highlight);border-color:var(--accent)}
+.name-form .btn{align-self:flex-start;margin-top:4px}
+.report{border:2px solid var(--accent);border-radius:12px;overflow:hidden}
+.report-top{background:var(--accent);color:var(--accent-ink);padding:10px 14px;display:flex;flex-direction:column}
+.report-top span{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;opacity:.85}
+.report dl,.check dl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0;padding:14px}
+.report dt,.check dt{color:var(--muted);font-size:.9rem}
+.report dd,.check dd{margin:0;font-weight:700}
+.score-sm{font-family:var(--display);font-size:1.3rem}
+.code-box{margin:0 14px 14px;padding:10px 12px;border-radius:8px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));display:flex;flex-direction:column;gap:2px}
+.code-box span{font-size:.8rem;color:var(--muted);font-weight:700}
+.code-box code{font-size:1.3rem;font-weight:800;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.check-wrap{max-width:560px;display:flex;flex-direction:column;gap:14px}
+.check-wrap h1{font-size:1.8rem}
+.check{border-radius:10px;padding:14px;border:2px solid;display:flex;flex-direction:column;gap:8px}
+.check.ok{border-color:var(--ok)}.check.ok>b{color:var(--ok)}
+.check.bad{border-color:var(--bad)}.check.bad>b{color:var(--bad)}
+.check dl{padding:0}
+
+/* Ficha interactiva */
+.overlay{position:fixed;inset:0;background:rgba(10,15,25,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;z-index:10}
+.overlay.open{display:flex}
+.dialog{background:var(--surface);color:var(--ink);border-radius:14px;max-width:640px;width:100%;padding:24px;display:flex;flex-direction:column;gap:16px}
+.dialog-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.dialog h2{font-size:1.4rem}
+.close{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}
+.progress{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.q{font-size:1.1rem;font-weight:700}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;font:inherit;background:var(--bg);color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.feedback{margin:0;padding:12px 14px;border-radius:10px;background:var(--bg);display:none}
+.feedback.show{display:block}
+.score{font-family:var(--display);font-size:2.4rem;font-weight:800}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;padding:18px 0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <a class="brand" href="#inicio"><span>Aula de Rubén</span></a>
+      <div class="school">Centro Parroquial La Inmaculada · Paiporta · Curso 2026‑27</div>
+    </div>
+    <nav id="nav" aria-label="Materias"></nav>
+  </div>
+</header>
+<main class="wrap" id="main"></main>
+<footer><div class="wrap">Materiales de clase de Rubén Olivares. Si un enlace no funciona, avisa por Teams. · <a href="#comprobar">Comprobar un informe (profesorado)</a></div></footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+  <div class="dialog" id="dialog"></div>
+</div>
+
+<script>
+/* ============================================================
+   CONTENIDO DE LA WEB
+   Cada materia tiene: unidades (con elementos) y criterios.
+   Tipos de elemento: contenido, actividad, video, ficha (descargable), interactiva
+   ============================================================ */
+const TIPOS = {
+  contenido:  {label:"Contenido",  c:"#1f5fd6"},
+  actividad:  {label:"Actividad",  c:"#e08a00"},
+  video:      {label:"Vídeo",      c:"#d23a5a"},
+  ficha:      {label:"Ficha PDF",  c:"#6b4fd8"},
+  juego:      {label:"Juego",      c:"#0e8f8f"},
+  interactiva:{label:"Interactiva",c:"#1b8a4b"}
+};
+
+const DOSIER = [{"n": 1, "canal": "WhatsApp", "titulo": "Cadena sobre WhatsApp", "texto": "⚠️ NO AUTORIZO ⚠️ Mañana empieza la nueva regla de Meta que permite usar tus fotos y mensajes, incluso los borrados. Además WhatsApp cobrará 0,01 € por mensaje. Reenvía esto a 10 grupos y aparecerá ✅ en tu WhatsApp: así tu teléfono quedará protegido. ¡Lo han dicho en la radio!"}, {"n": 2, "canal": "Titular", "titulo": "Noticia internacional", "texto": "Australia se convierte en el primer país del mundo en prohibir las redes sociales a los menores de 16 años."}, {"n": 3, "canal": "Imagen en redes", "titulo": "El papa, icono de la moda", "texto": "Foto viral: el papa Francisco paseando por la calle con un enorme abrigo de plumas blanco, al estilo de un rapero. Miles de personas la comparten diciendo que el papa es «un icono de la moda»."}, {"n": 4, "canal": "SMS", "titulo": "SMS de la DGT", "texto": "DGT: Tiene una multa pendiente de pago. Abónela antes del día 21 para evitar recargos. Detalles y pago aquí: dgt-multas-pago.com"}, {"n": 5, "canal": "Publicación en redes", "titulo": "Dato curioso", "texto": "¿Sabías que el pulpo tiene tres corazones y la sangre azul? 🐙"}, {"n": 6, "canal": "Imagen en redes", "titulo": "Tiburón en la autopista", "texto": "«¡Increíble! Acaban de ver un tiburón nadando por una autopista inundada tras el paso del huracán.» La foto, tomada desde dentro de un coche, muestra la aleta de un tiburón junto al vehículo."}, {"n": 7, "canal": "Vídeo en redes", "titulo": "La presentadora que recomienda invertir", "texto": "Anuncio en Facebook: una conocida presentadora de un informativo de televisión, en el plató, anuncia una nueva plataforma de inversión «del empresario Elon Musk» que promete multiplicar tus ahorros. Al final aparece un enlace para registrarte."}, {"n": 8, "canal": "Titular", "titulo": "Adiós a los cargadores distintos", "texto": "Desde el 28 de diciembre de 2024, todos los móviles, tabletas, auriculares y cámaras nuevos que se vendan en la Unión Europea deben cargarse con USB-C."}, {"n": 9, "canal": "Imagen en redes", "titulo": "Explosión en el Pentágono", "texto": "«ÚLTIMA HORA: gran explosión cerca del Pentágono, en Washington.» La publicación, de una cuenta con insignia de verificada, muestra una columna de humo negro junto a un edificio oficial."}, {"n": 10, "canal": "WhatsApp", "titulo": "Cupón de Mercadona", "texto": "🎉 ¡Mercadona regala cupones de 500 € por su 50 aniversario! Solo tienes que responder una encuesta rápida y reenviar este mensaje a 5 grupos. Entra aquí 👉 regalo-mercadona-aniversario.info"}, {"n": 11, "canal": "Publicación en redes", "titulo": "Dato histórico", "texto": "La Gran Muralla China es la única construcción humana que se puede ver a simple vista desde el espacio."}, {"n": 12, "canal": "Titular", "titulo": "Una foto falsa mueve la bolsa", "texto": "Una imagen falsa creada con inteligencia artificial hizo caer durante unos minutos la bolsa de Estados Unidos."}];
+function dosierHTML(){
+  return `<div class="dosier">${DOSIER.map(d=>`
+    <article class="pieza"><header><span class="pn">${d.n}</span><span class="canal">${d.canal}</span></header>
+      <h4>${d.titulo}</h4><p class="msg">${d.texto}</p></article>`).join("")}</div>`;
+}
+
+/* ============================================================
+   DIBUJOS DE PLANOS (misma escena, distinto encuadre)
+   ============================================================ */
+const ESCENA = `
+  <rect x="0" y="0" width="400" height="240" fill="#cfe6f7"/>
+  <circle cx="335" cy="45" r="16" fill="#ffd84d"/>
+  <path d="M0 175 L60 120 L110 160 L170 105 L240 165 L300 115 L400 170 L400 240 L0 240Z" fill="#9cc49a"/>
+  <rect x="0" y="198" width="400" height="42" fill="#7fae6f"/>
+  <rect x="58" y="160" width="6" height="40" fill="#7a5a3a"/><circle cx="61" cy="150" r="18" fill="#4f8a4a"/>
+  <rect x="318" y="168" width="5" height="32" fill="#7a5a3a"/><circle cx="320" cy="160" r="13" fill="#4f8a4a"/>
+  <g>
+    <rect x="190" y="166" width="9" height="33" rx="2" fill="#2f3e63"/>
+    <rect x="201" y="166" width="9" height="33" rx="2" fill="#2f3e63"/>
+    <rect x="188" y="197" width="12" height="4" rx="2" fill="#222"/>
+    <rect x="200" y="197" width="12" height="4" rx="2" fill="#222"/>
+    <rect x="182" y="132" width="6" height="31" rx="3" fill="#e2b48c"/>
+    <rect x="212" y="132" width="6" height="31" rx="3" fill="#e2b48c"/>
+    <rect x="188" y="130" width="24" height="38" rx="5" fill="#e0533d"/>
+    <rect x="197" y="126" width="6" height="6" fill="#e2b48c"/>
+    <circle cx="200" cy="119" r="9" fill="#e2b48c"/>
+    <path d="M191 118 Q191 108 200 108 Q209 108 209 118 Q206 112 200 112 Q194 112 191 118Z" fill="#4a3020"/>
+    <ellipse cx="196.6" cy="118.6" rx="1.7" ry="1.1" fill="#fff"/><circle cx="196.8" cy="118.7" r=".65" fill="#222"/>
+    <ellipse cx="203.4" cy="118.6" rx="1.7" ry="1.1" fill="#fff"/><circle cx="203.6" cy="118.7" r=".65" fill="#222"/>
+    <path d="M197.5 123.2 Q200 124.8 202.5 123.2" stroke="#8a4b3a" stroke-width=".6" fill="none"/>
+  </g>`;
+function planoSVG(vb){ return `<svg viewBox="${vb}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${ESCENA}</svg>`; }
+function anguloSVG(tipo){
+  const cam = {picado:[150,40,128,112], contrapicado:[150,96,128,128], cenital:[100,22,100,96]}[tipo];
+  const [cx,cy,tx,ty]=cam;
+  return `<svg viewBox="0 0 200 112" aria-hidden="true">
+    <rect width="200" height="112" fill="#eef3f8"/>
+    <rect x="0" y="100" width="200" height="12" fill="#c9d6c4"/>
+    <circle cx="100" cy="58" r="7" fill="#e2b48c"/><rect x="94" y="66" width="12" height="20" rx="3" fill="#e0533d"/>
+    <rect x="95" y="86" width="4" height="14" fill="#2f3e63"/><rect x="101" y="86" width="4" height="14" fill="#2f3e63"/>
+    <line x1="${cx}" y1="${cy}" x2="${tipo==="cenital"?100:104}" y2="${tipo==="cenital"?50:tipo==="picado"?60:62}" stroke="#56637a" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <g transform="translate(${cx} ${cy}) rotate(${tipo==="picado"?35:tipo==="contrapicado"?-35:90})">
+      <rect x="-10" y="-6" width="16" height="12" rx="2" fill="#15223b"/><path d="M-10 -4 L-17 -7 L-17 7 L-10 4Z" fill="#15223b"/>
+    </g>
+  </svg>`;
+}
+const PLANOS = [
+  {n:"Gran plano general", s:"GPG", vb:"0 8 400 225", d:"Muestra un paisaje o espacio muy amplio; la persona apenas se distingue.", u:"Situar al espectador: dónde estamos. Transmite soledad o grandeza."},
+  {n:"Plano general", s:"PG", vb:"80 85 240 135", d:"Se ve a la persona entera con mucho espacio a su alrededor.", u:"Mostrar a la persona en su entorno y lo que hace."},
+  {n:"Plano entero", s:"PE", vb:"114 106 171 96", d:"La persona ocupa el encuadre de la cabeza a los pies.", u:"Ver la acción, la postura y la ropa del personaje."},
+  {n:"Plano americano", s:"PA", vb:"129 106 142 80", d:"Corta a la altura de las rodillas.", u:"Clásico del western: deja ver las manos y el arma. Útil en diálogos y acción."},
+  {n:"Plano medio", s:"PM", vb:"148.5 107 103 58", d:"Corta a la altura de la cintura.", u:"Conversaciones: vemos gestos y expresión a la vez."},
+  {n:"Plano medio corto", s:"PMC", vb:"162.5 107 75 42", d:"Corta a la altura del pecho.", u:"Acerca al personaje; muy usado en entrevistas y noticias."},
+  {n:"Primer plano", s:"PP", vb:"171.5 106.5 57 32", d:"Muestra la cara y los hombros.", u:"Mostrar emociones: el espectador se acerca a lo que siente el personaje."},
+  {n:"Primerísimo primer plano", s:"PPP", vb:"186 111 28 16", d:"Solo la cara, de la frente a la barbilla.", u:"Emoción intensa, tensión, intimidad."},
+  {n:"Plano detalle", s:"PD", vb:"193.6 116.6 7.2 4.05", d:"Un detalle muy pequeño: un ojo, una mano, un objeto.", u:"Llamar la atención sobre algo importante para la historia."}
+];
+const ANGULOS = [
+  {n:"Plano picado", t:"picado", d:"La cámara está por encima y mira hacia abajo.", u:"El personaje parece pequeño, débil o vulnerable."},
+  {n:"Plano contrapicado", t:"contrapicado", d:"La cámara está por debajo y mira hacia arriba.", u:"El personaje parece grande, poderoso o amenazante."},
+  {n:"Plano cenital", t:"cenital", d:"La cámara está justo encima, en vertical.", u:"Vista de pájaro: originalidad, orden, mostrar un espacio desde arriba."}
+];
+function planosHTML(){
+  return `<div class="planos">${PLANOS.map((p,i)=>`
+    <figure class="plano"><div class="shot">${planoSVG(p.vb)}<span class="abbr">${p.s}</span></div>
+      <figcaption><b>${i+1}. ${p.n}</b><span>${p.d}</span><span class="uso">${p.u}</span></figcaption></figure>`).join("")}</div>`;
+}
+function angulosHTML(){
+  return `<div class="planos">${ANGULOS.map((p,i)=>`
+    <figure class="plano"><div class="shot">${anguloSVG(p.t)}</div>
+      <figcaption><b>${i+10}. ${p.n}</b><span>${p.d}</span><span class="uso">${p.u}</span></figcaption></figure>`).join("")}</div>`;
+}
+
+const MATERIAS = [
+  {
+    id:"digitalizacion-4", nombre:"Digitalización", corto:"Digitalización", nivel:"4.º ESO", color:"#1b8a4b",
+    intro:"Equipos y redes, contenidos digitales, bienestar y seguridad, ciudadanía digital y retos tecnológicos. Este trimestre preparamos y damos sesiones de seguridad digital a 6.º de Primaria.",
+    presentacion:{
+      cita:"No estamos en una era de cambios, sino en un cambio de era caracterizado por la digitalización de prácticamente todo lo que nos rodea.",
+      texto:"En esta materia damos el salto al diseño de equipos y redes y aprendemos a ser ciudadanos digitales críticos, comprometidos con el bienestar, la igualdad y la sostenibilidad. Trabajamos sobre todo con proyectos prácticos, solos o en equipo.",
+      bloques:["Dispositivos digitales, sistemas operativos y de comunicación","Digitalización del entorno personal de aprendizaje","Seguridad y bienestar digital","Ciudadanía digital crítica"]
+    },
+    unidades:[
+      {id:"dig4-sa1-1", etiqueta:"Situación de aprendizaje 1.1", titulo:"Arquitectura de ordenadores",
+       cita:["Todo lo complejo puede dividirse en partes simples","René Descartes"],
+       bloque:"Bloque 1. Dispositivos digitales, sistemas operativos y de comunicación",
+       desc:"Investigamos los componentes de un ordenador, diseñamos nuestro PC ideal y desmontamos y volvemos a montar un ordenador real del aula de tecnología.",
+       criterios:["1.1","1.3","1.4","1.5","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.3","3.5","3.6"],
+       saberes:[
+        "La representación digital de la información. Unidades de medida.",
+        "Diseño de un ordenador personal. Elementos, componentes físicos y sus características.",
+        "Criterios de selección de los componentes de un ordenador personal. Montaje de ordenadores personales. Simuladores de hardware. Configuración de componentes.",
+        "Actitud crítica y razonada para la utilización de los equipos informáticos. Consumo responsable de equipamiento informático. Sostenibilidad.",
+        "Interacción de los componentes del equipo informático en su funcionamiento. Prestaciones y rendimiento.",
+        "Dispositivos móviles. Características básicas."],
+       producto:"Vídeo del desmontaje y montaje del ordenador, entregado por OneDrive.",
+       tareas:[
+        {n:1, t:"Vídeo motivacional", html:"<p>Empezamos viendo un vídeo sobre la situación de aprendizaje que vamos a trabajar este primer trimestre.</p>", enlaces:[["Ver el vídeo en TikTok","https://www.tiktok.com/@roro.bueno/video/7412640015076936993?lang=es"]]},
+        {n:2, t:"Componentes de un ordenador", html:"<p>Echa un ojo al siguiente artículo y recopila toda la información necesaria para hacer una <b>infografía</b> que resuma lo explicado.</p>", enlaces:[["Guía de componentes del ordenador (PcComponentes)","https://www.pccomponentes.com/guia-componentes-ordenador"]], evalua:"anexo1", entrega:"PDF por Teams"},
+        {n:3, t:"¡De compras! Diseña tu ordenador personal", html:"<p>Una vez hecha la investigación sobre los componentes, diseña tu ordenador personal según tus intereses.</p><ol><li>Explica brevemente qué necesidad tienes y qué uso le vas a dar.</li><li>Simula la compra en la web de PcComponentes añadiendo al carrito todo lo necesario para montarlo.</li></ol><p>Esta tarea la valora un compañero o compañera con una lista de control.</p>", enlaces:[["PcComponentes","https://www.pccomponentes.com"]], evalua:"anexo2", entrega:"Coevaluación"},
+        {n:4, t:"Tu ordenador del aula", html:"<p>Ya hemos visto suficiente, ahora toca mancharse las manos. Tu profesor te asignará un grupo y un ordenador del aula de tecnología. Comprobaremos juntos que funciona correctamente. Cuidadlo: será vuestro tesoro.</p>"},
+        {n:5, t:"¡Manos a la obra! Despiece y montaje", html:"<p>Antes de quitar tornillos y extraer componentes, organizaos. Cada persona tiene un papel:</p><ul><li><b>Fotos y vídeo:</b> graba cada componente y cada paso.</li><li><b>Montaje:</b> herramienta en mano, desmonta el ordenador.</li><li><b>Notas:</b> apunta cada paso, cada nombre y cada idea. Será clave para editar el vídeo final.</li></ul><p>Cuando esté desmontado, limpiad todo y volved a montarlo.</p>"},
+        {n:6, t:"¿Se enciende?", html:"<p>Lo más importante: comprobad que funciona como al principio, sin ningún error. ¡Acordaos de grabar ese momento! Si aparece un error, investigad de qué se trata y buscad la solución.</p>"},
+        {n:7, t:"Entrega del vídeo", html:"<p>Edita y maqueta el vídeo, súbelo a tu cuenta de OneDrive y compártelo con el profesor para que pueda valorarlo.</p>", evalua:"anexo3", entrega:"Enlace de OneDrive"},
+        {n:8, t:"Pon a punto tu dispositivo", html:"<p>Ahora que sabes cómo funciona un ordenador por dentro, cuida el dispositivo que más usas: tu iPad o tu móvil. Revisa cada punto, arregla lo que haga falta y haz una captura del antes y el después (tapa cualquier dato personal):</p><ol><li><b>Actualizaciones:</b> ¿el sistema y las apps están al día? Actualiza lo pendiente.</li><li><b>Almacenamiento:</b> ¿cuánto espacio queda y qué ocupa más? Libera espacio borrando lo que no uses.</li><li><b>Copia de seguridad:</b> ¿tus fotos y archivos están en la nube (iCloud, OneDrive…)? ¿Cuándo fue la última copia?</li><li><b>Permisos de las apps:</b> ¿qué apps usan tu ubicación, cámara y micrófono? Quita los permisos que no tengan sentido.</li><li><b>Bloqueo:</b> ¿tienes código de desbloqueo seguro y bloqueo automático?</li><li><b>Tiempo de uso:</b> mira cuántas horas usaste el dispositivo la última semana y en qué apps. ¿Te sorprende? ¿Qué cambiarías?</li></ol>", entrega:"Informe con capturas por Teams", evalua:"anexo4"}
+       ],
+       anexos:["anexo1","anexo2","anexo3","anexo4"],
+       items:[
+        {tipo:"interactiva", t:"Repaso: componentes del ordenador", s:"8 preguntas con corrección automática.", quiz:"componentes"}
+       ]},
+      {id:"dig4-sa1-2", etiqueta:"Situación de aprendizaje 1.2", titulo:"Redes informáticas", subtitulo:"¿Hay alguien offline?",
+       bloque:"Bloque 1. Dispositivos digitales, sistemas operativos y de comunicación",
+       desc:"Qué es una red informática, qué tipos existen y cómo funcionan las redes cableadas e inalámbricas. Proyecto final: el esquema de la red del colegio.",
+       criterios:["1.1","1.2","1.3","1.4","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.3","3.6"],
+       producto:"Gráfico con la arquitectura de la red de nuestro centro educativo.",
+       teoria:`
+        <p>Hoy en día la comunicación entre dispositivos electrónicos es muy común, tanto para el ocio como para el trabajo de muchas empresas. Compartimos datos a través de conexiones 4G, 5G, wifi, NFC, Ethernet o bluetooth. Los móviles se conectan con otros móviles y con los proveedores de Internet a través de las redes de datos. Los ordenadores, portátiles, impresoras y otros dispositivos se conectan entre sí en redes locales para trabajar juntos, e incluso con ordenadores remotos en cualquier lugar de Internet.</p>
+        <h3>¿Qué es una red informática?</h3>
+        <p>Una red informática (o red de comunicación de datos, o red de computadoras) es un conjunto de sistemas informáticos conectados entre sí mediante dispositivos con cable o inalámbricos. Gracias a ellos comparten información en paquetes de datos, que se transmiten mediante impulsos eléctricos, ondas electromagnéticas u otro medio físico.</p>
+        <h3>Tipos de redes según su tamaño</h3>
+        <div class="defs">
+          <div><b>LAN</b><span>Local Area Network, red de área local</span><p>Las redes más pequeñas, como las de un cibercafé o un departamento.</p></div>
+          <div><b>MAN</b><span>Metropolitan Area Network, red de área metropolitana</span><p>Redes de tamaño intermedio, como las de un campus universitario, una gran biblioteca o una empresa, que conectan zonas alejadas entre sí.</p></div>
+          <div><b>WAN</b><span>Wide Area Network, red de área amplia</span><p>Las redes de mayor tamaño y alcance, como la red de redes: Internet.</p></div>
+        </div>
+        <h3>¿Cómo diseñamos una red funcional?</h3>
+        <p>Una red informática funcional tiene que permitir dos cosas:</p>
+        <ul><li>Que varios dispositivos salgan a Internet usando la misma línea de acceso, que normalmente es única.</li><li>Que los ordenadores compartan los recursos internos de la red: la impresora, el escáner o un almacenamiento en red que todos pueden usar.</li></ul>
+        <h3>Glosario de dispositivos de red</h3>
+        <div class="defs">
+          <div><b>Router</b><p>Conecta tu red con otras redes, como Internet, y decide por dónde enviar los datos.</p></div>
+          <div><b>Conmutador (switch)</b><p>Une varios equipos de la misma red y envía la información solo al equipo al que va dirigida.</p></div>
+          <div><b>Concentrador (hub)</b><p>Une varios equipos, pero reenvía todo lo que recibe a todos ellos.</p></div>
+          <div><b>Puente</b><p>Une dos partes de una red que usan el mismo protocolo de comunicación.</p></div>
+          <div><b>Pasarela</b><p>Conecta redes que usan tecnologías distintas, por ejemplo una de cable y una de fibra.</p></div>
+          <div><b>Punto de acceso</b><p>Permite conectar dispositivos inalámbricos a una red con cable.</p></div>
+          <div><b>Repetidor</b><p>Recibe la señal y la amplifica para que llegue más lejos.</p></div>
+          <div><b>Servidor de impresión</b><p>Permite compartir una impresora entre todos los equipos de la red.</p></div>
+          <div><b>Adaptador de red</b><p>La tarjeta que conecta cada equipo a la red, con cable o sin él.</p></div>
+        </div>`,
+       tareas:[
+        {n:1, t:"La red de tu casa", html:"<p>Diseña un gráfico que represente la arquitectura de una red que conecte entre sí todos los dispositivos de tu hogar.</p>"},
+        {n:2, t:"Opciones para crear una pequeña red", html:`<p>Completa la tabla con las opciones que existen para crear una pequeña red de datos. Las casillas con «?» son las que tienes que rellenar.</p>
+          <div class="table-wrap"><table class="tbl">
+            <thead><tr><th></th><th>Descripción</th><th>Ventajas</th><th>Inconvenientes</th></tr></thead>
+            <tbody>
+              <tr><th>Redes PLC</th><td>Usan la red eléctrica de la casa como medio físico para transmitir datos.</td><td class="q">?</td><td class="q">?</td></tr>
+              <tr><th>Redes wifi</th><td class="q">?</td><td>Instalación mínima: basta un equipo emisor para cubrir toda la casa. Imprescindibles para conectar equipos sin cables.</td><td class="q">?</td></tr>
+              <tr><th>Fibra óptica</th><td class="q">?</td><td class="q">?</td><td>Cables frágiles que no se pueden doblar mucho. Hay que cablear la casa y los equipos conectados no pueden moverse.</td></tr>
+              <tr><th>Red cableada UTP (par trenzado)</th><td>Cables con hilos de cobre recubiertos de plástico. Los hay de distintos tipos y velocidades.</td><td class="q">?</td><td class="q">?</td></tr>
+              <tr><th>Extensores</th><td class="q">?</td><td>Baratos y sencillos de instalar.</td><td class="q">?</td></tr>
+              <tr><th>Puntos de acceso</th><td class="q">?</td><td class="q">?</td><td>Hay que llevar un cable de red hasta ellos.</td></tr>
+            </tbody></table></div>`},
+        {n:3, t:"Conectando territorios", html:"<p>Investiga cómo se comunican la Península con Canarias, Baleares, Ceuta y Melilla y qué tipo de red hay instalada.</p>"},
+        {n:4, t:"Proyecto final: la red de nuestro colegio", html:`<p>Diseña un gráfico que represente la red del colegio: de dónde llega Internet, qué zonas y aulas se conectan, dónde están los puntos de acceso wifi, los ordenadores, el servidor y la impresora.</p>
+          <p>Fíjate en cómo está hecho este gráfico de la red del centro:</p>
+          <figure class="fig"><button class="zoom" data-zoom="img/red-centro.jpg" aria-label="Ampliar el gráfico de la red del centro"><img src="img/red-centro.jpg" alt="Gráfico de la red del Colegio La Inmaculada: desde la conexión de Telefónica se reparten las conexiones a secretaría, sala de profesores, aulas de informática, tutorías, infantil, primaria, biblioteca, puntos de acceso wifi y cámaras." loading="lazy"></button><figcaption>Gráfico de la red del centro. Pulsa la imagen para ampliarla.</figcaption></figure>`},
+        {n:5, t:"Crimpa tu propio cable de red RJ45", html:`
+          <p>El cable de red más usado en casas y centros es el <b>UTP de par trenzado</b>. Por dentro lleva <b>8 hilos de cobre</b> agrupados en <b>4 pares trenzados</b>: naranja, verde, azul y marrón. Cada par tiene un hilo de color liso y otro blanco con una raya de ese color. Se trenzan para reducir las interferencias.</p>
+          <p>En cada extremo se pone un conector <b>RJ45</b>, con 8 contactos. «Crimpar» es fijar el conector al cable con una crimpadora, que aprieta los contactos sobre los hilos.</p>
+          <h4>Orden de colores: norma T568B</h4>
+          <p>Coloca el conector con la pestaña hacia abajo y los contactos dorados hacia ti. El pin 1 queda a la izquierda.</p>
+          <ol class="pins">
+            <li><span class="wire w-st" style="--w:#f28c28"></span><b>1</b>Blanco-naranja</li>
+            <li><span class="wire" style="--w:#f28c28"></span><b>2</b>Naranja</li>
+            <li><span class="wire w-st" style="--w:#2e9e4f"></span><b>3</b>Blanco-verde</li>
+            <li><span class="wire" style="--w:#2a63d4"></span><b>4</b>Azul</li>
+            <li><span class="wire w-st" style="--w:#2a63d4"></span><b>5</b>Blanco-azul</li>
+            <li><span class="wire" style="--w:#2e9e4f"></span><b>6</b>Verde</li>
+            <li><span class="wire w-st" style="--w:#8a5a2b"></span><b>7</b>Blanco-marrón</li>
+            <li><span class="wire" style="--w:#8a5a2b"></span><b>8</b>Marrón</li>
+          </ol>
+          <p>Para un cable normal (directo) se usa <b>el mismo orden en los dos extremos</b>.</p>
+          <h4>Material</h4>
+          <p>Cable UTP, dos conectores RJ45, pelacables, crimpadora y comprobador de cables (tester).</p>
+          <h4>Pasos</h4>
+          <ol>
+            <li>Pela unos 2–3 cm de la funda exterior sin cortar los hilos.</li>
+            <li>Destrenza los pares y estira bien los hilos.</li>
+            <li>Ordénalos según la norma T568B.</li>
+            <li>Córtalos rectos, dejando unos 12–14 mm.</li>
+            <li>Mete los hilos en el conector sin que se descoloquen, hasta que toquen el fondo. La funda exterior tiene que quedar dentro del conector.</li>
+            <li>Comprueba el orden de los colores antes de crimpar.</li>
+            <li>Crimpa con fuerza.</li>
+            <li>Repite en el otro extremo.</li>
+          </ol>
+          <h4>¿Funciona?</h4>
+          <p>Conecta los dos extremos al tester. Si las luces del 1 al 8 se encienden en orden en los dos lados, tu cable funciona. Si alguna no se enciende o salen en otro orden, corta el conector y vuelve a empezar.</p>`, entrega:"En clase: se prueba con el tester"}
+       ],
+       items:[
+        {tipo:"contenido", t:"¿Qué es la información?", s:"Artículo de apoyo.", url:"https://concepto.de/informacion/"},
+        {tipo:"contenido", t:"¿Qué es una computadora?", s:"Artículo de apoyo.", url:"https://concepto.de/computadora/"},
+        {tipo:"interactiva", t:"Repaso: redes informáticas", s:"8 preguntas con corrección automática.", quiz:"redes"}
+       ]},
+      {id:"dig4-seguridad", etiqueta:"Situación de aprendizaje 3", titulo:"Seguridad en la red", subtitulo:"De alumnos a profesores: enseñamos a 6.º de Primaria",
+       bloque:"Bloque 3. Seguridad y bienestar digital",
+       desc:"Aprendemos los cinco principios de «Sé genial en Internet», los ponemos a prueba en Interland y preparamos y damos una sesión de seguridad digital al alumnado de 6.º de Primaria.",
+       criterios:["2.5","3.1","3.2","3.3","3.4","3.6","4.1","4.4","5.3"],
+       producto:"Sesión de seguridad digital impartida al alumnado de 6.º de Primaria, con su presentación.",
+       anexos:["sa3a1","sa3a2"],
+       teoria:`
+        <p>«Sé genial en Internet» es un programa de Google, adaptado en España junto con la Fad, el INCIBE y la Policía Nacional, que resume la seguridad digital en <b>cinco principios</b>. Cuatro de ellos son los mundos del juego Interland; el quinto los une a todos.</p>
+        <div class="worlds">
+          <article class="world" style="--wc:#7c4dcc">
+            <header><span class="wn">1</span><div><h3>Comparte con cuidado</h3><span>Sé listo · Mundo: Montaña Sensata</span></div></header>
+            <p>Todo lo que publicas forma tu <b>huella digital</b>: el rastro que dejas en Internet. Con ella, otras personas construyen tu <b>identidad digital</b>, lo que piensan de ti sin conocerte.</p>
+            <ul>
+              <li><b>Información personal:</b> nombre, dirección, colegio, teléfono, ubicación, fotos de tu casa o tu horario. No se comparte con desconocidos.</li>
+              <li><b>Lo publicado se queda:</b> aunque lo borres, alguien puede haber hecho una captura o haberlo reenviado.</li>
+              <li><b>Privacidad:</b> revisa quién ve tus publicaciones, quién puede escribirte y qué apps usan tu ubicación.</li>
+              <li><b>Lo de los demás también cuenta:</b> pide permiso antes de publicar fotos o datos de otra persona.</li>
+            </ul>
+            <p class="ask">Antes de publicar, pregúntate: ¿me importaría que lo viera mi familia, mi profesor o quien me entreviste para un trabajo dentro de diez años?</p>
+          </article>
+          <article class="world" style="--wc:#1f8fc9">
+            <header><span class="wn">2</span><div><h3>No caigas en trampas</h3><span>Sé alerta · Mundo: Río de la Realidad</span></div></header>
+            <p>No todo lo que aparece en Internet es verdad, ni todo el mundo es quien dice ser.</p>
+            <ul>
+              <li><b>Phishing:</b> mensajes o webs que se hacen pasar por un banco, una tienda, una red social o incluso un amigo para robarte contraseñas o datos. Si llega por SMS se llama <i>smishing</i>.</li>
+              <li><b>Señales de alarma:</b> prisa («tu cuenta se bloqueará en 24 h»), premios que no has pedido, faltas de ortografía, remitentes o direcciones web raras y peticiones de contraseñas o códigos.</li>
+              <li><b>Perfiles falsos:</b> fotos que no son reales, pocos seguidores, cuentas recién creadas o que piden datos o fotos muy pronto.</li>
+              <li><b>Bulos y desinformación:</b> antes de compartir una noticia, comprueba quién la publica, la fecha y si otros medios fiables la cuentan.</li>
+            </ul>
+            <p class="ask">Ante la duda, no pulses el enlace: entra tú mismo en la web o la app oficial.</p>
+          </article>
+          <article class="world" style="--wc:#d9822b">
+            <header><span class="wn">3</span><div><h3>Protege tus secretos</h3><span>Sé fuerte · Mundo: Torre del Tesoro</span></div></header>
+            <p>Tus cuentas guardan tus mensajes, fotos y datos. La contraseña es la llave.</p>
+            <ul>
+              <li><b>Contraseña fuerte:</b> larga (mejor una frase de varias palabras), con mayúsculas, números y símbolos, y nada fácil de adivinar como tu nombre, tu fecha de nacimiento o «123456».</li>
+              <li><b>Una contraseña distinta para cada cuenta:</b> si roban una, las demás siguen a salvo.</li>
+              <li><b>Verificación en dos pasos:</b> además de la contraseña, la cuenta pide un código que llega al móvil.</li>
+              <li><b>Nunca compartas tus contraseñas</b>, salvo con tu familia.</li>
+              <li><b>Dispositivos protegidos:</b> bloqueo de pantalla, sistema y apps actualizados y cerrar sesión en equipos compartidos.</li>
+            </ul>
+          </article>
+          <article class="world" style="--wc:#d64584">
+            <header><span class="wn">4</span><div><h3>Ser amable es genial</h3><span>Sé amable · Mundo: Reino Amable</span></div></header>
+            <p>Internet amplifica tanto lo bueno como lo malo. Detrás de cada pantalla hay una persona.</p>
+            <ul>
+              <li><b>Ciberacoso:</b> molestar, humillar, amenazar o excluir a alguien de forma repetida a través de medios digitales: mensajes, grupos, montajes, perfiles falsos…</li>
+              <li><b>Los roles:</b> quien acosa, quien lo sufre y los <b>espectadores</b>. Quien se ríe, comparte o calla también participa.</li>
+              <li><b>Cómo actuar:</b> no respondas a las provocaciones, guarda pruebas (capturas), bloquea y denuncia en la plataforma, y cuéntaselo a un adulto de confianza.</li>
+              <li><b>Netiqueta:</b> escribe como hablarías cara a cara y apoya a quien lo está pasando mal.</li>
+            </ul>
+          </article>
+          <article class="world" style="--wc:#2e9e4f">
+            <header><span class="wn">5</span><div><h3>Si tienes dudas, pregunta</h3><span>Sé valiente · Une todos los mundos</span></div></header>
+            <p>Ante cualquier situación que te incomode, te dé miedo o no sepas resolver, habla con un adulto de confianza: tu familia, tu tutor o un profesor. Pedir ayuda es de valientes.</p>
+            <p>También puedes llamar al <b>017</b>, la línea gratuita y confidencial de ayuda en ciberseguridad del INCIBE.</p>
+          </article>
+        </div>`,
+       tareas:[
+        {n:1, t:"Aprendemos la teoría", html:"<p>Lee la teoría de los cinco principios y haz un resumen con los conceptos clave de cada uno: huella digital, phishing, contraseña fuerte, verificación en dos pasos, ciberacoso… Después, comprueba lo que sabes con la ficha interactiva de repaso.</p>", evalua:"sa3a1", entrega:"Resumen por Teams"},
+        {n:2, t:"Jugamos a Interland", html:"<p>Juega a los cuatro mundos de Interland. Mientras juegas, anota en cada mundo:</p><ul><li>Qué principio trabaja.</li><li>Qué conceptos de la teoría aparecen.</li><li>Qué pregunta o reto te ha parecido más difícil.</li><li>Qué crees que les costará más a los alumnos de 6.º.</li></ul>", evalua:"sa3a1", entrega:"Diario de Interland por Teams", enlaces:[["Jugar a Interland","https://beinternetawesome.withgoogle.com/es_es/interland"]]},
+        {n:3, t:"Nos repartimos los mundos", html:"<p>Nos repartimos los cuatro mundos de Interland. Cada mundo tendrá sus expertos, que se encargarán de enseñar ese principio al alumnado de 6.º de Primaria.</p>"},
+        {n:4, t:"Preparamos la sesión", html:"<p>Diseña la sesión que vas a dar y la presentación que la acompaña, en Keynote o Canva. El guion debe incluir:</p><ol><li><b>Inicio:</b> una pregunta o una situación real para despertar el interés.</li><li><b>Explicación:</b> los conceptos clave del principio, con palabras que entienda un alumno de 11 años y ejemplos cercanos.</li><li><b>Juego:</b> el mundo de Interland, con las pistas que les darás.</li><li><b>Comprobación:</b> unas preguntas o una dinámica para ver si lo han entendido.</li><li><b>Cierre:</b> el mensaje que queréis que recuerden.</li></ol>", entrega:"Guion y presentación por Teams", evalua:"sa3a1"},
+        {n:5, t:"Ensayamos", html:"<p>Cada sesión se ensaya delante del resto de la clase. Los compañeros harán sugerencias de mejora, que tendrás que aplicar antes del gran día.</p>", evalua:"sa3a1"},
+        {n:6, t:"¡A 6.º de Primaria!", html:"<p>Llega el momento: impartimos las sesiones al alumnado de 6.º de Primaria. Recuerda hablar despacio, mirar al público, dejarles participar y ayudarles mientras juegan.</p>", evalua:"sa3a2"},
+        {n:7, t:"Reflexión final", html:"<p>Después de la sesión, valora individualmente cómo ha ido: qué funcionó, qué cambiarías, qué preguntas te hicieron y qué has aprendido enseñando a otros.</p>", evalua:"sa3a1", entrega:"Autoevaluación por Teams"}
+       ],
+       items:[
+        {tipo:"contenido", t:"Sé genial en Internet", s:"Web del programa, con materiales para alumnado, familias y docentes.", url:"https://beinternetawesome.withgoogle.com/es_es"},
+        {tipo:"contenido", t:"INCIBE: Tu ayuda en ciberseguridad (017)", s:"Línea gratuita y confidencial de ayuda.", url:"https://www.incibe.es/linea-de-ayuda-en-ciberseguridad"},
+        {tipo:"interactiva", t:"Repaso: seguridad en la red", s:"8 preguntas sobre los cinco principios.", quiz:"seguridad4"},
+        {tipo:"interactiva", t:"Ficha para 6.º: ¿Es seguro compartirlo?", s:"8 situaciones. Puedes usarla en tu sesión.", quiz:"seguridad"}
+       ]}
+      ,{id:"dig4-video", etiqueta:"Situación de aprendizaje 4", titulo:"Edición de vídeo y sonido", subtitulo:"Luces, cámara… ¡acción!",
+       bloque:"Bloque 2. Digitalización del entorno personal de aprendizaje",
+       desc:"Aprendemos el lenguaje del cine: los tipos de plano y los ángulos de cámara. Los cazamos con la cámara por el colegio y terminamos creando en grupo un cortometraje de ficción: guion, rodaje, edición de vídeo y sonido.",
+       criterios:["2.1","2.3","2.5","2.6","3.2","3.6","4.1","5.1","5.2","5.3"],
+       producto:"Cortometraje de ficción grabado y editado en grupo, con su guion y su storyboard.",
+       anexos:["sa4a1","sa4a2"],
+       teoria:`
+        <p>En el cine, cada plano es una decisión: <b>qué</b> enseñamos, <b>cuánto</b> enseñamos y <b>desde dónde</b>. Elegir bien el plano ayuda a contar la historia y a transmitir emociones sin decir una palabra.</p>
+        <h3>Los planos según lo que se ve</h3>
+        <p>Van de lo más abierto a lo más cerrado. Fíjate en que todos los dibujos son la misma escena: solo cambia el encuadre.</p>
+        ${planosHTML()}
+        <h3>Los ángulos de cámara</h3>
+        <p>Además de cuánto se ve, importa la altura desde la que mira la cámara. Si está a la altura de los ojos del personaje, el ángulo es <b>normal</b> y no transmite nada especial. Estos tres sí:</p>
+        ${angulosHTML()}
+        <h3>Trucos de encuadre</h3>
+        <ul>
+          <li><b>Regla de los tercios:</b> divide la imagen en 3×3 y coloca lo importante en las líneas o en sus cruces, no en el centro.</li>
+          <li><b>Aire:</b> deja espacio hacia donde mira o se mueve el personaje.</li>
+          <li><b>Cortes:</b> no cortes a los personajes por las articulaciones (cuello, codos, rodillas exactas, tobillos).</li>
+          <li><b>Plano y contraplano:</b> en un diálogo alternamos los planos de cada personaje, a menudo por encima del hombro del otro.</li>
+        </ul>
+        <h3>El sonido también cuenta</h3>
+        <p>La banda sonora de una película tiene cuatro elementos:</p>
+        <div class="defs">
+          <div><b>Diálogos</b><p>Lo que dicen los personajes. Graba cerca de quien habla y en un sitio sin ruido.</p></div>
+          <div><b>Música</b><p>Crea ambiente y emoción. Usa solo música libre de derechos o con licencia que lo permita.</p></div>
+          <div><b>Efectos</b><p>Pasos, puertas, lluvia… Se pueden grabar aparte y añadir al editar.</p></div>
+          <div><b>Silencio</b><p>Bien usado, crea tensión o da importancia a un momento.</p></div>
+        </div>
+        <h3>Editar: el montaje</h3>
+        <ul>
+          <li><b>Ordenar y cortar:</b> elige las mejores tomas y quita lo que sobra. Un buen montaje es ágil.</li>
+          <li><b>Transiciones:</b> el corte directo es la más usada; las demás, con moderación.</li>
+          <li><b>Sonido:</b> ajusta volúmenes para que los diálogos se entiendan por encima de la música.</li>
+          <li><b>Títulos y créditos:</b> título al principio y, al final, quién ha hecho qué y de dónde salen la música y las imágenes que no son vuestras.</li>
+          <li><b>Exportar:</b> guarda el vídeo final en un formato que se pueda compartir, como MP4.</li>
+        </ul>`,
+       tareas:[
+        {n:1, t:"Aprendemos los planos", html:"<p>Trabajamos en clase los doce planos y ángulos. Después, comprueba lo que sabes con la ficha interactiva «¿Qué plano es?».</p>", evalua:"sa4a1"},
+        {n:2, t:"Cazadores de planos", html:"<p>En el espacio del centro que te indique el profesor, haz una fotografía de cada uno de los doce planos, a tus compañeros o al paisaje.</p><ul><li>Pon a cada foto el nombre del plano.</li><li>Pide permiso a los compañeros antes de fotografiarlos. Las fotos son solo para clase: no se publican en redes.</li></ul>", entrega:"Álbum o presentación por Teams", evalua:"sa4a1"},
+        {n:3, t:"Historia muda en 6 planos", html:"<p>Cuenta una mini historia de unos 30 segundos <b>sin diálogos</b>, solo con imágenes. Tiene que tener seis planos distintos de los que hemos estudiado, y cada uno debe aportar algo a la historia.</p><ol><li>Piensa una situación sencilla con inicio, nudo y final (perder algo y encontrarlo, una sorpresa, una espera…).</li><li>Dibuja un storyboard rápido de seis viñetas indicando el plano de cada una.</li><li>Graba y monta los seis planos en orden.</li></ol><p>Si el espectador entiende la historia sin que nadie la explique, lo has conseguido.</p>", entrega:"Vídeo y storyboard por Teams", evalua:"sa4a1"},
+        {n:4, t:"Laboratorio de sonido: efectos y doblaje", html:"<p>El profesor te dará un fragmento de vídeo sin sonido. Tu reto es reconstruir toda su banda sonora:</p><ul><li><b>Efectos de sala (foley):</b> graba los sonidos con objetos de clase: pasos, puertas, papeles, lluvia con un plástico, golpes…</li><li><b>Doblaje:</b> pon voz a los personajes, ajustando lo que dices al movimiento de sus labios.</li><li><b>Música:</b> añade música libre de derechos que encaje con el ambiente.</li></ul><p>Mezcla todo en el editor ajustando los volúmenes y sincronizando cada sonido con su imagen.</p>", enlaces:[["Música y efectos libres en Pixabay","https://pixabay.com/music/"]], entrega:"Vídeo con sonido por Teams", evalua:"sa4a1"},
+        {n:5, t:"Preproducción: idea, guion y storyboard", html:"<p>En grupo, inventad una historia de ficción para un cortometraje y preparadla:</p><ol><li><b>Idea:</b> resumid la historia en dos o tres frases.</li><li><b>Guion literario:</b> escenas, lugares, personajes y diálogos.</li><li><b>Storyboard:</b> una viñeta por plano, indicando el tipo de plano y el ángulo.</li><li><b>Reparto de roles:</b> dirección, guion, cámara, sonido, montaje, interpretación, vestuario y atrezo, continuidad…</li><li><b>Plan de rodaje:</b> qué se graba, dónde, cuándo y quién lo necesita.</li></ol>", entrega:"Guion y storyboard por Teams", evalua:"sa4a1"},
+        {n:6, t:"Rodaje", html:"<p>¡A grabar! Cada persona cumple su rol. Consejos:</p><ul><li>Graba en horizontal y con la cámara estable.</li><li>Haz varias tomas de cada plano.</li><li>Cuida el sonido: silencio en el set mientras se graba.</li><li>Revisa el storyboard antes de cada plano.</li></ul>", evalua:"sa4a1"},
+        {n:7, t:"Postproducción: edición de vídeo y sonido", html:"<p>Montad el corto en iMovie u otro editor: ordenad y cortad las tomas, añadid música libre de derechos y efectos, ajustad los volúmenes, poned título y créditos y exportad el vídeo final.</p>", enlaces:[["Música y efectos libres en Pixabay","https://pixabay.com/music/"]], entrega:"Enlace de OneDrive al corto", evalua:"sa4a2"},
+        {n:8, t:"Estreno y reflexión", html:"<p>Proyectamos los cortos en clase. Después, cada persona valora su trabajo y el del grupo con la rúbrica del corto.</p>", entrega:"Autoevaluación por Teams", evalua:"sa4a1"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"¿Qué plano es?", s:"10 preguntas sobre planos y ángulos.", quiz:"planos"}
+       ]}
+      ,{id:"dig4-gamelab", etiqueta:"Situación de aprendizaje 5", titulo:"GameLab: juega, piensa, mejora", subtitulo:"Proyecto Gamer",
+       bloque:"Bloques 3 y 4. Bienestar digital y ciudadanía digital crítica",
+       desc:"Elegimos un videojuego educativo gratuito, lo jugamos, lo analizamos a fondo (también cómo cuida nuestro tiempo y nuestros datos) y proponemos una mejora creativa que presentamos a la clase.",
+       criterios:["2.3","2.5","3.2","3.5","4.4","4.5","5.2","5.3"],
+       producto:"Ficha de análisis, propuesta de mejora y presentación final del videojuego.",
+       anexos:["sa5a1","sa5a2","sa5a3"],
+       teoria:`
+        <p>Un <b>videojuego educativo</b> (o juego serio) está diseñado para enseñar algo mientras juegas. Para analizarlo como un experto, fíjate en estas piezas:</p>
+        <div class="defs">
+          <div><b>Mecánicas</b><p>Las reglas y las acciones que puedes hacer: saltar, responder, construir, gestionar recursos.</p></div>
+          <div><b>Dinámicas</b><p>Lo que pasa cuando juegas con esas reglas: competir, colaborar, explorar, superar retos.</p></div>
+          <div><b>Estética</b><p>Lo que sientes: diversión, tensión, curiosidad. Depende del diseño visual, el sonido y la historia.</p></div>
+          <div><b>Narrativa</b><p>La historia, los personajes y el mundo en el que transcurre el juego.</p></div>
+        </div>
+        <h3>Diseño que engancha… ¿demasiado?</h3>
+        <p>Muchos juegos y apps usan técnicas pensadas para que pases más tiempo dentro. No siempre son malas, pero conviene reconocerlas:</p>
+        <ul>
+          <li><b>Recompensas diarias y rachas:</b> te premian por volver cada día y te castigan si fallas uno.</li>
+          <li><b>Cajas de botín:</b> pagas o juegas por un premio al azar, un mecanismo parecido a las apuestas.</li>
+          <li><b>Compras dentro del juego</b> y monedas virtuales que esconden cuánto dinero real gastas.</li>
+          <li><b>Notificaciones</b> que te avisan para que vuelvas a jugar.</li>
+          <li><b>Partidas sin final claro</b>, que hacen difícil saber cuándo parar.</li>
+        </ul>
+        <h3>Accesibilidad</h3>
+        <p>Un buen juego educativo es para todos: texto legible y ajustable, subtítulos, colores que distingan también las personas con daltonismo, controles sencillos, varios idiomas y que funcione en distintos dispositivos.</p>`,
+       tareas:[
+        {n:1, t:"Elige y juega", duracion:"1 semana", html:"<p>Elige un videojuego gratuito y educativo de la lista de recursos. Juega lo suficiente para conocerlo bien: prueba varios niveles, equivócate a propósito y fíjate en todo.</p>"},
+        {n:2, t:"Analiza el videojuego", duracion:"1 semana", html:"<p>Rellena la ficha de análisis (Anexo 3) con todo lo que has observado. Justifica cada respuesta con ejemplos concretos del juego: capturas, situaciones o niveles.</p>", entrega:"Ficha de análisis por Teams", evalua:"sa5a2"},
+        {n:3, t:"Propón una mejora", duracion:"2 semanas", html:"<p>Diseña una mejora para el videojuego que salga de tu análisis. Puede ser:</p><ul><li><b>Visual:</b> rediseño de pantallas, personajes o menús.</li><li><b>Narrativa:</b> una historia o personajes nuevos.</li><li><b>De accesibilidad:</b> que lo pueda jugar más gente.</li><li><b>Funcional:</b> una nueva mecánica, un nivel o un modo de juego.</li></ul><p>Preséntala de forma visual (bocetos o maqueta en Canva) o escrita, explicando qué problema resuelve.</p>", entrega:"Propuesta de mejora por Teams", evalua:"sa5a2"},
+        {n:4, t:"Presentación final", duracion:"1 semana", html:"<p>Presenta a la clase tu análisis y tu mejora con una presentación digital (Canva, Keynote, Genially…). Estructura recomendada: el juego en un minuto, qué enseña, cómo funciona, lo bueno y lo mejorable, bienestar y datos, y tu propuesta de mejora.</p>", entrega:"Presentación por Teams", evalua:"sa5a2"}
+       ],
+       items:[
+        {tipo:"juego", t:"Interland – Sé genial en Internet", s:"Ciudadanía digital.", url:"https://beinternetawesome.withgoogle.com/es_es/interland"},
+        {tipo:"juego", t:"Fiscalito – Agencia Tributaria", s:"Educación fiscal y ciudadanía.", url:"https://www.agenciatributaria.es/AEAT.internet/Fiscalito/Fiscalito.shtml"},
+        {tipo:"juego", t:"CyberScouts – INCIBE", s:"Ciberseguridad y redes sociales.", url:"https://cyberscouts.incibe.es/"},
+        {tipo:"juego", t:"Juegos educativos – Junta de Castilla y León", s:"Varias materias.", url:"https://www.educa.jcyl.es/es/recursos-educativos/juegos-educativos"},
+        {tipo:"juego", t:"Juegos de educación vial – DGT", s:"Seguridad vial.", url:"https://www.dgt.es/educacion-vial/juegos/"},
+        {tipo:"juego", t:"Odisea 2030", s:"ODS y sostenibilidad.", url:"https://odisea2030.org/"},
+        {tipo:"juego", t:"Play to Care – Save the Children", s:"Derechos de la infancia.", url:"https://www.playtocare.org/es/"},
+        {tipo:"juego", t:"Más juegos educativos – cristic", s:"Recopilación de juegos de varias materias.", url:"https://www.cristic.com/juegos-educativos/"}
+       ]}
+      ,{id:"dig4-bulos", etiqueta:"Situación de aprendizaje 6", titulo:"¿Es verdad? IA, bulos y deepfakes", subtitulo:"Detectives de la información",
+       bloque:"Bloque 4. Ciudadanía digital crítica",
+       desc:"Aprendemos a comprobar si una noticia, una imagen o un vídeo son reales, ponemos a prueba lo que dicen las inteligencias artificiales y debatimos sobre dilemas digitales con argumentos verificados.",
+       criterios:["2.1","2.3","3.4","3.6","4.1","4.3","4.4"],
+       producto:"Informe de verificación, análisis de respuestas de IA, debate y tu kit antibulos.",
+       anexos:["sa6a1","sa6a2"],
+       teoria:`
+        <p>Cada día recibimos cientos de mensajes, noticias, imágenes y vídeos. Algunos son falsos, y ahora la inteligencia artificial permite crear contenido falso que parece totalmente real. Saber distinguirlo es una de las habilidades más importantes de un ciudadano digital.</p>
+        <h3>Conceptos clave</h3>
+        <div class="defs">
+          <div><b>Bulo</b><p>Información falsa que se difunde como si fuera verdad, a menudo por WhatsApp o redes sociales.</p></div>
+          <div><b>Desinformación</b><p>Información falsa creada a propósito para engañar, ganar dinero o influir en lo que pensamos.</p></div>
+          <div><b>Información errónea</b><p>Información falsa que se comparte sin intención de engañar, por error.</p></div>
+          <div><b>Clickbait</b><p>Titulares exagerados o misteriosos pensados para que hagas clic.</p></div>
+          <div><b>Deepfake</b><p>Vídeo, imagen o audio creado o manipulado con IA para que alguien parezca hacer o decir algo que nunca hizo.</p></div>
+          <div><b>Sesgo de confirmación</b><p>Tendencia a creer lo que encaja con lo que ya pensamos y a desconfiar de lo que no.</p></div>
+        </div>
+        <h3>Cuatro pasos para verificar</h3>
+        <ol class="steps4">
+          <li><b>Para.</b> Antes de creer o compartir, detente. Si te provoca mucha emoción (miedo, rabia, risa), desconfía más.</li>
+          <li><b>Investiga la fuente.</b> ¿Quién lo publica? ¿Es un medio conocido, una institución, una cuenta anónima? ¿Qué fecha tiene?</li>
+          <li><b>Busca otras fuentes.</b> ¿Lo cuentan otros medios fiables? ¿Lo han desmentido los verificadores?</li>
+          <li><b>Rastrea el original.</b> Busca de dónde sale la imagen, el vídeo o la cita. Muchas veces es real pero de otro lugar u otra época.</li>
+        </ol>
+        <h3>Herramientas</h3>
+        <ul>
+          <li><b>Búsqueda inversa de imágenes</b> con Google Lens o TinEye: subes una imagen y te dice dónde ha aparecido antes.</li>
+          <li><b>Verificadores:</b> Maldita.es, Newtral y EFE Verifica comprueban y desmienten bulos.</li>
+          <li><b>Lectura atenta:</b> la URL, la fecha, el autor, las faltas de ortografía y si cita fuentes.</li>
+        </ul>
+        <h3>Cómo detectar un deepfake</h3>
+        <ul>
+          <li>Rostros con bordes borrosos, piel demasiado lisa o parpadeo extraño.</li>
+          <li>Labios que no encajan del todo con el audio.</li>
+          <li>Manos con dedos de más o deformados, textos imposibles de leer, sombras y reflejos raros.</li>
+          <li>Voz plana o con entonación poco natural.</li>
+          <li>Y lo más fiable: comprobar si alguna fuente seria recoge ese vídeo o esa declaración.</li>
+        </ul>
+        <h3>La IA no siempre tiene razón</h3>
+        <ul>
+          <li><b>Alucinaciones:</b> la IA puede inventarse datos, citas o fuentes con total seguridad.</li>
+          <li><b>Sesgos:</b> aprende de textos e imágenes de Internet y puede repetir estereotipos.</li>
+          <li><b>Información desactualizada:</b> puede no conocer lo más reciente.</li>
+          <li><b>Úsala bien:</b> compruébala siempre, pídele las fuentes y revísalas, no le des datos personales y di cuándo la has usado.</li>
+        </ul>`,
+       tareas:[
+        {n:1, t:"Aprendemos a verificar", html:"<p>Trabajamos la teoría en clase. Después, comprueba lo que sabes con la ficha interactiva «¿Bulo o verdad?».</p>", evalua:"sa6a1"},
+        {n:2, t:"Laboratorio de verificación", html:`<p>Aquí tienes un dosier con mensajes, imágenes, vídeos y noticias que han circulado de verdad. Algunos son reales y otros falsos o generados con IA. Para cada pieza, completa un informe:</p><ol><li>¿Qué dice o qué muestra?</li><li>¿Quién lo publica y cuándo?</li><li>¿Qué has hecho para comprobarlo? (búsqueda inversa, otros medios, verificadores…)</li><li>Conclusión: real, falso o manipulado.</li><li>La prueba: el enlace o la captura que lo demuestra.</li></ol><p>Lo que más cuenta no es acertar, sino que tu proceso sea sólido y esté demostrado. La plantilla del informe está en el canal de Teams de la materia.</p><h4>El dosier</h4><p>Cuidado: no todo es falso.</p>${dosierHTML()}`, entrega:"Informe de verificación por Teams", evalua:"sa6a2", enlaces:[["Google Lens","https://lens.google/"],["TinEye","https://tineye.com/"],["Maldita.es","https://maldita.es/"],["Newtral","https://www.newtral.es/"],["EFE Verifica","https://verifica.efe.com/"]]},
+        {n:3, t:"La IA bajo la lupa", html:"<p>Con <b>Gemini</b>, haz una pregunta sobre un tema que conozcas bien o que puedas comprobar. Repítela varias veces y formulada de distintas maneras (si el profesor lo permite, compárala también con otra IA).</p><ul><li>Compara las respuestas: ¿coinciden? ¿Alguna se contradice?</li><li>Comprueba los datos con fuentes fiables. ¿Has encontrado errores o datos inventados?</li><li>Pide las fuentes y revisa si existen de verdad.</li><li>Busca sesgos: ¿hay estereotipos o puntos de vista que faltan?</li></ul><p>Recoge tus conclusiones en un documento con capturas.</p>", entrega:"Análisis con capturas por Teams", evalua:"sa6a2"},
+        {n:4, t:"Debate: dilemas digitales", html:"<p>Debatimos sobre un dilema digital real. Algunas propuestas:</p><ul><li>¿Se debería poder usar la IA para hacer los deberes?</li><li>¿Debería subir la edad mínima para tener redes sociales?</li><li>¿Móviles en el aula: sí o no?</li><li>¿Deberían las redes sociales borrar los bulos o eso es censura?</li></ul><p>Prepara tus argumentos con datos verificados y cita de dónde salen. En el debate se valora tanto la fuerza de tus argumentos como el respeto a quien opina distinto.</p>", evalua:"sa6a2"},
+        {n:5, t:"Tu kit antibulos", html:"<p>Crea una infografía con tu propio método para no caer en bulos: los pasos para verificar, las señales de alarma, las herramientas y los verificadores. Debe ser útil para cualquier persona de tu familia.</p>", entrega:"Infografía en PDF por Teams", evalua:"sa6a2"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"¿Bulo o verdad?", s:"8 preguntas sobre desinformación, deepfakes e IA.", quiz:"bulos"}
+       ]}
+      ,{id:"dig4-mayores", etiqueta:"Situación de aprendizaje 7", titulo:"Enseña a tus mayores", subtitulo:"Brecha digital, comercio y administración electrónica",
+       bloque:"Bloque 4. Ciudadanía digital crítica",
+       desc:"Descubrimos qué es la brecha digital escuchando a una persona mayor de nuestro entorno, aprendemos a comprar y hacer trámites por Internet con seguridad y le enseñamos algo que de verdad necesite.",
+       criterios:["2.3","2.5","3.3","3.4","4.1","4.2","5.2"],
+       producto:"Entrevista, guía paso a paso adaptada, sesión de enseñanza y reflexión sobre la brecha digital.",
+       anexos:["sa7a1","sa7a2","sa7a3"],
+       teoria:`
+        <h3>La brecha digital</h3>
+        <p>La <b>brecha digital</b> es la diferencia entre las personas que pueden usar la tecnología con soltura y las que no. No consiste solo en tener o no tener Internet:</p>
+        <div class="defs">
+          <div><b>Brecha de acceso</b><p>No tener dispositivo, conexión o una conexión de calidad.</p></div>
+          <div><b>Brecha de uso</b><p>Tener el dispositivo pero no saber usarlo para lo que se necesita.</p></div>
+          <div><b>Brecha de calidad</b><p>Usarlo, pero sin seguridad ni aprovechar todo lo que ofrece; por ejemplo, caer en timos.</p></div>
+        </div>
+        <p>Influyen la edad, los ingresos, vivir en una zona rural, el nivel de estudios o tener una discapacidad. Hoy pedir cita médica, cobrar una ayuda o hablar con el banco se hace cada vez más por Internet, así que quien se queda fuera pierde derechos y autonomía.</p>
+        <h3>Comprar por Internet con seguridad</h3>
+        <ul>
+          <li><b>¿La tienda es real?</b> Busca el aviso legal con el nombre de la empresa, su dirección y un teléfono. Busca opiniones fuera de la propia web.</li>
+          <li><b>Desconfía de los chollos:</b> precios muy por debajo de lo normal son la señal típica de una tienda falsa.</li>
+          <li><b>El candado (https) no basta:</b> indica que la conexión está cifrada, no que la tienda sea honrada.</li>
+          <li><b>Paga de forma segura:</b> tarjeta (mejor virtual o de prepago) o plataformas de pago conocidas. Nunca transferencias ni Bizum a desconocidos.</li>
+          <li><b>Tus derechos:</b> en compras online en la Unión Europea tienes, en general, 14 días para devolver un producto sin dar explicaciones. Y en España los productos nuevos tienen 3 años de garantía.</li>
+        </ul>
+        <h3>La administración electrónica</h3>
+        <p>Muchos trámites se pueden hacer desde casa en la <b>sede electrónica</b> de cada organismo: pedir cita médica, consultar notas, presentar la renta, pedir un certificado…</p>
+        <div class="defs">
+          <div><b>Sede electrónica</b><p>La web oficial de un organismo para hacer trámites. Su dirección suele terminar en <i>.gob.es</i> o en la de la comunidad autónoma.</p></div>
+          <div><b>Cl@ve</b><p>Sistema para identificarte ante la Administración con el móvil, sin certificado.</p></div>
+          <div><b>Certificado digital y DNIe</b><p>Tu identidad electrónica, que equivale a tu firma.</p></div>
+          <div><b>Carpeta Ciudadana</b><p>Web donde consultar en un solo sitio tus datos y trámites con la Administración.</p></div>
+        </div>
+        <p class="ask">Recuerda: la Administración y los bancos nunca te piden contraseñas ni códigos por SMS, correo o teléfono.</p>`,
+       tareas:[
+        {n:1, t:"Aprendemos la teoría", html:"<p>Trabajamos en clase la brecha digital, la compra segura y la administración electrónica. Después, comprueba lo que sabes con la ficha interactiva.</p>", evalua:"sa7a1"},
+        {n:2, t:"Entrevista a una persona mayor", html:"<p>Elige a una persona mayor de tu entorno: tus abuelos, un vecino, un familiar… Explícale el proyecto y pídele permiso. Hazle la entrevista del Anexo 3 para conocer qué usa, qué le cuesta y qué le gustaría aprender.</p><ul><li>No grabes ni fotografíes sin su permiso.</li><li>Sus datos personales no salen del trabajo de clase.</li></ul><p>Si no tienes a nadie a quien entrevistar, habla con el profesor: te propondrá una alternativa.</p>", entrega:"Resumen de la entrevista por Teams", evalua:"sa7a1"},
+        {n:3, t:"Diagnóstico y guía paso a paso", html:"<p>A partir de la entrevista, elige <b>una</b> necesidad concreta y realista. Algunas ideas:</p><ul><li>Hacer una videollamada con la familia.</li><li>Pedir cita médica por Internet.</li><li>Reconocer un mensaje de estafa.</li><li>Comprar algo en una tienda online fiable.</li><li>Guardar y enviar fotos.</li><li>Ampliar la letra o configurar el móvil para verlo mejor.</li></ul><p>Prepara una guía paso a paso pensada para esa persona: letra grande, capturas de pantalla, pocas palabras y un paso por imagen. Incluye siempre un consejo de seguridad.</p>", entrega:"Guía en PDF por Teams", evalua:"sa7a2"},
+        {n:4, t:"Sesión de enseñanza", html:"<p>Enseña a tu mayor con tu guía. La regla de oro: <b>no lo hagas tú por él o ella</b>. Explica, deja que lo haga, equivócate con paciencia y repite. Al acabar, pídele que responda el cuestionario de valoración del Anexo 3.</p>", entrega:"Cuestionario de valoración y una evidencia (foto de la sesión con permiso o breve descripción)", evalua:"sa7a2"},
+        {n:5, t:"¿Lo sabe hacer solo?", html:"<p>Unos días después, comprueba si tu mayor es capaz de hacerlo sin ayuda. Anota qué ha recordado, qué ha olvidado y cómo mejorarías tu guía.</p>", evalua:"sa7a1"},
+        {n:6, t:"Reflexión: la brecha digital a nuestro alrededor", html:"<p>Presenta a la clase tu experiencia: a quién has enseñado (sin datos personales), qué necesitaba, cómo fue y qué has aprendido. Terminad entre todos con propuestas para reducir la brecha digital en vuestro barrio o en el colegio.</p>", entrega:"Presentación en clase", evalua:"sa7a2"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: compras y trámites seguros", s:"8 preguntas sobre brecha digital, comercio y administración electrónica.", quiz:"mayores"},
+        {tipo:"contenido", t:"Carpeta Ciudadana", s:"Web oficial de la Administración General del Estado.", url:"https://carpetaciudadana.gob.es/"}
+       ]}
+      ,{id:"dig4-ia-app", etiqueta:"Situación de aprendizaje 8", titulo:"Crea tu herramienta con IA", subtitulo:"De la idea a la app, con la IA de ayudante",
+       bloque:"Bloque 2. Digitalización del entorno personal de aprendizaje",
+       desc:"La IA puede escribir una app en segundos, pero solo funciona bien si sabes pedirla, probarla y entenderla. Creamos una pequeña herramienta web útil para nosotros, la mejoramos versión a versión y aprendemos a leer su código.",
+       criterios:["2.4","4.1","5.1","5.2","5.4"],
+       producto:"Herramienta web funcional, con su ficha de requisitos, diario de versiones y documentación.",
+       anexos:["sa8a1","sa8a2"],
+       teoria:`
+        <p>Una <b>aplicación web</b> funciona en el navegador de cualquier dispositivo (iPad, móvil u ordenador) sin instalar nada: por eso es <b>multiplataforma</b>. Está hecha con tres lenguajes:</p>
+        <div class="defs">
+          <div><b>HTML</b><span>La estructura</span><p>Qué hay en la página: títulos, textos, botones, casillas.</p></div>
+          <div><b>CSS</b><span>El aspecto</span><p>Cómo se ve: colores, tamaños, tipos de letra, posiciones.</p></div>
+          <div><b>JavaScript</b><span>El comportamiento</span><p>Qué hace: calcular, guardar, reaccionar cuando pulsas un botón.</p></div>
+        </div>
+        <h3>Cómo pedirle una app a la IA</h3>
+        <p>La IA hace lo que le pides, no lo que quieres. Un buen encargo incluye:</p>
+        <ul>
+          <li><b>Objetivo:</b> qué problema resuelve y para quién.</li>
+          <li><b>Funciones:</b> la lista concreta de lo que debe hacer (y lo que no).</li>
+          <li><b>Diseño:</b> colores, tamaño de letra, que se vea bien en el iPad.</li>
+          <li><b>Formato:</b> «todo en un solo archivo HTML, sin librerías externas».</li>
+          <li><b>Ejemplo:</b> unos datos de prueba para ver cómo funciona.</li>
+        </ul>
+        <p class="ask">Pide de poco en poco: primero lo básico y, cuando funcione, añade funciones de una en una.</p>
+        <h3>El ciclo de trabajo</h3>
+        <ol class="steps4">
+          <li><b>Describe</b> lo que quieres con precisión.</li>
+          <li><b>Genera</b> el código con la IA y pégalo en el editor.</li>
+          <li><b>Prueba</b> todo, también los casos raros: campos vacíos, números negativos, textos muy largos.</li>
+          <li><b>Corrige:</b> explica a la IA el fallo exacto («al pulsar Calcular con la casilla vacía sale NaN») en vez de «no funciona».</li>
+          <li><b>Entiende:</b> pide que te explique las partes del código y cambia tú algo a mano.</li>
+        </ol>
+        <h3>Usar la IA con cabeza</h3>
+        <ul>
+          <li>La IA se equivoca: el código puede tener fallos aunque parezca perfecto. Pruébalo siempre.</li>
+          <li>No metas datos personales tuyos ni de otras personas en la IA ni en la app.</li>
+          <li>Di qué partes ha hecho la IA. Atribuir el trabajo con honestidad también es competencia digital.</li>
+          <li>Si usas imágenes, iconos o código de otros, comprueba su licencia y cítalos.</li>
+        </ul>`,
+       tareas:[
+        {n:1, t:"Aprendemos cómo funciona", html:"<p>Trabajamos en clase qué es una app web, cómo se le pide a una IA y el ciclo de trabajo. Comprueba lo que sabes con la ficha interactiva.</p>", evalua:"sa8a1"},
+        {n:2, t:"Detecta un problema y escribe los requisitos", html:"<p>Piensa en algo de tu día a día que una pequeña herramienta podría facilitar. Algunas ideas: un organizador de estudio, una calculadora de gastos, un repaso de vocabulario, un temporizador para estudiar, un conversor de unidades, un marcador para un deporte…</p><p>Escribe la <b>ficha de requisitos</b>:</p><ul><li>¿Qué problema resuelve y para quién?</li><li>Funciones mínimas (entre 3 y 5).</li><li>Cómo se tiene que ver.</li><li>Qué NO va a hacer.</li></ul>", entrega:"Ficha de requisitos por Teams", evalua:"sa8a2"},
+        {n:3, t:"Primer prototipo", html:"<p>Con <b>Gemini</b>, escribe tu encargo a partir de la ficha de requisitos. Prueba la app en la vista previa de Gemini (Canvas), si tu cuenta la tiene, o pega el código en un editor web como CodePen, y comprueba que funciona. Guarda el encargo (el prompt) que has usado: forma parte de la entrega.</p>", enlaces:[["CodePen","https://codepen.io/"]], evalua:"sa8a2"},
+        {n:4, t:"Prueba y mejora", html:"<p>Haz un plan de pruebas con al menos cinco casos, incluidos casos raros. Anota en tu <b>diario de versiones</b> cada fallo que encuentres, cómo se lo explicaste a la IA y qué cambió. Llega como mínimo a la versión 3, añadiendo funciones de una en una.</p>", entrega:"Diario de versiones por Teams", evalua:"sa8a2"},
+        {n:5, t:"Entiende tu código", html:"<p>Demuestra que entiendes lo que has creado:</p><ol><li>Señala en el código dónde está la estructura (HTML), el aspecto (CSS) y el comportamiento (JavaScript).</li><li>Explica con tus palabras qué hacen cinco partes del código.</li><li>Haz <b>tú, sin IA</b>, al menos un cambio a mano: un color, un texto, un nuevo botón o un cálculo, y explica qué has tocado.</li></ol>", entrega:"Explicación con capturas por Teams", evalua:"sa8a2"},
+        {n:6, t:"Presenta tu herramienta", html:"<p>Presenta tu herramienta a la clase con una demostración en directo. Acompáñala de una breve documentación: qué hace, cómo se usa, qué partes hizo la IA, qué hiciste tú y qué mejorarías.</p>", entrega:"Enlace a la herramienta y documentación por Teams", evalua:"sa8a2"}
+       ],
+       items:[
+        {tipo:"interactiva", t:"Repaso: apps web e IA", s:"8 preguntas sobre HTML, CSS, JavaScript y cómo trabajar con IA.", quiz:"iaapp"}
+       ]}
+    ],
+    norma:"Decreto 107/2022 del Consell (currículo de ESO de la Comunitat Valenciana)",
+    competencias:[
+      {n:1, t:"Equipos y redes", d:"Diseñar, montar y mantener ordenadores y redes de casa de forma segura y sostenible.", c:[
+        ["1.1","Elegir los componentes de un ordenador personal con criterio, pensando en la sostenibilidad y el consumo responsable."],
+        ["1.2","Diseñar una red doméstica, con cable e inalámbrica."],
+        ["1.3","Conectar los componentes del equipo y de la red, con dispositivos reales o simuladores."],
+        ["1.4","Instalar, usar y mantener sistemas operativos y aplicaciones, configurándolos a tus necesidades."],
+        ["1.5","Gestionar móviles y redes domésticas de forma segura y sostenible."],
+        ["1.6","Trabajar en equipo respetando tu rol y las aportaciones de los demás."]]},
+      {n:2, t:"Información y contenidos digitales", d:"Buscar y organizar información y crear, publicar y compartir contenidos digitales.", c:[
+        ["2.1","Buscar y seleccionar información de forma crítica, comprobando si es fiable."],
+        ["2.2","Organizar tu entorno personal de aprendizaje con recursos digitales."],
+        ["2.3","Crear y editar contenidos digitales con buen gusto y respetando la autoría."],
+        ["2.4","Programar aplicaciones sencillas respetando las licencias."],
+        ["2.5","Compartir y publicar información adaptándote al público, con respeto."],
+        ["2.6","Colaborar en equipo para seguir aprendiendo en entornos digitales."]]},
+      {n:3, t:"Bienestar y seguridad digital", d:"Proteger tus dispositivos, tus datos y tu salud en el mundo digital.", c:[
+        ["3.1","Aplicar medidas básicas de seguridad en dispositivos y redes."],
+        ["3.2","Proteger tus datos y tu identidad digital configurando la privacidad."],
+        ["3.3","Actuar para proteger a otras personas y cuidar las relaciones respetuosas."],
+        ["3.4","Reconocer las amenazas digitales y elegir la mejor respuesta."],
+        ["3.5","Prevenir los riesgos del uso continuado de los dispositivos."],
+        ["3.6","Mostrar empatía y resolver conflictos dialogando."]]},
+      {n:4, t:"Ciudadanía digital crítica", d:"Usar los medios digitales, el comercio electrónico y la administración digital de forma responsable y ética.", c:[
+        ["4.1","Usar datos y herramientas con ética y buena netiqueta."],
+        ["4.2","Conocer la administración y el comercio electrónicos y la brecha digital."],
+        ["4.3","Valorar los medios digitales como forma de expresión y participación responsable."],
+        ["4.4","Analizar mensajes digitales con espíritu crítico: intención, sesgos y actualidad."],
+        ["4.5","Valorar un uso de la tecnología accesible, sostenible y responsable."]]},
+      {n:5, t:"Retos y resolución de problemas", d:"Afrontar retos digitales y proponer soluciones creativas.", c:[
+        ["5.1","Afrontar con actitud positiva lo nuevo e inesperado en entornos digitales."],
+        ["5.2","Desarrollar proyectos de digitalización con soluciones creativas."],
+        ["5.3","Asumir responsabilidades dentro del equipo ante los retos de la sociedad digital."],
+        ["5.4","Resolver problemas técnicos sencillos y revisar el proceso cuando haga falta."]]}
+    ],
+    criterios:null, pesos:null
+  },
+  {
+    id:"piayr-2", nombre:"Programación, IA y Robótica I", corto:"PIAyR I", nivel:"2.º ESO", color:"#e08a00",
+    intro:"Proyecto «Carrera de saltadores» con LEGO SPIKE: diseñamos, programamos y mejoramos un robot que salta.",
+    unidades:[
+      {titulo:"Carrera de saltadores", desc:"Empezamos en noviembre. Montaje, primeros programas y pruebas de salto.",
+       items:[
+        {tipo:"contenido", t:"Conocer el hub y los motores de SPIKE", s:"Puertos, motores, sensores y la app."},
+        {tipo:"actividad", t:"Primer salto", s:"Programa el motor para que el saltador avance y mide la distancia."},
+        {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"}
+       ]}
+    ],
+    criterios:null, pesos:null
+  },
+  {
+    id:"piayr-3", nombre:"Programación, IA y Robótica II", corto:"PIAyR II", nivel:"3.º ESO", color:"#c2410c",
+    intro:"Proyecto «Misión a Marte»: construimos y programamos un rover con LEGO SPIKE para superar misiones.",
+    unidades:[
+      {titulo:"Misión a Marte", desc:"Empezamos en noviembre. Montaje del rover y programación de las primeras misiones.",
+       items:[
+        {tipo:"contenido", t:"Movimiento del rover: giros y distancias", s:"Rotaciones, grados y velocidad."},
+        {tipo:"actividad", t:"Misión 1: salir de la base", s:"Programa el rover para recorrer un circuito marcado."},
+        {tipo:"interactiva", t:"¿Qué pieza de SPIKE es?", s:"6 preguntas sobre hub, motores y sensores.", quiz:"spike"}
+       ]}
+    ],
+    criterios:null, pesos:null
+  },
+  {
+    id:"lab-audiovisual-1", nombre:"Laboratorio de Creación Audiovisual", corto:"Lab. Audiovisual", nivel:"1.º ESO", color:"#7c4dcc",
+    intro:"Contenidos en preparación.",
+    unidades:[],
+    criterios:null, pesos:null
+  },
+  {
+    id:"tecnologia-3", nombre:"Tecnología y Digitalización", corto:"Tecnología y Dig.", nivel:"3.º ESO", color:"#1f5fd6",
+    intro:"Proyecto de emprendimiento por ABP. Seis equipos llevan una idea hasta un prototipo presentado con iPad, Keynote y Canva.",
+    unidades:[
+      {titulo:"De la idea al prototipo", desc:"Fase actual del proyecto: cada equipo construye y presenta el prototipo de su producto o servicio.",
+       items:[
+        {tipo:"contenido", t:"Qué es un prototipo y para qué sirve", s:"Prototipo de baja y alta fidelidad, cuándo usar cada uno."},
+        {tipo:"actividad", t:"Diario de equipo", s:"Cada sesión, una entrada: qué hemos hecho, qué falta, quién se encarga."},
+        {tipo:"ficha", t:"Plantilla de presentación del prototipo", s:"Para preparar la exposición en Keynote."},
+        {tipo:"interactiva", t:"Repaso: fases del proyecto", s:"8 preguntas con corrección automática.", quiz:"abp"}
+       ]}
+    ],
+    criterios:null,
+    pesos:[["Prototipo",40],["Presentación",25],["Diario de equipo",20],["Coevaluación",15]],
+    pesosEjemplo:true
+  }
+];
+
+/* ============================================================
+   ANEXOS DE EVALUACIÓN (rúbricas, listas de control, escalas)
+   ============================================================ */
+const ANEXOS = {
+  sa8a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Repaso</th><td>1</td><td>Resultado de la ficha interactiva</td><td>2.4</td><td>10 %</td></tr>
+        <tr><th>Ficha de requisitos</th><td>2</td><td>Rúbrica (Anexo 2): fila A</td><td>5.2</td><td>15 %</td></tr>
+        <tr><th>Herramienta funcional</th><td>3–4</td><td>Rúbrica (Anexo 2): fila B</td><td>2.4 · 5.2</td><td>20 %</td></tr>
+        <tr><th>Pruebas y diario de versiones</th><td>4</td><td>Rúbrica (Anexo 2): fila C</td><td>5.1 · 5.4</td><td>25 %</td></tr>
+        <tr><th>Comprensión del código</th><td>5</td><td>Rúbrica (Anexo 2): fila D</td><td>2.4</td><td>20 %</td></tr>
+        <tr><th>Presentación y documentación</th><td>6</td><td>Rúbrica (Anexo 2): fila E</td><td>4.1</td><td>10 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  sa8a2:{titulo:"Anexo 2. Rúbrica del proyecto", para:"tareas 2 a 6", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Requisitos<span class="crit">5.2</span></th><td>Problema real y bien definido; funciones concretas y realistas; deja claro qué no hará.</td><td>Problema y funciones claros, con algún punto vago.</td><td>Requisitos generales o poco realistas.</td><td>Sin requisitos claros.</td></tr>
+        <tr><th>B. La herramienta<span class="crit">2.4 · 5.2</span></th><td>Funciona sin errores, cumple todos los requisitos, es fácil de usar y se ve bien en distintos dispositivos.</td><td>Funciona y cumple casi todos los requisitos.</td><td>Funciona a medias o con errores visibles.</td><td>No funciona.</td></tr>
+        <tr><th>C. Pruebas y mejora<span class="crit">5.1 · 5.4</span></th><td>Plan de pruebas con casos raros, fallos descritos con precisión y al menos tres versiones bien documentadas.</td><td>Pruebas y diario completos con alguna versión poco explicada.</td><td>Pocas pruebas o diario incompleto.</td><td>No hay pruebas ni diario.</td></tr>
+        <tr><th>D. Comprensión del código<span class="crit">2.4</span></th><td>Identificas HTML, CSS y JavaScript, explicas bien cinco partes y haces cambios a mano que funcionan.</td><td>Explicas las partes con algún error y haces un cambio a mano.</td><td>Explicación superficial o cambio que no funciona.</td><td>No demuestras entender el código.</td></tr>
+        <tr><th>E. Uso ético y documentación<span class="crit">4.1</span></th><td>Documentación clara; indicas con honestidad qué hizo la IA y qué hiciste tú; sin datos personales; recursos citados.</td><td>Documentación completa con algún detalle sin citar.</td><td>Documentación incompleta.</td><td>No indicas el uso de IA o hay datos personales.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  anexo4:{titulo:"Anexo 4. Lista de control: pon a punto tu dispositivo", para:"Tarea 8", html:`
+    <div class="table-wrap"><table class="tbl pts">
+      <thead><tr><th>Punto revisado (con captura del antes y el después)</th><th>Puntos</th></tr></thead>
+      <tbody>
+        <tr><td>Sistema y apps actualizados (criterio 1.4)</td><td>2</td></tr>
+        <tr><td>Almacenamiento revisado y espacio liberado (1.4)</td><td>1,5</td></tr>
+        <tr><td>Copia de seguridad comprobada o activada (1.5 · 3.1)</td><td>1,5</td></tr>
+        <tr><td>Permisos de ubicación, cámara y micrófono revisados (3.1)</td><td>2</td></tr>
+        <tr><td>Bloqueo con código y bloqueo automático (3.1)</td><td>1</td></tr>
+        <tr><td>Tiempo de uso analizado con una reflexión y un cambio concreto (3.5)</td><td>2</td></tr>
+      </tbody>
+      <tfoot><tr><th>Total</th><th>10</th></tr></tfoot>
+    </table></div>`},
+  sa7a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Repaso</th><td>1</td><td>Resultado de la ficha interactiva</td><td>3.4 · 4.2</td><td>10 %</td></tr>
+        <tr><th>Entrevista</th><td>2</td><td>Completa, respetuosa y con permiso; el resumen identifica qué tipo de brecha tiene la persona</td><td>4.2</td><td>15 %</td></tr>
+        <tr><th>Guía paso a paso</th><td>3</td><td>Rúbrica (Anexo 2): filas A, B y D</td><td>2.3 · 2.5 · 3.4</td><td>25 %</td></tr>
+        <tr><th>Sesión de enseñanza</th><td>4</td><td>Rúbrica (Anexo 2): fila C y cuestionario de valoración</td><td>3.3 · 5.2</td><td>25 %</td></tr>
+        <tr><th>Comprobación</th><td>5</td><td>Registro de lo que recuerda y propuestas de mejora de la guía</td><td>5.2</td><td>10 %</td></tr>
+        <tr><th>Reflexión final</th><td>6</td><td>Rúbrica (Anexo 2): fila E</td><td>4.2 · 4.1</td><td>15 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  sa7a2:{titulo:"Anexo 2. Rúbrica del proyecto", para:"tareas 3, 4 y 6", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Necesidad elegida<span class="crit">4.2</span></th><td>Sale claramente de la entrevista, es útil para esa persona y realista.</td><td>Relacionada con la entrevista y útil.</td><td>Poco relacionada con lo que necesita la persona.</td><td>Elegida sin tener en cuenta la entrevista.</td></tr>
+        <tr><th>B. Guía adaptada<span class="crit">2.5 · 2.3</span></th><td>Letra grande, un paso por imagen, capturas claras y lenguaje sencillo: la persona puede seguirla sola.</td><td>Clara y con capturas, con algún paso confuso.</td><td>Demasiado texto, letra pequeña o pasos que faltan.</td><td>No sirve para que la persona aprenda.</td></tr>
+        <tr><th>C. Enseñanza<span class="crit">3.3 · 5.2</span></th><td>Enseñas con paciencia, dejas que lo haga y la persona termina sabiendo hacerlo; muy buena valoración.</td><td>Buena sesión; la persona lo hace con algo de ayuda.</td><td>Lo haces tú casi todo o la sesión queda a medias.</td><td>No hay sesión o no hay evidencia.</td></tr>
+        <tr><th>D. Seguridad<span class="crit">3.4</span></th><td>La guía incluye consejos de seguridad concretos y útiles para esa tarea (timos, contraseñas, webs oficiales).</td><td>Incluye un consejo de seguridad adecuado.</td><td>El consejo es muy general.</td><td>No hay consejos de seguridad.</td></tr>
+        <tr><th>E. Reflexión<span class="crit">4.2 · 4.1</span></th><td>Explicas con ejemplos qué es la brecha digital, cómo afecta a las personas y propones soluciones realistas, respetando la intimidad de tu mayor.</td><td>Explicas la brecha con algún ejemplo y propones alguna solución.</td><td>Reflexión superficial.</td><td>No hay reflexión.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  sa7a3:{titulo:"Anexo 3. Guion de entrevista y cuestionario de valoración", para:"tareas 2 y 4", html:`
+    <div class="ficha">
+      <div class="ficha-sec"><h4>Entrevista: tu relación con la tecnología</h4><ul>
+        <li>¿Qué dispositivos tienes y usas? (móvil, tableta, ordenador, tele inteligente…)</li>
+        <li>¿Para qué los usas normalmente?</li>
+        <li>¿Quién te enseñó? ¿Cómo aprendiste?</li>
+        <li>¿Qué te cuesta más o te pone nervioso?</li>
+        <li>¿Has tenido que hacer algún trámite por Internet? ¿Cómo fue?</li>
+        <li>¿Has recibido alguna vez un mensaje o una llamada que te pareciera un engaño?</li>
+        <li>¿Qué te gustaría aprender a hacer tú solo o sola?</li>
+        <li>¿Cómo te sientes cuando algo solo se puede hacer por Internet?</li>
+      </ul></div>
+      <div class="ficha-sec"><h4>Valoración de la sesión (la responde tu mayor)</h4><ul>
+        <li>¿Te ha resultado útil lo que has aprendido? (Nada · Poco · Bastante · Mucho)</li>
+        <li>¿Te lo han explicado con claridad y paciencia?</li>
+        <li>¿Te ves capaz de hacerlo sin ayuda?</li>
+        <li>¿La guía se entiende y la vas a usar?</li>
+        <li>¿Qué otra cosa te gustaría aprender?</li>
+      </ul></div>
+    </div>`},
+  sa6a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Repaso</th><td>1</td><td>Resultado de la ficha interactiva</td><td>3.4</td><td>10 %</td></tr>
+        <tr><th>Informe de verificación</th><td>2</td><td>Rúbrica (Anexo 2): fila A</td><td>2.1 · 4.4</td><td>30 %</td></tr>
+        <tr><th>La IA bajo la lupa</th><td>3</td><td>Rúbrica (Anexo 2): fila B</td><td>4.1 · 4.4</td><td>20 %</td></tr>
+        <tr><th>Debate</th><td>4</td><td>Rúbrica (Anexo 2): filas C y D</td><td>4.3 · 3.6</td><td>20 %</td></tr>
+        <tr><th>Kit antibulos</th><td>5</td><td>Rúbrica (Anexo 2): fila E</td><td>2.3</td><td>20 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  sa6a2:{titulo:"Anexo 2. Rúbrica del tema", para:"tareas 2 a 5", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Proceso de verificación<span class="crit">2.1 · 4.4</span></th><td>Aplicas los cuatro pasos en todas las piezas, usas varias herramientas y demuestras cada conclusión con pruebas.</td><td>Verificas todas las piezas con pruebas, aunque alguna con un solo método.</td><td>Algunas conclusiones no están demostradas o faltan piezas.</td><td>Das conclusiones sin comprobar.</td></tr>
+        <tr><th>B. Uso crítico de la IA<span class="crit">4.1 · 4.4</span></th><td>Comparas varias respuestas, detectas errores, inventos y sesgos y los demuestras con fuentes fiables.</td><td>Comparas respuestas y compruebas datos, con alguna conclusión poco justificada.</td><td>Análisis superficial: describes las respuestas sin comprobarlas.</td><td>Copias las respuestas sin analizarlas.</td></tr>
+        <tr><th>C. Argumentación<span class="crit">4.3</span></th><td>Argumentos sólidos, con datos verificados y fuentes citadas; respondes bien a los contrarios.</td><td>Buenos argumentos con algún dato sin fuente.</td><td>Argumentos poco fundamentados u opiniones sin datos.</td><td>No aportas argumentos.</td></tr>
+        <tr><th>D. Respeto en el debate<span class="crit">3.6</span></th><td>Escuchas, respetas los turnos y rebates las ideas, nunca a las personas.</td><td>Respetuoso, con alguna interrupción.</td><td>Interrumpes a menudo o descalificas ideas sin argumentos.</td><td>Faltas al respeto.</td></tr>
+        <tr><th>E. Kit antibulos<span class="crit">2.3</span></th><td>Completo, claro y atractivo, útil para cualquier persona y con imágenes libres o citadas.</td><td>Completo y claro, con algún fallo de diseño.</td><td>Incompleto o poco claro.</td><td>No sirve como guía.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  sa5a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Qué se valora</th><th>Tarea</th><th>En qué me fijo</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Análisis del videojuego</th><td>2</td><td>Calidad y profundidad del análisis, justificación del valor educativo y presentación clara y cuidada</td><td>3.2 · 3.5 · 4.4 · 4.5</td><td>25 %</td></tr>
+        <tr><th>Propuesta de mejora</th><td>3</td><td>Originalidad, viabilidad y creatividad; relación con el análisis; diseño visual o técnico adecuado</td><td>2.3 · 5.2</td><td>25 %</td></tr>
+        <tr><th>Presentación final</th><td>4</td><td>Claridad, estructura y uso de herramientas digitales</td><td>2.5</td><td>20 %</td></tr>
+        <tr><th>Creatividad e innovación</th><td>3–4</td><td>Atractivo visual o conceptual; elementos nuevos e interesantes</td><td>2.3 · 5.2</td><td>15 %</td></tr>
+        <tr><th>Actitud y trabajo en el aula</th><td>1–4</td><td>Implicación, esfuerzo y compromiso</td><td>5.3</td><td>15 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  sa5a2:{titulo:"Anexo 2. Rúbrica del proyecto", para:"tareas 2, 3 y 4", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Análisis<span class="crit">4.4 · 3.5 · 3.2 · 4.5</span></th><td>Respondes todos los apartados de la ficha con ejemplos concretos del juego y valoras con criterio su valor educativo, su accesibilidad y cómo trata tu tiempo y tus datos.</td><td>Completas la ficha con ejemplos, aunque algún apartado es superficial.</td><td>Faltan apartados o las respuestas son muy generales, sin ejemplos.</td><td>La ficha está incompleta o no demuestra que hayas jugado.</td></tr>
+        <tr><th>B. Propuesta de mejora<span class="crit">5.2 · 2.3</span></th><td>Original, realista y bien explicada; resuelve un problema detectado en el análisis y está bien diseñada.</td><td>Clara y realista, relacionada con el análisis, con un diseño mejorable.</td><td>Poco desarrollada o sin relación clara con el análisis.</td><td>No hay propuesta o no se entiende.</td></tr>
+        <tr><th>C. Presentación<span class="crit">2.5</span></th><td>Bien estructurada, clara y visual; la expones con seguridad y respondes a las preguntas.</td><td>Clara y ordenada, con algún fallo de diseño o de exposición.</td><td>Desordenada, con mucho texto o leída.</td><td>No se entiende o no se presenta.</td></tr>
+        <tr><th>D. Creatividad<span class="crit">2.3 · 5.2</span></th><td>Aporta ideas nuevas y sorprendentes con un resultado muy atractivo.</td><td>Aporta alguna idea propia con un resultado atractivo.</td><td>Ideas poco originales.</td><td>Sin aportación propia.</td></tr>
+        <tr><th>E. Actitud y trabajo<span class="crit">5.3</span></th><td>Aprovechas todas las sesiones, cumples los plazos y ayudas a los demás.</td><td>Trabajas en clase y cumples los plazos.</td><td>Trabajas de forma irregular o con retrasos.</td><td>No aprovechas las sesiones.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
+  sa5a3:{titulo:"Anexo 3. Ficha de análisis del videojuego", para:"tarea 2", html:`
+    <p>Estas son las preguntas que tienes que responder. La plantilla en Word está en el canal de Teams de la materia.</p>
+    <div class="ficha"><div class="ficha-sec"><h4>Ficha técnica</h4><ul><li>Nombre del videojuego</li><li>Web de acceso o plataforma (¿navegador, app?)</li><li>Creador: quién lo ha hecho (empresa, organismo público, ONG…)</li><li>Idioma disponible</li><li>Número de jugadores y duración aproximada</li><li>¿Se puede guardar la partida? ¿Tiene instrucciones?</li></ul></div><div class="ficha-sec"><h4>1. Objetivo educativo</h4><ul><li>¿Qué intenta enseñar o reforzar?</li><li>¿Qué valores transmite?</li><li>¿Los contenidos son correctos? ¿Has encontrado algún error o idea falsa?</li></ul></div><div class="ficha-sec"><h4>2. Historia y mundo del juego</h4><ul><li>¿Tiene historia o narrador? ¿Qué importancia tiene?</li><li>¿Dónde y cuándo transcurre? ¿Cómo es el entorno?</li></ul></div><div class="ficha-sec"><h4>3. Mecánicas y dinámicas</h4><ul><li>¿Qué acciones hace el jugador? (resolver puzles, gestionar recursos, responder preguntas…)</li><li>¿Cuál es la misión? ¿Qué hay que hacer para ganar?</li><li>¿Cómo te recompensa? (puntos, niveles, insignias…)</li><li>¿Cuánto puedes decidir o cambiar tú dentro del juego?</li></ul></div><div class="ficha-sec"><h4>4. Diseño y accesibilidad</h4><ul><li>¿Está bien diseñado? ¿Es intuitivo?</li><li>¿Es accesible para todos? (tamaño del texto, subtítulos, colores, idioma, dispositivos)</li><li>¿Para qué edad crees que está pensado?</li></ul></div><div class="ficha-sec"><h4>5. Bienestar y datos personales</h4><ul><li>¿Te pide registrarte o datos personales? ¿Cuáles?</li><li>¿Tiene publicidad, compras o enlaces a redes sociales?</li><li>¿Usa trucos para que juegues más tiempo? (recompensas diarias, rachas, avisos)</li><li>¿Crees que es un juego sano para usar a menudo? ¿Por qué?</li></ul></div><div class="ficha-sec"><h4>6. Motivación y entretenimiento</h4><ul><li>¿Ha sido divertido? ¿Motiva a seguir jugando? ¿Por qué?</li></ul></div><div class="ficha-sec"><h4>7. Puntos fuertes y puntos a mejorar</h4><ul><li>Al menos dos fortalezas del juego</li><li>Al menos dos aspectos mejorables</li></ul></div><div class="ficha-sec"><h4>8. Propuesta de mejora</h4><ul><li>Describe una mejora concreta: una nueva mecánica, un rediseño visual, una mejora de accesibilidad, una adaptación para otro nivel educativo…</li></ul></div></div>`},
+  sa4a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Repaso de planos</th><td>1</td><td>Resultado de la ficha interactiva</td><td>2.1</td><td>5 %</td></tr>
+        <tr><th>Cazadores de planos</th><td>2</td><td>Los doce planos están, son correctos y tienen su nombre; se ha pedido permiso</td><td>2.3 · 3.2 · 4.1</td><td>15 %</td></tr>
+        <tr><th>Historia muda en 6 planos</th><td>3</td><td>Se entiende sin diálogos, usa seis planos distintos y el storyboard coincide con el vídeo</td><td>2.3 · 5.2</td><td>10 %</td></tr>
+        <tr><th>Laboratorio de sonido</th><td>4</td><td>Efectos, doblaje y música sincronizados con la imagen y volúmenes equilibrados; música libre de derechos</td><td>2.3 · 4.1 · 5.1</td><td>10 %</td></tr>
+        <tr><th>Guion, storyboard y plan de rodaje</th><td>5</td><td>Están completos y el storyboard indica plano y ángulo en cada viñeta</td><td>2.3 · 5.2</td><td>15 %</td></tr>
+        <tr><th>Trabajo en tu rol durante el rodaje</th><td>6</td><td>Observación en clase: cumples tu rol y colaboras</td><td>2.6 · 3.6 · 5.3</td><td>10 %</td></tr>
+        <tr><th>Cortometraje final</th><td>7</td><td>Rúbrica del corto (Anexo 2)</td><td>2.3 · 2.5 · 4.1 · 5.2</td><td>25 %</td></tr>
+        <tr><th>Reflexión final</th><td>8</td><td>Autoevaluación con la rúbrica del Anexo 2</td><td>5.3</td><td>10 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  sa4a2:{titulo:"Anexo 2. Rúbrica del cortometraje", para:"tareas 7 y 8", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Historia<span class="crit">5.2</span></th><td>La historia se entiende, tiene inicio, nudo y desenlace y engancha.</td><td>Se entiende y tiene estructura, aunque algún momento flojea.</td><td>Cuesta seguirla o le falta alguna parte.</td><td>No se entiende la historia.</td></tr>
+        <tr><th>B. Lenguaje cinematográfico<span class="crit">2.3</span></th><td>Usa variedad de planos y ángulos, elegidos con intención y bien encuadrados.</td><td>Usa varios tipos de plano, con algún encuadre mejorable.</td><td>Casi todo con el mismo plano o con encuadres descuidados.</td><td>No hay intención en los planos.</td></tr>
+        <tr><th>C. Montaje<span class="crit">2.3</span></th><td>Ritmo ágil, cortes limpios, sin tomas sobrantes; transiciones con sentido.</td><td>Montaje correcto con algún corte o toma mejorable.</td><td>Ritmo lento o cortes bruscos que dificultan seguir la historia.</td><td>Tomas sin editar o desordenadas.</td></tr>
+        <tr><th>D. Sonido<span class="crit">2.3</span></th><td>Diálogos claros, música y efectos que refuerzan la historia y volúmenes bien ajustados.</td><td>Se entiende todo, con algún desajuste de volumen.</td><td>Hay partes que no se oyen bien o la música tapa los diálogos.</td><td>El sonido impide seguir el corto.</td></tr>
+        <tr><th>E. Títulos, créditos y derechos<span class="crit">4.1 · 2.5</span></th><td>Título y créditos completos; música e imágenes libres de derechos y citadas; el corto se comparte correctamente.</td><td>Créditos completos con algún fallo en las citas.</td><td>Créditos incompletos o material sin citar.</td><td>Sin créditos o con material protegido sin permiso.</td></tr>
+        <tr><th>F. Trabajo en equipo<span class="crit">3.6 · 5.3</span></th><td>Cumples tu rol a tiempo, aportas ideas y ayudas a resolver los desacuerdos dialogando.</td><td>Cumples tu rol y colaboras cuando se te pide.</td><td>Cumples solo parte de tu rol.</td><td>No cumples tu rol o dificultas el trabajo del grupo.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4. La nota es la media de las filas multiplicada por 2,5.</p>`},
+  sa3a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
+    <p>Tu nota del tema sale de seis evidencias. Cada una se relaciona con criterios de evaluación de la materia. Así sabes desde el primer día qué tienes que demostrar y cómo lo voy a comprobar.</p>
+    <div class="table-wrap"><table class="tbl ev">
+      <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><th>Resumen de la teoría y repaso</th><td>1</td><td>Revisión del resumen y resultado del repaso interactivo</td><td>3.1 · 3.2 · 3.4</td><td>15 %</td></tr>
+        <tr><th>Diario de Interland</th><td>2</td><td>Revisión de las notas de cada mundo</td><td>3.4 · 4.4</td><td>10 %</td></tr>
+        <tr><th>Guion y presentación</th><td>4</td><td>Rúbrica (Anexo 2): filas A, B, C y D</td><td>2.5 · 3.1 · 3.2 · 4.1 · 4.4</td><td>25 %</td></tr>
+        <tr><th>Sesión con 6.º de Primaria</th><td>6</td><td>Rúbrica (Anexo 2): filas A, B y E</td><td>2.5 · 3.3</td><td>30 %</td></tr>
+        <tr><th>Trabajo en equipo durante la preparación y el ensayo</th><td>3–5</td><td>Observación en clase y valoración de los compañeros: fila F</td><td>3.6 · 5.3</td><td>10 %</td></tr>
+        <tr><th>Reflexión final</th><td>7</td><td>Autoevaluación con la rúbrica del Anexo 2</td><td>5.3</td><td>10 %</td></tr>
+      </tbody>
+      <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
+    </table></div>`},
+  sa3a2:{titulo:"Anexo 2. Rúbrica de la sesión de seguridad digital", para:"tareas 4, 5, 6 y 7", html:`
+    <p>Con esta rúbrica te valoro yo, te valoran tus compañeros en el ensayo y te valoras tú en la reflexión final. Léela antes de preparar tu sesión: te dice exactamente qué hace falta para llegar a cada nivel.</p>
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. Dominio de los conceptos<span class="crit">3.1 · 3.2 · 3.4</span></th><td>Explicas todos los conceptos de tu mundo sin errores, con ejemplos propios, y respondes con seguridad a las preguntas.</td><td>Explicas los conceptos correctamente, aunque con pocos ejemplos o alguna duda al responder.</td><td>Faltan conceptos importantes o hay algún error.</td><td>Hay errores graves o no se entiende qué se quiere enseñar.</td></tr>
+        <tr><th>B. Adaptación al público<span class="crit">2.5</span></th><td>El lenguaje, los ejemplos y la dinámica están pensados para alumnos de 11 años y consiguen que participen.</td><td>La sesión se entiende y es adecuada, aunque algún momento resulta difícil o poco participativo.</td><td>Hay partes demasiado técnicas o largas y cuesta mantener su atención.</td><td>La sesión no está adaptada a 6.º de Primaria.</td></tr>
+        <tr><th>C. Guion y presentación<span class="crit">4.1</span></th><td>El guion tiene sus cinco partes. La presentación es clara y atractiva, con poco texto e imágenes con licencia libre o citadas.</td><td>El guion está completo y la presentación es clara, con algún fallo de diseño o de citas.</td><td>Falta alguna parte del guion o la presentación tiene demasiado texto o imágenes sin citar.</td><td>No hay guion o la presentación no sirve de apoyo.</td></tr>
+        <tr><th>D. Situaciones reales y espíritu crítico<span class="crit">4.4</span></th><td>Usas casos reales o creíbles (mensajes, perfiles, noticias) y enseñas a analizarlos paso a paso.</td><td>Usas ejemplos realistas, pero sin enseñar del todo a analizarlos.</td><td>Los ejemplos son poco realistas o muy generales.</td><td>No hay ejemplos.</td></tr>
+        <tr><th>E. Actitud con 6.º<span class="crit">3.3</span></th><td>Tratas al alumnado con respeto y paciencia, animas a participar, ayudas mientras juegan y transmites el mensaje de pedir ayuda.</td><td>Trato respetuoso y ayudas cuando te lo piden.</td><td>Ayudas poco o hay momentos de impaciencia.</td><td>Trato poco respetuoso o desinterés.</td></tr>
+        <tr><th>F. Trabajo en equipo y responsabilidad<span class="crit">3.6 · 5.3</span></th><td>Cumples tu parte a tiempo, aportas ideas, escuchas y ayudas a resolver los desacuerdos dialogando.</td><td>Cumples tu parte y colaboras cuando se te pide.</td><td>Cumples solo parte de lo acordado o colaboras poco.</td><td>No cumples tu parte o dificultas el trabajo del grupo.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="desc">Cada fila se puntúa de 1 a 4. La nota de cada evidencia es la media de sus filas multiplicada por 2,5 (un 4 equivale a 10; un 2, a 5).</p>`},
+  anexo1:{titulo:"Anexo 1. Rúbrica de la infografía", para:"Tarea 2", html:`
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Categoría</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>Estructura</th><td>Estructura muy clara. Están los cinco elementos de una infografía (titular, texto, cuerpo, fuente y crédito) y se respetan siempre sus características.</td><td>Estructura clara. Están los cinco elementos, pero no siempre se respetan sus características.</td><td>Estructura bastante clara, pero faltan uno o dos elementos y no siempre se respetan sus características.</td><td>Estructura poco clara. Solo hay uno o dos elementos y, en general, no se respetan sus características.</td></tr>
+        <tr><th>Diseño</th><td>Elementos organizados de forma perfecta, colores muy armónicos y tipografía legible y muy apropiada.</td><td>Elementos organizados de forma adecuada, colores armónicos y tipografía legible y apropiada.</td><td>No todos los elementos están bien organizados, los colores no son lo bastante armónicos y/o la tipografía no es la apropiada.</td><td>No se ha cuidado la organización, los colores no son armónicos y la tipografía no es adecuada.</td></tr>
+        <tr><th>Texto</th><td>Ideas expresadas con total claridad, sin errores gramaticales ni ortográficos.</td><td>Ideas expresadas con total claridad, pero con algún error.</td><td>Ideas poco claras y/o dos o tres errores.</td><td>Ideas sin claridad y/o más de tres errores.</td></tr>
+        <tr><th>Imágenes</th><td>Todas tienen licencia CC, dimensiones perfectas y apoyan con total claridad el mensaje.</td><td>Todas tienen licencia CC, dimensiones adecuadas y apoyan con claridad el mensaje.</td><td>No todas tienen licencia CC; alguna no tiene las dimensiones adecuadas y/o no apoya bien el mensaje.</td><td>La mayoría no tienen licencia CC, ni dimensiones adecuadas, ni encajan con el mensaje.</td></tr>
+        <tr><th>Herramientas TIC</th><td>Se han explorado todas las posibilidades de la herramienta; el trabajo se ha guardado, exportado a PDF y entregado por Teams.</td><td>Se ha explorado bien la herramienta; el trabajo se ha guardado, exportado a PDF y entregado por Teams.</td><td>Se ha explorado poco la herramienta; se ha guardado pero no se ha exportado a PDF para entregarlo por Teams.</td><td>No se ha explorado la herramienta; se ha guardado pero ni se ha exportado a PDF ni se ha entregado por Teams.</td></tr>
+      </tbody></table></div>`},
+  anexo2:{titulo:"Anexo 2. Lista de control del diseño del ordenador", para:"Tarea 3", html:`
+    <p>Tu compañero o compañera marca si tu diseño incluye cada componente y propone mejoras.</p>
+    <div class="table-wrap"><table class="tbl check">
+      <thead><tr><th>Componente</th><th>Sí</th><th>No</th><th>Propuestas de mejora</th></tr></thead>
+      <tbody>${["CPU o microprocesador","Placa base","Memoria RAM","Disco duro","Tarjeta gráfica","Fuente de alimentación","Tarjeta de red","Refrigeración líquida","Torre","Monitor","Teclado","Ratón","Otros (¿cuáles?)"].map(c=>`<tr><th>${c}</th><td></td><td></td><td></td></tr>`).join("")}</tbody>
+    </table></div>`,
+    enlaces:[["Abrir la lista de control editable (OneDrive del colegio)","https://lainmaculada-my.sharepoint.com/:w:/g/personal/ruben_lainmaculada_es/EUb3P0XSai5CibQvABRol4sBRvI837iWqK3wY3dFlDTXmA?e=8UCW15"]]},
+  anexo3:{titulo:"Anexo 3. Escala de valoración del vídeo", para:"Tarea 7", html:`
+    <p>Cada aspecto se valora en cinco niveles: de forma muy incompleta, incompleta, correcta, satisfactoria o muy satisfactoria.</p>
+    <div class="table-wrap"><table class="tbl pts">
+      <thead><tr><th>Aspecto que se valora</th><th>Puntos</th></tr></thead>
+      <tbody>
+        <tr><td>Sintetiza de forma adecuada los datos solicitados.</td><td>1</td></tr>
+        <tr><td>Organiza y estructura la información de forma comprensible y con orden.</td><td>1</td></tr>
+        <tr><td>Hace una presentación clara que recoge toda la información solicitada.</td><td>1</td></tr>
+        <tr><td>Aparecen correctamente los nombres de los componentes.</td><td>1</td></tr>
+        <tr><td>Maneja de manera eficaz las herramientas digitales.</td><td>1</td></tr>
+        <tr><td>El ordenador funciona correctamente.</td><td>2</td></tr>
+        <tr><td>Trabaja con autonomía y muestra iniciativa para hacer propuestas.</td><td>2</td></tr>
+        <tr><td>Comparte el enlace tras subir el vídeo a OneDrive.</td><td>1</td></tr>
+      </tbody>
+      <tfoot><tr><th>Total</th><th>10</th></tr></tfoot>
+    </table></div>`}
+};
+
+/* ============================================================
+   FICHAS INTERACTIVAS
+   ============================================================ */
+const QUIZZES = {
+  iaapp:{titulo:"Repaso: apps web e IA", preguntas:[
+    {q:"¿Qué lenguaje define la estructura de una página: títulos, textos y botones?", o:["CSS","HTML","JavaScript"], a:1, f:"HTML es la estructura; CSS, el aspecto; JavaScript, el comportamiento."},
+    {q:"Quieres que el botón sea verde y más grande. ¿Qué parte del código cambias?", o:["El CSS","El HTML","El JavaScript"], a:0, f:"Colores y tamaños se definen en el CSS."},
+    {q:"Al pulsar «Calcular» no pasa nada. ¿Dónde está probablemente el fallo?", o:["En el CSS","En el JavaScript","En el título"], a:1, f:"Lo que la app hace al pulsar un botón lo programa el JavaScript."},
+    {q:"¿Por qué una app web es multiplataforma?", o:["Porque solo funciona en iPad","Porque funciona en el navegador de cualquier dispositivo","Porque la ha hecho una IA"], a:1, f:"Basta con un navegador: iPad, móvil, Windows, Mac…"},
+    {q:"¿Cuál es el mejor mensaje para que la IA corrija un fallo?", o:["No funciona, arréglalo","Al pulsar Calcular con la casilla vacía aparece NaN; quiero que avise de que falta el dato","Hazlo otra vez mejor"], a:1, f:"Cuanto más concreto describas el fallo, mejor lo corregirá."},
+    {q:"¿Qué es mejor al pedir una app a la IA?", o:["Pedir todas las funciones a la vez","Pedir lo básico y añadir funciones de una en una","No dar detalles para que sea creativa"], a:1, f:"Avanzar por pasos facilita encontrar y corregir errores."},
+    {q:"El código que ha generado la IA parece perfecto. ¿Qué haces?", o:["Lo entrego sin probar","Lo pruebo con casos normales y casos raros","Pido otro por si acaso"], a:1, f:"La IA también se equivoca. Probar es parte del trabajo."},
+    {q:"En la documentación de tu herramienta…", o:["No hace falta decir que usaste IA","Indicas qué partes hizo la IA y cuáles hiciste tú","Dices que lo has hecho todo tú"], a:1, f:"Atribuir el trabajo con honestidad es parte del uso ético de la IA."}
+  ]},
+  mayores:{titulo:"Repaso: compras y trámites seguros", preguntas:[
+    {q:"Tu abuela tiene móvil con Internet, pero no sabe pedir cita médica con él. ¿Qué tipo de brecha digital es?", o:["Brecha de acceso","Brecha de uso","No es brecha digital"], a:1, f:"Tiene acceso, pero le faltan habilidades para usarlo: brecha de uso."},
+    {q:"Una tienda online tiene el candado (https) en la dirección. ¿Significa que es fiable?", o:["Sí, siempre","No: solo indica que la conexión está cifrada","Solo si es una tienda española"], a:1, f:"Las tiendas falsas también usan https. Hay que comprobar el aviso legal, las opiniones y los precios."},
+    {q:"¿Cuál es una señal típica de tienda falsa?", o:["Precios muy por debajo de lo normal","Tener aviso legal","Aceptar varios métodos de pago"], a:0, f:"Los chollos imposibles son el cebo más habitual."},
+    {q:"¿Qué forma de pago es más segura en una tienda online que no conoces bien?", o:["Transferencia bancaria","Bizum al vendedor","Tarjeta virtual o de prepago"], a:2, f:"Con una tarjeta virtual o de prepago limitas lo que pueden robarte. Transferencias y Bizum a desconocidos son muy difíciles de recuperar."},
+    {q:"Has comprado unas zapatillas online en una tienda europea y no te gustan. En general, ¿cuánto tiempo tienes para devolverlas sin dar explicaciones?", o:["24 horas","14 días","No se pueden devolver"], a:1, f:"Es el derecho de desistimiento en las compras a distancia en la UE."},
+    {q:"¿Qué es Cl@ve?", o:["Un antivirus","Un sistema para identificarte ante la Administración por Internet","Una red social del Gobierno"], a:1, f:"Permite hacer trámites online identificándote con el móvil."},
+    {q:"Te llega un SMS de «tu banco» pidiendo el código que te acaba de llegar. ¿Qué haces?", o:["Se lo doy, es mi banco","No lo doy nunca: los bancos no piden códigos ni contraseñas","Se lo doy si el mensaje tiene el logo"], a:1, f:"Ni bancos ni Administración piden nunca contraseñas o códigos por SMS, correo o teléfono."},
+    {q:"Al enseñar a una persona mayor a usar el móvil, ¿qué es lo más eficaz?", o:["Hacerlo yo rápido para que no se agobie","Explicar, dejar que lo haga y repetir con paciencia","Darle un manual largo"], a:1, f:"Se aprende haciendo. Si lo haces tú, no aprenderá a hacerlo sola."}
+  ]},
+  bulos:{titulo:"¿Bulo o verdad?", preguntas:[
+    {q:"¿Qué diferencia hay entre desinformación e información errónea?", o:["Ninguna","La desinformación se crea a propósito para engañar; la errónea se comparte por error","La información errónea siempre es más grave"], a:1, f:"La clave es la intención: la desinformación busca engañar."},
+    {q:"Un mensaje te provoca mucha rabia y te pide que lo reenvíes a todos tus contactos. ¿Qué haces?", o:["Lo reenvío rápido","Paro y compruebo antes de compartir","Lo reenvío solo a mi familia"], a:1, f:"Las emociones fuertes y la urgencia son señales de alarma típicas de los bulos."},
+    {q:"Quieres saber si una foto que circula es de verdad de lo que dice. ¿Qué herramienta usas?", o:["Una búsqueda inversa de imágenes","Un antivirus","Un editor de fotos"], a:0, f:"La búsqueda inversa (Google Lens, TinEye) muestra dónde y cuándo apareció antes la imagen."},
+    {q:"¿Qué es un deepfake?", o:["Un virus informático","Un contenido creado o manipulado con IA para que parezca real","Una noticia antigua"], a:1, f:"Los deepfakes pueden ser vídeos, imágenes o audios."},
+    {q:"¿Cuál de estas puede ser una señal de imagen generada con IA?", o:["Que tenga buena luz","Manos con dedos de más o textos ilegibles","Que sea en color"], a:1, f:"Las manos, los textos, las sombras y los reflejos suelen delatar a la IA."},
+    {q:"Una IA te da una cita textual de un científico con su fuente. ¿Qué haces?", o:["La copio, la IA no se equivoca","Compruebo que la cita y la fuente existen de verdad","La cambio un poco para que no se note"], a:1, f:"Las IA pueden «alucinar» e inventarse citas y fuentes."},
+    {q:"¿Qué es el sesgo de confirmación?", o:["Creer más lo que encaja con lo que ya pensamos","Confirmar una noticia con dos fuentes","Un error de los ordenadores"], a:0, f:"Por eso hay que dudar también de lo que nos gusta oír."},
+    {q:"¿Cuál de estos es un verificador de noticias español?", o:["Maldita.es","Wikipedia","YouTube"], a:0, f:"Maldita.es, Newtral y EFE Verifica se dedican a desmentir bulos."}
+  ]},
+  planos:{titulo:"¿Qué plano es?", preguntas:[
+    {q:"Se ve a la persona desde la cabeza hasta las rodillas.", o:["Plano medio","Plano americano","Plano entero"], a:1, f:"El plano americano corta a la altura de las rodillas."},
+    {q:"Un paisaje enorme en el que el personaje es casi un punto.", o:["Gran plano general","Plano general","Plano cenital"], a:0, f:"El gran plano general sitúa al espectador en un espacio muy amplio."},
+    {q:"Solo vemos la cara del personaje, de la frente a la barbilla.", o:["Primer plano","Plano detalle","Primerísimo primer plano"], a:2, f:"El PPP muestra solo el rostro y transmite emociones intensas."},
+    {q:"La cámara está por debajo del personaje y lo hace parecer poderoso.", o:["Picado","Contrapicado","Cenital"], a:1, f:"El contrapicado engrandece al personaje."},
+    {q:"Vemos la cara y los hombros de una persona que llora.", o:["Primer plano","Plano medio","Plano general"], a:0, f:"El primer plano acerca al espectador a la emoción."},
+    {q:"La cámara mira desde arriba a un personaje que se siente perdido.", o:["Contrapicado","Picado","Normal"], a:1, f:"El picado empequeñece al personaje y lo hace parecer vulnerable."},
+    {q:"Vemos solo una mano que gira el pomo de una puerta.", o:["Plano detalle","Primer plano","Plano medio corto"], a:0, f:"El plano detalle llama la atención sobre algo concreto."},
+    {q:"Dos personajes conversan y los vemos de la cintura para arriba.", o:["Plano americano","Plano medio","Plano entero"], a:1, f:"El plano medio corta por la cintura: ideal para diálogos."},
+    {q:"La cámara está justo encima de una mesa, mirando en vertical.", o:["Picado","Cenital","Gran plano general"], a:1, f:"El plano cenital es la vista de pájaro, en vertical."},
+    {q:"¿Qué música puedes usar en tu cortometraje?", o:["Cualquier canción de Spotify","Música libre de derechos o con licencia que lo permita","Cualquiera, si es menos de 30 segundos"], a:1, f:"Usar música protegida sin permiso vulnera los derechos de autor, aunque sea un fragmento."}
+  ]},
+  seguridad4:{titulo:"Repaso: seguridad en la red", preguntas:[
+    {q:"¿Qué es la huella digital?", o:["Tu huella dactilar para desbloquear el móvil","El rastro de información que dejas en Internet","Un tipo de contraseña"], a:1, f:"Todo lo que publicas, comentas o buscas deja un rastro: tu huella digital."},
+    {q:"Te llega un SMS de «tu banco» con un enlace para «verificar tu cuenta en 24 horas». ¿Qué es probablemente?", o:["Smishing","Una actualización","Verificación en dos pasos"], a:0, f:"Es phishing por SMS (smishing). La prisa y el enlace son señales de alarma."},
+    {q:"¿Qué es la verificación en dos pasos?", o:["Escribir la contraseña dos veces","Pedir, además de la contraseña, un código que llega a otro dispositivo","Tener dos cuentas"], a:1, f:"Aunque roben tu contraseña, sin el código no podrán entrar."},
+    {q:"¿Cuál es la contraseña más segura?", o:["Maria2010","qwerty123","MiPerro-Come-7-Pizzas!"], a:2, f:"Las frases largas con símbolos y números son fuertes y fáciles de recordar."},
+    {q:"¿Por qué no conviene usar la misma contraseña en todas tus cuentas?", o:["Porque caduca antes","Porque si la roban en una web, pueden entrar en todas","Porque las webs no lo permiten"], a:1, f:"Una contraseña distinta por cuenta limita el daño si hay una filtración."},
+    {q:"En un grupo de clase se burlan de un compañero y tú no dices nada. ¿Qué papel tienes?", o:["Ninguno, no he escrito nada","Espectador: también participo en el ciberacoso","Víctima"], a:1, f:"Los espectadores pueden frenar el acoso: no reírse, apoyar a la víctima y avisar a un adulto."},
+    {q:"Si sufres ciberacoso, ¿qué NO deberías hacer?", o:["Guardar capturas como prueba","Responder con insultos","Bloquear y contárselo a un adulto"], a:1, f:"Responder suele empeorar la situación. Guarda pruebas, bloquea y pide ayuda."},
+    {q:"¿Qué número puedes llamar en España para pedir ayuda en ciberseguridad?", o:["112","017","010"], a:1, f:"El 017 es la línea gratuita y confidencial del INCIBE."}
+  ]},
+  componentes:{titulo:"Repaso: componentes del ordenador", preguntas:[
+    {q:"¿Qué componente ejecuta las instrucciones de los programas?", o:["La memoria RAM","La CPU o microprocesador","La fuente de alimentación"], a:1, f:"La CPU es el «cerebro»: procesa las instrucciones y hace los cálculos."},
+    {q:"¿Qué pieza conecta entre sí todos los componentes del ordenador?", o:["La placa base","La torre","La tarjeta de red"], a:0, f:"Todos los componentes se conectan a la placa base."},
+    {q:"¿Qué le pasa a la información de la memoria RAM al apagar el ordenador?", o:["Se guarda para siempre","Se borra","Se copia al monitor"], a:1, f:"La RAM es memoria volátil: solo guarda datos mientras hay corriente."},
+    {q:"¿Dónde se guardan tus archivos aunque apagues el ordenador?", o:["En el disco duro o SSD","En la RAM","En la tarjeta gráfica"], a:0, f:"El disco duro (HDD) o SSD es el almacenamiento permanente."},
+    {q:"¿Qué componente transforma la corriente del enchufe para alimentar al resto?", o:["La placa base","La refrigeración","La fuente de alimentación"], a:2, f:"La fuente de alimentación da a cada componente la tensión que necesita."},
+    {q:"Si quieres jugar o editar vídeo, ¿en qué componente conviene invertir más?", o:["En el ratón","En la tarjeta gráfica","En la torre"], a:1, f:"La tarjeta gráfica procesa las imágenes y el vídeo."},
+    {q:"¿Cuántos bits tiene un byte?", o:["8","10","1024"], a:0, f:"1 byte = 8 bits. Es la unidad básica para medir información."},
+    {q:"¿Qué es más grande?", o:["1 MB","1 KB","1 GB"], a:2, f:"KB < MB < GB < TB. Cada unidad es unas 1000 (o 1024) veces la anterior."}
+  ]},
+  redes:{titulo:"Repaso: redes informáticas", preguntas:[
+    {q:"La red de un cibercafé o de un departamento es una red…", o:["LAN","MAN","WAN"], a:0, f:"LAN: red de área local, la más pequeña."},
+    {q:"Internet es el mayor ejemplo de red…", o:["LAN","MAN","WAN"], a:2, f:"WAN: red de área amplia. Internet es la red de redes."},
+    {q:"La red que conecta los edificios de un campus universitario es una red…", o:["LAN","MAN","WAN"], a:1, f:"MAN: red de tamaño intermedio que une zonas alejadas entre sí."},
+    {q:"¿Qué dispositivo conecta tu red de casa con Internet?", o:["El router","El repetidor","El adaptador de red"], a:0, f:"El router conecta tu red con otras redes y decide por dónde van los datos."},
+    {q:"¿Qué dispositivo envía la información solo al equipo al que va dirigida?", o:["El concentrador (hub)","El conmutador (switch)","El repetidor"], a:1, f:"El switch sabe a qué equipo va cada dato; el hub lo envía a todos."},
+    {q:"La señal wifi no llega a tu habitación. ¿Qué te ayudaría?", o:["Un repetidor o extensor","Un servidor de impresión","Una pasarela"], a:0, f:"El repetidor amplifica la señal para que llegue más lejos."},
+    {q:"¿Qué tipo de red usa la instalación eléctrica de casa para transmitir datos?", o:["Fibra óptica","PLC","UTP"], a:1, f:"Las redes PLC usan los cables de la luz como medio físico."},
+    {q:"Una red funcional debe permitir…", o:["Que cada equipo tenga su propia línea de Internet","Compartir la conexión a Internet y los recursos de la red","Que solo un equipo use la impresora"], a:1, f:"Varios dispositivos comparten una única línea de acceso y recursos como la impresora."}
+  ]},
+  seguridad:{titulo:"¿Es seguro compartirlo?", preguntas:[
+    {q:"Un compañero te pide la contraseña de tu cuenta del cole para «mirar una cosa».", o:["Se la doy, es de confianza","No la comparto con nadie, salvo con mi familia","Se la doy y luego la cambio"], a:1, f:"Las contraseñas no se comparten, ni con amigos. Solo con tu familia o tutores."},
+    {q:"Te llega un mensaje: «Has ganado un iPhone, pulsa aquí y pon tus datos».", o:["Pulso, por si acaso","Lo borro y aviso a un adulto","Lo reenvío a mis amigos"], a:1, f:"Los premios que no has pedido suelen ser estafas (phishing). No pulses enlaces raros."},
+    {q:"¿Cuál de estas contraseñas es más segura?", o:["lucas2012","123456","Gato!Verde-Salta7"], a:2, f:"Mejor frases largas que mezclen letras, números y símbolos, y nada personal."},
+    {q:"Quieres subir una foto de un amigo en la que sale haciendo el tonto.", o:["Le pregunto antes si le parece bien","La subo, es graciosa","La subo y la borro si se queja"], a:0, f:"Pide permiso siempre antes de publicar algo de otra persona."},
+    {q:"Alguien que no conoces te escribe en un juego y te pide tu dirección.", o:["Se la doy si es simpático","No doy datos personales y se lo cuento a un adulto","Le doy solo la ciudad"], a:1, f:"Nunca compartas datos personales con desconocidos en Internet."},
+    {q:"Ves que en un grupo se están burlando de una compañera.", o:["No digo nada","Me río para no quedar mal","La apoyo y lo cuento a un adulto"], a:2, f:"Sé valiente: si ves acoso, no lo apoyes y pide ayuda."},
+    {q:"Lo que publicas en Internet…", o:["Desaparece al borrarlo","Puede quedarse para siempre aunque lo borres","Solo lo ven tus amigos"], a:1, f:"Alguien puede haber hecho captura. Piensa antes de publicar."},
+    {q:"Una web te pide permiso para usar tu ubicación y solo es un juego.", o:["Acepto siempre","La rechazo si no la necesita","Da igual"], a:1, f:"Comparte solo los permisos que la app necesita de verdad."}
+  ]},
+  spike:{titulo:"¿Qué pieza de SPIKE es?", preguntas:[
+    {q:"¿Qué pieza es el «cerebro» del robot, donde se guarda el programa?", o:["El motor","El hub","El sensor de color"], a:1, f:"El hub ejecuta el programa y tiene los puertos A–F."},
+    {q:"¿Cuántos puertos tiene el hub grande de SPIKE Prime?", o:["4","6","8"], a:1, f:"Tiene seis puertos, de la A a la F."},
+    {q:"¿Qué sensor usarías para que el robot se pare antes de chocar con una pared?", o:["Sensor de distancia","Sensor de color","Sensor de fuerza"], a:0, f:"El sensor de distancia mide a qué distancia hay un objeto."},
+    {q:"Para seguir una línea negra en el suelo usarías el…", o:["Sensor de fuerza","Sensor de color","Giroscopio"], a:1, f:"El sensor de color distingue la línea del suelo."},
+    {q:"Si un motor gira 360 grados, ha dado…", o:["Media vuelta","Una vuelta completa","Dos vueltas"], a:1, f:"360° es una rotación completa."},
+    {q:"¿Qué sensor detecta si se ha pulsado un botón o algo ha empujado al robot?", o:["Sensor de fuerza","Sensor de distancia","Sensor de color"], a:0, f:"El sensor de fuerza detecta presión y pulsaciones."}
+  ]},
+  abp:{titulo:"Repaso: fases del proyecto", preguntas:[
+    {q:"¿Qué es un prototipo?", o:["El producto final a la venta","Una primera versión para probar la idea","El logotipo de la empresa"], a:1, f:"Sirve para probar y mejorar la idea antes de hacer el producto final."},
+    {q:"Un prototipo de papel y cartón es de…", o:["Baja fidelidad","Alta fidelidad","Producción"], a:0, f:"Baja fidelidad: rápido y barato, ideal para probar pronto."},
+    {q:"¿Para qué enseñamos el prototipo a otras personas?", o:["Para presumir","Para recibir opiniones y mejorarlo","Para venderlo ya"], a:1, f:"El feedback nos dice qué cambiar."},
+    {q:"Si al probar el prototipo algo no funciona…", o:["Abandonamos la idea","Lo mejoramos y volvemos a probar","Lo escondemos en la presentación"], a:1, f:"Probar, fallar y mejorar es parte del proceso."},
+    {q:"¿Qué herramienta usamos para la presentación final?", o:["Keynote","Excel","Paint"], a:0, f:"Keynote en el iPad, con apoyo de Canva para el diseño."},
+    {q:"En un equipo, el reparto de tareas sirve para…", o:["Que trabaje solo el que más sabe","Que cada uno sepa qué le toca y el trabajo avance","Tener menos trabajo cada uno"], a:1, f:"Repartir roles hace que todos aporten y nada se quede sin hacer."},
+    {q:"¿Qué debe explicar la presentación del prototipo?", o:["Solo el nombre del producto","El problema, la solución y cómo funciona el prototipo","La nota que queremos sacar"], a:1, f:"Problema → solución → prototipo → mejoras."},
+    {q:"La coevaluación consiste en…", o:["Que el profesor ponga la nota","Evaluar el trabajo de los compañeros con unos criterios","Evaluarse uno mismo sin criterios"], a:1, f:"Valoramos el trabajo de otros equipos con una rúbrica."}
+  ]}
+};
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function renderNav(current){
+  $("#nav").innerHTML = `<a href="#inicio" ${current==="inicio"?'aria-current="page"':''}>Inicio</a>` +
+    MATERIAS.map(m => `<a href="#${m.id}" style="--sub:${m.color}" ${current===m.id?'aria-current="page"':''}>${esc(m.corto||m.nombre)} ${esc(m.nivel)}</a>`).join("");
+}
+
+function renderHome(){
+  $("#main").innerHTML = `
+    <div class="home-intro">
+      <h1>Elige tu materia</h1>
+      <p>Aquí tienes los contenidos, actividades, vídeos, fichas y criterios de evaluación de cada asignatura.</p>
+    </div>
+    <div class="grid">
+      ${MATERIAS.map(m => `
+        <a class="subj-card" href="#${m.id}" style="--sub:${m.color}">
+          <span class="lvl">${esc(m.nivel)}</span>
+          <h2>${esc(m.nombre)}</h2>
+          <p>${esc(m.intro)}</p>
+        </a>`).join("")}
+    </div>`;
+}
+
+function itemAction(it){
+  if(it.tipo==="interactiva") return `<button class="btn" data-quiz="${it.quiz}">Empezar</button>`;
+  if(it.url) return `<a class="btn ghost" href="${esc(it.url)}" target="_blank" rel="noopener">${it.tipo==="video"?"Ver":"Abrir"}</a>`;
+  if(it.tipo==="ficha") return `<span class="pending">Disponible pronto</span>`;
+  return "";
+}
+
+function critTitle(m,code){
+  if(!m.competencias) return "";
+  for(const ce of m.competencias) for(const [k,v] of ce.c) if(k===code) return v;
+  return "";
+}
+function renderCompetencias(m){
+  return `
+    <section class="unit" id="criterios-${m.id}">
+      <div class="unit-head"><h2>Criterios de evaluación</h2></div>
+      <p class="desc">Lo que se evalúa en esta materia, según el ${esc(m.norma)}. Están explicados con palabras sencillas.</p>
+      <div class="ces">
+        ${m.competencias.map(ce=>`
+          <details class="ce" open>
+            <summary><span class="ce-n">CE${ce.n}</span><span><b>${esc(ce.t)}</b><span class="ce-d">${esc(ce.d)}</span></span></summary>
+            <ul class="crit-list">${ce.c.map(([k,v])=>`<li><span class="code">${k}</span><span>${esc(v)}</span></li>`).join("")}</ul>
+          </details>`).join("")}
+      </div>
+    </section>`;
+}
+function plural(n,a,b){ return n+" "+(n===1?a:b); }
+function itemsList(items){
+  return `<ul class="items">
+    ${items.map(it=>`
+      <li class="item">
+        <span class="tag" style="--c:${TIPOS[it.tipo].c}">${TIPOS[it.tipo].label}</span>
+        <div><div class="t">${esc(it.t)}</div>${it.s?`<div class="s">${esc(it.s)}</div>`:""}</div>
+        <div>${itemAction(it)}</div>
+      </li>`).join("")}
+  </ul>`;
+}
+function chips(m,list){
+  return `<div class="chips"><span class="tag-plain">Criterios que trabajamos</span>${list.map(c=>`<span class="chip" title="${esc(critTitle(m,c))}">${c}</span>`).join("")}</div>`;
+}
+function renderSubject(m){
+  const crit = m.competencias
+    ? `<ol class="ce-short">${m.competencias.map(ce=>`<li><b>CE${ce.n}</b> ${esc(ce.t)}</li>`).join("")}</ol>
+       <p class="note" style="margin-top:10px"><a href="#criterios-${m.id}" data-jump="criterios-${m.id}">Ver todos los criterios</a></p>`
+    : m.criterios
+    ? `<ol>${m.criterios.map(c=>`<li>${esc(c)}</li>`).join("")}</ol>`
+    : `<p class="note">Los criterios de evaluación de esta materia se publicarán aquí.</p>`;
+  const pesos = m.pesos ? `
+    <div class="box">
+      <h3>Cómo se calcula la nota</h3>
+      ${m.pesosEjemplo?'<p class="note">Reparto provisional.</p>':''}
+      <div class="weights">
+        ${m.pesos.map(([n,p])=>`<div class="w-row"><span>${esc(n)}</span><b>${p}%</b><span class="w-bar"><i style="width:${p}%"></i></span></div>`).join("")}
+      </div>
+    </div>` : "";
+  const pres = m.presentacion ? `
+    <div class="box">
+      <h3>Sobre la materia</h3>
+      <p class="note" style="margin-bottom:10px">${esc(m.presentacion.texto)}</p>
+      <ol class="blocks">${m.presentacion.bloques.map(b=>`<li>${esc(b)}</li>`).join("")}</ol>
+    </div>` : "";
+  $("#main").innerHTML = `
+    <div style="--sub:${m.color}">
+      <div class="subj-head">
+        <span class="lvl">${esc(m.nivel)}</span>
+        <h1>${esc(m.nombre)}</h1>
+        ${m.presentacion?`<blockquote class="quote">${esc(m.presentacion.cita)}</blockquote>`:`<p>${esc(m.intro)}</p>`}
+      </div>
+      <div class="layout">
+        <div class="units">
+          ${m.unidades.map((u,i)=> u.id ? `
+            <a class="unit unit-link" href="#${u.id}">
+              <div class="unit-head"><span class="unit-num">Tema ${i+1}</span><span class="eti">${esc(u.etiqueta||"")}</span></div>
+              <h2>${esc(u.titulo)}</h2>
+              <p class="desc">${esc(u.desc)}</p>
+              <div class="meta">
+                ${u.tareas?`<span>${plural(u.tareas.length,"tarea","tareas")}</span>`:""}
+                ${u.anexos?`<span>${plural(u.anexos.length,"anexo de evaluación","anexos de evaluación")}</span>`:""}
+                ${u.items&&u.items.some(x=>x.tipo==="interactiva")?`<span>${plural(u.items.filter(x=>x.tipo==="interactiva").length,"ficha interactiva","fichas interactivas")}</span>`:""}
+                <span class="go">Abrir tema →</span>
+              </div>
+            </a>` : `
+            <section class="unit">
+              <div class="unit-head"><span class="unit-num">Unidad ${i+1}</span><h2>${esc(u.titulo)}</h2></div>
+              <p class="desc">${esc(u.desc)}</p>
+              ${u.criterios?chips(m,u.criterios):""}
+              ${itemsList(u.items)}
+            </section>`).join("")}
+          ${m.unidades.length?"":`<section class="unit"><p class="desc">Los temas de esta materia se publicarán aquí muy pronto.</p></section>`}
+          ${m.competencias?renderCompetencias(m):""}
+        </div>
+        <aside>
+          ${pres}
+          <div class="box"><h3>Criterios de evaluación</h3>${crit}</div>
+          ${pesos}
+        </aside>
+      </div>
+    </div>`;
+}
+
+function renderUnit(m,u){
+  const idx = m.unidades.indexOf(u);
+  const prev = m.unidades[idx-1], next = m.unidades[idx+1];
+  const toc = [
+    u.teoria&&["teoria","Teoría"], u.saberes&&["saberes","Qué vamos a aprender"],
+    u.tareas&&["tareas","Tareas"], u.items&&u.items.length&&["recursos","Recursos y repaso"],
+    u.anexos&&["anexos","Cómo se evalúa"]].filter(Boolean);
+  const tareaHtml = t => `
+    <li class="task" id="${u.id}-t${t.n}">
+      <span class="task-n">${t.n}</span>
+      <div class="task-body">
+        <h3>${esc(t.t)}</h3>
+        ${t.html}
+        ${t.enlaces?`<div class="links">${t.enlaces.map(([l,h])=>`<a class="btn ghost" href="${esc(h)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
+        ${(t.evalua||t.entrega||t.pendiente||t.duracion)?`<div class="task-meta">
+          ${t.duracion?`<span class="pill">Duración: ${esc(t.duracion)}</span>`:""}
+          ${t.entrega?`<span class="pill">Entrega: ${esc(t.entrega)}</span>`:""}
+          ${t.evalua?`<a class="pill pill-link" href="#${t.evalua}-${u.id}" data-jump="${t.evalua}-${u.id}">Se evalúa con: ${esc(ANEXOS[t.evalua].titulo.split(".")[0])}</a>`:""}
+          ${t.pendiente?`<span class="pending">${esc(t.pendiente)}</span>`:""}
+        </div>`:""}
+      </div>
+    </li>`;
+  $("#main").innerHTML = `
+    <div style="--sub:${m.color}">
+      <a class="back" href="#${m.id}">← ${esc(m.nombre)} ${esc(m.nivel)}</a>
+      <div class="subj-head">
+        <span class="lvl">${esc(u.etiqueta||("Tema "+(idx+1)))}</span>
+        <h1>${esc(u.titulo)}</h1>
+        ${u.subtitulo?`<p class="sub">${esc(u.subtitulo)}</p>`:""}
+        ${u.cita?`<blockquote class="quote">${esc(u.cita[0])}<cite>${esc(u.cita[1])}</cite></blockquote>`:""}
+        <p>${esc(u.desc)}</p>
+      </div>
+      <div class="layout">
+        <div class="units">
+          ${u.teoria?`<section class="unit prose" id="teoria-${u.id}"><h2>Teoría</h2>${u.teoria}</section>`:""}
+          ${u.saberes?`<section class="unit" id="saberes-${u.id}"><h2>Qué vamos a aprender</h2>${u.bloque?`<p class="desc">${esc(u.bloque)}</p>`:""}<ul class="plain">${u.saberes.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></section>`:""}
+          ${u.tareas?`<section class="unit" id="tareas-${u.id}"><h2>Tareas</h2><ol class="tasks">${u.tareas.map(tareaHtml).join("")}</ol></section>`:""}
+          ${u.items&&u.items.length?`<section class="unit" id="recursos-${u.id}"><h2>Recursos y repaso</h2>${itemsList(u.items)}</section>`:""}
+          ${u.anexos?`<section class="unit" id="anexos-${u.id}"><h2>Cómo se evalúa</h2>
+            ${u.anexos.map(k=>{const a=ANEXOS[k]; return `
+              <div class="anexo" id="${k}-${u.id}">
+                <h3>${esc(a.titulo)}</h3><p class="desc">Se usa en: ${esc(a.para)}.</p>
+                ${a.html}
+                ${a.enlaces?`<div class="links">${a.enlaces.map(([l,h])=>`<a class="btn ghost" href="${esc(h)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
+              </div>`}).join("")}
+          </section>`:""}
+          ${!u.tareas&&!u.teoria&&!(u.items&&u.items.length)?`<section class="unit"><p class="desc">Contenido en preparación.</p></section>`:""}
+          <div class="pager">
+            ${prev&&prev.id?`<a class="btn ghost" href="#${prev.id}">← ${esc(prev.titulo)}</a>`:"<span></span>"}
+            ${next&&next.id?`<a class="btn ghost" href="#${next.id}">${esc(next.titulo)} →</a>`:""}
+          </div>
+        </div>
+        <aside>
+          ${toc.length>1?`<div class="box"><h3>En este tema</h3><ul class="toc">${toc.map(([k,l])=>`<li><a href="#${k}-${u.id}" data-jump="${k}-${u.id}">${l}</a></li>`).join("")}</ul></div>`:""}
+          ${u.producto?`<div class="box"><h3>Producto final</h3><p class="note">${esc(u.producto)}</p></div>`:""}
+          ${u.criterios?`<div class="box"><h3>Criterios que trabajamos</h3><ul class="crit-mini">${u.criterios.map(c=>`<li><span class="code">${c}</span><span>${esc(critTitle(m,c))}</span></li>`).join("")}</ul></div>`:""}
+        </aside>
+      </div>
+    </div>`;
+}
+
+function route(){
+  const id = (location.hash||"#inicio").slice(1);
+  if(id==="comprobar"){ renderNav(""); renderCheck(); window.scrollTo(0,0); return; }
+  let m = MATERIAS.find(x=>x.id===id), u = null;
+  if(!m) for(const mm of MATERIAS){ const f=mm.unidades.find(x=>x.id===id); if(f){ m=mm; u=f; break; } }
+  renderNav(m?m.id:"inicio");
+  if(u) renderUnit(m,u); else if(m) renderSubject(m); else renderHome();
+  window.scrollTo(0,0);
+}
+
+/* ---------- motor de fichas interactivas ---------- */
+let qs = null;
+/* ---------- código de verificación ---------- */
+const SAL = "AulaRuben·LaInmaculada·Paiporta";
+const EPOCH = Date.UTC(2026,0,1);
+function cyrb53(str, seed=0){
+  let h1=0xdeadbeef^seed, h2=0x41c6ce57^seed;
+  for(let i=0;i<str.length;i++){ const c=str.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return 4294967296*(2097151&h2)+(h1>>>0);
+}
+function normName(n){ return String(n).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9ñ ]/g,"").replace(/\s+/g," ").trim(); }
+function quizId(key){ return (cyrb53(key)%1296).toString(36).toUpperCase().padStart(2,"0"); }
+function makeCode(key, score, total, name, when){
+  const mins = Math.floor((when-EPOCH)/60000);
+  const payload = quizId(key) + score.toString(36).toUpperCase() + total.toString(36).toUpperCase() + mins.toString(36).toUpperCase().padStart(6,"0");
+  const sig = cyrb53(payload+"|"+normName(name)+"|"+SAL).toString(36).toUpperCase().padStart(5,"0").slice(-5);
+  const raw = payload + sig;
+  return raw.match(/.{1,5}/g).join("-");
+}
+function checkCode(code, name){
+  const raw = String(code).toUpperCase().replace(/[^0-9A-Z]/g,"");
+  if(raw.length!==15) return {ok:false, msg:"El código debe tener 15 caracteres (tres grupos de 5)."};
+  const payload = raw.slice(0,10), sig = raw.slice(10);
+  const expected = cyrb53(payload+"|"+normName(name)+"|"+SAL).toString(36).toUpperCase().padStart(5,"0").slice(-5);
+  const qid = payload.slice(0,2);
+  const key = Object.keys(QUIZZES).find(k=>quizId(k)===qid);
+  const score = parseInt(payload[2],36), total = parseInt(payload[3],36);
+  const when = new Date(EPOCH + parseInt(payload.slice(4),36)*60000);
+  if(sig!==expected) return {ok:false, msg:"El código no es válido para ese nombre: o el nombre no está escrito igual que en el informe, o el informe ha sido modificado."};
+  return {ok:true, titulo: key?QUIZZES[key].titulo:"Ficha desconocida", score, total, when};
+}
+function fmtDate(d){ return d.toLocaleString("es-ES",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}); }
+function savedName(){ try{ return localStorage.getItem("aula-nombre")||""; }catch(e){ return ""; } }
+function saveName(n){ try{ localStorage.setItem("aula-nombre",n); }catch(e){} }
+
+function openQuiz(key){
+  const quiz = QUIZZES[key]; if(!quiz) return;
+  qs = {key, quiz, i:0, ok:0, fallos:[], lastFocus:document.activeElement, nombre:""};
+  $("#dialog").classList.remove("wide");
+  $("#overlay").classList.add("open");
+  drawStart();
+}
+function drawStart(){
+  $("#dialog").innerHTML = head() + `
+    <p style="margin:0"><b>Ficha de repaso.</b> Sirve para comprobar lo que sabes. Escribe tu nombre y apellidos: al terminar obtendrás un informe con un código de verificación para entregarlo por Teams.</p>
+    <form id="name-form" class="name-form">
+      <label for="alumno">Nombre y apellidos</label>
+      <input id="alumno" name="alumno" autocomplete="name" required value="${esc(savedName())}">
+      <button class="btn" type="submit">Empezar</button>
+    </form>`;
+  $("#alumno").focus();
+}
+function closeQuiz(){
+  $("#overlay").classList.remove("open");
+  if(qs && qs.lastFocus) qs.lastFocus.focus();
+  qs = null;
+}
+function head(){
+  return `<div class="dialog-head"><h2 id="dlg-title">${esc(qs.quiz?qs.quiz.titulo:"")}</h2><button class="close" id="close-btn">Cerrar</button></div>`;
+}
+function drawQuestion(){
+  const p = qs.quiz.preguntas[qs.i], n = qs.quiz.preguntas.length;
+  $("#dialog").innerHTML = head() + `
+    <div class="progress">${esc(qs.nombre)} · Pregunta ${qs.i+1} de ${n} · Aciertos: ${qs.ok}</div>
+    <div class="q">${esc(p.q)}</div>
+    <div class="opts">${p.o.map((o,j)=>`<button class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div>
+    <p class="feedback" id="fb"></p>
+    <div><button class="btn" id="next-btn" hidden>${qs.i+1<n?"Siguiente":"Ver resultado"}</button></div>`;
+  $("#dialog .opt").focus();
+}
+function answer(j){
+  const p = qs.quiz.preguntas[qs.i];
+  document.querySelectorAll("#dialog .opt").forEach((b,k)=>{
+    b.disabled = true;
+    if(k===p.a) b.classList.add("right");
+    else if(k===j) b.classList.add("wrong");
+  });
+  const good = j===p.a; if(good) qs.ok++; else qs.fallos.push(qs.i+1);
+  const fb = $("#fb"); fb.classList.add("show");
+  fb.innerHTML = `<strong style="color:var(${good?"--ok":"--bad"})">${good?"¡Correcto!":"No es esa."}</strong> ${esc(p.f)}`;
+  const nb = $("#next-btn"); nb.hidden = false; nb.focus();
+}
+function next(){
+  qs.i++;
+  if(qs.i < qs.quiz.preguntas.length) return drawQuestion();
+  const n = qs.quiz.preguntas.length, when = new Date();
+  const code = makeCode(qs.key, qs.ok, n, qs.nombre, when.getTime());
+  const nota = (qs.ok/n*10).toFixed(1).replace(".",",");
+  qs.informe = `INFORME · FICHA DE REPASO · Aula de Rubén\nAlumno/a: ${qs.nombre}\nFicha: ${qs.quiz.titulo}\nResultado: ${qs.ok}/${n} (nota ${nota})\nFecha: ${fmtDate(when)}\nCódigo de verificación: ${code}`;
+  $("#dialog").innerHTML = head() + `
+    <div class="report" id="report">
+      <div class="report-top"><span>Informe · Ficha de repaso</span><b>${esc(qs.quiz.titulo)}</b></div>
+      <dl>
+        <dt>Alumno/a</dt><dd>${esc(qs.nombre)}</dd>
+        <dt>Resultado</dt><dd><span class="score-sm">${qs.ok} / ${n}</span> · nota ${nota}</dd>
+        <dt>Fecha</dt><dd>${fmtDate(when)}</dd>
+        ${qs.fallos.length?`<dt>A repasar</dt><dd>Preguntas ${qs.fallos.join(", ")}</dd>`:""}
+      </dl>
+      <div class="code-box"><span>Código de verificación</span><code>${code}</code></div>
+    </div>
+    <p class="note" style="margin:0">${qs.ok===n?"¡Perfecto! ":qs.ok>=n/2?"Bien hecho. ":"Repasa los contenidos y vuelve a intentarlo. "}Haz una captura de este informe o cópialo y entrégalo por Teams.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="copy-btn">Copiar informe</button>
+      <button class="btn ghost" id="retry-btn">Repetir</button>
+      <button class="btn ghost" id="close-btn2">Cerrar</button>
+    </div>`;
+  $("#copy-btn").focus();
+}
+
+/* ---------- página del profesorado: comprobar un informe ---------- */
+function renderCheck(){
+  $("#main").innerHTML = `
+    <div class="check-wrap">
+      <h1>Comprobar un informe</h1>
+      <p class="note">Para el profesorado. Pega el código del informe y el nombre del alumno tal como aparece en él.</p>
+      <form id="check-form" class="name-form">
+        <label for="chk-code">Código de verificación</label>
+        <input id="chk-code" placeholder="XXXXX-XXXXX-XXXXX" autocomplete="off" required>
+        <label for="chk-name">Nombre y apellidos</label>
+        <input id="chk-name" autocomplete="off" required>
+        <button class="btn" type="submit">Comprobar</button>
+      </form>
+      <div id="check-result"></div>
+    </div>`;
+}
+
+document.addEventListener("click", e=>{
+  const j = e.target.closest("a[data-jump]");
+  if(j){ e.preventDefault(); const el=document.getElementById(j.dataset.jump); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+  const t = e.target.closest("button"); if(!t) return;
+  if(t.dataset.zoom){
+    qs = {lastFocus:t, zoom:true};
+    $("#dialog").classList.add("wide");
+    $("#dialog").innerHTML = `<div class="dialog-head"><h2 id="dlg-title">Gráfico de la red del centro</h2><button class="close" id="close-btn">Cerrar</button></div><div class="zoom-big"><img src="${t.dataset.zoom}" alt="Gráfico de la red del centro a tamaño grande"></div>`;
+    $("#overlay").classList.add("open"); $("#close-btn").focus(); return;
+  }
+  if(t.dataset.quiz) openQuiz(t.dataset.quiz);
+  else if(t.classList.contains("opt")) answer(+t.dataset.j);
+  else if(t.id==="next-btn") next();
+  else if(t.id==="retry-btn"){ qs.i=0; qs.ok=0; qs.fallos=[]; drawQuestion(); }
+  else if(t.id==="copy-btn"){
+    navigator.clipboard.writeText(qs.informe).then(()=>{ t.textContent="¡Copiado!"; }).catch(()=>{ t.textContent="No se pudo copiar: haz una captura"; });
+  }
+  else if(t.id==="close-btn"||t.id==="close-btn2") closeQuiz();
+});
+$("#overlay").addEventListener("click", e=>{ if(e.target.id==="overlay") closeQuiz(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qs) closeQuiz(); });
+document.addEventListener("submit", e=>{
+  if(e.target.id==="name-form"){
+    e.preventDefault();
+    const n = $("#alumno").value.trim();
+    if(n.split(/\s+/).length<2){ $("#alumno").setCustomValidity("Escribe nombre y al menos un apellido"); $("#alumno").reportValidity(); return; }
+    qs.nombre = n; saveName(n); drawQuestion();
+  }
+  if(e.target.id==="check-form"){
+    e.preventDefault();
+    const r = checkCode($("#chk-code").value, $("#chk-name").value);
+    $("#check-result").innerHTML = r.ok
+      ? `<div class="check ok"><b>Informe auténtico</b><dl><dt>Ficha</dt><dd>${esc(r.titulo)}</dd><dt>Resultado</dt><dd>${r.score} / ${r.total}</dd><dt>Fecha</dt><dd>${fmtDate(r.when)}</dd></dl><p class="note" style="margin:0">Comprueba que estos datos coinciden con los del informe entregado.</p></div>`
+      : `<div class="check bad"><b>No se puede verificar</b><p style="margin:0">${esc(r.msg)}</p></div>`;
+  }
+});
+document.addEventListener("input", e=>{ if(e.target.id==="alumno") e.target.setCustomValidity(""); });
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
