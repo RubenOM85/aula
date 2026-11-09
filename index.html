@@ -38,7 +38,7 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
 header{background:var(--surface);border-bottom:1px solid var(--line)}
-.top{display:flex;gap:16px;align-items:baseline;justify-content:space-between;flex-wrap:wrap;padding-top:22px}
+.top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:22px}
 .brand{font-family:var(--display);font-weight:800;font-size:1.6rem;text-decoration:none;color:var(--ink)}
 .brand span{background:linear-gradient(transparent 62%, var(--highlight) 62%)}
 .school{color:var(--muted);font-size:.92rem}
@@ -90,9 +90,79 @@ main{padding:28px 0 60px}
 .matriz td{text-align:center;font-weight:700}
 .matriz td.ok{background:color-mix(in srgb,#1b8a4b 18%,#fff)}
 .matriz td.ko{background:color-mix(in srgb,#d64545 16%,#fff)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:44px;height:44px;flex:none}
+.brand-txt{display:flex;flex-direction:column;line-height:1.05}
+.brand .brand-txt{background:none}
+.brand-txt small{font-family:var(--body,inherit);font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.task-n{width:44px!important;height:44px!important;border-radius:12px!important;position:relative}
+.task-n .ico{width:26px;height:26px;color:#fff}
+.task-n b{position:absolute;right:-6px;bottom:-6px;min-width:20px;height:20px;padding:0 4px;border-radius:10px;background:#fff;color:var(--sub);border:2px solid var(--sub);font-size:.72rem;display:flex;align-items:center;justify-content:center;line-height:1}
+.task{grid-template-columns:48px minmax(0,1fr)!important}
+.home-tools{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.home-tools a{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:700}
+.home-tools a:hover{border-color:#1d5fd1}
+.home-tools .ico,.tools-tabs .ico{width:20px;height:20px;color:#1d5fd1}
+.tools-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.tools-tabs a{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);text-decoration:none;color:var(--ink);font-weight:700}
+.tools-tabs a[aria-current]{background:#1d5fd1;color:#fff;border-color:#1d5fd1}
+.tools-tabs a[aria-current] .ico{color:#fff}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.tool.fs{position:fixed;inset:0;z-index:1000;border-radius:0;overflow:auto;padding:24px}
+body.fs-on{overflow:hidden}
+.tool-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tool-bar.center{justify-content:center}
+.tool-bar.small{font-size:.92rem;color:var(--muted)}
+.tool-bar .sp{flex:1}
+.tool-bar .sep{width:1px;height:26px;background:var(--line);margin:0 4px}
+.tool input[type=number],.tool input:not([type]),.tool select,.tool textarea{font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.tool input[type=number]{width:80px}
+.tool textarea{width:100%;box-sizing:border-box;resize:vertical}
+.tool fieldset{border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.tool legend{font-weight:700;padding:0 6px}
+.chip-btn{font:inherit;font-weight:700;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.chip-btn:hover{border-color:#1d5fd1}
+.chip-btn.on{background:#1d5fd1;color:#fff;border-color:#1d5fd1}
+.btn.big{font-size:1.25rem;padding:14px 30px}
+.tool-cols{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+.tl-listas{display:flex;flex-direction:column;gap:8px}
+.tl-listas small{color:var(--muted);font-weight:400}
+.tl-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tl-row input:not([type]){flex:1;min-width:180px}
+.tl-opc{display:flex;flex-direction:column;gap:14px;justify-content:center}
+@media (max-width:760px){.tool-cols{grid-template-columns:1fr}}
+.tmr-face{text-align:center;padding:10px 0}
+.tmr-digits{font-family:var(--display);font-weight:800;font-size:clamp(84px,17vw,240px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--ink)}
+.tool.fs .tmr-digits{font-size:min(28vw,52vh)}
+.tmr-bar{height:16px;max-width:900px;margin:18px auto 0;background:var(--line);border-radius:8px;overflow:hidden}
+.tmr-bar span{display:block;height:100%;width:100%;background:#1d5fd1;transition:width .25s linear}
+.tmr.warn .tmr-digits{color:#e08a00}.tmr.warn .tmr-bar span{background:#e08a00}
+.tmr.done .tmr-digits{color:#d64545;animation:parpadeo 1s steps(2,start) infinite}
+@keyframes parpadeo{to{visibility:hidden}}
+.g-res{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.g-card{border-radius:14px;padding:14px 16px;color:#fff}
+.g-card h3{margin:0 0 6px;font-size:1.25rem}
+.g-card ul{margin:0;padding-left:1.1em;font-size:1.12rem;line-height:1.5}
+.tool.fs .g-card ul{font-size:1.5rem}.tool.fs .g-card h3{font-size:1.6rem}
+.s-out{font-family:var(--display);font-weight:800;text-align:center;font-size:clamp(64px,12vw,200px);line-height:1.1;padding:20px 0;color:var(--ink);word-break:break-word}
+.s-out.hit{color:#1d5fd1;animation:salto .5s ease}
+@keyframes salto{0%{transform:scale(.8)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+.tool.fs .s-out{font-size:min(20vw,40vh);padding-top:8vh}
+.s-hist{text-align:center;color:var(--muted)}
+.pz-col{width:30px;height:30px;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer}
+.pz-col.on{box-shadow:0 0 0 3px #1d5fd1}
+.pz-wrap{height:min(68vh,720px);border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.pz-wrap.cuadros{background-image:linear-gradient(#e3e8f0 1px,transparent 1px),linear-gradient(90deg,#e3e8f0 1px,transparent 1px);background-size:32px 32px}
+.tool.fs .pz-wrap{height:calc(100vh - 110px)}
+#pz{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.top-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.tools-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#15223b;color:#fff;text-decoration:none;font-weight:700}
+.tools-btn .ico{width:18px;height:18px}
+.tools-btn:hover,.tools-btn.on{background:#1d5fd1}
+@media (max-width:640px){.school{display:none}}
 .grid.home5{grid-template-columns:repeat(5,1fr)}
 .home5 .subj-card{min-height:150px;justify-content:space-between}
-.home5 .subj-card{padding:0;overflow:hidden;min-height:clamp(320px,calc(100vh - 260px),560px);border-top:none;justify-content:flex-start;transition:transform .15s,box-shadow .15s}
+.home5 .subj-card{padding:0;overflow:hidden;min-height:clamp(300px,calc(100vh - 330px),540px);border-top:none;justify-content:flex-start;transition:transform .15s,box-shadow .15s}
 .home5 .subj-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(20,30,50,.12)}
 .home-ill{flex:1 1 auto;min-height:170px;display:grid;place-items:center;background-color:var(--sub);background-image:radial-gradient(rgba(255,255,255,.22) 1.6px,transparent 1.7px),radial-gradient(circle at 20% 110%,rgba(255,255,255,.14) 0 45%,transparent 46%);background-size:20px 20px,100% 100%}
 .home5 .subj-card .home-ill .ico{width:46%;max-width:120px;height:auto;aspect-ratio:1;color:#fff;stroke-width:1.6}
@@ -315,8 +385,8 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;padd
 <header>
   <div class="wrap">
     <div class="top">
-      <a class="brand" href="#inicio"><span>Aula de Rubén</span></a>
-      <div class="school">Centro Parroquial La Inmaculada · Paiporta · Curso 2026‑27</div>
+      <a class="brand" href="#inicio"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#15223b"/><path d="M13 28V11h7.5a5.2 5.2 0 0 1 0 10.4H13m7 0 6.5 6.6" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="33" width="5" height="3" rx="1.5" fill="#1b8a4b"/><rect x="12" y="33" width="5" height="3" rx="1.5" fill="#1d5fd1"/><rect x="18" y="33" width="5" height="3" rx="1.5" fill="#c2410c"/><rect x="24" y="33" width="5" height="3" rx="1.5" fill="#e08a00"/><rect x="30" y="33" width="5" height="3" rx="1.5" fill="#7c4dcc"/></svg><span class="brand-txt"><span>Aula de Rubén</span><small>Materiales de clase</small></span></a>
+      <div class="top-right"><div class="school">Centro Parroquial La Inmaculada · Paiporta · Curso 2026‑27</div><a class="tools-btn" id="tools-btn" href="#herramientas"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4Z"/></svg>Herramientas</a></div>
     </div>
     <nav id="nav" aria-label="Materias"></nav>
   </div>
@@ -649,6 +719,28 @@ function matrizConfusion(){
   return `<div class="table-wrap"><table class="tbl matriz"><thead><tr><th>Real ↓ · Dice el modelo →</th>${cl.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${m.map((r,i)=>`<tr><th>${cl[i]}</th>${r.map((v,j)=>`<td class="${i===j?"ok":v?"ko":""}">${v}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="note">En la diagonal, los aciertos: 8 + 9 + 7 = 24 de 30 pruebas. Precisión = 24 / 30 = 80 %. «Puño» y «pulgar» se confunden: hay que mejorar esos ejemplos.</p>`;
 }
 
+const REGLAS_TAREA = [
+  [/entren|modelo|teachable|createai|sesgo|\bia\b|inteligencia|gestos/,"brain"],
+  [/estreno|festival|feria|torneo|gran carrera|día de reparto|presenta|demostraci|tech show|pase y/,"star"],
+  [/grab|vídeo|video|rodaj|tráiler|trailer|croma|imovie|montaje|película/,"camera"],
+  [/foto|fotomontaje|cazadores de planos/,"image"],
+  [/música|sonido|voz|voces|garageband|audio|radio con/,"music"],
+  [/storyboard|dibuj|boceto|diseñ|cartel|infograf|plano|croquis|guion|cuento/,"pencil"],
+  [/centralita|protocolo|red\b|redes|cable|rj45|wifi|tráfico/,"radio"],
+  [/program|código|scratch|makecode|\bapp\b|python|algoritm|bucle|variable|función|seguidor|sigue la/,"code"],
+  [/robot|maqueen|spike|rover|motor|sensor|servo|brazo|mecanism|misión|saltador|movimiento|frenar|obstácul|calibr/,"robot"],
+  [/construi|maqueta|decorad|prototipo|montamos|puente|estructura|barrio|almacén|monta/,"gear"],
+  [/prueba|test|error|errores|versión 2|cazadores|estrés|verific|comprueba/,"check"],
+  [/investig|busca|analiz|averigu|descubr|qué sabes|desmont|conoce|dónde está/,"search"],
+  [/debate|decálogo|reflex|valora|ética|diario|informe|document|memoria|licencia|créditos/,"book"],
+  [/equipo|reparto|roles|grupo|empresa|mayores|enseña/,"people"]
+];
+function iconoTarea(t){
+  const tit=(t.t||"").toLowerCase(), txt=(t.html||"").replace(/<[^>]+>/g," ").toLowerCase();
+  for(const [re,ic] of REGLAS_TAREA) if(re.test(tit)) return ic;
+  for(const [re,ic] of REGLAS_TAREA) if(re.test(txt)) return ic;
+  return "target";
+}
 function vistasSVG(){
   const s=36, ox=50, oy=205, c=0.866;
   const P=(x,y,z)=>[ox+(x+z)*c*s, oy-(y+(x-z)*0.5)*s];
@@ -3071,7 +3163,8 @@ function materiasOrdenadas(){
 }
 function renderNav(current){
   $("#nav").innerHTML = `<a href="#inicio" ${current==="inicio"?'aria-current="page"':''}>Inicio</a>` +
-    materiasOrdenadas().map(m => `<a href="#${m.id}" style="--sub:${m.color}" ${current===m.id?'aria-current="page"':''}>${esc(m.corto||m.nombre)} ${esc(m.nivel)}</a>`).join("");
+    materiasOrdenadas().map(m => `<a href="#${m.id}" style="--sub:${m.color}" ${current===m.id?'aria-current="page"':''}>${esc(m.corto||m.nombre)} ${esc(m.nivel)}</a>`).join("") ;
+  const tb=document.getElementById("tools-btn"); if(tb) tb.classList.toggle("on", current==="herramientas");
 }
 
 function renderHome(){
@@ -3085,7 +3178,8 @@ function renderHome(){
           <div class="home-ill">${icono(ICONO_MATERIA[m.id]||"star")}</div>
           <div class="home-txt"><span class="lvl">${esc(m.nivel)}</span><h2>${esc(m.nombre)}</h2></div>
         </a>`).join("")}
-    </div>`;
+    </div>
+    <div class="home-tools">${HERR.map(([id,n,ic])=>`<a href="#herramientas-${id}">${icono(ic)}<span>${n}</span></a>`).join("")}</div>`;
 }
 
 function itemAction(it){
@@ -3200,7 +3294,7 @@ function renderUnit(m,u){
     u.anexos&&["anexos","Cómo se evalúa"]].filter(Boolean);
   const tareaHtml = t => `
     <li class="task" id="${u.id}-t${t.n}">
-      <span class="task-n">${t.n}</span>
+      <span class="task-n" title="Tarea ${t.n}">${icono(iconoTarea(t))}<b>${t.n}</b></span>
       <div class="task-body">
         <h3>${esc(t.t)}</h3>
         ${t.html}
@@ -3256,6 +3350,8 @@ function renderUnit(m,u){
 
 function route(){
   const id = (location.hash||"#inicio").slice(1);
+  document.querySelectorAll(".fs").forEach(x=>x.classList.remove("fs")); document.body.classList.remove("fs-on");
+  if(id.startsWith("herramientas")){ renderNav("herramientas"); renderTools(id.split("-")[1]||"temporizador"); window.scrollTo(0,0); return; }
   if(id==="comprobar"){ renderNav(""); renderCheck(); window.scrollTo(0,0); return; }
   let m = MATERIAS.find(x=>x.id===id), u = null;
   if(!m) for(const mm of MATERIAS){ const f=mm.unidades.find(x=>x.id===id); if(f){ m=mm; u=f; break; } }
@@ -3453,6 +3549,290 @@ document.addEventListener("input", e=>{
     o.innerHTML=`Eficiencia: <b>${ef.toLocaleString("es-ES",{maximumFractionDigits:4})}</b> · tu puente soportó <b>${veces.toLocaleString("es-ES",{maximumFractionDigits:1})} veces</b> su propio peso.`;
   }
 });
+
+/* ---------- herramientas de clase ---------- */
+const HERR = [["temporizador","Temporizador","play"],["grupos","Grupos","people"],["sorteo","Sorteo","star"],["pizarra","Pizarra","pencil"]];
+function lsGet(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
+function rnd(n){ try{ const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%n; }catch(e){ return Math.floor(Math.random()*n); } }
+function barajar(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=rnd(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function pantallaCompleta(el){
+  if(!el) return;
+  const on = !el.classList.contains("fs");
+  document.querySelectorAll(".fs").forEach(x=>x.classList.remove("fs"));
+  document.body.classList.toggle("fs-on", on);
+  if(on){
+    el.classList.add("fs");
+    const d=document.documentElement, f=d.requestFullscreen||d.webkitRequestFullscreen;
+    try{ const p=f&&f.call(d); if(p&&p.catch) p.catch(()=>{}); }catch(e){}
+  } else {
+    try{ if(document.fullscreenElement||document.webkitFullscreenElement){ const p=(document.exitFullscreen||document.webkitExitFullscreen).call(document); if(p&&p.catch) p.catch(()=>{}); } }catch(e){}
+  }
+  setTimeout(pizarraAjustar,80);
+}
+["fullscreenchange","webkitfullscreenchange"].forEach(ev=>document.addEventListener(ev,()=>{
+  if(!(document.fullscreenElement||document.webkitFullscreenElement)){
+    document.querySelectorAll(".fs").forEach(x=>x.classList.remove("fs")); document.body.classList.remove("fs-on");
+    setTimeout(pizarraAjustar,80);
+  }
+}));
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && document.querySelector(".fs")) pantallaCompleta(document.querySelector(".fs")); });
+
+function renderTools(t){
+  if(!HERR.some(h=>h[0]===t)) t="temporizador";
+  const cuerpo = {temporizador:tmrHTML, grupos:gruposHTML, sorteo:sorteoHTML, pizarra:pizarraHTML}[t]();
+  $("#main").innerHTML = `
+    <div style="--sub:#1d5fd1">
+      <div class="subj-head"><span class="lvl">Para la clase</span><h1>Herramientas</h1></div>
+      <nav class="tools-tabs" aria-label="Herramientas">${HERR.map(([id,n,ic])=>`<a href="#herramientas-${id}" ${id===t?'aria-current="page"':''}>${icono(ic)}<span>${n}</span></a>`).join("")}</nav>
+      ${cuerpo}
+    </div>`;
+  if(t==="temporizador") tmrPintar();
+  if(t==="pizarra") pizarraIniciar();
+}
+
+/* --- listas de alumnado (compartidas por grupos y sorteo) --- */
+function listasHTML(p){
+  const L=lsGet("aula-listas",{});
+  return `<div class="tl-listas">
+    <label for="${p}-nombres"><b>Lista de alumnado</b> <small>Un nombre por línea. Las listas se guardan solo en este navegador.</small></label>
+    <div class="tl-row"><select id="${p}-sel" data-tlsel="${p}"><option value="">— Listas guardadas —</option>${Object.keys(L).sort().map(k=>`<option>${esc(k)}</option>`).join("")}</select>
+      <button class="btn ghost" data-tl="lista-borrar" data-p="${p}">Borrar lista</button></div>
+    <textarea id="${p}-nombres" rows="7" placeholder="Ana&#10;Bruno&#10;Carla"></textarea>
+    <div class="tl-row"><input id="${p}-lista" placeholder="Nombre de la lista (por ejemplo, 2.º ESO A)"><button class="btn ghost" data-tl="lista-guardar" data-p="${p}">Guardar lista</button></div>
+  </div>`;
+}
+function nombresDe(p){ const t=$("#"+p+"-nombres"); return t? t.value.split("\n").map(x=>x.trim()).filter(Boolean) : []; }
+
+/* --- temporizador --- */
+const TMR = {total:300, rest:300, run:false, fin:0, iv:null, son:true, ctx:null};
+function tmrHTML(){
+  return `<section class="tool tmr" id="tool-box">
+    <div class="tool-bar">${[1,2,3,5,10,15,20,30].map(m=>`<button class="chip-btn" data-tl="tmr-pre" data-s="${m*60}">${m} min</button>`).join("")}
+      <span class="sp"></span><button class="btn ghost" data-tl="fs">⛶ Pantalla completa</button></div>
+    <div class="tmr-face"><div class="tmr-digits" id="tmr-d">5:00</div><div class="tmr-bar"><span id="tmr-p"></span></div></div>
+    <div class="tool-bar center">
+      <button class="btn ghost" data-tl="tmr-add" data-s="-60">−1 min</button>
+      <button class="btn ghost" data-tl="tmr-add" data-s="-10">−10 s</button>
+      <button class="btn big" data-tl="tmr-go" id="tmr-go">Empezar</button>
+      <button class="btn ghost" data-tl="tmr-reset">Reiniciar</button>
+      <button class="btn ghost" data-tl="tmr-add" data-s="10">+10 s</button>
+      <button class="btn ghost" data-tl="tmr-add" data-s="60">+1 min</button>
+    </div>
+    <div class="tool-bar center small">
+      <label>Otro tiempo: <input id="tmr-m" type="number" min="0" max="180" value="" placeholder="min"> min <input id="tmr-s" type="number" min="0" max="59" placeholder="s"> s</label>
+      <button class="btn ghost" data-tl="tmr-set">Poner</button>
+      <label><input type="checkbox" id="tmr-son" ${TMR.son?"checked":""}> Sonido al terminar</label>
+    </div>
+  </section>`;
+}
+function tmrFmt(s){ s=Math.ceil(s); const h=Math.floor(s/3600), m=Math.floor(s%3600/60), x=s%60; return (h?h+":"+String(m).padStart(2,"0"):m)+":"+String(x).padStart(2,"0"); }
+function tmrPintar(){
+  const d=$("#tmr-d"); if(!d) return;
+  d.textContent=tmrFmt(TMR.rest);
+  $("#tmr-p").style.width=(TMR.total?TMR.rest/TMR.total*100:0)+"%";
+  const box=$("#tool-box"); box.classList.toggle("warn", TMR.run && TMR.rest<=10 && TMR.rest>0); box.classList.toggle("done", TMR.rest<=0 && TMR.total>0 && !TMR.run && TMR.acabado);
+  $("#tmr-go").textContent = TMR.run ? "Pausa" : (TMR.rest<TMR.total && TMR.rest>0 ? "Seguir" : "Empezar");
+}
+function tmrTick(){
+  if(!TMR.run) return;
+  TMR.rest=Math.max(0,(TMR.fin-Date.now())/1000);
+  if(TMR.rest<=0){ TMR.run=false; clearInterval(TMR.iv); TMR.acabado=true; if(TMR.son) tmrPitido(); }
+  tmrPintar();
+}
+function tmrPitido(){
+  try{
+    const c=TMR.ctx||(TMR.ctx=new (window.AudioContext||window.webkitAudioContext)());
+    [0,0.35,0.7,1.4,1.75,2.1].forEach(t=>{ const o=c.createOscillator(), g=c.createGain(); o.type="sine"; o.frequency.value=880; g.gain.setValueAtTime(0.0001,c.currentTime+t); g.gain.exponentialRampToValueAtTime(0.4,c.currentTime+t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+t+0.25); o.connect(g).connect(c.destination); o.start(c.currentTime+t); o.stop(c.currentTime+t+0.3); });
+  }catch(e){}
+}
+function tmrPoner(seg){ TMR.run=false; clearInterval(TMR.iv); TMR.acabado=false; TMR.total=TMR.rest=Math.max(0,Math.min(seg,10*3600)); tmrPintar(); }
+
+/* --- grupos --- */
+const COLORES_G = ["#1d5fd1","#1b8a4b","#c2410c","#7c4dcc","#e08a00","#0e7c86","#c0266d","#4b5563","#8a5a00","#2f6f3e"];
+function gruposHTML(){
+  return `<section class="tool" id="tool-box">
+    <div class="tool-cols">
+      <div>${listasHTML("g")}
+        <p class="note">¿Sin lista? Escribe solo cuántos sois y se harán grupos con números.</p>
+        <label class="tl-row">Número de alumnos: <input id="g-n" type="number" min="2" max="60" placeholder="25"></label>
+      </div>
+      <div class="tl-opc">
+        <fieldset><legend>¿Cómo quieres los grupos?</legend>
+          <label><input type="radio" name="g-modo" value="num" checked> Número de grupos</label>
+          <label><input type="radio" name="g-modo" value="tam"> Personas por grupo</label>
+          <input id="g-k" type="number" min="1" max="30" value="4">
+        </fieldset>
+        <button class="btn big" data-tl="g-hacer">Hacer grupos</button>
+      </div>
+    </div>
+    <div class="tool-bar"><span class="sp"></span><button class="btn ghost" data-tl="fs">⛶ Pantalla completa</button></div>
+    <div id="g-res" class="g-res"></div>
+  </section>`;
+}
+function hacerGrupos(){
+  let n=nombresDe("g");
+  if(!n.length){ const k=parseInt($("#g-n").value,10); if(k>1) n=Array.from({length:k},(_,i)=>String(i+1)); }
+  const res=$("#g-res");
+  if(n.length<2){ res.innerHTML=`<p class="note">Escribe al menos dos nombres o el número de alumnos.</p>`; return; }
+  const modo=document.querySelector('input[name="g-modo"]:checked').value, v=Math.max(1,parseInt($("#g-k").value,10)||1);
+  let k = modo==="num" ? Math.min(v,n.length) : Math.max(1,Math.round(n.length/v));
+  const g=Array.from({length:k},()=>[]); barajar(n).forEach((x,i)=>g[i%k].push(x));
+  res.innerHTML = g.map((m,i)=>`<div class="g-card" style="background:${COLORES_G[i%COLORES_G.length]}"><h3>Grupo ${i+1}</h3><ul>${m.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+}
+
+/* --- sorteo --- */
+const SRT = {sacados:[], clave:""};
+function sorteoHTML(){
+  return `<section class="tool" id="tool-box">
+    <div class="tool-cols">
+      <div>
+        <fieldset><legend>¿Qué sorteamos?</legend>
+          <label><input type="radio" name="s-modo" value="num" checked> Un número</label>
+          <label><input type="radio" name="s-modo" value="nom"> Un nombre de la lista</label>
+        </fieldset>
+        <div class="tl-row"><label>Desde <input id="s-a" type="number" value="1"></label><label>hasta <input id="s-b" type="number" value="25"></label></div>
+        <label class="tl-row"><input type="checkbox" id="s-norep" checked> No repetir (quien sale, ya no vuelve a salir)</label>
+      </div>
+      <div>${listasHTML("s")}</div>
+    </div>
+    <div class="tool-bar center"><button class="btn big" data-tl="s-go">Sortear</button><button class="btn ghost" data-tl="s-reset">Empezar de nuevo</button><span class="sp"></span><button class="btn ghost" data-tl="fs">⛶ Pantalla completa</button></div>
+    <div class="s-out" id="s-out">?</div>
+    <p class="s-hist" id="s-hist"></p>
+  </section>`;
+}
+function sortear(){
+  const modo=document.querySelector('input[name="s-modo"]:checked').value;
+  let pool;
+  if(modo==="num"){ let a=parseInt($("#s-a").value,10), b=parseInt($("#s-b").value,10); if(isNaN(a)||isNaN(b)) return; if(a>b)[a,b]=[b,a]; if(b-a>5000) b=a+5000; pool=Array.from({length:b-a+1},(_,i)=>String(a+i)); }
+  else pool=nombresDe("s");
+  const out=$("#s-out");
+  if(!pool.length){ out.textContent="Escribe la lista"; return; }
+  const clave=modo+"|"+pool.join(",");
+  if(clave!==SRT.clave){ SRT.clave=clave; SRT.sacados=[]; }
+  const norep=$("#s-norep").checked;
+  const libres = norep ? pool.filter(x=>!SRT.sacados.includes(x)) : pool;
+  if(!libres.length){ out.textContent="¡Ya han salido todos!"; return; }
+  const elegido=libres[rnd(libres.length)];
+  let i=0; const pasos=22; out.classList.remove("hit");
+  (function giro(){
+    out.textContent = i<pasos-1 ? pool[rnd(pool.length)] : elegido;
+    if(++i<pasos) setTimeout(giro, 40+i*i*0.9);
+    else { out.classList.add("hit"); SRT.sacados.push(elegido); $("#s-hist").innerHTML = "Han salido: "+SRT.sacados.map(esc).join(" · "); }
+  })();
+}
+
+/* --- pizarra --- */
+const PZ = {color:"#1f2533", tam:4, goma:false, guardado:null, deshacer:[], cuadros:false, dibujando:false, ult:null};
+function pizarraHTML(){
+  const cols=["#1f2533","#1d5fd1","#d64545","#1b8a4b","#e08a00","#7c4dcc"];
+  return `<section class="tool pz" id="tool-box">
+    <div class="tool-bar">
+      ${cols.map(c=>`<button class="pz-col ${!PZ.goma&&PZ.color===c?"on":""}" style="--c:${c}" data-tl="pz-color" data-c="${c}" aria-label="Color"></button>`).join("")}
+      <span class="sep"></span>
+      ${[[2,"Fino"],[4,"Medio"],[9,"Grueso"]].map(([t,n])=>`<button class="chip-btn ${PZ.tam===t?"on":""}" data-tl="pz-tam" data-t="${t}">${n}</button>`).join("")}
+      <button class="chip-btn ${PZ.goma?"on":""}" data-tl="pz-goma">Goma</button>
+      <span class="sep"></span>
+      <button class="chip-btn" data-tl="pz-undo">↶ Deshacer</button>
+      <button class="chip-btn" data-tl="pz-borrar">Borrar todo</button>
+      <button class="chip-btn ${PZ.cuadros?"on":""}" data-tl="pz-fondo">Cuadrícula</button>
+      <button class="chip-btn" data-tl="pz-bajar">Descargar</button>
+      <span class="sp"></span><button class="btn ghost" data-tl="fs">⛶ Pantalla completa</button>
+    </div>
+    <div class="pz-wrap ${PZ.cuadros?"cuadros":""}" id="pz-wrap"><canvas id="pz"></canvas></div>
+  </section>`;
+}
+function pizarraAjustar(){
+  const c=$("#pz"), w=$("#pz-wrap"); if(!c||!w) return;
+  const r=w.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+  const W=Math.max(1,Math.round(r.width*dpr)), H=Math.max(1,Math.round(r.height*dpr));
+  if(c.width===W && c.height===H) return;
+  const tmp=document.createElement("canvas"); tmp.width=c.width; tmp.height=c.height; if(c.width>1) tmp.getContext("2d").drawImage(c,0,0);
+  c.width=W; c.height=H; const x=c.getContext("2d"); x.setTransform(dpr,0,0,dpr,0,0);
+  if(tmp.width>1) x.drawImage(tmp,0,0,tmp.width/dpr,tmp.height/dpr);
+}
+function pizarraIniciar(){
+  const c=$("#pz"); if(!c) return;
+  pizarraAjustar();
+  const x=c.getContext("2d");
+  if(PZ.guardado){ const im=new Image(); im.onload=()=>{ const dpr=window.devicePixelRatio||1; x.drawImage(im,0,0,im.width/dpr,im.height/dpr); }; im.src=PZ.guardado; }
+  const pos=e=>{ const r=c.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; };
+  c.addEventListener("pointerdown",e=>{
+    e.preventDefault(); c.setPointerCapture(e.pointerId);
+    PZ.deshacer.push(c.toDataURL()); if(PZ.deshacer.length>25) PZ.deshacer.shift();
+    PZ.dibujando=true; PZ.ult=pos(e);
+    x.globalCompositeOperation = PZ.goma ? "destination-out" : "source-over";
+    x.strokeStyle=PZ.color; x.lineWidth = PZ.goma ? PZ.tam*6 : PZ.tam*(e.pointerType==="pen"&&e.pressure?0.6+e.pressure:1);
+    x.lineCap="round"; x.lineJoin="round";
+    x.beginPath(); x.moveTo(...PZ.ult); x.lineTo(PZ.ult[0]+0.01,PZ.ult[1]); x.stroke();
+  });
+  c.addEventListener("pointermove",e=>{
+    if(!PZ.dibujando) return;
+    const p=pos(e), m=[(PZ.ult[0]+p[0])/2,(PZ.ult[1]+p[1])/2];
+    x.quadraticCurveTo(PZ.ult[0],PZ.ult[1],m[0],m[1]); x.stroke(); x.beginPath(); x.moveTo(m[0],m[1]); PZ.ult=p;
+  });
+  const fin=()=>{ if(!PZ.dibujando) return; PZ.dibujando=false; PZ.guardado=c.toDataURL(); };
+  c.addEventListener("pointerup",fin); c.addEventListener("pointercancel",fin); c.addEventListener("pointerleave",fin);
+}
+function pizarraCargar(url){
+  const c=$("#pz"); if(!c) return; const x=c.getContext("2d"), dpr=window.devicePixelRatio||1;
+  x.save(); x.setTransform(1,0,0,1,0,0); x.globalCompositeOperation="source-over"; x.clearRect(0,0,c.width,c.height); x.restore();
+  if(!url){ PZ.guardado=null; return; }
+  const im=new Image(); im.onload=()=>{ x.globalCompositeOperation="source-over"; x.drawImage(im,0,0,im.width/dpr,im.height/dpr); PZ.guardado=c.toDataURL(); }; im.src=url;
+}
+window.addEventListener("resize",()=>setTimeout(pizarraAjustar,60));
+
+/* --- acciones --- */
+document.addEventListener("input",e=>{ if(e.target.id==="s-nombres"){ const r=document.querySelector('input[name="s-modo"][value="nom"]'); if(r) r.checked=true; } });
+document.addEventListener("change",e=>{
+  const p=e.target.dataset&&e.target.dataset.tlsel; if(!p) return;
+  if(p==="s"){ const r=document.querySelector('input[name="s-modo"][value="nom"]'); if(r) r.checked=true; }
+  const L=lsGet("aula-listas",{}), k=e.target.value; if(k&&L[k]){ $("#"+p+"-nombres").value=L[k].join("\n"); $("#"+p+"-lista").value=k; }
+});
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-tl]"); if(!b) return;
+  const a=b.dataset.tl;
+  if(a==="fs") return pantallaCompleta($("#tool-box"));
+  if(a==="tmr-pre") return tmrPoner(+b.dataset.s);
+  if(a==="tmr-set") return tmrPoner((parseInt($("#tmr-m").value,10)||0)*60+(parseInt($("#tmr-s").value,10)||0));
+  if(a==="tmr-add"){ const d=+b.dataset.s; TMR.total=Math.max(1,TMR.total+d); if(TMR.run) TMR.fin+=d*1000; else TMR.rest=Math.max(0,TMR.rest+d); if(TMR.rest>TMR.total) TMR.total=TMR.rest; TMR.acabado=false; tmrTick(); return tmrPintar(); }
+  if(a==="tmr-reset") return tmrPoner(TMR.total);
+  if(a==="tmr-go"){
+    TMR.son=$("#tmr-son").checked;
+    try{ const AC=window.AudioContext||window.webkitAudioContext; if(TMR.son&&!TMR.ctx&&AC) TMR.ctx=new AC(); if(TMR.ctx&&TMR.ctx.state==="suspended") TMR.ctx.resume(); }catch(err){}
+    if(TMR.run){ TMR.run=false; clearInterval(TMR.iv); }
+    else { if(TMR.rest<=0) TMR.rest=TMR.total; if(TMR.rest<=0) return; TMR.acabado=false; TMR.run=true; TMR.fin=Date.now()+TMR.rest*1000; clearInterval(TMR.iv); TMR.iv=setInterval(tmrTick,200); }
+    return tmrPintar();
+  }
+  if(a==="lista-guardar"){
+    const p=b.dataset.p, n=($("#"+p+"-lista").value||"").trim(), v=nombresDe(p);
+    if(!n||!v.length){ b.textContent="Pon nombre y alumnos"; setTimeout(()=>b.textContent="Guardar lista",1800); return; }
+    const L=lsGet("aula-listas",{}); L[n]=v; b.textContent = lsSet("aula-listas",L) ? "Guardada ✓" : "No se pudo guardar"; setTimeout(()=>b.textContent="Guardar lista",1800);
+    const s=$("#"+p+"-sel"); if(s && ![...s.options].some(o=>o.value===n)){ const o=document.createElement("option"); o.textContent=n; s.appendChild(o); } if(s) s.value=n;
+    return;
+  }
+  if(a==="lista-borrar"){
+    const p=b.dataset.p, s=$("#"+p+"-sel"), k=s&&s.value; if(!k) return;
+    const L=lsGet("aula-listas",{}); delete L[k]; lsSet("aula-listas",L); s.querySelector("option:checked").remove(); s.value=""; return;
+  }
+  if(a==="g-hacer") return hacerGrupos();
+  if(a==="s-go") return sortear();
+  if(a==="s-reset"){ SRT.sacados=[]; $("#s-out").textContent="?"; $("#s-out").classList.remove("hit"); $("#s-hist").textContent=""; return; }
+  if(a==="pz-color"){ PZ.color=b.dataset.c; PZ.goma=false; }
+  else if(a==="pz-tam"){ PZ.tam=+b.dataset.t; }
+  else if(a==="pz-goma"){ PZ.goma=!PZ.goma; }
+  else if(a==="pz-undo"){ const u=PZ.deshacer.pop(); if(u!==undefined) pizarraCargar(u); return; }
+  else if(a==="pz-borrar"){ const c=$("#pz"); if(c){ PZ.deshacer.push(c.toDataURL()); } pizarraCargar(null); return; }
+  else if(a==="pz-fondo"){ PZ.cuadros=!PZ.cuadros; $("#pz-wrap").classList.toggle("cuadros",PZ.cuadros); b.classList.toggle("on",PZ.cuadros); return; }
+  else if(a==="pz-bajar"){
+    const c=$("#pz"); if(!c) return; const t=document.createElement("canvas"); t.width=c.width; t.height=c.height; const x=t.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,t.width,t.height); x.drawImage(c,0,0);
+    const l=document.createElement("a"); l.download="pizarra.png"; l.href=t.toDataURL("image/png"); l.click(); return;
+  } else return;
+  document.querySelectorAll(".pz-col").forEach(x=>x.classList.toggle("on",!PZ.goma&&x.dataset.c===PZ.color));
+  document.querySelectorAll('[data-tl="pz-tam"]').forEach(x=>x.classList.toggle("on",+x.dataset.t===PZ.tam));
+  const g=document.querySelector('[data-tl="pz-goma"]'); if(g) g.classList.toggle("on",PZ.goma);
+});
+
 window.addEventListener("hashchange", route);
 route();
 </script>
