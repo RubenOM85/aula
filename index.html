@@ -79,6 +79,17 @@ main{padding:28px 0 60px}
 .simb svg{width:100%;max-width:130px;height:auto}
 .simb figcaption{display:flex;flex-direction:column;color:var(--ink)}
 .simb figcaption span{font-size:.9rem;color:var(--muted)}
+.dg{margin:12px 0 16px;background:color-mix(in srgb,var(--sub) 6%,#fff);border-radius:12px;padding:12px;text-align:center}
+.dg svg{width:100%;max-width:480px;height:auto}
+.dg figcaption{font-size:.92rem;color:var(--muted);margin-top:6px}
+.capas{display:flex;flex-direction:column;gap:6px;margin:12px 0 16px;max-width:520px}
+.capa{display:grid;grid-template-columns:34px 170px 1fr;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:color-mix(in srgb,var(--sub) calc(8% + var(--k)*9%),#fff)}
+.capa .ico{width:26px;height:26px;color:var(--sub)}
+.capa span{color:var(--muted);font-size:.92rem}
+@media (max-width:640px){.capa{grid-template-columns:30px 1fr}.capa span{grid-column:2}}
+.matriz td{text-align:center;font-weight:700}
+.matriz td.ok{background:color-mix(in srgb,#1b8a4b 18%,#fff)}
+.matriz td.ko{background:color-mix(in srgb,#d64545 16%,#fff)}
 .grid.home5{grid-template-columns:repeat(5,1fr)}
 .home5 .subj-card{min-height:150px;justify-content:space-between}
 .home5 .subj-card h2{font-size:1.15rem;line-height:1.25}
@@ -519,6 +530,116 @@ function simbolosFlujo(){
   </div>`;
 }
 
+function _fl(x1,y1,x2,y2,w){
+  const a=Math.atan2(y2-y1,x2-x1), L=7, s=0.45;
+  const p1=[x2-L*Math.cos(a-s),y2-L*Math.sin(a-s)], p2=[x2-L*Math.cos(a+s),y2-L*Math.sin(a+s)];
+  return `<line x1="${x1}" y1="${y1}" x2="${x2-4*Math.cos(a)}" y2="${y2-4*Math.sin(a)}" style="stroke:var(--sub)" stroke-width="${w||2.5}" stroke-linecap="round"/><path d="M${x2} ${y2}L${p1[0].toFixed(1)} ${p1[1].toFixed(1)}L${p2[0].toFixed(1)} ${p2[1].toFixed(1)}Z" style="fill:var(--sub)"/>`;
+}
+function figuras(lista){
+  return `<div class="simbolos">${lista.map(([svg,t,d])=>`<figure class="simb"><svg viewBox="0 0 140 100" aria-hidden="true">${svg}</svg><figcaption><b>${t}</b>${d?`<span>${d}</span>`:""}</figcaption></figure>`).join("")}</div>`;
+}
+const _nodo=(x,y)=>`<rect x="${x-8}" y="${y-6}" width="16" height="12" rx="2.5" fill="#fff" style="stroke:var(--sub)" stroke-width="2"/>`;
+function topologias(){
+  const ln=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#8a94a6" stroke-width="2"/>`;
+  const est=[[70,15],[110,35],[105,80],[35,80],[30,35]];
+  const ring=[0,1,2,3,4].map(i=>[70+34*Math.sin(i*1.2566),50-34*Math.cos(i*1.2566)]);
+  const malla=[[25,25],[70,15],[115,30],[95,82],[40,80]];
+  return figuras([
+    [est.map(([x,y])=>ln(70,50,x,y)).join("")+`<rect x="58" y="42" width="24" height="16" rx="3" style="fill:var(--sub)"/>`+est.map(([x,y])=>_nodo(x,y)).join(""),"Estrella","Todos a un equipo central."],
+    [ln(10,50,130,50)+[25,55,85,115].map((x,i)=>ln(x,50,x,i%2?72:28)+_nodo(x,i%2?78:22)).join(""),"Bus","Todos comparten un cable."],
+    [`<circle cx="70" cy="50" r="34" fill="none" stroke="#8a94a6" stroke-width="2"/>`+ring.map(([x,y])=>_nodo(x,y)).join(""),"Anillo","Cada uno, con el siguiente."],
+    [malla.map((p,i)=>malla.slice(i+1).map(q=>ln(p[0],p[1],q[0],q[1])).join("")).join("")+malla.map(([x,y])=>_nodo(x,y)).join(""),"Malla","Varios caminos entre equipos."]
+  ]);
+}
+function palancas(){
+  const barra=`<line x1="12" y1="52" x2="128" y2="52" stroke="#5b6475" stroke-width="5" stroke-linecap="round"/>`;
+  const apoyo=x=>`<path d="M${x} 55 L${x-11} 75 L${x+11} 75Z" style="fill:var(--sub)"/><text x="${x}" y="90" text-anchor="middle" font-size="11" fill="#5b6475">A</text>`;
+  const carga=x=>`<rect x="${x-12}" y="28" width="24" height="22" rx="3" fill="#c9d1de"/><text x="${x}" y="43" text-anchor="middle" font-size="12" font-weight="700" fill="#33415c">R</text>`;
+  const fuerza=(x,arriba)=>(arriba?_fl(x,88,x,58):_fl(x,14,x,47))+`<text x="${x+9}" y="${arriba?82:24}" font-size="12" font-weight="700" style="fill:var(--sub)">F</text>`;
+  return figuras([
+    [barra+apoyo(70)+carga(28)+fuerza(112,false),"Primer grado","El apoyo, en medio. Balancín, tijeras."],
+    [barra+apoyo(18)+carga(66)+fuerza(118,true),"Segundo grado","La carga, en medio. Carretilla, cascanueces."],
+    [barra+apoyo(18)+fuerza(62,true)+carga(112),"Tercer grado","La fuerza, en medio. Pinzas, caña de pescar."]
+  ]);
+}
+function engranajes(){
+  const rueda=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#5b6475" stroke-width="7" stroke-dasharray="4 3.5"/><circle cx="${x}" cy="${y}" r="${r-4}" fill="#e7ebf2"/><circle cx="${x}" cy="${y}" r="3" fill="#5b6475"/>`;
+  const giro=(x,y,r,h)=>`<path d="M${x-r*0.7} ${y-r-8} A ${r+8} ${r+8} 0 0 ${h?1:0} ${x+r*0.7} ${y-r-8}" fill="none" style="stroke:var(--sub)" stroke-width="2.5"/>`+(h?_fl(x+r*0.5,y-r-9.5,x+r*0.75,y-r-7):_fl(x-r*0.5,y-r-9.5,x-r*0.75,y-r-7));
+  const et=(x,t)=>`<text x="${x}" y="99" text-anchor="middle" font-size="9.5" fill="#5b6475">${t}</text>`;
+  return figuras([
+    [rueda(36,52,16)+rueda(89,52,31)+giro(36,52,16,true)+giro(89,52,31,false)+et(30,"Motriz")+et(92,"Conducido"),"Reductor","Pequeño mueve a grande: más despacio y con más fuerza."],
+    [rueda(51,52,31)+rueda(104,52,16)+giro(51,52,31,true)+giro(104,52,16,false)+et(45,"Motriz")+et(110,"Conducido"),"Multiplicador","Grande mueve a pequeño: más rápido y con menos fuerza."]
+  ]);
+}
+function esfuerzosSVG(){
+  const barra=(w,h)=>`<rect x="${70-w/2}" y="${50-h/2}" width="${w}" height="${h}" rx="3" fill="#c9d1de" stroke="#5b6475" stroke-width="1.5"/>`;
+  return figuras([
+    [barra(70,16)+_fl(33,50,8,50)+_fl(107,50,132,50),"Tracción","Tiende a alargarse. Un cable."],
+    [barra(16,56)+_fl(70,6,70,18)+_fl(70,94,70,82),"Compresión","Tiende a acortarse. Un pilar."],
+    [`<path d="M18 46 Q70 62 122 46 L122 58 Q70 74 18 58Z" fill="#c9d1de" stroke="#5b6475" stroke-width="1.5"/><path d="M14 64 l8 12 h-16Z M126 64 l8 12 h-16Z" fill="#8a94a6"/>`+_fl(70,18,70,52),"Flexión","Tiende a doblarse. Una viga."],
+    [`<rect x="20" y="40" width="100" height="20" rx="10" fill="#c9d1de" stroke="#5b6475" stroke-width="1.5"/><path d="M20 47 L120 53 M20 53 L120 47" stroke="#8a94a6" stroke-width="1"/><path d="M14 30 A 18 18 0 0 0 14 70" fill="none" style="stroke:var(--sub)" stroke-width="2.5"/>${_fl(16,67,19,71)}<path d="M126 70 A 18 18 0 0 0 126 30" fill="none" style="stroke:var(--sub)" stroke-width="2.5"/>${_fl(124,33,121,29)}`,"Torsión","Tiende a retorcerse. Una llave."],
+    [`<rect x="15" y="30" width="110" height="18" fill="#c9d1de" stroke="#5b6475" stroke-width="1.5"/><rect x="15" y="52" width="110" height="18" fill="#c9d1de" stroke="#5b6475" stroke-width="1.5"/>`+_fl(55,12,55,36)+_fl(85,88,85,64),"Cortadura","Tiende a cortarse. Unas tijeras."]
+  ]);
+}
+function trianguloSVG(){
+  const n=(x,y)=>`<circle cx="${x}" cy="${y}" r="4" style="fill:var(--sub)"/>`;
+  return figuras([
+    [`<path d="M30 80 L30 30 L80 30 L80 80Z" fill="none" stroke="#c9d1de" stroke-width="3" stroke-dasharray="5 4"/><path d="M30 80 L55 30 L105 30 L80 80Z" fill="none" stroke="#5b6475" stroke-width="4" stroke-linejoin="round"/>`+n(30,80)+n(55,30)+n(105,30)+n(80,80)+_fl(10,30,48,30),"Cuadrado","Con una fuerza lateral, se deforma."],
+    [`<path d="M30 80 L70 22 L110 80Z" fill="none" stroke="#5b6475" stroke-width="4" stroke-linejoin="round"/>`+n(30,80)+n(70,22)+n(110,80)+_fl(28,22,62,22),"Triángulo","No se deforma: es indeformable."],
+    [`<path d="M15 80 L15 25 L125 25 L125 80 M15 80 L70 25 L125 80 M70 25 L70 80 M15 80 L125 80" fill="none" stroke="#5b6475" stroke-width="3" stroke-linejoin="round"/>`,"Estructura triangulada","Por eso las grúas y los puentes están llenos de triángulos."]
+  ]);
+}
+function lineaSensores(){
+  const nombres=["L2","L1","M","R1","R2"], xs=[118,139,160,181,202], v=[0,0,1,0,0];
+  return `<figure class="dg"><svg viewBox="0 0 320 170" aria-hidden="true">
+    <rect width="320" height="170" rx="10" fill="#f6f7fa"/>
+    <path d="M160 170 L160 60 C160 30 190 12 250 8 L320 6" fill="none" stroke="#1f2533" stroke-width="16"/>
+    <rect x="104" y="58" width="112" height="92" rx="16" fill="#fff" fill-opacity=".72" style="stroke:var(--sub)" stroke-width="3"/>
+    <rect x="92" y="78" width="12" height="44" rx="4" fill="#5b6475"/><rect x="216" y="78" width="12" height="44" rx="4" fill="#5b6475"/>
+    ${xs.map((x,i)=>`<circle cx="${x}" cy="72" r="7" fill="${v[i]?"#1f2533":"#fff"}" style="stroke:var(--sub)" stroke-width="2.5"/><text x="${x}" y="98" text-anchor="middle" font-size="10" font-weight="700" fill="#33415c">${nombres[i]}</text><text x="${x}" y="114" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--sub)">${v[i]}</text>`).join("")}
+    <text x="160" y="138" text-anchor="middle" font-size="10" fill="#5b6475">Vista desde arriba</text>
+  </svg><figcaption>Los cinco sensores miran el suelo: solo el central (M) está sobre la línea negra y lee 1. El robot va centrado.</figcaption></figure>`;
+}
+function ruedaSVG(){
+  return `<figure class="dg"><svg viewBox="0 0 320 140" aria-hidden="true">
+    <line x1="10" y1="112" x2="310" y2="112" stroke="#5b6475" stroke-width="3"/>
+    <circle cx="50" cy="80" r="32" fill="#e7ebf2" stroke="#5b6475" stroke-width="5"/><circle cx="50" cy="80" r="4" fill="#5b6475"/>
+    <line x1="50" y1="48" x2="50" y2="112" style="stroke:var(--sub)" stroke-width="2" stroke-dasharray="4 3"/><text x="58" y="72" font-size="12" font-weight="700" style="fill:var(--sub)">d</text>
+    <circle cx="251" cy="80" r="32" fill="none" stroke="#c9d1de" stroke-width="5" stroke-dasharray="6 5"/>
+    ${_fl(90,128,232,128)}<line x1="50" y1="120" x2="50" y2="136" stroke="#5b6475" stroke-width="2"/><line x1="251" y1="120" x2="251" y2="136" stroke="#5b6475" stroke-width="2"/>
+    <text x="150" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#33415c">1 vuelta = π · d</text>
+  </svg><figcaption>En cada vuelta completa, la rueda avanza exactamente su perímetro.</figcaption></figure>`;
+}
+function lazosSVG(){
+  const caja=(x,y,t)=>`<rect x="${x}" y="${y}" width="76" height="30" rx="8" fill="#fff" style="stroke:var(--sub)" stroke-width="2"/><text x="${x+38}" y="${y+19}" text-anchor="middle" font-size="11" font-weight="700" fill="#33415c">${t}</text>`;
+  return `<figure class="dg"><svg viewBox="0 0 340 190" aria-hidden="true">
+    <text x="6" y="16" font-size="12" font-weight="700" fill="#5b6475">Lazo abierto</text>
+    ${caja(6,26,"Programa")}${_fl(84,41,108,41)}${caja(110,26,"Motores")}${_fl(188,41,212,41)}${caja(214,26,"Se mueve")}
+    <text x="6" y="98" font-size="12" font-weight="700" fill="#5b6475">Lazo cerrado</text>
+    ${caja(6,108,"Programa")}${_fl(84,123,108,123)}${caja(110,108,"Motores")}${_fl(188,123,212,123)}${caja(214,108,"Se mueve")}
+    ${caja(110,152,"Sensores")}
+    <path d="M252 138 L252 167 L190 167" fill="none" style="stroke:var(--sub)" stroke-width="2.5"/>${_fl(196,167,188,167)}
+    <path d="M110 167 L44 167 L44 142" fill="none" style="stroke:var(--sub)" stroke-width="2.5"/>${_fl(44,148,44,140)}
+    <text x="300" y="160" text-anchor="middle" font-size="10" fill="#5b6475">mide y</text><text x="300" y="172" text-anchor="middle" font-size="10" fill="#5b6475">corrige</text>
+  </svg><figcaption>En lazo cerrado, los sensores informan al programa de lo que pasa y el robot corrige sobre la marcha.</figcaption></figure>`;
+}
+function fotogramasSVG(){
+  const ys=[22,40,62,80,62,40,22];
+  return `<figure class="dg"><svg viewBox="0 0 350 120" aria-hidden="true">
+    <rect width="350" height="120" rx="8" fill="#1f2533"/>
+    ${Array.from({length:14},(_,i)=>`<rect x="${8+i*24.5}" y="5" width="12" height="7" rx="1.5" fill="#f6f7fa"/><rect x="${8+i*24.5}" y="108" width="12" height="7" rx="1.5" fill="#f6f7fa"/>`).join("")}
+    ${ys.map((y,i)=>`<rect x="${8+i*48}" y="18" width="44" height="84" rx="3" fill="#f6f7fa"/><line x1="${10+i*48}" y1="96" x2="${50+i*48}" y2="96" stroke="#c9d1de" stroke-width="2"/><circle cx="${30+i*48}" cy="${y+8}" r="8" style="fill:var(--sub)"/><text x="${46+i*48}" y="30" text-anchor="end" font-size="8" fill="#8a94a6">${i+1}</text>`).join("")}
+  </svg><figcaption>Siete fotogramas de una pelota que bota. Pasados muy rápido, el cerebro ve movimiento.</figcaption></figure>`;
+}
+function capasSO(){
+  const c=[["people","Tú","Usas los programas."],["image","Aplicaciones","Navegador, editor, juegos…"],["gear","Sistema operativo","Gestiona todo y hace de intermediario."],["chip","Hardware","Procesador, memoria, disco, pantalla…"]];
+  return `<div class="capas">${c.map(([ic,t,d],i)=>`<div class="capa" style="--k:${i}">${icono(ic)}<b>${t}</b><span>${d}</span></div>`).join("")}</div>`;
+}
+function matrizConfusion(){
+  const cl=["Puño","Palma","Pulgar"], m=[[8,0,2],[1,9,0],[3,0,7]];
+  return `<div class="table-wrap"><table class="tbl matriz"><thead><tr><th>Real ↓ · Dice el modelo →</th>${cl.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${m.map((r,i)=>`<tr><th>${cl[i]}</th>${r.map((v,j)=>`<td class="${i===j?"ok":v?"ko":""}">${v}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="note">En la diagonal, los aciertos: 8 + 9 + 7 = 24 de 30 pruebas. Precisión = 24 / 30 = 80 %. «Puño» y «pulgar» se confunden: hay que mejorar esos ejemplos.</p>`;
+}
+
 const MATERIAS = [
   {
     id:"digitalizacion-4", nombre:"Digitalización", corto:"Digitalización", nivel:"4.º ESO", color:"#1b8a4b",
@@ -550,6 +671,7 @@ const MATERIAS = [
         </div>
         <h3>Sistemas operativos</h3>
         <p>El <b>sistema operativo</b> es el programa principal: gestiona el hardware, los archivos y los programas, y nos permite usarlos.</p>
+        ${capasSO()}
         <div class="defs">
           <div><b>De escritorio</b><p>Windows, macOS y Linux.</p></div>
           <div><b>Móviles</b><p>Android e iOS / iPadOS.</p></div>
@@ -605,6 +727,8 @@ const MATERIAS = [
         <p>Una red informática funcional tiene que permitir dos cosas:</p>
         <ul><li>Que varios dispositivos salgan a Internet usando la misma línea de acceso, que normalmente es única.</li><li>Que los ordenadores compartan los recursos internos de la red: la impresora, el escáner o un almacenamiento en red que todos pueden usar.</li></ul>
         <h3>Topologías: cómo se conectan los equipos</h3>
+        ${topologias()}
+        
         <div class="defs">
           <div><b>Estrella</b><p>Todos los equipos se conectan a un dispositivo central (router o switch). Es la de casa y la del colegio: si falla un equipo, los demás siguen funcionando.</p></div>
           <div><b>Bus</b><p>Todos comparten un mismo cable. Sencilla, pero si el cable falla, cae toda la red.</p></div>
@@ -819,6 +943,8 @@ const MATERIAS = [
         </div>
         <p>También hay obras de <b>dominio público</b> (se pueden usar libremente) y bibliotecas de música y efectos libres de derechos. En los créditos del corto indica siempre de dónde sale cada recurso y con qué licencia.</p>
         <h3>Editar: el montaje</h3>
+        ${flujo([["film","Ordenar y cortar"],["play","Transiciones"],["music","Sonido"],["pencil","Títulos y créditos"],["check","Exportar"]])}
+        
         <ul>
           <li><b>Ordenar y cortar:</b> elige las mejores tomas y quita lo que sobra. Un buen montaje es ágil.</li>
           <li><b>Transiciones:</b> el corte directo es la más usada; las demás, con moderación.</li>
@@ -898,6 +1024,8 @@ const MATERIAS = [
           <div><b>Sesgo de confirmación</b><p>Tendencia a creer lo que encaja con lo que ya pensamos y a desconfiar de lo que no.</p></div>
         </div>
         <h3>Cuatro pasos para verificar</h3>
+        ${flujo([["hand","Para"],["search","Investiga la fuente"],["network","Busca otras fuentes"],["target","Rastrea el original"]])}
+        
         <ol class="steps4">
           <li><b>Para.</b> Antes de creer o compartir, detente. Si te provoca mucha emoción (miedo, rabia, risa), desconfía más.</li>
           <li><b>Investiga la fuente.</b> ¿Quién lo publica? ¿Es un medio conocido, una institución, una cuenta anónima? ¿Qué fecha tiene?</li>
@@ -1033,13 +1161,7 @@ const MATERIAS = [
         </ul>
         <p class="ask">Pide de poco en poco: primero lo básico y, cuando funcione, añade funciones de una en una.</p>
         <h3>El ciclo de trabajo</h3>
-        <ol class="steps4">
-          <li><b>Describe</b> lo que quieres con precisión.</li>
-          <li><b>Genera</b> el código con la IA y pégalo en el editor.</li>
-          <li><b>Prueba</b> todo, también los casos raros: campos vacíos, números negativos, textos muy largos.</li>
-          <li><b>Corrige:</b> explica a la IA el fallo exacto («al pulsar Calcular con la casilla vacía sale NaN») en vez de «no funciona».</li>
-          <li><b>Entiende:</b> pide que te explique las partes del código y cambia tú algo a mano.</li>
-        </ol>
+        ${flujo([["pencil","Describe","Lo que quieres, con precisión."],["brain","Genera","El código, con la IA."],["play","Prueba","También los casos raros."],["code","Corrige","Explica el fallo exacto."],["bulb","Entiende","Pide que te lo explique y cambia algo tú."]])}
         <h3>Usar la IA con cabeza</h3>
         <ul>
           <li>La IA se equivoca: el código puede tener fallos aunque parezca perfecto. Pruébalo siempre.</li>
@@ -1243,14 +1365,10 @@ const MATERIAS = [
           <div><b>Mecanismos</b><p>Pala, empujador, pinza o montacargas que se mueven con un pequeño motor llamado <b>servo</b>, que gira a un ángulo exacto.</p></div>
         </div>
         <h3>Programar el Maqueen</h3>
-        <ol class="steps4">
-          <li>Abre MakeCode y crea un proyecto nuevo.</li>
-          <li>Añade la <b>extensión del Maqueen Plus V2</b> (el profesor te dará el enlace): aparecerán sus bloques.</li>
-          <li>Programa y prueba lo que puedas en el simulador.</li>
-          <li>Pasa el programa a la micro:bit, colócala en el robot y enciéndelo.</li>
-        </ol>
+        ${flujo([["code","MakeCode","Crea un proyecto nuevo."],["box","Extensión","Añade la del Maqueen Plus V2."],["screen","Simulador","Prueba en pantalla."],["robot","Al robot","Pasa el programa y enciende."]])}
         <h3>Seguir una línea con tres sensores</h3>
         <p>El robot mira la calle con sus tres sensores centrales y decide:</p>
+        ${lineaSensores()}
         <div class="table-wrap"><table class="tbl"><thead><tr><th>L1</th><th>M</th><th>R1</th><th>¿Qué pasa?</th><th>Qué hace</th></tr></thead><tbody>
           <tr><td>0</td><td>1</td><td>0</td><td>Va centrado</td><td>Recto</td></tr>
           <tr><td>1</td><td>0 o 1</td><td>0</td><td>La línea se va a la izquierda</td><td>Gira a la izquierda</td></tr>
@@ -1261,6 +1379,7 @@ const MATERIAS = [
         <p>Si las paradas están numeradas por cruces, el robot puede usar una <b>variable</b> que cuente los cruces que pasa. Cuando el contador llega al número de la parada, se detiene y entrega. Como en Scratch, la variable empieza en 0 y suma 1 en cada cruce.</p>
         <h3>Pedidos por radio</h3>
         <p>Las micro:bit pueden enviarse números y palabras por radio si están en el mismo <b>grupo</b>. Una micro:bit hace de <b>centralita</b>: con sus botones elige un número de parada y lo envía. El robot lo recibe, lo guarda en una variable y sale a repartir.</p>
+        ${flujo([["radio","Centralita","Envía el número de parada."],["robot","Robot","Lo recibe y lo guarda."],["truck","Reparto","Va a la parada y entrega."],["check","Aviso","Vuelve y confirma."]])}
         <h3>Seguridad ante todo</h3>
         <p>Un robot de reparto comparte el espacio con personas y otros robots. Siempre debe comprobar con el ultrasonido si hay algo delante y frenar a tiempo, encender las luces y avisar con el zumbador.</p>`,
        tareas:[
@@ -1358,7 +1477,8 @@ const MATERIAS = [
           <div><b>Entrevista</b><p>A un robot, a un algoritmo o a un sensor que cuenta su vida.</p></div>
         </div>
         <h3>Si os bloqueáis</h3>
-        <p>Usad esta estructura: <b>problema → error tecnológico → explicación → solución → frase final</b>.</p>`,
+        <p>Usad esta estructura: <b>problema → error tecnológico → explicación → solución → frase final</b>.</p>
+        ${flujo([["target","Problema"],["bolt","Error tecnológico"],["bulb","Explicación"],["check","Solución"],["star","Frase final"]])}`,
        tareas:[
         {n:1, t:"Lanzamiento", duracion:"1 sesión", html:"<p>Elegid la sección, repartid los roles y escribid la primera idea en la ficha inicial.</p>", evalua:"p2tR"},
         {n:2, t:"Guion express", duracion:"1 sesión", html:"<p>Escribid el guion con su inicio, desarrollo y final. Marcad qué dice y hace cada miembro del equipo.</p>", evalua:"p2tR"},
@@ -1479,11 +1599,13 @@ const MATERIAS = [
         <p>Elegir bien los <b>módulos de entrada y salida</b> es parte del diseño: cada sensor de más añade peso, consumo y complejidad.</p>
         <h3>Moverse con precisión</h3>
         <p>En cada vuelta, una rueda avanza su <b>perímetro</b>: <b>P = π · d</b>. Si la rueda mide 5,6 cm de diámetro, avanza unos 17,6 cm por vuelta. Para recorrer 50 cm necesita 50 / 17,6 ≈ 2,84 vueltas, es decir, unos 1023 grados. En la realidad hay deslizamiento: por eso hay que <b>calibrar</b> midiendo y corrigiendo.</p>
+        ${ruedaSVG()}
         <h3>Control en lazo abierto y en lazo cerrado</h3>
         <ul>
           <li><b>Lazo abierto:</b> el robot hace lo programado sin comprobar el resultado («avanza 3 segundos»). Si algo cambia, falla.</li>
           <li><b>Lazo cerrado:</b> el robot mide con sus sensores y corrige sobre la marcha («avanza hasta que haya un obstáculo a 10 cm»). Es lo que hace un robot autónomo.</li>
         </ul>
+        ${lazosSVG()}
         <h3>Seguir una línea</h3>
         <p>El sensor de color mira el borde de la línea. Si ve negro, el rover gira hacia un lado; si ve blanco, hacia el otro. Así avanza en zigzag pegado al borde. Cuanto más suave sea la corrección, más fluido será el movimiento.</p>
         <h3>Control remoto en tiempo real</h3>
@@ -1522,10 +1644,12 @@ const MATERIAS = [
         <p>Nuestros Maqueen funcionarán como AGV: siguen pasillos marcados y obedecen al centro de control.</p>
         <h3>Seguir pasillos con cinco sensores</h3>
         <p>Con los sensores centrales (L1, M, R1) el robot va por la línea; con los exteriores (L2, R2) detecta cruces y se recupera si se desvía. Algunos sensores dan además un valor <b>analógico</b> (cuánta luz reflejan, no solo negro o blanco), que permite corregir de forma más suave: cuanto más se aleja de la línea, más corrige. Es el <b>control proporcional</b>.</p>
+        ${lineaSensores()}
         <h3>Servos: el montacargas y la pinza</h3>
         <p>Un <b>servo</b> es un motor que gira hasta un ángulo exacto (normalmente de 0 a 180 grados) y se queda ahí. Con un servo el montacargas sube y baja, y la pinza se abre y se cierra. Hay que encontrar los ángulos adecuados y moverlos despacio para que la caja no se caiga.</p>
         <h3>Comunicación: un protocolo</h3>
         <p>Si varios robots escuchan la misma radio, todos reciben todos los mensajes. Necesitamos un <b>protocolo</b>: unas normas sobre cómo se escriben los mensajes. Por ejemplo, <code>R2:EST3</code> significa «robot 2, ve a la estantería 3». Cada robot solo obedece los mensajes con su número y responde <code>R2:OK</code> al terminar.</p>
+        ${flujo([["radio","Centro de control","Envía R2:EST3."],["robot","Robot 2","Solo él obedece."],["box","Recoge","Va a la estantería 3."],["check","Responde","R2:OK."]])}
         <h3>Tráfico sin choques</h3>
         <ul>
           <li><b>Zonas reservadas:</b> antes de entrar en un cruce, el robot pide permiso; si está ocupado, espera.</li>
@@ -1580,6 +1704,7 @@ const MATERIAS = [
         </ul>
         <h3>Medir si funciona</h3>
         <p>La <b>precisión</b> es el porcentaje de aciertos en pruebas nuevas. La <b>matriz de confusión</b> es una tabla que muestra qué clase se confunde con cuál: en las filas, lo que era de verdad; en las columnas, lo que dijo el modelo. Así se descubre, por ejemplo, que «puño» y «pulgar abajo» se confunden a menudo.</p>
+        ${matrizConfusion()}
         <h3>Equidad, inclusión y sesgos</h3>
         <p>Un modelo entrenado solo con las manos del equipo puede fallar con manos de otro tamaño, color de piel o movilidad. Diseñar con <b>inclusión</b> significa probar con personas diversas y corregir. Un modelo que funciona peor para un grupo tiene un <b>sesgo</b>, aunque nadie lo haya querido.</p>
         <h3>Implicaciones éticas y sociales</h3>
@@ -1670,6 +1795,7 @@ const MATERIAS = [
         <p>Es un anuncio de una película. En pocos segundos presenta a los personajes, plantea un conflicto y crea intriga <b>sin contar el final</b>. Combina planos cortos, títulos con frases gancho y una música que marca el ritmo. iMovie incluye plantillas de tráiler que indican qué plano poner en cada hueco.</p>
         <h3>Adaptar un guion</h3>
         <p>Adaptar es contar una historia que ya existe con nuestros medios. Hay que decidir qué escenas se quedan, qué se simplifica y cómo lo grabamos. Un <b>guion</b> indica en cada escena el lugar, el momento, lo que hacen los personajes y sus diálogos. El <b>storyboard</b> lo dibuja plano a plano.</p>
+        ${flujo([["book","Guion"],["pencil","Storyboard"],["people","Reparto"],["camera","Rodaje"],["film","Montaje"],["star","Estreno"]])}
         <h3>Los roles del equipo</h3>
         <ul>
           <li><b>Dirección:</b> coordina y decide cómo se cuenta cada escena.</li>
@@ -1706,6 +1832,7 @@ const MATERIAS = [
        teoria:`
         <h3>¿Por qué vemos movimiento?</h3>
         <p>Cuando vemos imágenes fijas muy seguidas y ligeramente distintas, el cerebro las une y cree que hay movimiento. Es la <b>persistencia de la visión</b>. Cada imagen es un <b>fotograma</b>: el cine proyecta 24 por segundo. Antes del cine ya existían juguetes que usaban este truco, como el <b>taumatropo</b>, el <b>zoótropo</b> o el <b>flipbook</b>.</p>
+        ${fotogramasSVG()}
         <h3>Técnicas de animación</h3>
         <div class="defs">
           <div><b>Dibujo animado</b><p>Cada fotograma se dibuja.</p></div>
@@ -1723,6 +1850,7 @@ const MATERIAS = [
         </ul>
         <h3>Del cuento al storyboard</h3>
         <p>El cuento tiene <b>planteamiento</b>, <b>nudo</b> y <b>desenlace</b>. Después se divide en escenas y se dibuja un <b>storyboard</b>: una viñeta por cada momento, con lo que se ve, lo que se mueve y lo que se oye. Así sabremos cuántas diapositivas, dibujos y voces necesitamos.</p>
+        ${flujo([["book","Cuento"],["pencil","Storyboard"],["image","Dibujos"],["play","Animación"],["mic","Voces y música"],["film","Montaje"]])}
         <h3>Animar con Keynote</h3>
         <ul>
           <li>Cada <b>diapositiva</b> es una escena o un momento de la escena.</li>
@@ -1773,14 +1901,10 @@ const MATERIAS = [
         </div>
         <p>Un público crítico detecta los trucos: exageraciones, estereotipos o promesas imposibles. La publicidad debe ser veraz y respetar a todas las personas.</p>
         <h3>Estructura de un anuncio</h3>
-        <ol class="steps4">
-          <li><b>Gancho:</b> en los primeros segundos hay que captar la atención.</li>
-          <li><b>Mensaje:</b> qué ofrecemos o qué idea defendemos.</li>
-          <li><b>Prueba o ejemplo:</b> lo mostramos, no solo lo decimos.</li>
-          <li><b>Cierre:</b> eslogan, llamada a la acción y logotipo.</li>
-        </ol>
+        ${flujo([["target","Gancho","Capta la atención en segundos."],["megaphone","Mensaje","Qué ofrecemos o defendemos."],["eye","Prueba","Lo mostramos, no solo lo decimos."],["star","Cierre","Eslogan, llamada a la acción y logo."]])}
         <h3>El croma</h3>
         <p>Se graba a una persona delante de un fondo de un solo color, normalmente <b>verde</b>. El programa de edición borra ese color y lo sustituye por otra imagen o vídeo. Así se hacen el tiempo de la televisión y muchos efectos de cine. En iMovie se pone el vídeo grabado encima del fondo y se elige el efecto <b>pantalla verde/azul</b>.</p>
+        ${flujo([["screen","Grabamos","Delante del fondo verde."],["code","Borramos el verde","Efecto pantalla verde/azul."],["image","Fondo nuevo","¡Estamos en cualquier lugar!"]])}
         <ul>
           <li>El fondo tiene que estar <b>bien iluminado y sin arrugas ni sombras</b>.</li>
           <li>Nadie puede llevar <b>ropa verde</b>: ¡desaparecería!</li>
@@ -1848,6 +1972,8 @@ const MATERIAS = [
        teoria:`
         <h3>El proceso tecnológico</h3>
         <p>Es el método que siguen ingenieros y diseñadores para pasar de un problema a una solución que funciona. Lo usaremos en todos los proyectos del curso:</p>
+        
+        ${flujo([["search","Problema"],["data","Información"],["pencil","Diseño"],["flow","Planificación"],["gear","Construcción"],["check","Evaluación"],["megaphone","Comunicación"]])}
         <ol class="steps4">
           <li><b>Identificar el problema</b> o la necesidad: ¿qué falla?, ¿a quién afecta?</li>
           <li><b>Buscar información:</b> qué existe ya, qué opinan los usuarios, qué se puede mejorar.</li>
@@ -1975,6 +2101,7 @@ const MATERIAS = [
         <p>Una barra rígida que gira sobre un punto de apoyo. Permite mover una carga (resistencia, R) haciendo una fuerza (F) menor si la colocamos lejos del apoyo:</p>
         <p class="formula">F · d = R · r</p>
         <p>donde <i>d</i> es la distancia de la fuerza al apoyo y <i>r</i> la de la resistencia al apoyo. Según dónde esté el apoyo hay palancas de primer grado (balancín, tijeras), de segundo (carretilla, cascanueces) y de tercer grado (pinzas, caña de pescar).</p>
+        ${palancas()}
         <h3>Transmitir el giro: poleas y engranajes</h3>
         <ul>
           <li><b>Poleas con correa:</b> dos ruedas unidas por una correa giran en el mismo sentido.</li>
@@ -1983,6 +2110,8 @@ const MATERIAS = [
         <p>La <b>relación de transmisión</b> (i) indica cuántas veces más rápido o más lento gira el eje conducido:</p>
         <p class="formula">i = Z<sub>motriz</sub> / Z<sub>conducido</sub> = n<sub>conducido</sub> / n<sub>motriz</sub></p>
         <p>donde Z es el número de dientes y n la velocidad de giro (vueltas por minuto, rpm). Con poleas se usan los diámetros en lugar de los dientes.</p>
+        
+        ${engranajes()}
         <div class="defs">
           <div><b>Reductor (i &lt; 1)</b><p>Engranaje pequeño mueve a uno grande: el eje conducido gira más despacio pero con <b>más fuerza</b>. Ideal para subir cuestas o cargar peso.</p></div>
           <div><b>Multiplicador (i &gt; 1)</b><p>Engranaje grande mueve a uno pequeño: gira más rápido pero con <b>menos fuerza</b>. Ideal en llano y sin carga.</p></div>
@@ -2057,13 +2186,7 @@ const MATERIAS = [
         <p>Las <b>cargas</b> son las fuerzas que actúan sobre una estructura. Pueden ser <b>fijas</b> (su propio peso) o <b>variables</b> (personas, vehículos, viento, nieve); <b>estáticas</b> (no se mueven, como un armario) o <b>dinámicas</b> (en movimiento, como un tren que cruza un puente); y <b>puntuales</b> (en un punto) o <b>repartidas</b> (a lo largo de una superficie, de forma uniforme o no).</p>
         <h3>Esfuerzos</h3>
         <p>Cuando las cargas actúan sobre un elemento, este sufre un <b>esfuerzo</b> y tiende a deformarse:</p>
-        <div class="defs">
-          <div><b>Tracción</b><p>Las cargas tiran del elemento en la misma dirección y sentidos contrarios: tiende a alargarse y adelgazar. Ej.: el cable de un ascensor.</p></div>
-          <div><b>Compresión</b><p>Las cargas empujan en la misma dirección y sentidos opuestos: tiende a acortarse y ensancharse. Ej.: un pilar.</p></div>
-          <div><b>Flexión</b><p>Las cargas tienden a doblarlo: una parte se comprime y la otra se estira. Ej.: una viga o una estantería.</p></div>
-          <div><b>Torsión</b><p>Las cargas tienden a retorcerlo. Ej.: una llave al girar en la cerradura.</p></div>
-          <div><b>Cortante o cizalladura</b><p>Dos cargas paralelas, muy próximas y en sentidos contrarios tienden a cortarlo. Ej.: unas tijeras sobre el papel.</p></div>
-        </div>
+        ${esfuerzosSVG()}
         <h3>Elementos estructurales</h3>
         <div class="defs">
           <div><b>Cimentación</b><p>Reparte el peso de la estructura sobre el terreno.</p></div>
@@ -2090,7 +2213,8 @@ const MATERIAS = [
           <li><b>Casas impresas en 3D:</b> una gran impresora deposita capas de hormigón o de tierra; se construye más rápido y con menos residuos.</li>
         </ul>
         <h3>El secreto del triángulo</h3>
-        <p>Un cuadrado de barras unidas por las esquinas se deforma con facilidad; un triángulo, no: es la única figura indeformable. Por eso se <b>triangulan</b> las estructuras. Además, la <b>forma</b> del material importa tanto como el material: un folio plano se dobla enseguida, pero enrollado en tubo soporta mucho más. Eso es un <b>perfil</b>.</p>`,
+        <p>Un cuadrado de barras unidas por las esquinas se deforma con facilidad; un triángulo, no: es la única figura indeformable. Por eso se <b>triangulan</b> las estructuras. Además, la <b>forma</b> del material importa tanto como el material: un folio plano se dobla enseguida, pero enrollado en tubo soporta mucho más. Eso es un <b>perfil</b>.</p>
+        ${trianguloSVG()}`,
        tareas:[
         {n:1, t:"Evolución histórica · Observamos", html:"<p>Mira el vídeo y responde en tu diario: ¿qué aspectos han provocado la evolución de las estructuras?</p>", enlaces:[["Vídeo: la evolución de las estructuras","https://www.youtube.com/watch?v=lmro2FvfZLQ"]], evalua:"t3e4"},
         {n:2, t:"Evolución histórica · Decidimos", html:"<p>A lo largo de la historia se han construido estructuras para cubrir necesidades: transporte (puentes, túneles), vivienda, protección frente a desastres (presas, diques), almacenamiento, salud, educación, ocio, trabajo o religión. Elige qué tipo de estructura vas a investigar.</p>"},
