@@ -57,6 +57,12 @@ main{padding:28px 0 60px}
 .subj-card .lvl{font-size:.85rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 .subj-card h2{font-size:1.3rem}
 .subj-card p{margin:0;color:var(--muted);font-size:.95rem}
+.home-intro{margin-top:28px}
+.grid.home5{grid-template-columns:repeat(5,1fr)}
+.home5 .subj-card{min-height:150px;justify-content:space-between}
+.home5 .subj-card h2{font-size:1.15rem;line-height:1.25}
+@media (max-width:1000px){.grid.home5{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.grid.home5{grid-template-columns:1fr}}
 
 .subj-head{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;max-width:70ch}
 .subj-head .lvl{display:inline-block;align-self:flex-start;background:var(--sub);color:#fff;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:99px}
@@ -2793,23 +2799,25 @@ const QUIZZES = {
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
+const ORDEN = ["digitalizacion-4","tecnologia-3","piayr-3","piayr-2","lab-audiovisual-1"];
+function materiasOrdenadas(){
+  return [...MATERIAS].sort((a,b)=>{const i=ORDEN.indexOf(a.id),j=ORDEN.indexOf(b.id);return (i<0?99:i)-(j<0?99:j);});
+}
 function renderNav(current){
   $("#nav").innerHTML = `<a href="#inicio" ${current==="inicio"?'aria-current="page"':''}>Inicio</a>` +
-    MATERIAS.map(m => `<a href="#${m.id}" style="--sub:${m.color}" ${current===m.id?'aria-current="page"':''}>${esc(m.corto||m.nombre)} ${esc(m.nivel)}</a>`).join("");
+    materiasOrdenadas().map(m => `<a href="#${m.id}" style="--sub:${m.color}" ${current===m.id?'aria-current="page"':''}>${esc(m.corto||m.nombre)} ${esc(m.nivel)}</a>`).join("");
 }
 
 function renderHome(){
   $("#main").innerHTML = `
     <div class="home-intro">
       <h1>Elige tu materia</h1>
-      <p>Aquí tienes los contenidos, actividades, vídeos, fichas y criterios de evaluación de cada asignatura.</p>
     </div>
-    <div class="grid">
-      ${MATERIAS.map(m => `
+    <div class="grid home5">
+      ${materiasOrdenadas().map(m => `
         <a class="subj-card" href="#${m.id}" style="--sub:${m.color}">
           <span class="lvl">${esc(m.nivel)}</span>
           <h2>${esc(m.nombre)}</h2>
-          <p>${esc(m.intro)}</p>
         </a>`).join("")}
     </div>`;
 }
