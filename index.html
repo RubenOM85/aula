@@ -640,6 +640,36 @@ function matrizConfusion(){
   return `<div class="table-wrap"><table class="tbl matriz"><thead><tr><th>Real ↓ · Dice el modelo →</th>${cl.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${m.map((r,i)=>`<tr><th>${cl[i]}</th>${r.map((v,j)=>`<td class="${i===j?"ok":v?"ko":""}">${v}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="note">En la diagonal, los aciertos: 8 + 9 + 7 = 24 de 30 pruebas. Precisión = 24 / 30 = 80 %. «Puño» y «pulgar» se confunden: hay que mejorar esos ejemplos.</p>`;
 }
 
+function vistasSVG(){
+  const s=36, ox=50, oy=205, c=0.866;
+  const P=(x,y,z)=>[ox+(x+z)*c*s, oy-(y+(x-z)*0.5)*s];
+  const poly=(pts,fill)=>`<path d="M${pts.map(p=>P(...p).map(v=>v.toFixed(1)).join(" ")).join("L")}Z" fill="${fill}" stroke="#33415c" stroke-width="1.8" stroke-linejoin="round"/>`;
+  const iso = poly([[0,2,0],[3,2,0],[3,2,1],[0,2,1]],"#f3f5f9")+poly([[0,1,1],[3,1,1],[3,1,2],[0,1,2]],"#f3f5f9")
+    + poly([[0,1,1],[3,1,1],[3,2,1],[0,2,1]],"#d9dfea")+poly([[0,0,2],[3,0,2],[3,1,2],[0,1,2]],"#d9dfea")
+    + poly([[0,0,0],[0,0,2],[0,1,2],[0,1,1],[0,2,1],[0,2,0]],"#b9c3d3");
+  const lbl=(x,y,t)=>`<text x="${x}" y="${y}" font-size="12" font-weight="700" style="fill:var(--sub)">${t}</text>`;
+  const fc=P(1.5,0.5,2), pt=P(1.5,2,0.5), pf=P(0,1,1);
+  const arrows = _fl(fc[0]+1.6*c*s, fc[1]+1.6*0.5*s, fc[0]+5, fc[1]+3)+lbl(fc[0]+1.6*c*s-30, fc[1]+1.6*0.5*s+16,"Alzado")
+    + _fl(pt[0], pt[1]-70, pt[0], pt[1]-6)+lbl(pt[0]+6, pt[1]-60,"Planta")
+    + _fl(pf[0]-1.0*c*s, pf[1]+1.0*0.5*s, pf[0]-4, pf[1]+2)+lbl(pf[0]-1.0*c*s-34, pf[1]+1.0*0.5*s+14,"Perfil");
+  const k=36, ax=290, ay=40, px=ax+3*k+34, py=ay+2*k+34;
+  const st='fill="#fff" stroke="#1f2533" stroke-width="2.2" stroke-linejoin="round"';
+  const alz=`<rect x="${ax}" y="${ay}" width="${3*k}" height="${2*k}" ${st}/><line x1="${ax}" y1="${ay+k}" x2="${ax+3*k}" y2="${ay+k}" stroke="#1f2533" stroke-width="2.2"/>`;
+  const pla=`<rect x="${ax}" y="${py}" width="${3*k}" height="${2*k}" ${st}/><line x1="${ax}" y1="${py+k}" x2="${ax+3*k}" y2="${py+k}" stroke="#1f2533" stroke-width="2.2"/>`;
+  const per=`<path d="M${px} ${ay} h${k} v${k} h${k} v${k} h${-2*k}Z" ${st}/>`;
+  const guia=`<g stroke="#9aa4b5" stroke-width="1" stroke-dasharray="3 3"><line x1="${ax+3*k}" y1="${ay}" x2="${px}" y2="${ay}"/><line x1="${ax+3*k}" y1="${ay+k}" x2="${px+k}" y2="${ay+k}"/><line x1="${ax+3*k}" y1="${ay+2*k}" x2="${px}" y2="${ay+2*k}"/><line x1="${ax}" y1="${ay+2*k}" x2="${ax}" y2="${py}"/><line x1="${ax+3*k}" y1="${ay+2*k}" x2="${ax+3*k}" y2="${py}"/></g>`;
+  const t=(x,y,a,b)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="12" font-weight="700" fill="#33415c">${a}</text><text x="${x}" y="${y+14}" text-anchor="middle" font-size="10.5" fill="#5b6475">${b}</text>`;
+  return `<figure class="dg"><svg viewBox="0 0 560 300" aria-hidden="true">
+    <rect width="560" height="300" rx="10" fill="#fff" opacity=".6"/>
+    ${iso}${arrows}
+    <line x1="250" y1="20" x2="250" y2="280" stroke="#d9dfea" stroke-width="2"/>
+    ${guia}${alz}${per}${pla}
+    ${t(ax+1.5*k, ay-12, "", "")}
+    ${t(ax+1.5*k, ay+2*k+14, "Alzado", "de frente")}
+    ${t(px+k, ay+2*k+14, "Perfil izquierdo", "desde la izquierda")}
+    ${t(ax+1.5*k, py+2*k+16, "Planta", "desde arriba")}
+  </svg><figcaption>Una pieza con un escalón y sus tres vistas. En el sistema europeo, la planta se dibuja debajo del alzado y el perfil izquierdo, a su derecha. Fíjate en que cada vista comparte medidas con las otras: el alzado y la planta tienen el mismo ancho; el alzado y el perfil, la misma altura.</figcaption></figure>`;
+}
 const MATERIAS = [
   {
     id:"digitalizacion-4", nombre:"Digitalización", corto:"Digitalización", nivel:"4.º ESO", color:"#1b8a4b",
@@ -2014,6 +2044,7 @@ const MATERIAS = [
           <li><b>Escala:</b> relación entre el tamaño del dibujo y el real. 1:1 es tamaño natural; 1:2 reduce a la mitad; 2:1 amplía al doble.</li>
           <li><b>Perspectiva:</b> la isométrica y la caballera muestran el objeto en tres dimensiones en un solo dibujo.</li>
         </ul>
+        ${vistasSVG()}
         <h3>Los plásticos</h3>
         <p>Son materiales ligeros, baratos, aislantes y fáciles de moldear, por eso están en casi todos los productos. Hay tres grupos:</p>
         <div class="defs">
