@@ -92,6 +92,15 @@ main{padding:28px 0 60px}
 .matriz td.ko{background:color-mix(in srgb,#d64545 16%,#fff)}
 .grid.home5{grid-template-columns:repeat(5,1fr)}
 .home5 .subj-card{min-height:150px;justify-content:space-between}
+.home5 .subj-card{padding:0;overflow:hidden;min-height:clamp(320px,calc(100vh - 260px),560px);border-top:none;justify-content:flex-start;transition:transform .15s,box-shadow .15s}
+.home5 .subj-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(20,30,50,.12)}
+.home-ill{flex:1 1 auto;min-height:170px;display:grid;place-items:center;background-color:var(--sub);background-image:radial-gradient(rgba(255,255,255,.22) 1.6px,transparent 1.7px),radial-gradient(circle at 20% 110%,rgba(255,255,255,.14) 0 45%,transparent 46%);background-size:20px 20px,100% 100%}
+.home5 .subj-card .home-ill .ico{width:46%;max-width:120px;height:auto;aspect-ratio:1;color:#fff;stroke-width:1.6}
+.home-txt{padding:18px 18px 22px;display:flex;flex-direction:column;gap:6px;min-height:8.6em;box-sizing:border-box}
+.home5 .subj-card .home-txt h2{font-size:1.4rem;line-height:1.2}
+.home5 .home-txt .lvl{font-size:.95rem}
+@media (max-width:1000px){.home5 .subj-card{min-height:300px}}
+@media (max-width:640px){.home5 .subj-card{min-height:0}.home-ill{min-height:120px}}
 .home5 .subj-card h2{font-size:1.15rem;line-height:1.25}
 @media (max-width:1000px){.grid.home5{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:640px){.grid.home5{grid-template-columns:1fr}}
@@ -3073,8 +3082,8 @@ function renderHome(){
     <div class="grid home5">
       ${materiasOrdenadas().map(m => `
         <a class="subj-card" href="#${m.id}" style="--sub:${m.color}">
-          <div class="top"><span class="lvl">${esc(m.nivel)}</span>${icono(ICONO_MATERIA[m.id]||"star")}</div>
-          <h2>${esc(m.nombre)}</h2>
+          <div class="home-ill">${icono(ICONO_MATERIA[m.id]||"star")}</div>
+          <div class="home-txt"><span class="lvl">${esc(m.nivel)}</span><h2>${esc(m.nombre)}</h2></div>
         </a>`).join("")}
     </div>`;
 }
