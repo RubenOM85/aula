@@ -58,6 +58,27 @@ main{padding:28px 0 60px}
 .subj-card h2{font-size:1.3rem}
 .subj-card p{margin:0;color:var(--muted);font-size:.95rem}
 .home-intro{margin-top:28px}
+.portada{display:block;width:100%;height:auto}
+.unit-cover{border-radius:14px;overflow:hidden;margin:6px 0 14px;line-height:0}
+.unit-cover .portada{height:150px}
+.unit-link{display:grid!important;grid-template-columns:150px 1fr;padding:0!important;overflow:hidden;gap:0!important}
+.unit-link .card-cover{line-height:0;min-height:100%}
+.unit-link .card-cover .portada{width:100%;height:100%;min-height:150px}
+.unit-link .card-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+@media (max-width:640px){.unit-link{grid-template-columns:1fr}.unit-link .card-cover .portada{min-height:0;height:90px}}
+.home5 .subj-card .ico{width:44px;height:44px;color:var(--sub)}
+.home5 .subj-card .top{display:flex;justify-content:space-between;align-items:flex-start}
+.flujo{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:12px 0 16px}
+.flujo .paso{flex:1 1 130px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;background:color-mix(in srgb,var(--sub) 9%,#fff);border:1px solid color-mix(in srgb,var(--sub) 30%,#fff);border-radius:12px;padding:14px 10px}
+.flujo .paso .ico{width:38px;height:38px;color:var(--sub)}
+.flujo .paso span{font-size:.9rem;color:var(--muted)}
+.flujo .flecha{align-self:center;font-size:1.4rem;color:var(--sub);font-weight:700}
+@media (max-width:640px){.flujo{flex-direction:column}.flujo .flecha{transform:rotate(90deg)}}
+.simbolos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0 16px}
+.simb{margin:0;background:color-mix(in srgb,var(--sub) 7%,#fff);border-radius:12px;padding:10px;text-align:center;color:var(--sub)}
+.simb svg{width:100%;max-width:130px;height:auto}
+.simb figcaption{display:flex;flex-direction:column;color:var(--ink)}
+.simb figcaption span{font-size:.9rem;color:var(--muted)}
 .grid.home5{grid-template-columns:repeat(5,1fr)}
 .home5 .subj-card{min-height:150px;justify-content:space-between}
 .home5 .subj-card h2{font-size:1.15rem;line-height:1.25}
@@ -117,7 +138,7 @@ aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:16px}
 .ce-short b{color:var(--sub);margin-right:4px}
 
 /* Temas */
-.unit-link{text-decoration:none;color:var(--ink);border-left:6px solid var(--sub)}
+.unit-link{text-decoration:none;color:var(--ink)}
 .unit-link:hover{border-color:var(--sub);box-shadow:0 2px 10px rgba(20,30,50,.08)}
 .eti{font-size:.85rem;color:var(--muted);font-weight:700}
 .meta{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.88rem;color:var(--muted);align-items:center}
@@ -390,6 +411,112 @@ function angulosHTML(){
   return `<div class="planos">${ANGULOS.map((p,i)=>`
     <figure class="plano"><div class="shot">${anguloSVG(p.t)}</div>
       <figcaption><b>${i+10}. ${p.n}</b><span>${p.d}</span><span class="uso">${p.u}</span></figcaption></figure>`).join("")}</div>`;
+}
+
+const ICONOS = {
+  robot:'<rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 4v4M3 12h2M19 12h2"/><circle cx="12" cy="3.5" r="1"/><circle cx="9.5" cy="13" r="1.2"/><circle cx="14.5" cy="13" r="1.2"/><path d="M10 16.5h4"/>',
+  chip:'<rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9.5 3v4M12 3v4M14.5 3v4M9.5 17v4M12 17v4M14.5 17v4M3 9.5h4M3 12h4M3 14.5h4M17 9.5h4M17 12h4M17 14.5h4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',
+  eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+  flow:'<rect x="8.5" y="2" width="7" height="4" rx="2"/><path d="M12 6v3M12 9l4 3.5-4 3.5-4-3.5Z M12 16v2"/><rect x="8" y="18" width="8" height="4"/>',
+  code:'<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14"/>',
+  brain:'<circle cx="5" cy="7" r="1.8"/><circle cx="5" cy="17" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="7" r="1.8"/><circle cx="19" cy="17" r="1.8"/><path d="M6.6 7.8l3.8 3.2M6.6 16.2l3.8-3.2M13.6 11l3.8-3.2M13.6 13l3.8 3.2M5 8.8v6.4M19 8.8v6.4"/>',
+  camera:'<rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10.5 21 7.5v9l-5-3Z"/>',
+  clapper:'<rect x="3" y="10" width="18" height="10" rx="1.5"/><path d="M3 10 20 6l-.8-3.5L2.5 6.5Z M8 5.5l2 3.5M13 4.3l2 3.6"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/>',
+  music:'<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M3 18l6-6 4 4 3-3 5 5"/>',
+  rocket:'<path d="M12 2c4 3 5 8 3 13H9C7 10 8 5 12 2Z"/><circle cx="12" cy="9" r="1.6"/><path d="M9 12.5 6 16h3M15 12.5l3 3.5h-3M10.5 18 12 21.5 13.5 18"/>',
+  truck:'<rect x="2" y="7" width="12" height="9" rx="1"/><path d="M14 10h4l3 3v3h-7Z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+  box:'<path d="M12 2l9 5v10l-9 5-9-5V7Z M3 7l9 5 9-5M12 12v10"/>',
+  hand:'<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11M11 10V4a1.5 1.5 0 0 1 3 0v7M14 10.5v-5a1.5 1.5 0 0 1 3 0V14c0 4-2.5 7-6 7-3 0-4.5-1.5-6-4l-1.5-3.5A1.5 1.5 0 0 1 6 12l2 2.5"/>',
+  shield:'<path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5Z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  network:'<circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2V12M12 12l-5.4 5.4M12 12l5.4 5.4"/>',
+  bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.8.6 1 1.6 1 2.6h5c0-1 .2-2 1-2.6A6 6 0 0 0 12 3Z"/>',
+  bridge:'<path d="M2 15h20M2 15q10-11 20 0M7 10v5M12 8v7M17 10v5M4 15v5M20 15v5"/>',
+  bolt:'<path d="M13 2 4 14h7l-1 8 10-13h-7Z"/>',
+  briefcase:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>',
+  leaf:'<path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15ZM5 19l8-8"/>',
+  megaphone:'<path d="M3 10v4h3l10 5V5L6 10Z M19 9a4 4 0 0 1 0 6"/>',
+  book:'<path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4Z M20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6Z"/>',
+  tv:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 2l4 4 4-4M8 21h8"/>',
+  gamepad:'<path d="M6 8h12a4 4 0 0 1 4 4v1a4 4 0 0 1-7 2.6L14 15h-4l-1 .6A4 4 0 0 1 2 13v-1a4 4 0 0 1 4-4Z M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r=".9"/><circle cx="18" cy="13.5" r=".9"/>',
+  search:'<circle cx="11" cy="11" r="6"/><path d="M15.5 15.5 21 21"/>',
+  people:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.3A5 5 0 0 1 21 20"/>',
+  star:'<path d="M12 2.5l2.9 6.1 6.6.7-5 4.5 1.5 6.7-6-3.5-6 3.5 1.5-6.7-5-4.5 6.6-.7Z"/>',
+  radio:'<path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1"/><path d="M2 9.5a14 14 0 0 1 20 0"/>',
+  route:'<circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h8a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h8"/>',
+  flag:'<path d="M5 21V4h13l-2.5 4 2.5 4H5"/>',
+  film:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4M3 12h4M3 16h4M17 8h4M17 12h4M17 16h4"/>',
+  screen:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6.5 21a5.5 5.5 0 0 1 11 0"/>',
+  data:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+  pencil:'<path d="M4 20l1-4L16 5l3 3L8 19Z M14 7l3 3"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',
+  play:'<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5Z"/>'
+};
+const ICONOS_UNIDAD = {
+  "dig4-sa1-1":["chip","gear"], "dig4-sa1-2":["network","radio"], "dig4-seguridad":["shield","people"],
+  "dig4-video":["camera","film"], "dig4-gamelab":["gamepad","star"], "dig4-bulos":["search","brain"],
+  "dig4-mayores":["people","bulb"], "dig4-ia-app":["brain","code"],
+  "p2-prog":["flow","code"], "p2-robot":["robot","flag"], "p2-reparto":["truck","route"],
+  "p2-ia":["brain","eye"], "p2-techshow":["tv","star"],
+  "p3-prog":["chip","flow"], "p3-robot":["rocket","robot"], "p3-almacen":["box","radio"], "p3-ia":["hand","brain"],
+  "lab-postal":["camera","clapper"], "lab-cuento":["book","music"], "lab-croma":["megaphone","screen"],
+  "tec3-empresa":["briefcase","bulb"], "tec3-movilidad":["bolt","gear"], "tec3-estructuras":["bridge","pencil"], "tec3-entorno":["leaf","search"]
+};
+const ICONO_MATERIA = {"digitalizacion-4":"chip","tecnologia-3":"gear","piayr-3":"rocket","piayr-2":"robot","lab-audiovisual-1":"clapper"};
+function icono(n, cls){ return `<svg class="ico ${cls||""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONOS[n]||ICONOS.star}</svg>`; }
+function portada(m, u, alto, tono){
+  const [a,b] = (u && ICONOS_UNIDAD[u.id]) || [ICONO_MATERIA[m.id]||"star","star"];
+  const c = m.color, h = alto||160, W = 1200;
+  const g = n => `<g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONOS[n]}</g>`;
+  const pid = "pt-"+(u?u.id:m.id)+"-"+h;
+  return `<svg class="portada" viewBox="0 0 ${W} ${h}" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+    <defs><pattern id="${pid}" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#fff"/></pattern></defs>
+    <rect width="${W}" height="${h}" fill="${c}"/>
+    <rect width="${W}" height="${h}" fill="#000" opacity="${tono||0}"/>
+    <rect width="${W}" height="${h}" fill="url(#${pid})" opacity=".16"/>
+    <circle cx="${W-520}" cy="${h+30}" r="${h*0.8}" fill="#fff" opacity=".08"/>
+    <circle cx="${W-40}" cy="-20" r="${h*0.55}" fill="#000" opacity=".07"/>
+    <g transform="translate(${W-h*1.2} ${h*0.52})">
+      <circle r="${h*0.38}" fill="#fff" opacity=".18"/>
+      <g transform="translate(${-h*0.22} ${-h*0.22}) scale(${h*0.44/24})">${g(a)}</g>
+    </g>
+    <g transform="translate(${W-h*0.5} ${h*0.5})">
+      <circle r="${h*0.2}" fill="#fff" opacity=".22"/>
+      <g transform="translate(${-h*0.11} ${-h*0.11}) scale(${h*0.22/24})">${g(b)}</g>
+    </g>
+  </svg>`;
+}
+function portadaMini(m, u, tono){
+  const [a,b] = (u && ICONOS_UNIDAD[u.id]) || [ICONO_MATERIA[m.id]||"star","star"];
+  const g = n => `<g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONOS[n]}</g>`;
+  const pid = "pm-"+u.id;
+  return `<svg class="portada" viewBox="0 0 160 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><pattern id="${pid}" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#fff"/></pattern></defs>
+    <rect width="160" height="220" fill="${m.color}"/>
+    <rect width="160" height="220" fill="#000" opacity="${tono||0}"/>
+    <rect width="160" height="220" fill="url(#${pid})" opacity=".16"/>
+    <circle cx="10" cy="240" r="100" fill="#fff" opacity=".08"/>
+    <circle cx="80" cy="92" r="44" fill="#fff" opacity=".18"/>
+    <g transform="translate(53 65) scale(${54/24})">${g(a)}</g>
+    <circle cx="80" cy="168" r="19" fill="#fff" opacity=".22"/>
+    <g transform="translate(69.5 157.5) scale(${21/24})">${g(b)}</g>
+  </svg>`;
+}
+function flujo(pasos){
+  return `<div class="flujo">${pasos.map(([ic,t,d],i)=>`${i?'<span class="flecha" aria-hidden="true">→</span>':""}<div class="paso">${icono(ic)}<b>${t}</b>${d?`<span>${d}</span>`:""}</div>`).join("")}</div>`;
+}
+function simbolosFlujo(){
+  const f = (shape, t, d) => `<figure class="simb"><svg viewBox="0 0 120 70" aria-hidden="true">${shape}</svg><figcaption><b>${t}</b><span>${d}</span></figcaption></figure>`;
+  const st = 'fill="none" stroke="currentColor" stroke-width="3"';
+  return `<div class="simbolos">
+    ${f(`<rect x="15" y="15" width="90" height="40" rx="20" ${st}/>`,"Óvalo","Inicio y fin.")}
+    ${f(`<rect x="15" y="15" width="90" height="40" rx="3" ${st}/>`,"Rectángulo","Una acción.")}
+    ${f(`<path d="M60 8 105 35 60 62 15 35Z" ${st}/>`,"Rombo","Una decisión: sí o no.")}
+    ${f(`<path d="M30 15h80L90 55H10Z" ${st}/>`,"Paralelogramo","Entrada o salida de datos.")}
+  </div>`;
 }
 
 const MATERIAS = [
@@ -1005,12 +1132,7 @@ const MATERIAS = [
         <p>Un <b>programa</b> es un algoritmo escrito en un lenguaje que la máquina entiende. Cuando el programa no hace lo que esperábamos tiene un <b>error</b> (en inglés, <i>bug</i>). Buscarlo y corregirlo se llama <b>depurar</b>. Equivocarse forma parte de programar.</p>
         <h3>Diagramas de flujo</h3>
         <p>Sirven para dibujar un algoritmo antes de programarlo. Cada forma tiene un significado:</p>
-        <div class="defs">
-          <div><b>Óvalo</b><p>Inicio y fin.</p></div>
-          <div><b>Rectángulo</b><p>Una acción: «encender la luz», «moverse 10 pasos».</p></div>
-          <div><b>Rombo</b><p>Una decisión o pregunta con dos salidas, sí o no: «¿está oscuro?».</p></div>
-          <div><b>Paralelogramo</b><p>Entrada o salida de datos: «pedir el nombre», «mostrar la puntuación».</p></div>
-        </div>
+        ${simbolosFlujo()}
         <h3>Las tres estructuras de cualquier programa</h3>
         <div class="defs">
           <div><b>Secuencia</b><p>Instrucciones una detrás de otra, en orden.</p></div>
@@ -1057,11 +1179,7 @@ const MATERIAS = [
        teoria:`
         <h3>¿Qué es un robot?</h3>
         <p>Un <b>robot</b> es una máquina programable que percibe su entorno, toma decisiones y actúa. Se resume en tres verbos:</p>
-        <div class="defs">
-          <div><b>Percibir</b><p>Con los <b>sensores</b>: luz, color, distancia, fuerza, sonido, temperatura.</p></div>
-          <div><b>Decidir</b><p>Con el <b>controlador</b>, el «cerebro» que ejecuta el programa.</p></div>
-          <div><b>Actuar</b><p>Con los <b>actuadores</b>: motores, luces, altavoces, pantallas.</p></div>
-        </div>
+        ${flujo([["eye","Percibir","Con los sensores: luz, color, distancia, fuerza…"],["chip","Decidir","Con el controlador, que ejecuta el programa."],["gear","Actuar","Con los actuadores: motores, luces, altavoces."]])}
         <p>Todo ello va montado sobre una <b>estructura</b> y necesita una fuente de <b>energía</b>, normalmente una batería.</p>
         <h3>Tipos de robots</h3>
         <ul>
@@ -1179,12 +1297,7 @@ const MATERIAS = [
         </div>
         <h3>Aprender: personas y máquinas</h3>
         <p>Los seres vivos aprenden con la experiencia: un bebé ve muchos perros hasta que reconoce uno nuevo. Las máquinas hacen algo parecido con el <b>aprendizaje automático</b>:</p>
-        <ol class="steps4">
-          <li><b>Datos:</b> muchos ejemplos, cada uno con su etiqueta («esto es un gato», «esto es un perro»).</li>
-          <li><b>Entrenamiento:</b> el programa busca qué tienen en común los ejemplos de cada clase.</li>
-          <li><b>Modelo:</b> lo que ha aprendido.</li>
-          <li><b>Predicción:</b> ante un ejemplo nuevo, el modelo dice a qué clase cree que pertenece y con qué seguridad.</li>
-        </ol>
+        ${flujo([["data","Datos","Muchos ejemplos con su etiqueta."],["gear","Entrenamiento","Busca lo que tienen en común."],["brain","Modelo","Lo que ha aprendido."],["target","Predicción","Ante algo nuevo, dice qué es."]])}
         <p>Pero la máquina no entiende lo que ve: solo encuentra patrones. Si los datos son pocos o están mal elegidos, aprenderá mal.</p>
         <h3>Árboles de decisión y redes neuronales</h3>
         <ul>
@@ -1303,6 +1416,7 @@ const MATERIAS = [
        teoria:`
         <h3>Entrada, decisión y salida</h3>
         <p>Cualquier sistema automático funciona igual: recoge datos con <b>sensores</b> (entrada), un <b>controlador</b> los compara con unas reglas (decisión) y activa unos <b>actuadores</b> (salida). Un termostato, una puerta automática o el riego de un jardín lo hacen sin necesidad de inteligencia artificial: solo siguen reglas programadas.</p>
+        ${flujo([["eye","Entrada","Sensores: ¿hay alguien?, ¿está oscuro?"],["chip","Decisión","El controlador aplica las reglas."],["bulb","Salida","Actuadores: encender la luz."]])}
         <h3>Combinar condiciones: Y, O, NO</h3>
         <p>Una sola regla casi nunca basta. Los <b>operadores lógicos</b> combinan varias condiciones:</p>
         <div class="defs">
@@ -1548,22 +1662,10 @@ const MATERIAS = [
         <p>Es la forma de comunicar con <b>imágenes</b> y <b>sonidos</b> a la vez. Como cualquier lenguaje, tiene sus reglas: dónde se coloca la cámara, qué se ve, qué se oye y en qué orden. Está en el cine, la televisión, la publicidad, los videojuegos y las redes sociales.</p>
         <h3>Los tipos de plano</h3>
         <p>El <b>plano</b> indica cuánto se ve del personaje o del lugar. Cada uno sirve para algo:</p>
-        <div class="defs">
-          <div><b>Gran plano general</b><p>Un paisaje o un lugar enorme; las personas se ven diminutas. Sitúa la historia.</p></div>
-          <div><b>Plano general</b><p>El personaje entero y su entorno. Muestra dónde está y qué hace.</p></div>
-          <div><b>Plano americano</b><p>Desde las rodillas hacia arriba. Típico de los wésterns.</p></div>
-          <div><b>Plano medio</b><p>Desde la cintura. Ideal para conversaciones.</p></div>
-          <div><b>Primer plano</b><p>La cara y los hombros. Muestra las emociones.</p></div>
-          <div><b>Primerísimo primer plano</b><p>Solo una parte de la cara: los ojos, la boca. Máxima intensidad.</p></div>
-          <div><b>Plano detalle</b><p>Un objeto o una parte pequeña: una mano, una llave. Llama la atención sobre algo importante.</p></div>
-        </div>
+        ${planosHTML()}
         <h3>Ángulos de cámara</h3>
-        <div class="defs">
-          <div><b>Normal</b><p>A la altura de los ojos: neutral.</p></div>
-          <div><b>Picado</b><p>Desde arriba: el personaje parece pequeño o débil.</p></div>
-          <div><b>Contrapicado</b><p>Desde abajo: el personaje parece grande o poderoso.</p></div>
-          <div><b>Cenital</b><p>Desde justo encima, mirando hacia abajo.</p></div>
-        </div>
+        <p>A la altura de los ojos, el ángulo es <b>normal</b> y neutral. Si cambiamos la altura de la cámara, cambia lo que sentimos:</p>
+        ${angulosHTML()}
         <h3>El tráiler</h3>
         <p>Es un anuncio de una película. En pocos segundos presenta a los personajes, plantea un conflicto y crea intriga <b>sin contar el final</b>. Combina planos cortos, títulos con frases gancho y una música que marca el ritmo. iMovie incluye plantillas de tráiler que indican qué plano poner en cada hueco.</p>
         <h3>Adaptar un guion</h3>
@@ -2816,7 +2918,7 @@ function renderHome(){
     <div class="grid home5">
       ${materiasOrdenadas().map(m => `
         <a class="subj-card" href="#${m.id}" style="--sub:${m.color}">
-          <span class="lvl">${esc(m.nivel)}</span>
+          <div class="top"><span class="lvl">${esc(m.nivel)}</span>${icono(ICONO_MATERIA[m.id]||"star")}</div>
           <h2>${esc(m.nombre)}</h2>
         </a>`).join("")}
     </div>`;
@@ -2894,6 +2996,8 @@ function renderSubject(m){
         <div class="units">
           ${m.unidades.map((u,i)=> u.id ? `
             <a class="unit unit-link" href="#${u.id}">
+              <div class="card-cover">${portadaMini(m,u,[0,.08,.16,.24,.12][i%5])}</div>
+              <div class="card-body">
               <div class="unit-head"><span class="unit-num">${u.complementario?"Complementario":"Tema "+(i+1)}</span>${u.complementario?"":`<span class="eti">${esc(u.etiqueta||"")}</span>`}</div>
               <h2>${esc(u.titulo)}</h2>
               <p class="desc">${esc(u.desc)}</p>
@@ -2902,6 +3006,7 @@ function renderSubject(m){
                 ${u.anexos?`<span>${plural(u.anexos.length,"anexo de evaluación","anexos de evaluación")}</span>`:""}
                 ${u.items&&u.items.some(x=>x.tipo==="interactiva")?`<span>${plural(u.items.filter(x=>x.tipo==="interactiva").length,"ficha interactiva","fichas interactivas")}</span>`:""}
                 <span class="go">Abrir tema →</span>
+              </div>
               </div>
             </a>` : `
             <section class="unit">
@@ -2947,6 +3052,7 @@ function renderUnit(m,u){
   $("#main").innerHTML = `
     <div style="--sub:${m.color}">
       <a class="back" href="#${m.id}">← ${esc(m.nombre)} ${esc(m.nivel)}</a>
+      <div class="unit-cover">${portada(m,u,150,[0,.08,.16,.24,.12][idx%5])}</div>
       <div class="subj-head">
         <span class="lvl">${esc(u.etiqueta||("Tema "+(idx+1)))}</span>
         <h1>${esc(u.titulo)}</h1>
