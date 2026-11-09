@@ -99,6 +99,8 @@ main{padding:28px 0 60px}
 .task-n .ico{width:26px;height:26px;color:#fff}
 .task-n b{position:absolute;right:-6px;bottom:-6px;min-width:20px;height:20px;padding:0 4px;border-radius:10px;background:#fff;color:var(--sub);border:2px solid var(--sub);font-size:.72rem;display:flex;align-items:center;justify-content:center;line-height:1}
 .task{grid-template-columns:48px minmax(0,1fr)!important}
+.nav-ico{display:flex;align-items:center;gap:7px}
+.nav-ico .ico{width:18px;height:18px}
 .home-tools{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
 .home-tools a{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:700}
 .home-tools a:hover{border-color:#1d5fd1}
@@ -162,7 +164,7 @@ body.fs-on{overflow:hidden}
 @media (max-width:640px){.school{display:none}}
 .grid.home5{grid-template-columns:repeat(5,1fr)}
 .home5 .subj-card{min-height:150px;justify-content:space-between}
-.home5 .subj-card{padding:0;overflow:hidden;min-height:clamp(300px,calc(100vh - 330px),540px);border-top:none;justify-content:flex-start;transition:transform .15s,box-shadow .15s}
+.home5 .subj-card{padding:0;overflow:hidden;min-height:clamp(300px,calc(100vh - 270px),560px);border-top:none;justify-content:flex-start;transition:transform .15s,box-shadow .15s}
 .home5 .subj-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(20,30,50,.12)}
 .home-ill{flex:1 1 auto;min-height:170px;display:grid;place-items:center;background-color:var(--sub);background-image:radial-gradient(rgba(255,255,255,.22) 1.6px,transparent 1.7px),radial-gradient(circle at 20% 110%,rgba(255,255,255,.14) 0 45%,transparent 46%);background-size:20px 20px,100% 100%}
 .home5 .subj-card .home-ill .ico{width:46%;max-width:120px;height:auto;aspect-ratio:1;color:#fff;stroke-width:1.6}
@@ -386,7 +388,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;padd
   <div class="wrap">
     <div class="top">
       <a class="brand" href="#inicio"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#15223b"/><path d="M13 28V11h7.5a5.2 5.2 0 0 1 0 10.4H13m7 0 6.5 6.6" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="33" width="5" height="3" rx="1.5" fill="#1b8a4b"/><rect x="12" y="33" width="5" height="3" rx="1.5" fill="#1d5fd1"/><rect x="18" y="33" width="5" height="3" rx="1.5" fill="#c2410c"/><rect x="24" y="33" width="5" height="3" rx="1.5" fill="#e08a00"/><rect x="30" y="33" width="5" height="3" rx="1.5" fill="#7c4dcc"/></svg><span class="brand-txt"><span>Aula de Rubén</span><small>Materiales de clase</small></span></a>
-      <div class="top-right"><div class="school">Centro Parroquial La Inmaculada · Paiporta · Curso 2026‑27</div><a class="tools-btn" id="tools-btn" href="#herramientas"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4Z"/></svg>Herramientas</a></div>
+      <div class="top-right"><div class="school">Centro Parroquial La Inmaculada · Paiporta · Curso 2026‑27</div></div>
     </div>
     <nav id="nav" aria-label="Materias"></nav>
   </div>
@@ -504,6 +506,7 @@ function angulosHTML(){
 }
 
 const ICONOS = {
+  home:'<path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
   robot:'<rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 4v4M3 12h2M19 12h2"/><circle cx="12" cy="3.5" r="1"/><circle cx="9.5" cy="13" r="1.2"/><circle cx="14.5" cy="13" r="1.2"/><path d="M10 16.5h4"/>',
   chip:'<rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9.5 3v4M12 3v4M14.5 3v4M9.5 17v4M12 17v4M14.5 17v4M3 9.5h4M3 12h4M3 14.5h4M17 9.5h4M17 12h4M17 14.5h4"/>',
   gear:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',
@@ -3162,9 +3165,9 @@ function materiasOrdenadas(){
   return [...MATERIAS].sort((a,b)=>{const i=ORDEN.indexOf(a.id),j=ORDEN.indexOf(b.id);return (i<0?99:i)-(j<0?99:j);});
 }
 function renderNav(current){
-  $("#nav").innerHTML = `<a href="#inicio" ${current==="inicio"?'aria-current="page"':''}>Inicio</a>` +
-    materiasOrdenadas().map(m => `<a href="#${m.id}" style="--sub:${m.color}" ${current===m.id?'aria-current="page"':''}>${esc(m.corto||m.nombre)} ${esc(m.nivel)}</a>`).join("") ;
-  const tb=document.getElementById("tools-btn"); if(tb) tb.classList.toggle("on", current==="herramientas");
+  const enMateria = MATERIAS.some(m=>m.id===current);
+  $("#nav").innerHTML = `<a href="#inicio" class="nav-ico" ${(current==="inicio"||enMateria)?'aria-current="page"':''}>${icono("home")}<span>Inicio</span></a>` +
+    HERR.map(([id,n,ic]) => `<a href="#herramientas-${id}" class="nav-ico" ${current==="herramientas-"+id?'aria-current="page"':''}>${icono(ic)}<span>${n}</span></a>`).join("");
 }
 
 function renderHome(){
@@ -3178,8 +3181,7 @@ function renderHome(){
           <div class="home-ill">${icono(ICONO_MATERIA[m.id]||"star")}</div>
           <div class="home-txt"><span class="lvl">${esc(m.nivel)}</span><h2>${esc(m.nombre)}</h2></div>
         </a>`).join("")}
-    </div>
-    <div class="home-tools">${HERR.map(([id,n,ic])=>`<a href="#herramientas-${id}">${icono(ic)}<span>${n}</span></a>`).join("")}</div>`;
+    </div>`;
 }
 
 function itemAction(it){
@@ -3351,7 +3353,7 @@ function renderUnit(m,u){
 function route(){
   const id = (location.hash||"#inicio").slice(1);
   document.querySelectorAll(".fs").forEach(x=>x.classList.remove("fs")); document.body.classList.remove("fs-on");
-  if(id.startsWith("herramientas")){ renderNav("herramientas"); renderTools(id.split("-")[1]||"temporizador"); window.scrollTo(0,0); return; }
+  if(id.startsWith("herramientas")){ const t=id.split("-")[1]||"temporizador"; renderNav("herramientas-"+t); renderTools(t); window.scrollTo(0,0); return; }
   if(id==="comprobar"){ renderNav(""); renderCheck(); window.scrollTo(0,0); return; }
   let m = MATERIAS.find(x=>x.id===id), u = null;
   if(!m) for(const mm of MATERIAS){ const f=mm.unidades.find(x=>x.id===id); if(f){ m=mm; u=f; break; } }
@@ -3583,8 +3585,7 @@ function renderTools(t){
   const cuerpo = {temporizador:tmrHTML, grupos:gruposHTML, sorteo:sorteoHTML, pizarra:pizarraHTML}[t]();
   $("#main").innerHTML = `
     <div style="--sub:#1d5fd1">
-      <div class="subj-head"><span class="lvl">Para la clase</span><h1>Herramientas</h1></div>
-      <nav class="tools-tabs" aria-label="Herramientas">${HERR.map(([id,n,ic])=>`<a href="#herramientas-${id}" ${id===t?'aria-current="page"':''}>${icono(ic)}<span>${n}</span></a>`).join("")}</nav>
+      <div class="subj-head"><span class="lvl">Herramientas de clase</span><h1>${HERR.find(h=>h[0]===t)[1]}</h1></div>
       ${cuerpo}
     </div>`;
   if(t==="temporizador") tmrPintar();
