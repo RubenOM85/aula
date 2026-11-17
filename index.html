@@ -952,12 +952,12 @@ const MATERIAS = [
         {tipo:"contenido", t:"¿Qué es una computadora?", s:"Artículo de apoyo.", url:"https://concepto.de/computadora/"},
         {tipo:"interactiva", t:"Repaso: redes informáticas", s:"8 preguntas con corrección automática.", quiz:"redes"}
        ]},
-      {id:"dig4-seguridad", etiqueta:"Situación de aprendizaje 3", titulo:"Seguridad en la red", subtitulo:"De alumnos a profesores: enseñamos a 6.º de Primaria",
+      {id:"dig4-seguridad", etiqueta:"Situación de aprendizaje 3", titulo:"Seguridad en la red", subtitulo:"De alumnos a profesores: una sesión para 6.º de Primaria y un escape room para 1.º ESO",
        bloque:"Bloque 3. Seguridad y bienestar digital",
-       desc:"Aprendemos los cinco principios de «Sé genial en Internet», los ponemos a prueba en Interland y preparamos y damos una sesión de seguridad digital al alumnado de 6.º de Primaria.",
-       criterios:["2.5","3.1","3.2","3.3","3.4","3.5","3.6","4.1","4.4","5.3"],
-       producto:"Sesión de seguridad digital impartida al alumnado de 6.º de Primaria, con su presentación.",
-       anexos:["sa3a1","sa3a2"],
+       desc:"Aprendemos los cinco principios de «Sé genial en Internet», los ponemos a prueba en Interland y preparamos y damos una sesión de seguridad digital al alumnado de 6.º de Primaria. Después nos convertimos en la Unidad de Ciberseguridad del colegio: jugamos un escape room, aprendemos cómo funcionan sus mecánicas y diseñamos uno para 1.º ESO.",
+       criterios:["2.3","2.5","3.1","3.2","3.3","3.4","3.5","3.6","4.1","4.4","5.2","5.3"],
+       producto:"Sesión de seguridad digital impartida al alumnado de 6.º de Primaria y escape room de ciberseguridad «Operación Servidor» dirigido a 1.º ESO.",
+       anexos:["sa3a1","sa3a2","sa3a3","sa3a4"],
        teoria:`
         <p>«Sé genial en Internet» es un programa de Google, adaptado en España junto con la Fad, el INCIBE y la Policía Nacional, que resume la seguridad digital en <b>cinco principios</b>. Cuatro de ellos son los mundos del juego Interland; el quinto los une a todos.</p>
         <div class="worlds">
@@ -1030,7 +1030,37 @@ const MATERIAS = [
           <div><b>Vista</b><p>Regla 20-20-20: cada 20 minutos, mira algo a unos 6 metros durante 20 segundos.</p></div>
           <div><b>Sueño</b><p>La luz de las pantallas y las notificaciones retrasan el sueño. Deja el móvil fuera de la habitación por la noche.</p></div>
           <div><b>Mente</b><p>La comparación constante con otros, el miedo a perderse algo (FOMO) o la necesidad de «likes» afectan al ánimo. Desconectar también es cuidarse.</p></div>
-        </div>`,
+        </div>
+        <h3>Escape room de ciberseguridad</h3>
+        <p>Un escape room es un juego en el que un equipo tiene que resolver retos encadenados antes de que se acabe el tiempo. En el nuestro, <b>cada mecánica del juego es un concepto de seguridad</b>: para abrir un candado hay que entender el riesgo y saber defenderse.</p>
+        <p class="ask">Historia: un hacker ha bloqueado el servidor del colegio. 1.º ESO tiene 45 minutos para recuperarlo. Nosotros somos la Unidad de Ciberseguridad que ha preparado la misión… y la dirige.</p>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mecánica del juego</th><th>Concepto de seguridad que enseña</th></tr></thead>
+          <tbody>
+            <tr><th>Candado de números que se abre con datos de un perfil</th><td>Contraseñas débiles basadas en datos personales y ataques de fuerza bruta.</td></tr>
+            <tr><th>Buzón con mensajes falsos y verdaderos</th><td>Phishing y smishing: prisas, premios, remitentes y enlaces raros.</td></tr>
+            <tr><th>Foto con su información oculta</th><td>Metadatos y ubicación: fecha, hora y GPS de las fotos.</td></tr>
+            <tr><th>Perfil de una red social con pistas</th><td>Privacidad y huella digital: qué no se debe publicar.</td></tr>
+            <tr><th>Mensaje cifrado (César, Morse)</th><td>Cifrado: por qué WhatsApp o las webs con https protegen la información.</td></tr>
+            <tr><th>Código QR que lleva a una web trampa</th><td>QR y webs falsas: comprobar la dirección antes de introducir datos.</td></tr>
+            <tr><th>Chat de grupo con decisiones</th><td>Ciberacoso: el papel de los testigos y cómo pedir ayuda.</td></tr>
+          </tbody></table></div>
+        <h3>Cómo será la misión con 1.º ESO</h3>
+        <div class="defs">
+          <div><b>Seis estaciones</b><p>Cada alumno o alumna de 4.º diseña y dirige una estación, con un reto sobre un riesgo. Dos personas forman el centro de mando: la historia, la cuenta atrás, la caja final y los materiales digitales.</p></div>
+          <div><b>Seis equipos de cinco</b><p>Los 30 alumnos de 1.º se reparten en seis equipos que empiezan cada uno en una estación y van rotando cada 6 minutos.</p></div>
+          <div><b>Una pieza por estación</b><p>Al superar cada reto, el equipo consigue una pieza del código. Con las seis piezas se abre la caja del servidor.</p></div>
+          <div><b>Candados físicos y digitales</b><p>Cajas con candados de combinación, sobres, códigos QR y candados digitales en Keynote: un teclado en el que cada número es un enlace y solo el código correcto lleva a la diapositiva de «Acceso concedido».</p></div>
+        </div>
+        <h3>Cómo se diseña una buena prueba</h3>
+        <ol>
+          <li><b>Elige el riesgo</b> y la idea que quieres que recuerden.</li>
+          <li><b>Inventa el reto:</b> qué ven, qué tienen que descubrir y qué código consiguen.</li>
+          <li><b>Que se pueda resolver en 5-6 minutos</b> por alumnos de 12 años: claro, visual y sin texto largo.</li>
+          <li><b>Prepara dos pistas</b>, de menos a más ayuda, para dar si se atascan.</li>
+          <li><b>Cierra con el consejo:</b> una frase que explique el riesgo y cómo protegerse.</li>
+          <li><b>Pruébalo con alguien</b> que no lo conozca y mejora lo que falle.</li>
+        </ol>`,
        tareas:[
         {n:1, t:"Aprendemos la teoría", html:"<p>Lee la teoría de los cinco principios y haz un resumen con los conceptos clave de cada uno: huella digital, phishing, contraseña fuerte, verificación en dos pasos, ciberacoso… Después, comprueba lo que sabes con la ficha interactiva de repaso.</p>", evalua:"sa3a1", entrega:"Resumen por Teams"},
         {n:2, t:"Jugamos a Interland", html:"<p>Juega a los cuatro mundos de Interland. Mientras juegas, anota en cada mundo:</p><ul><li>Qué principio trabaja.</li><li>Qué conceptos de la teoría aparecen.</li><li>Qué pregunta o reto te ha parecido más difícil.</li><li>Qué crees que les costará más a los alumnos de 6.º.</li></ul>", evalua:"sa3a1", entrega:"Diario de Interland por Teams", enlaces:[["Jugar a Interland","https://beinternetawesome.withgoogle.com/es_es/interland"]]},
@@ -1038,9 +1068,18 @@ const MATERIAS = [
         {n:4, t:"Preparamos la sesión", html:"<p>Diseña la sesión que vas a dar y la presentación que la acompaña, en Keynote o Canva. El guion debe incluir:</p><ol><li><b>Inicio:</b> una pregunta o una situación real para despertar el interés.</li><li><b>Explicación:</b> los conceptos clave del principio, con palabras que entienda un alumno de 11 años y ejemplos cercanos.</li><li><b>Juego:</b> el mundo de Interland, con las pistas que les darás.</li><li><b>Comprobación:</b> unas preguntas o una dinámica para ver si lo han entendido.</li><li><b>Cierre:</b> el mensaje que queréis que recuerden.</li></ol>", entrega:"Guion y presentación por Teams", evalua:"sa3a1"},
         {n:5, t:"Ensayamos", html:"<p>Cada sesión se ensaya delante del resto de la clase. Los compañeros harán sugerencias de mejora, que tendrás que aplicar antes del gran día.</p>", evalua:"sa3a1"},
         {n:6, t:"¡A 6.º de Primaria!", html:"<p>Llega el momento: impartimos las sesiones al alumnado de 6.º de Primaria. Recuerda hablar despacio, mirar al público, dejarles participar y ayudarles mientras juegan.</p>", evalua:"sa3a2"},
-        {n:7, t:"Reflexión final", html:"<p>Después de la sesión, valora individualmente cómo ha ido: qué funcionó, qué cambiarías, qué preguntas te hicieron y qué has aprendido enseñando a otros.</p>", evalua:"sa3a1", entrega:"Autoevaluación por Teams"}
+        {n:7, t:"Reflexión final", html:"<p>Después de la sesión, valora individualmente cómo ha ido: qué funcionó, qué cambiarías, qué preguntas te hicieron y qué has aprendido enseñando a otros.</p>", evalua:"sa3a1", entrega:"Autoevaluación por Teams"},
+        {n:8, t:"Entrenamiento de agentes: «Operación Servidor»", duracion:"1 sesión", html:"<p>Por parejas, jugad al escape room de entrenamiento. Tenéis 40 minutos para abrir las seis puertas y desbloquear el servidor del colegio. Cada pista cuesta 2 minutos.</p><p>Mientras jugáis, fijaos en <b>cómo está hecho</b>: qué os hace pensar, qué os engancha y qué aprendéis en cada puerta. Vais a diseñar uno igual.</p>", enlaces:[["Jugar a «Operación Servidor»","escape.html"]]},
+        {n:9, t:"Taller de mecánicas", duracion:"2 sesiones", html:"<p>Resolvemos en clase las mecánicas de un escape room de ciberseguridad (mira la tabla de la teoría): candados con contraseñas, buzón de phishing, foto con metadatos, perfil con datos peligrosos, mensajes cifrados, QR trampa y chat de grupo.</p><p>Para cada mecánica, anota en tu ficha <b>cómo funciona</b>, <b>qué riesgo enseña</b> y <b>cómo la adaptarías para 1.º ESO</b>.</p>", entrega:"Ficha del taller por Teams", evalua:"sa3a1"},
+        {n:10, t:"Historia, mapa y reparto", duracion:"1 sesión", html:"<p>Entre todos, escribimos la historia de la misión y dibujamos el mapa del juego: las seis estaciones, el orden de rotación, la caja final y cómo se forma su código. Cada uno elige su estación y dos personas forman el centro de mando.</p>", evalua:"sa3a4"},
+        {n:11, t:"Diseño de mi estación", duracion:"2 sesiones", html:"<p>Diseña tu estación con la ficha del Anexo 3: el riesgo, el reto, la solución, las dos pistas, el material y el consejo final. Tiene que poder resolverse en 5-6 minutos y la juegan alumnos de 12 años.</p><p>El centro de mando diseña la introducción, la cuenta atrás, la caja final y los candados digitales.</p>", entrega:"Ficha de diseño por Teams", evalua:"sa3a4"},
+        {n:12, t:"Construcción", duracion:"3 sesiones", html:"<p>Construimos el escape room: preparamos los materiales, generamos los códigos QR, montamos los candados digitales en Keynote, programamos las cajas y los candados físicos y preparamos la ambientación (música y cuenta atrás).</p><p>Usa imágenes propias o con licencia libre y cita su autoría.</p>", evalua:"sa3a4"},
+        {n:13, t:"Prueba beta", duracion:"1 sesión", html:"<p>Probamos el juego completo con jugadores que no lo conocen (profesorado u otro grupo). Cronometra tu estación, anota dónde se atascan y mejora lo que no funcione antes de la misión.</p>", evalua:"sa3a4"},
+        {n:14, t:"Misión con 1.º ESO", duracion:"1 sesión", html:"<p>Llega el gran día. Cada uno dirige su estación como <i>game master</i>: explica el reto, controla el tiempo, da pistas sin resolverlo y, al terminar, cuenta el consejo de seguridad. El centro de mando presenta la historia y abre la caja final.</p>", evalua:"sa3a4"},
+        {n:15, t:"Informe de la misión", duracion:"1 sesión", html:"<p>Valoramos la misión: qué estaciones funcionaron mejor, qué aprendió 1.º ESO, qué cambiaríamos y qué has aprendido tú diseñando y dirigiendo un juego. Haz tu autoevaluación con la rúbrica del Anexo 4.</p>", evalua:"sa3a4", entrega:"Autoevaluación por Teams"}
        ],
        items:[
+        {tipo:"contenido", t:"Escape room «Operación Servidor»", s:"Seis puertas, 40 minutos. El entrenamiento de la Unidad de Ciberseguridad.", url:"escape.html"},
         {tipo:"contenido", t:"Sé genial en Internet", s:"Web del programa, con materiales para alumnado, familias y docentes.", url:"https://beinternetawesome.withgoogle.com/es_es"},
         {tipo:"contenido", t:"INCIBE: Tu ayuda en ciberseguridad (017)", s:"Línea gratuita y confidencial de ayuda.", url:"https://www.incibe.es/linea-de-ayuda-en-ciberseguridad"},
         {tipo:"interactiva", t:"Repaso: seguridad en la red", s:"8 preguntas sobre los cinco principios.", quiz:"seguridad4"},
@@ -2919,16 +2958,21 @@ const ANEXOS = {
     <p class="desc">Cada fila se puntúa de 1 a 4. La nota es la media de las filas multiplicada por 2,5.</p>
     <p class="desc"><b>Importante:</b> si el corto incluye vídeo, voces o narraciones generadas con IA, no se puede evaluar y habrá que rehacerlo en clase.</p>`},
   sa3a1:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`
-    <p>Tu nota del tema sale de seis evidencias. Cada una se relaciona con criterios de evaluación de la materia. Así sabes desde el primer día qué tienes que demostrar y cómo lo voy a comprobar.</p>
+    <p>Tu nota del tema sale de once evidencias: seis de la sesión para 6.º de Primaria y cinco del escape room para 1.º ESO. Cada una se relaciona con criterios de evaluación de la materia. Así sabes desde el primer día qué tienes que demostrar y cómo lo voy a comprobar.</p>
     <div class="table-wrap"><table class="tbl ev">
       <thead><tr><th>Evidencia</th><th>Tarea</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead>
       <tbody>
-        <tr><th>Resumen de la teoría y repaso</th><td>1</td><td>Revisión del resumen y resultado del repaso interactivo</td><td>3.1 · 3.2 · 3.4</td><td>15 %</td></tr>
-        <tr><th>Diario de Interland</th><td>2</td><td>Revisión de las notas de cada mundo</td><td>3.4 · 4.4</td><td>10 %</td></tr>
-        <tr><th>Guion y presentación</th><td>4</td><td>Rúbrica (Anexo 2): filas A, B, C y D</td><td>2.5 · 3.1 · 3.2 · 4.1 · 4.4</td><td>25 %</td></tr>
-        <tr><th>Sesión con 6.º de Primaria</th><td>6</td><td>Rúbrica (Anexo 2): filas A, B y E</td><td>2.5 · 3.3</td><td>30 %</td></tr>
-        <tr><th>Trabajo en equipo durante la preparación y el ensayo</th><td>3–5</td><td>Observación en clase y valoración de los compañeros: fila F</td><td>3.6 · 5.3</td><td>10 %</td></tr>
-        <tr><th>Reflexión final</th><td>7</td><td>Autoevaluación con la rúbrica del Anexo 2</td><td>3.5 · 5.3</td><td>10 %</td></tr>
+        <tr><th>Resumen de la teoría y repaso</th><td>1</td><td>Revisión del resumen y resultado del repaso interactivo</td><td>3.1 · 3.2 · 3.4</td><td>10 %</td></tr>
+        <tr><th>Diario de Interland</th><td>2</td><td>Revisión de las notas de cada mundo</td><td>3.4 · 4.4</td><td>5 %</td></tr>
+        <tr><th>Guion y presentación</th><td>4</td><td>Rúbrica (Anexo 2): filas A, B, C y D</td><td>2.5 · 3.1 · 3.2 · 4.1 · 4.4</td><td>15 %</td></tr>
+        <tr><th>Sesión con 6.º de Primaria</th><td>6</td><td>Rúbrica (Anexo 2): filas A, B y E</td><td>2.5 · 3.3</td><td>15 %</td></tr>
+        <tr><th>Trabajo en equipo durante la preparación y el ensayo</th><td>3–5</td><td>Observación en clase y valoración de los compañeros: fila F</td><td>3.6 · 5.3</td><td>5 %</td></tr>
+        <tr><th>Reflexión final de la sesión</th><td>7</td><td>Autoevaluación con la rúbrica del Anexo 2</td><td>3.5 · 5.3</td><td>5 %</td></tr>
+        <tr><th>Ficha del taller de mecánicas</th><td>9</td><td>Revisión de la ficha: funcionamiento, riesgo y adaptación de cada mecánica</td><td>3.1 · 3.2 · 3.4</td><td>5 %</td></tr>
+        <tr><th>Ficha de diseño de la estación</th><td>10–11</td><td>Rúbrica (Anexo 4): filas A y B</td><td>2.3 · 2.5 · 3.1 · 3.2 · 3.4 · 4.4</td><td>15 %</td></tr>
+        <tr><th>Estación construida y prueba beta</th><td>12–13</td><td>Rúbrica (Anexo 4): fila C</td><td>5.2</td><td>10 %</td></tr>
+        <tr><th>Misión con 1.º ESO</th><td>14</td><td>Observación con la rúbrica (Anexo 4): fila D</td><td>3.3 · 3.6</td><td>10 %</td></tr>
+        <tr><th>Trabajo en equipo e informe de la misión</th><td>10–15</td><td>Rúbrica (Anexo 4): fila E y autoevaluación</td><td>4.1 · 5.3</td><td>5 %</td></tr>
       </tbody>
       <tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot>
     </table></div>`},
@@ -2946,6 +2990,32 @@ const ANEXOS = {
       </tbody>
     </table></div>
     <p class="desc">Cada fila se puntúa de 1 a 4. La nota de cada evidencia es la media de sus filas multiplicada por 2,5 (un 4 equivale a 10; un 2, a 5).</p>`},
+  sa3a3:{titulo:"Anexo 3. Ficha de diseño de la estación", para:"tareas 10 y 11", html:`
+    <p>Rellena esta ficha antes de construir nada. Si está bien pensada, la construcción será rápida y la estación funcionará a la primera.</p>
+    <div class="table-wrap"><table class="tbl">
+      <thead><tr><th>Apartado</th><th>Qué tienes que escribir</th></tr></thead>
+      <tbody>
+        <tr><th>1. Riesgo</th><td>Qué riesgo de seguridad trabaja tu estación y por qué es importante para alguien de 12 años.</td></tr>
+        <tr><th>2. Mensaje clave</th><td>La idea, en una frase, que quieres que recuerden al salir.</td></tr>
+        <tr><th>3. El reto</th><td>Qué encuentra el equipo al llegar, qué tiene que descubrir y cómo lo descubre.</td></tr>
+        <tr><th>4. Solución y candado</th><td>La respuesta correcta, qué abre (candado físico, sobre, QR o candado digital) y qué pieza del código final entrega.</td></tr>
+        <tr><th>5. Pistas</th><td>Dos pistas, de menos a más ayuda, y en qué momento las darás.</td></tr>
+        <tr><th>6. Tiempo</th><td>Cuánto se tarda en resolver (máximo 5-6 minutos) y cómo lo has comprobado.</td></tr>
+        <tr><th>7. Material</th><td>Todo lo necesario: impresiones, cajas, candados, iPad, QR e imágenes (con su licencia o autoría).</td></tr>
+        <tr><th>8. Consejo final</th><td>Lo que dirás al equipo al terminar: el riesgo y cómo protegerse.</td></tr>
+        <tr><th>9. Boceto</th><td>Un dibujo o una foto de cómo quedará la estación.</td></tr>
+      </tbody></table></div>`},
+  sa3a4:{titulo:"Anexo 4. Rúbrica del escape room", para:"tareas 11 a 15", html:`
+    <p>Con esta rúbrica valoro tu estación y tu papel como <i>game master</i>. También la usarás para autoevaluarte en el informe de la misión.</p>
+    <div class="table-wrap"><table class="tbl rub">
+      <thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>
+      <tbody>
+        <tr><th>A. El reto enseña un riesgo real<span class="crit">3.1 · 3.2 · 3.4 · 4.4</span></th><td>El reto obliga a entender el riesgo para resolverlo, se basa en situaciones reales o creíbles y el consejo final es correcto y útil.</td><td>El reto trabaja el riesgo y el consejo es correcto, aunque podría resolverse sin entenderlo del todo.</td><td>El riesgo aparece de forma superficial o el consejo es vago.</td><td>El reto no tiene relación con la seguridad o contiene errores.</td></tr>
+        <tr><th>B. Diseño para 1.º ESO<span class="crit">2.3 · 2.5</span></th><td>La ficha está completa. El reto es claro, visual, se resuelve en 5-6 minutos y las pistas están bien graduadas. Los materiales son atractivos y respetan la autoría.</td><td>La ficha está completa y el reto es adecuado, con algún aspecto mejorable (tiempo, pistas o materiales).</td><td>Faltan apartados de la ficha o el reto es demasiado fácil, difícil o largo.</td><td>No hay ficha o el reto no se puede jugar.</td></tr>
+        <tr><th>C. Construcción y prueba beta<span class="crit">5.2</span></th><td>La estación está terminada a tiempo, funciona sin fallos y has aplicado las mejoras de la prueba beta.</td><td>La estación funciona, con algún detalle que no se llegó a mejorar.</td><td>La estación está incompleta o falla en algún momento.</td><td>La estación no está lista para la misión.</td></tr>
+        <tr><th>D. Game master con 1.º ESO<span class="crit">3.3 · 3.6</span></th><td>Explicas el reto con claridad, das pistas sin resolverlo, controlas el tiempo, tratas a todos con respeto, resuelves los problemas con calma y explicas el consejo final.</td><td>Diriges bien la estación, aunque te cuesta algo el tiempo o las pistas.</td><td>Necesitas ayuda frecuente o el consejo final no se explica.</td><td>No diriges la estación o el trato no es adecuado.</td></tr>
+        <tr><th>E. Equipo y responsabilidad<span class="crit">4.1 · 5.3</span></th><td>Cumples tus plazos, te coordinas con el centro de mando, ayudas a otras estaciones y tu informe analiza la misión con detalle y propuestas.</td><td>Cumples tu parte y te coordinas; el informe es correcto.</td><td>Hay retrasos o poca coordinación; el informe es breve.</td><td>No cumples tu parte o no entregas el informe.</td></tr>
+      </tbody></table></div>`},
   anexo1:{titulo:"Anexo 1. Rúbrica de la infografía", para:"Tarea 2", html:`
     <div class="table-wrap"><table class="tbl rub">
       <thead><tr><th>Categoría</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead>

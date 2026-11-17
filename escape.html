@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operación Servidor · Escape room de ciberseguridad</title>
+<style>
+:root{--bg:#0b1220;--panel:#121b2e;--panel2:#18233a;--line:#26344f;--txt:#e6ecf5;--mut:#93a3bd;--ok:#3ddc97;--warn:#ffb547;--bad:#ff5d73;--acc:#59b8ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#16264a 0,transparent 60%),var(--bg);color:var(--txt);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(11,18,32,.85);position:sticky;top:0;backdrop-filter:blur(6px);z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--bad);box-shadow:0 0 10px var(--bad);animation:blink 1.2s infinite}
+.brand.ok .dot{background:var(--ok);box-shadow:0 0 10px var(--ok);animation:none}
+@keyframes blink{50%{opacity:.25}}
+.timer{font-size:28px;font-weight:700;color:var(--warn)}
+.timer.low{color:var(--bad)}
+main{max-width:1060px;margin:0 auto;padding:24px 20px 60px}
+h1{font-size:clamp(28px,4vw,44px);margin:.2em 0}
+h2{margin:.2em 0 .4em}
+p{margin:.5em 0}
+.lead{color:var(--mut);font-size:18px;max-width:720px}
+.btn{appearance:none;border:1px solid var(--acc);background:var(--acc);color:#04111f;font-weight:700;padding:12px 20px;border-radius:10px;font-size:16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--acc)}
+.btn.small{padding:8px 12px;font-size:14px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:18px}
+.node{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;transition:.15s;position:relative}
+.node:hover{border-color:var(--acc);transform:translateY(-2px)}
+.node .n{color:var(--mut);font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding-right:96px}
+.node h3{margin:.25em 0;font-size:20px}
+.node .st{position:absolute;top:16px;right:16px;font-size:13px;padding:3px 9px;border-radius:99px;border:1px solid var(--bad);color:var(--bad)}
+.node.done{border-color:var(--ok)}
+.node.done .st{border-color:var(--ok);color:var(--ok)}
+.codebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.slot{width:46px;height:56px;border-radius:10px;border:1px dashed var(--line);display:grid;place-items:center;font-size:28px;font-weight:700;color:var(--ok)}
+.slot.f{border-style:solid;border-color:var(--ok);background:rgba(61,220,151,.08)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.back{margin-bottom:14px}
+.mission{color:var(--mut)}
+input.ans{background:#0a1120;border:1px solid var(--line);color:var(--txt);font-size:22px;padding:10px 14px;border-radius:10px;width:min(320px,100%);letter-spacing:.12em}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.msg{margin-top:12px;font-weight:600}
+.msg.bad{color:var(--bad)} .msg.ok{color:var(--ok)}
+.hint{margin-top:12px;padding:12px 14px;border-left:3px solid var(--warn);background:rgba(255,181,71,.08);border-radius:6px}
+.learn{margin-top:16px;padding:14px 16px;border:1px solid var(--ok);background:rgba(61,220,151,.07);border-radius:10px}
+.learn b{color:var(--ok)}
+.mail{display:flex;gap:12px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0;cursor:pointer}
+.mail input{width:22px;height:22px;margin-top:4px;accent-color:var(--bad)}
+.mail .from{font-size:13px;color:var(--mut)}
+.mail .sub{font-weight:700}
+.prof{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;max-width:620px}
+.prof .head{display:flex;gap:14px;align-items:center}
+.avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#ff8a5b,#7c4dcc);display:grid;place-items:center;font-size:28px;font-weight:800}
+.post{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.dat{border-bottom:2px dotted var(--mut);cursor:pointer;border-radius:3px}
+.dat.hit{background:rgba(255,93,115,.25);border-bottom-color:var(--bad)}
+.dat.miss{background:rgba(147,163,189,.2)}
+.photo{border-radius:12px;overflow:hidden;border:1px solid var(--line);max-width:520px}
+.exif{display:none;margin-top:10px;background:#0a1120;border:1px solid var(--line);border-radius:10px;padding:12px;max-width:520px}
+.exif td{padding:3px 10px 3px 0;vertical-align:top} .exif td:first-child{color:var(--mut)}
+.cipher{font-size:28px;letter-spacing:.18em;background:#0a1120;border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;color:var(--ok);word-break:break-word}
+.alpha{font-size:15px;color:var(--mut);overflow-x:auto;white-space:nowrap}
+.chat{max-width:560px;display:flex;flex-direction:column;gap:8px}
+.bub{background:var(--panel2);border:1px solid var(--line);padding:9px 13px;border-radius:14px;max-width:85%}
+.bub .who{font-size:12px;color:var(--acc);font-weight:700}
+.bub.me{align-self:flex-end;background:#16324a}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{text-align:left;background:var(--panel2);border:1px solid var(--line);color:var(--txt);padding:11px 14px;border-radius:10px;cursor:pointer;font-size:15px}
+.opt:hover{border-color:var(--acc)}
+.opt.wrong{border-color:var(--bad);opacity:.6}
+.win{text-align:center;padding:40px 20px}
+.win h1{color:var(--ok)}
+.debrief{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:20px;text-align:left}
+.debrief div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.small{font-size:14px;color:var(--mut)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand" id="brand"><span class="dot"></span><span>SERVIDOR DEL COLEGIO · <span id="estado">BLOQUEADO</span></span></div>
+  <div class="row" style="margin:0">
+    <span class="small" id="pen"></span>
+    <span class="timer mono" id="timer">40:00</span>
+  </div>
+</header>
+<main id="app"></main>
+
+<script>
+/* Operación Servidor · escape room de entrenamiento para Digitalización 4.º ESO
+   Las soluciones se comprueban con un resumen (hash) para que no estén a la vista en el código. */
+const H = s => { let x = 5381; for (const c of s) x = ((x << 5) + x + c.charCodeAt(0)) >>> 0; return x; };
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+const DURACION = 40 * 60, PENAL = 120;
+const NODOS = [
+ {id:"pass", titulo:"La contraseña del administrador", tema:"Contraseñas", digito:"4", pos:0},
+ {id:"mail", titulo:"La bandeja de entrada", tema:"Phishing", digito:"7", pos:1},
+ {id:"foto", titulo:"La foto del parque", tema:"Metadatos y ubicación", digito:"1", pos:2},
+ {id:"perfil", titulo:"El perfil de Álex", tema:"Privacidad", digito:"9", pos:3},
+ {id:"cifra", titulo:"El mensaje cifrado", tema:"Cifrado", digito:"3", pos:4},
+ {id:"chat", titulo:"El grupo de clase", tema:"Ciberacoso", digito:"5", pos:5},
+];
+const APRENDE = {
+ pass:"Una contraseña hecha con datos personales (fechas, nombres, mascotas) se adivina en segundos mirando tus redes. Usa frases largas, distintas para cada cuenta, y activa la verificación en dos pasos.",
+ mail:"El phishing mete prisa, promete premios o asusta, y lleva a webs con direcciones raras. Nunca pulses: entra tú en la app o web oficial.",
+ foto:"Las fotos guardan metadatos: fecha, hora, móvil y ubicación GPS. Desactiva la ubicación de la cámara y no publiques dónde estás en directo.",
+ perfil:"Uniforme, portal, cumpleaños, teléfono o «me voy de vacaciones» permiten saber quién eres y dónde estás. Cuenta privada y nada de datos personales.",
+ cifra:"El cifrado convierte un mensaje en algo ilegible sin la clave. Lo usan WhatsApp (cifrado de extremo a extremo) y las webs con https. César era fácil de romper; los cifrados de hoy no.",
+ chat:"En el ciberacoso, quien ríe, comparte o calla también participa. No reenvíes, apoya a la víctima, guarda pruebas, denuncia y pide ayuda a un adulto o al 017.",
+};
+let S = {inicio:null, fin:null, penal:0, hechos:{}, pistas:{}};
+try { const g = JSON.parse(localStorage.getItem("op-servidor")); if (g) S = g; } catch(e) {}
+const guarda = () => { try { localStorage.setItem("op-servidor", JSON.stringify(S)); } catch(e) {} };
+const $ = s => document.querySelector(s);
+const app = $("#app");
+
+function restante(){ if (!S.inicio) return DURACION; const ref = S.fin || Date.now(); return Math.max(0, DURACION - Math.floor((ref - S.inicio)/1000) - S.penal); }
+function fmt(t){ return String(Math.floor(t/60)).padStart(2,"0") + ":" + String(t%60).padStart(2,"0"); }
+setInterval(() => { const t = restante(); const el = $("#timer"); el.textContent = fmt(t); el.classList.toggle("low", t < 300);
+  $("#pen").textContent = S.penal ? `Pistas: −${S.penal/60} min` : ""; }, 500);
+
+function portada(){
+  app.innerHTML = `<p class="small mono">TRANSMISIÓN ENTRANTE · UNIDAD DE CIBERSEGURIDAD</p>
+  <h1>Operación Servidor</h1>
+  <p class="lead">Un hacker ha bloqueado el servidor del colegio. Ha dejado seis puertas cerradas y cada una protege una cifra del código de desbloqueo. Para abrirlas tendréis que pensar como él… y saber cómo defenderos.</p>
+  <p class="lead">Tenéis <b>40 minutos</b>. Cada pista os costará <b>2 minutos</b>.</p>
+  <div class="row"><button class="btn" id="go">Aceptar la misión</button></div>
+  <p class="small" style="margin-top:28px">Escape room de entrenamiento · Digitalización 4.º ESO · Aula de Rubén</p>`;
+  $("#go").onclick = () => { S.inicio = Date.now(); guarda(); mapa(); };
+}
+
+function mapa(){
+  const todos = NODOS.every(n => S.hechos[n.id]);
+  app.innerHTML = `<h2>Las seis puertas</h2><p class="mission">Podéis abrirlas en el orden que queráis. Cada una os da una cifra.</p>
+  <div class="grid">${NODOS.map((n,i) => `<div class="node ${S.hechos[n.id]?"done":""}" data-id="${n.id}">
+     <span class="st">${S.hechos[n.id]?"ABIERTA":"CERRADA"}</span>
+     <div class="n">Puerta ${i+1} · ${n.tema}</div><h3>${n.titulo}</h3></div>`).join("")}</div>
+  <div class="codebar"><b>Código del servidor:</b>${NODOS.map(n => `<span class="slot mono ${S.hechos[n.id]?"f":""}">${S.hechos[n.id]?n.digito:"·"}</span>`).join("")}
+   <span style="flex:1"></span><input class="ans mono" id="final" maxlength="6" placeholder="······" inputmode="numeric" style="width:170px">
+   <button class="btn" id="unlock">Desbloquear</button></div><div class="msg" id="fm"></div>
+   ${todos ? `<p class="small">Ya tenéis todas las cifras. Introducid el código.</p>` : ""}`;
+  document.querySelectorAll(".node").forEach(el => el.onclick = () => abre(el.dataset.id));
+  $("#unlock").onclick = () => {
+    const v = norm($("#final").value);
+    if (H(v) === 2234147074) { S.fin = Date.now(); guarda(); victoria(); }
+    else { $("#fm").className = "msg bad"; $("#fm").textContent = "ACCESO DENEGADO. El código no es correcto."; }
+  };
+}
+
+function marco(id, html){
+  const n = NODOS.find(x => x.id === id);
+  app.innerHTML = `<button class="btn ghost small back" id="volver">← Volver a las puertas</button>
+   <div class="panel"><div class="small mono">PUERTA ${NODOS.indexOf(n)+1} · ${n.tema.toUpperCase()}</div><h2>${n.titulo}</h2>${html}
+   <div id="res"></div>
+   ${S.hechos[id] ? "" : `<div class="row"><button class="btn ghost small" id="pista">Pedir pista (−2 min)</button></div>`}
+   <div id="pz">${S.pistas[id] ? `<div class="hint">${PISTA[id]}</div>` : ""}</div></div>`;
+  $("#volver").onclick = mapa;
+  const p = $("#pista"); if (p) p.onclick = () => { if (!S.pistas[id]) { S.pistas[id] = 1; S.penal += PENAL; guarda(); } $("#pz").innerHTML = `<div class="hint">${PISTA[id]}</div>`; };
+  if (S.hechos[id]) resuelto(id, false);
+}
+function resuelto(id, nuevo=true){
+  if (nuevo) { S.hechos[id] = true; guarda(); }
+  const n = NODOS.find(x => x.id === id);
+  $("#res").innerHTML = `<div class="learn"><p class="msg ok" style="margin:0 0 6px">PUERTA ABIERTA · Cifra obtenida: <span class="mono" style="font-size:22px">${n.digito}</span> (posición ${n.pos+1})</p><b>Lo que habéis aprendido:</b> ${APRENDE[id]}</div>`;
+  const p = $("#pista"); if (p) p.parentElement.remove();
+}
+const fallo = t => { const r = $("#res"); r.innerHTML = `<p class="msg bad">${t}</p>`; };
+const PISTA = {
+ pass:"Mirad la biografía y las publicaciones: el administrador dice qué día es su cumpleaños y en qué año nació. Formato DDMMAA: 6 cifras.",
+ mail:"Fijaos en la dirección del remitente, en las prisas, en los premios que nadie ha pedido y en los enlaces acortados. Hay más de un mensaje falso.",
+ foto:"Pulsad «Ver información de la foto». La hora se escribe con 4 cifras, sin los dos puntos.",
+ perfil:"Hay 6 datos peligrosos: algo que dice dónde estudia, dónde vive, cuándo nació, cómo contactarle, cuándo su casa estará vacía y dónde está ahora mismo.",
+ cifra:"El hacker firma «César 3». Cada letra se ha desplazado 3 posiciones hacia delante en el alfabeto: para descifrar, id 3 hacia atrás (D→A, E→B…).",
+ chat:"Elegid siempre la respuesta de alguien que no hace más daño, apoya a la víctima y busca ayuda.",
+};
+
+function abre(id){ ({pass, mail, foto, perfil, cifra, chat})[id](); }
+
+function pass(){
+  marco("pass", `<p class="mission">El servidor pide la contraseña de <b>@admin_jorge</b>. Dicen que siempre usa «su fecha especial». Este es su perfil público:</p>
+  <div class="prof"><div class="head"><div class="avatar">J</div><div><b>Jorge · @admin_jorge</b><div class="small">Informático. Fan del pádel y de los gatos 🐱</div></div></div>
+   <div class="post">🎂 ¡Hoy, 14 de marzo, toca tarta! Gracias a todos por las felicitaciones.<div class="small">Publicado el 14/03</div></div>
+   <div class="post">Reencuentro con la quinta del 87 🙌 ¡Cuántos años!<div class="small">Publicado el 02/06</div></div>
+   <div class="post">Mi gata Nube ya tiene 3 años 😻<div class="small">Publicado el 20/09</div></div></div>
+  <div class="row"><input class="ans mono" id="a" maxlength="8" placeholder="Contraseña"><button class="btn" id="ok">Probar</button></div>`);
+  if (S.hechos.pass) return;
+  $("#ok").onclick = () => H(norm($("#a").value)) === 2113140828 ? resuelto("pass") : fallo("Contraseña incorrecta. El hacker se ríe de vosotros.");
+}
+
+const MAILS = [
+ {f:"seguridad@pixelgram-verificar.xyz", s:"⚠️ Tu cuenta se cerrará en 24 horas", b:"Hemos detectado actividad sospechosa. Verifica tu contraseña aquí antes de que sea tarde: pixelgram-verificar.xyz/login", malo:1},
+ {f:"Tutora 4.º ESO · tutora@colegio.edu", s:"Excursión del viernes", b:"Recordad traer almuerzo, agua y la autorización firmada. Salimos a las 9:00 desde el patio.", malo:0},
+ {f:"premios@superpremios-ya.com", s:"🎉 ¡HAS GANADO UN MÓVIL!", b:"Eres el visitante 1.000.000. Solo tienes que pagar 1,99 € de gastos de envío con tu tarjeta. ¡Oferta válida 10 minutos!", malo:1},
+ {f:"Tienda Deportes Norte · pedidos@deportesnorte.es", s:"Tu pedido ha salido", b:"Tu pedido n.º 48211 (zapatillas) llegará el jueves. Puedes seguirlo desde la app de la tienda.", malo:0},
+ {f:"SMS de «Dani» · número desconocido", s:"jajaja mira estas fotos tuyas", b:"Dani: no me puedo creer que salgas así 😂😂 bit.ly/f0tos-tuy4s", malo:1},
+];
+function mail(){
+  marco("mail", `<p class="mission">El hacker ha llenado el buzón del colegio de trampas. Marcad <b>todos</b> los mensajes que son phishing y no tocéis los que son de verdad.</p>
+  ${MAILS.map((m,i) => `<label class="mail"><input type="checkbox" data-i="${i}" ${S.hechos.mail&&m.malo?"checked":""}><div><div class="from mono">${m.f}</div><div class="sub">${m.s}</div><div>${m.b}</div></div></label>`).join("")}
+  <div class="row"><button class="btn" id="ok">Enviar a cuarentena</button></div>`);
+  if (S.hechos.mail) return;
+  $("#ok").onclick = () => {
+    const sel = [...document.querySelectorAll(".mail input")].map(x => x.checked ? 1 : 0);
+    const bien = sel.every((v,i) => v === MAILS[i].malo);
+    bien ? resuelto("mail") : fallo(`No es correcto. Revisad cada mensaje: hay ${MAILS.filter(m=>m.malo).length} falsos.`);
+  };
+}
+
+function foto(){
+  marco("foto", `<p class="mission">Luna (@luna_09) ha subido esta foto sin pensarlo mucho. El hacker sabe exactamente <b>a qué hora</b> estuvo allí. ¿Y vosotros?</p>
+  <div class="photo"><svg viewBox="0 0 520 300" width="100%" role="img" aria-label="Foto de un parque al atardecer">
+    <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a5a"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
+    <rect width="520" height="300" fill="url(#sky)"/><circle cx="400" cy="190" r="40" fill="#fff3c4"/>
+    <rect y="210" width="520" height="90" fill="#4c8a4a"/><path d="M0 230 Q130 200 260 232 T520 226 V300 H0Z" fill="#3e7a3e"/>
+    <rect x="70" y="150" width="14" height="80" fill="#6b4a2b"/><circle cx="77" cy="140" r="42" fill="#2f6b34"/>
+    <rect x="440" y="160" width="12" height="70" fill="#6b4a2b"/><circle cx="446" cy="150" r="34" fill="#2f6b34"/>
+    <rect x="210" y="225" width="110" height="10" rx="3" fill="#7a5530"/><rect x="215" y="235" width="6" height="18" fill="#5b3d22"/><rect x="309" y="235" width="6" height="18" fill="#5b3d22"/>
+  </svg></div>
+  <p><b>@luna_09:</b> ¡Qué tarde más buena! 😎</p>
+  <button class="btn ghost small" id="ex">Ver información de la foto</button>
+  <div class="exif mono" id="exif"><table>
+   <tr><td>Archivo</td><td>IMG_2741.JPG</td></tr><tr><td>Dispositivo</td><td>Teléfono · cámara trasera</td></tr>
+   <tr><td>Fecha y hora</td><td>12/11/2026 · 18:42:07</td></tr><tr><td>Ubicación GPS</td><td>39,427 N · 0,418 O</td></tr>
+   <tr><td>Lugar aproximado</td><td>Parque municipal, junto al portal 7</td></tr></table></div>
+  <div class="row"><input class="ans mono" id="a" maxlength="5" placeholder="hhmm"><button class="btn" id="ok">Comprobar</button></div>`);
+  $("#ex").onclick = () => { const e = $("#exif"); e.style.display = e.style.display === "block" ? "none" : "block"; };
+  if (S.hechos.foto) return;
+  $("#ok").onclick = () => H(norm($("#a").value)) === 2088297268 ? resuelto("foto") : fallo("Esa no es la hora. Buscad bien.");
+}
+
+function perfil(){
+  const d = (t, ok) => `<span class="dat" data-ok="${ok}">${t}</span>`;
+  marco("perfil", `<p class="mission">Este es el perfil público de Álex. Pulsad sobre <b>todos los datos que le ponen en peligro</b>. Cuidado: si marcáis algo inofensivo, se reinicia.</p>
+  <div class="prof"><div class="head"><div class="avatar">A</div><div><b>Álex · @alex.13</b><div class="small">${d("Me encanta el reguetón y el baloncesto 🏀",0)} · ${d("📞 Escríbeme al 6XX 482 117",1)}</div></div></div>
+   <div class="post">${d("Primer día con el uniforme del Colegio San Rafael",1)} 😅 ¡Qué ganas!<div class="small">${d("Foto con mis amigas en el recreo",0)}</div></div>
+   <div class="post">Ya en casa. ${d("Os dejo la foto del portal con el número 23 de la calle Olivo",1)} 🏡</div>
+   <div class="post">${d("¡Mañana cumplo 14! 5 de mayo 🎉",1)} ${d("Mi tarta favorita es la de chocolate",0)}</div>
+   <div class="post">${d("Nos vamos dos semanas de vacaciones: ¡casa vacía!",1)} ✈️ ${d("Mi perro Toby se queda con mi abuela",0)}</div>
+   <div class="post">${d("📍 Ahora mismo en el centro comercial (ubicación en directo)",1)}</div></div>
+  <p class="msg" id="cnt"></p>`);
+  if (S.hechos.perfil) { document.querySelectorAll('.dat[data-ok="1"]').forEach(x => x.classList.add("hit")); return; }
+  const tot = document.querySelectorAll('.dat[data-ok="1"]').length;
+  const cuenta = () => { const n = document.querySelectorAll(".dat.hit").length; $("#cnt").textContent = `Datos peligrosos encontrados: ${n} de ${tot}`; if (n === tot) resuelto("perfil"); };
+  document.querySelectorAll(".dat").forEach(el => el.onclick = () => {
+    if (S.hechos.perfil) return;
+    if (el.dataset.ok === "1") { el.classList.add("hit"); cuenta(); }
+    else { el.classList.add("miss"); fallo("Ese dato es inofensivo. Se reinicia la búsqueda."); setTimeout(() => perfil(), 1100); }
+  });
+  cuenta();
+}
+
+function cifra(){
+  const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  marco("cifra", `<p class="mission">Hemos interceptado un mensaje del hacker. Está cifrado y firmado como <b class="mono">«César 3»</b>. Descifradlo y escribid la última palabra.</p>
+  <div class="cipher mono">OD FODYH HV OD ORQJLWXG</div>
+  <p class="small">Alfabeto (sin Ñ):</p><div class="alpha mono">${A.split("").join(" ")}</div>
+  <div class="row"><input class="ans mono" id="a" maxlength="12" placeholder="Palabra"><button class="btn" id="ok">Comprobar</button></div>`);
+  if (S.hechos.cifra) return;
+  $("#ok").onclick = () => H(norm($("#a").value)) === 462938475 ? resuelto("cifra") : fallo("Esa no es la palabra. Revisad el desplazamiento.");
+}
+
+const CHAT = [
+ {ctx:[["Marcos","Mirad el montaje que he hecho de Sara 🤣🤣"],["Marcos","[imagen: montaje de Sara con cara de cerdo]"],["Leo","JAJAJAJA reenviadlo"]],
+  ops:[["Me río y lo reenvío a otro grupo",0],["No lo reenvío y escribo: «Esto no mola, borradlo»",1],["No digo nada y sigo mirando",0]]},
+ {ctx:[["Sara","¿Por qué todo el mundo se ríe de mí?? 😢"]],
+  ops:[["Le escribo por privado: «Estoy contigo, no estás sola. ¿Se lo contamos a alguien?»",1],["Le digo que no se lo tome tan a pecho, que es broma",0],["Me salgo del grupo y me olvido",0]]},
+ {ctx:[["Marcos","Mañana hago otro 😈"]],
+  ops:[["Contesto con un insulto a Marcos",0],["Hago capturas de pantalla y se lo cuento a la tutora (o llamamos al 017)",1],["Borro todos los mensajes para no meterme en líos",0]]},
+];
+function chat(){
+  let paso = S.hechos.chat ? CHAT.length : 0;
+  marco("chat", `<p class="mission">Estás en el grupo de clase. El hacker solo os dará la cifra si elegís, en cada momento, cómo actuaría un buen <b>testigo</b>.</p><div class="chat" id="ch"></div><div class="opts" id="op"></div>`);
+  const pinta = () => {
+    const ch = $("#ch"), op = $("#op");
+    ch.innerHTML = CHAT.slice(0, Math.min(paso+1, CHAT.length)).map(e => e.ctx.map(([w,t]) => `<div class="bub"><div class="who">${w}</div>${t}</div>`).join("")
+      + (CHAT.indexOf(e) < paso ? `<div class="bub me"><div class="who">Tú</div>${e.ops.find(o=>o[1])[0]}</div>` : "")).join("");
+    if (paso >= CHAT.length) { op.innerHTML = ""; if (!S.hechos.chat) resuelto("chat"); return; }
+    op.innerHTML = CHAT[paso].ops.map((o,i) => `<button class="opt" data-i="${i}">${o[0]}</button>`).join("");
+    op.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (CHAT[paso].ops[b.dataset.i][1]) { paso++; $("#res").innerHTML = ""; pinta(); }
+      else { b.classList.add("wrong"); fallo("Esa respuesta no ayuda a Sara. Probad otra."); }
+    });
+  };
+  pinta();
+}
+
+function victoria(){
+  $("#brand").classList.add("ok"); $("#estado").textContent = "RESTAURADO";
+  const usado = Math.floor((S.fin - S.inicio)/1000) + S.penal;
+  app.innerHTML = `<div class="win"><p class="small mono">CÓDIGO ACEPTADO</p><h1>¡Servidor restaurado!</h1>
+   <p class="lead" style="margin:0 auto">Tiempo empleado: <b class="mono">${fmt(Math.min(usado, 5999))}</b>${S.penal ? ` (incluye ${S.penal/60} min de pistas)` : ""}. ${usado <= DURACION ? "¡Dentro del tiempo!" : "Os habéis pasado de tiempo, pero lo habéis conseguido."}</p>
+   <h2 style="margin-top:28px">Informe de la misión</h2>
+   <div class="debrief">${NODOS.map(n => `<div><b>${n.tema}</b><p class="small" style="color:var(--txt)">${APRENDE[n.id]}</p></div>`).join("")}</div>
+   <p class="small" style="margin-top:24px">Ahora os toca a vosotros: ¿qué mecánica os ha gustado más? ¿Cómo la adaptaríais para 1.º ESO?</p>
+   <div class="row" style="justify-content:center"><button class="btn ghost small" id="reset">Reiniciar la misión</button></div></div>`;
+  $("#reset").onclick = () => { if (confirm("¿Seguro que queréis empezar de cero?")) { S = {inicio:null, fin:null, penal:0, hechos:{}, pistas:{}}; guarda(); location.reload(); } };
+}
+
+if (S.fin) victoria(); else if (S.inicio) mapa(); else portada();
+</script>
+</body>
+</html>
