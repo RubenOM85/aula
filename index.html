@@ -852,7 +852,7 @@ const MATERIAS = [
       {id:"dig4-sa1-2", etiqueta:"Situación de aprendizaje 1.2", titulo:"Redes informáticas", subtitulo:"¿Hay alguien offline?",
        bloque:"Bloque 1. Dispositivos digitales, sistemas operativos y de comunicación",
        desc:"Qué es una red informática, qué tipos existen y cómo funcionan las redes cableadas e inalámbricas. Proyecto final: el esquema de la red del colegio.",
-       criterios:["1.1","1.2","1.3","1.5","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.6"],
+       criterios:["1.1","1.2","1.3","1.5","1.6","2.1","2.3","2.5","2.6","3.1","3.2","3.6","5.1","5.4"],
        producto:"Gráfico con la arquitectura de la red de nuestro centro educativo.",
        teoria:`
         <p>Hoy en día la comunicación entre dispositivos electrónicos es muy común, tanto para el ocio como para el trabajo de muchas empresas. Compartimos datos a través de conexiones 4G, 5G, wifi, NFC, Ethernet o bluetooth. Los móviles se conectan con otros móviles y con los proveedores de Internet a través de las redes de datos. Los ordenadores, portátiles, impresoras y otros dispositivos se conectan entre sí en redes locales para trabajar juntos, e incluso con ordenadores remotos en cualquier lugar de Internet.</p>
@@ -896,7 +896,16 @@ const MATERIAS = [
           <div><b>Repetidor</b><p>Recibe la señal y la amplifica para que llegue más lejos.</p></div>
           <div><b>Servidor de impresión</b><p>Permite compartir una impresora entre todos los equipos de la red.</p></div>
           <div><b>Adaptador de red</b><p>La tarjeta que conecta cada equipo a la red, con cable o sin él.</p></div>
-        </div>`,
+        </div>
+        <h3>Diagnosticar una incidencia de red</h3>
+        <p>Cuando algo deja de funcionar, un buen técnico no cambia cables al azar: <b>localiza la zona afectada, sigue en el mapa de red el camino hasta el punto del que depende y hace las comprobaciones en orden</b>, de lo más cercano a lo más general.</p>
+        <div class="defs">
+          <div><b>Falla un solo equipo</b><p>Empieza por ese equipo, su cable y su toma de red.</p></div>
+          <div><b>Falla toda una zona</b><p>Revisa el nodo del que cuelga esa zona (el armario o el switch).</p></div>
+          <div><b>Fallan muchas zonas</b><p>Sube hacia el nodo común o la salida a Internet.</p></div>
+          <div><b>Solo falla el wifi</b><p>No des por hecho que falla Internet: revisa el punto de acceso, su alimentación y su cable.</p></div>
+        </div>
+        <p>Crimpar un cable nuevo <b>no es el primer paso</b>: tiene sentido cuando las comprobaciones apuntan a un fallo físico del latiguillo o del conector (la conexión falla al moverlo, la pestaña no hace clic o no se enciende la luz de enlace y el mismo cable falla en otro equipo).</p>`,
        anexos:["d12V","d12R"],
        tareas:[
         {n:1, t:"La red de tu casa", html:"<p>Diseña un gráfico que represente la arquitectura de una red que conecte entre sí todos los dispositivos de tu hogar. Indica qué topología tiene y qué medidas de seguridad aplicarías al router.</p>", evalua:"d12R"},
@@ -915,7 +924,8 @@ const MATERIAS = [
         {n:4, t:"Proyecto final: la red de nuestro colegio", html:`<p>Diseña un gráfico que represente la red del colegio: de dónde llega Internet, qué zonas y aulas se conectan, dónde están los puntos de acceso wifi, los ordenadores, el servidor y la impresora.</p>
           <p>Fíjate en cómo está hecho este gráfico de la red del centro:</p>
           <figure class="fig"><button class="zoom" data-zoom="img/red-centro.jpg" aria-label="Ampliar el gráfico de la red del centro"><img src="img/red-centro.jpg" alt="Gráfico de la red del Colegio La Inmaculada: desde la conexión de Telefónica se reparten las conexiones a secretaría, sala de profesores, aulas de informática, tutorías, infantil, primaria, biblioteca, puntos de acceso wifi y cámaras." loading="lazy"></button><figcaption>Gráfico de la red del centro. Pulsa la imagen para ampliarla.</figcaption></figure>`, evalua:"d12R"},
-        {n:5, t:"Crimpa tu propio cable de red RJ45", html:`
+        {n:5, t:"Resolvemos incidencias TIC del centro", duracion:"2 sesiones", html:`<p><b>Misión 1 del Departamento TIC.</b> El coordinador TIC necesita técnicos que le ayuden a localizar averías en la red del colegio. Por equipos, elegid una incidencia del banco de casos (por ejemplo: «4.º ESO no tiene wifi, pero 3.º sí» o «La intranet no abre desde ningún aula, pero Internet sí funciona») y resolvedla con el mapa real de la red del centro.</p><ol><li>Localizad la zona afectada y seguid en el mapa la ruta hasta el nodo del que depende.</li><li>Plantead una hipótesis y ordenad las comprobaciones de menor a mayor alcance.</li><li>Si se puede, recorred los puntos de comprobación por el centro con permiso del profesor; si no, simulad el recorrido sobre el mapa.</li><li>Decidid la causa más probable y una solución realista, y justificad si hace falta crimpar o sustituir un cable.</li><li>Completad el parte de intervención técnica.</li></ol><p>El cuaderno de la misión, con el banco de incidencias y el parte de intervención, está en Teams. Usad el gráfico de la red del centro de la tarea 4.</p>`, entrega:"Cuaderno de la misión y parte de intervención por Teams", evalua:"d12R"},
+        {n:6, t:"Crimpa tu propio cable de red RJ45", html:`
           <p>El cable de red más usado en casas y centros es el <b>UTP de par trenzado</b>. Por dentro lleva <b>8 hilos de cobre</b> agrupados en <b>4 pares trenzados</b>: naranja, verde, azul y marrón. Cada par tiene un hilo de color liso y otro blanco con una raya de ese color. Se trenzan para reducir las interferencias.</p>
           <p>En cada extremo se pone un conector <b>RJ45</b>, con 8 contactos. «Crimpar» es fijar el conector al cable con una crimpadora, que aprieta los contactos sobre los hilos.</p>
           <h4>Orden de colores: norma T568B</h4>
@@ -2553,19 +2563,21 @@ const ANEXOS = {
     <tr><th>D. Trabajo en equipo<span class="crit">1.6 · 3.6</span></th><td>Cumples tu rol, respetas las aportaciones y resolvéis los desacuerdos dialogando.</td><td>Cumples tu rol.</td><td>Participación irregular.</td><td>No participas.</td></tr>
     </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   d12V:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el tema", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
-    <tr><th>La red de tu casa</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.2 · 1.5 · 3.1 · 3.2</td><td>20 %</td></tr>
+    <tr><th>La red de tu casa</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.2 · 1.5 · 3.1 · 3.2</td><td>15 %</td></tr>
     <tr><th>Opciones para crear una red</th><td>2</td><td>Rúbrica (Anexo 2): fila B</td><td>1.1 · 2.1</td><td>10 %</td></tr>
     <tr><th>Conectando territorios</th><td>3</td><td>Rúbrica (Anexo 2): fila C</td><td>2.1 · 2.3 · 2.5</td><td>15 %</td></tr>
-    <tr><th>La red de nuestro colegio</th><td>4</td><td>Rúbrica (Anexo 2): fila D</td><td>1.2 · 1.6 · 2.6 · 3.6</td><td>30 %</td></tr>
-    <tr><th>Cable de red RJ45</th><td>5</td><td>Rúbrica (Anexo 2): fila E</td><td>1.3</td><td>20 %</td></tr>
+    <tr><th>La red de nuestro colegio</th><td>4</td><td>Rúbrica (Anexo 2): fila D</td><td>1.2 · 1.6 · 2.6 · 3.6</td><td>25 %</td></tr>
+    <tr><th>Diagnóstico de incidencias TIC</th><td>5</td><td>Rúbrica (Anexo 2): fila F, con el cuaderno y el parte de intervención</td><td>1.3 · 5.1 · 5.4</td><td>15 %</td></tr>
+    <tr><th>Cable de red RJ45</th><td>6</td><td>Rúbrica (Anexo 2): fila E</td><td>1.3</td><td>15 %</td></tr>
     <tr><th>Ficha de repaso</th><td>—</td><td>Resultado de la ficha interactiva</td><td>1.2</td><td>5 %</td></tr>
     </tbody><tfoot><tr><th colspan="4">Total</th><th>100 %</th></tr></tfoot></table></div>`},
-  d12R:{titulo:"Anexo 2. Rúbrica de redes", para:"tareas 1 a 5", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
+  d12R:{titulo:"Anexo 2. Rúbrica de redes", para:"tareas 1 a 6", html:`<div class="table-wrap"><table class="tbl rub"><thead><tr><th>Qué se valora</th><th>4 · Excelente</th><th>3 · Satisfactorio</th><th>2 · Mejorable</th><th>1 · Insuficiente</th></tr></thead><tbody>
     <tr><th>A. Red de casa<span class="crit">1.2 · 1.5 · 3.1 · 3.2</span></th><td>Gráfico claro con todos los dispositivos, topología correcta y medidas de seguridad del router bien explicadas.</td><td>Gráfico correcto con medidas básicas.</td><td>Incompleto o sin medidas de seguridad.</td><td>No se entrega.</td></tr>
     <tr><th>B. Opciones de red<span class="crit">1.1 · 2.1</span></th><td>Tabla completa y correcta, con fuentes fiables.</td><td>Casi completa.</td><td>Con errores.</td><td>No se entrega.</td></tr>
     <tr><th>C. Conectando territorios<span class="crit">2.1 · 2.3 · 2.5</span></th><td>Información contrastada, bien organizada y explicada con tus palabras, citando las fuentes.</td><td>Información correcta.</td><td>Información copiada o sin fuentes.</td><td>No se entrega.</td></tr>
     <tr><th>D. Red del colegio<span class="crit">1.2 · 1.6 · 2.6 · 3.6</span></th><td>Gráfico completo y realista (acceso a Internet, zonas, wifi, servidor, impresora) hecho en equipo y compartido en el espacio común.</td><td>Gráfico correcto con algún olvido.</td><td>Gráfico incompleto.</td><td>No se entrega.</td></tr>
     <tr><th>E. Cable RJ45<span class="crit">1.3</span></th><td>Cable crimpado con la norma T568B que funciona en la comprobación.</td><td>Funciona tras una corrección.</td><td>No funciona pero el orden es casi correcto.</td><td>No se realiza.</td></tr>
+    <tr><th>F. Diagnóstico de incidencias<span class="crit">1.3 · 5.1 · 5.4</span></th><td>Sigue la ruta correcta en el mapa, ordena las comprobaciones de menor a mayor alcance, distingue fallo local, de zona y general, y propone una solución realista y verificable, bien documentada en el parte.</td><td>Localiza la zona, propone comprobaciones coherentes y una solución razonable; el parte está completo.</td><td>Necesita ayuda para seguir el mapa, las comprobaciones están desordenadas o la solución es incompleta.</td><td>Actúa sin comprobar, no justifica la causa o no entrega el parte.</td></tr>
     </tbody></table></div><p class="desc">Cada fila se puntúa de 1 a 4 y se multiplica por 2,5 para pasarla a nota sobre 10.</p>`},
   labKV:{titulo:"Anexo 1. Qué voy a valorar y cuánto cuenta", para:"todo el proyecto", html:`<div class="table-wrap"><table class="tbl ev"><thead><tr><th>Evidencia</th><th>Tareas</th><th>Cómo se valora</th><th>Criterios</th><th>Peso</th></tr></thead><tbody>
     <tr><th>Juguete óptico</th><td>1</td><td>Rúbrica (Anexo 2): fila A</td><td>1.2</td><td>5 %</td></tr>
